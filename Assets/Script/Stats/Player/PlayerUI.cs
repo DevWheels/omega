@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.Tilemaps;
-using System.IO;
-using Mirror;
 
 namespace Script.Stats.Player
 {
     public class PlayerUI : MonoBehaviour
     {
+        //Временно public для будущей проверки в онлайне
         [Header("Player Stats texts")]
         public TMP_Text hp_text;
         public TMP_Text hp_text_inv;
@@ -78,6 +72,7 @@ namespace Script.Stats.Player
             agility_text.text = $"{playerStats.Agility}";
             luck_text.text = $"{playerStats.Luck}";
             speed_text.text = $"{playerStats.Speed}";
+            
             if (playerStats.AbilityPoints > 0)
                 ability_points_text.text = $"Очки характеристиков: {playerStats.AbilityPoints}";
             else
