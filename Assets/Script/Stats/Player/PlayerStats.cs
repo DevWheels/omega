@@ -68,11 +68,7 @@ public class PlayerStats : NetworkBehaviour
     }
     void Start()
     {
-
         FindPlayerComponents();
-        //StartCoroutine(FindObjectsAsync());
-        //Debug.Log(Application.persistentDataPath);
-
         UpdateEverything();
     }
 
