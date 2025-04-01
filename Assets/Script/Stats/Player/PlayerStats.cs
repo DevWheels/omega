@@ -72,7 +72,7 @@ public class PlayerStats : NetworkBehaviour
     public int Speed => speed;
     
 
-    protected PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
     private PlayerUI playerUI;
 
     
