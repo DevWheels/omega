@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Mirror.Examples.Basic;
+using PlayerUI = Script.Stats.Player.PlayerUI;
 
-//Его теперь нужно подключить к префабу игрока, так же включить все панели инвентаря
-//и поставить scale x = 0 y = 0
+//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+//пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ scale x = 0 y = 0
 public class InventoryManager : NetworkBehaviour
 {
     public GameObject inventorySlots;
     public GameObject inventoryQuests;
     public GameObject inventorySkills;
     private bool isOpened = false;
-    private PlayerStats playerStats;
+    private PlayerUI playerUI;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = gameObject.GetComponent<PlayerStats>();
+        playerUI = gameObject.GetComponent<PlayerUI>();
         StartCoroutine(FindInventories());
 
     }
@@ -38,7 +40,7 @@ public class InventoryManager : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            playerStats.UpdateUI();
+            playerUI.UpdateUI();
             if (!isOpened)
             {
                 InventoryOpen();
@@ -75,7 +77,7 @@ public class InventoryManager : NetworkBehaviour
             inventorySkills = GameObject.Find("PanelProgres");
             inventoryQuests = GameObject.Find("PanelKvest");
 
-            yield return null; // Ждём один кадр, чтобы избежать зависания
+            yield return null; // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
         }
     }

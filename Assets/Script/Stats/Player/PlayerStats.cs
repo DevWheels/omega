@@ -8,32 +8,10 @@ using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.IO;
 using Mirror;
+using Script.Stats.Player;
+
 public class PlayerStats : NetworkBehaviour
 {
-    [Header("Player Stats texts")]
-    public TMP_Text hp_text;
-    public TMP_Text hp_text_inv;
-
-    public TMP_Text mana_text;
-    public TMP_Text mana_text_inv;
-
-    public TMP_Text armor_text;
-    public TMP_Text strength_text;
-    public TMP_Text sanity_text;
-    public TMP_Text agility_text;
-    public TMP_Text luck_text;
-    public TMP_Text speed_text;
-    public TMP_Text level_text;
-    public TMP_Text level_text_percent_for_new_level;
-    public TMP_Text ability_points_text;
-    public TMP_Text exp_text;
-
-    [Header("Player Stats UI buttons")]
-    public GameObject strength_up;
-    public GameObject sanity_up;
-    public GameObject agility_up;
-    public GameObject luck_up;
-    public GameObject speed_up;
 
     [SyncVar]
     private int max_hp = 300;
@@ -69,33 +47,42 @@ public class PlayerStats : NetworkBehaviour
     private int speed = 1;
 
     [SyncVar]
-    private float timer = 0f;
+    private float timer;
     [SyncVar]
-    private float interval = 1f;
+    private float interval_of_one_second = 1f;
 
     [SyncVar]
     private float hp_regeneration;
     [SyncVar]
     private float mana_regeneration;
 
-    public Image healthBarFill;  //Добавил Денис для отображения hp на canvas
-    public Image manahBarFill;  //Добавил Денис для отображения mana на canvas
-    public Image expBarFill;  //Добавил Денис для отображения hp на персанаже на canvas
+    public int MaxHp => max_hp;
+    public int CurrentlyHp => currently_hp;
+    public int MaxMana => max_mana;
+    public int CurrentlyMana => currently_mana;
+    public int Armor => armor;
+    public int Lvl => lvl;
+    public int XpNeeded => xp_needed;
+    public int XpCurrently => xp_currently;
+    public int AbilityPoints => ability_points;
+    public int Strength => strength;
+    public int Sanity => sanity;
+    public int Agility => agility;
+    public int Luck => luck;
+    public int Speed => speed;
+    
 
     private PlayerMovement playerMovement;
-    private Find find;
+    private PlayerUI playerUI;
+
+    
     private void OnApplicationQuit()
     {
         //SavePlayerData(); // Сохраняем данные при выходе
     }
     void Start()
     {
-        find = new();
-        FindAllUI();
-        //StartCoroutine(FindObjectsAsync());
-        //Debug.Log(Application.persistentDataPath);
-
-        UpdateEverything();
+        FindPlayerComponents();
     }
 
     // Update is called once per frame
@@ -107,19 +94,12 @@ public class PlayerStats : NetworkBehaviour
         }
         AddExperience(2); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ДЛЯ ТЕСТА удалить потом
         CheckHpAndMana();
-        UpdateUI();
-
-        // Регенерация здоровья и маны раз в секунду, если не максимальное здоровье или мана
-        // может быть переделать это в карутину в будущем
+        playerUI.UpdateUI();
+        
         timer += Time.deltaTime;
-        if (timer >= interval && max_mana >= currently_mana && max_hp >= currently_hp)
-        {
-            Regeneration();
-            timer = 0f; // Сброс времени на 1 секунду
-        }
+        Regeneration();
+
     }
-
-
 
     public void UseItem(Item item)
     {
@@ -141,41 +121,9 @@ public class PlayerStats : NetworkBehaviour
             }
         }
 
-        UpdateUI(); // Обновляем интерфейс после использования предмета
+        playerUI.UpdateUI(); // Обновляем интерфейс после использования предмета
     }
-
-
-
-
-    private void UpdateHealthBar() //Добавил Денис для отображения hp на canvas
-    {
-
-        if (healthBarFill != null)
-        {
-            float healthPercentage = (float)currently_hp / max_hp;
-            healthBarFill.fillAmount = healthPercentage;
-        }
-    }
-
-    private void UpdateEXPBar() //Добавил Юра для отображения exp на canvas
-    {
-        if (expBarFill != null)
-        {
-            float expPercentage = (float)xp_currently / xp_needed;
-            expBarFill.fillAmount = expPercentage;
-            level_text_percent_for_new_level.text = expPercentage.ToString("0.00%");
-        }
-    }
-
-    private void UpdateManaBar() //Добавил Денис для отображения mana на canvas
-    {
-        if (manahBarFill != null)
-        {
-            float manaPercentage = (float)currently_mana / max_mana;
-            manahBarFill.fillAmount = manaPercentage;
-        }
-    }
-
+    
     private void LevelUp()
     {
 
@@ -189,7 +137,7 @@ public class PlayerStats : NetworkBehaviour
 
             xp_currently = 0;
             ability_points += 1;
-            SetStateOfAbilityUpdateButtons();
+            playerUI.SetStateOfAbilityUpdateButtons();
         }
 
         //если уровень выше 100, то просто прибавляем к нему 1, ничего не выдавая
@@ -215,7 +163,7 @@ public class PlayerStats : NetworkBehaviour
         max_hp = (int)300 + strength_hp;
         int sanity_mana = (sanity - 1) * 10;
         max_mana = (int)65 + sanity_mana;
-        UpdateUI();
+        playerUI.UpdateUI();
     }
 
     public void AddExperience(int experience)
@@ -225,126 +173,40 @@ public class PlayerStats : NetworkBehaviour
         {
             LevelUp();
         }
-        UpdateUI();
+        playerUI.UpdateUI();
     }
     [Client]
     private void Regeneration()
     {
+        if (!(timer >= interval_of_one_second && max_mana >= currently_mana && max_hp >= currently_hp))
+        {
+            return;
+        }
         hp_regeneration += 0.05f; // восстановление единицы хп раз в 20 секунд 
         mana_regeneration += 0.2f; // восстановление единицы маны раз в 5 секунд 
 
         if (hp_regeneration >= 1)
         {
             currently_hp += (int)hp_regeneration;
-            hp_regeneration = 0f; // Сбросить значения регенерации
-            UpdateUI();
+            hp_regeneration = 0f; 
+            playerUI.UpdateUI();
 
         }
         if (mana_regeneration >= 1 && currently_mana > max_mana * 0.1f)
         {
             currently_mana += (int)mana_regeneration;
-            mana_regeneration = 0f; // Сбросить значения регенерации
-            UpdateUI();
+            mana_regeneration = 0f; 
+            playerUI.UpdateUI();
         }
+
+        timer = 0f;
     }
     public void TakeHit(int damage)
     {
         currently_hp -= damage;
         UpdateEverything();
     }
-    public void IncreaseStrength()
-    {
-        if (ability_points > 0)
-        {
-            strength++;
-            ability_points -= 1;
-            UpdateAllStats();
-            SetStateOfAbilityUpdateButtons();
-        }
-    }
-    public void IncreaseSanity()
-    {
-        if (ability_points > 0)
-        {
-            sanity++;
-            ability_points -= 1;
-            UpdateAllStats();
-            SetStateOfAbilityUpdateButtons();
 
-
-        }
-
-    }
-    public void IncreaseAgility()
-    {
-        if (ability_points > 0)
-        {
-            agility++;
-            ability_points -= 1;
-            UpdateAllStats();
-
-            SetStateOfAbilityUpdateButtons();
-
-        }
-    }
-    public void IncreaseLuck()
-    {
-        if (ability_points > 0)
-        {
-            luck++;
-            ability_points -= 1;
-            UpdateAllStats();
-            SetStateOfAbilityUpdateButtons();
-
-        }
-    }
-    public void IncreaseSpeed()
-    {
-        if (ability_points > 0)
-        {
-            speed++;
-            ability_points -= 1;
-            float speed_multiply = 0.05f;
-            playerMovement.moveSpeed += speed_multiply;
-            UpdateAllStats();
-            SetStateOfAbilityUpdateButtons();
-
-        }
-    }
-    /// <summary>
-    /// Обновляет UI для игрока
-    /// </summary>
-    [Client]
-    public void UpdateUI()
-    {
-        //Обновляет визуально картинку для игрока в процентном соотношении
-        UpdateHealthBar();
-        UpdateManaBar();
-        UpdateEXPBar();
-
-        //Обновляет текст
-        hp_text.text = $"{currently_hp}/{max_hp}";
-        hp_text_inv.text = $"{currently_hp}/{max_hp}";
-
-        mana_text.text = $"{currently_mana} / {max_mana}";
-        mana_text_inv.text = $"{currently_mana} / {max_mana}";
-
-        armor_text.text = $"{armor}";
-
-        level_text.text = $"{lvl}";
-        exp_text.text = $"Опыт: {xp_currently}/{xp_needed}";
-
-        strength_text.text = $"{strength}";
-        sanity_text.text = $"{sanity}";
-        agility_text.text = $"{agility}";
-        luck_text.text = $"{luck}";
-        speed_text.text = $"{speed}";
-        if (ability_points > 0)
-            ability_points_text.text = $"Очки характеристиков: {ability_points}";
-        else
-            ability_points_text.text = "";
-
-    }
     [Client]
     private void CheckHpAndMana()
     {
@@ -366,6 +228,66 @@ public class PlayerStats : NetworkBehaviour
             currently_mana = max_mana;
         }
     }
+    
+    public void IncreaseStrength()
+    {
+        if (ability_points > 0)
+        {
+            strength++;
+            ability_points -= 1;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+        }
+    }
+    public void IncreaseSanity()
+    {
+        if (ability_points > 0)
+        {
+            sanity++;
+            ability_points -= 1;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+        }
+
+    }
+    public void IncreaseAgility()
+    {
+        if (ability_points > 0)
+        {
+            agility++;
+            ability_points -= 1;
+            UpdateAllStats();
+
+            playerUI.SetStateOfAbilityUpdateButtons();
+
+        }
+    }
+    public void IncreaseLuck()
+    {
+        if (ability_points > 0)
+        {
+            luck++;
+            ability_points -= 1;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+
+
+        }
+    }
+    public void IncreaseSpeed()
+    {
+        if (ability_points > 0)
+        {
+            speed++;
+            ability_points -= 1;
+            float speed_multiply = 0.05f;
+            playerMovement.moveSpeed += speed_multiply;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+
+
+        }
+    }
     public int GetCurretlyMana()
     {
         return currently_mana;
@@ -383,151 +305,20 @@ public class PlayerStats : NetworkBehaviour
     {
         return currently_mana >= cost; // Проверка достаточности маны
     }
-    //public void SavePlayerData()
-    //{
-    //    Transform transform = GetComponent<Transform>();
-    //    PlayerData data = new()
-    //    {
-    //        maxHp = max_hp,
-    //        currentlyHp = currently_hp,
-    //        maxMana = max_mana,
-    //        currentlyMana = currently_mana,
-    //        armor = armor,
-    //        xpNeeded = xp_needed,
-    //        xpNeededPerLvl = xp_needed_per_lvl,
-    //        xpCurrently = xp_currently,
-    //        lvl = lvl,
-    //        abilityPoints = ability_points,
-    //        strength = strength,
-    //        sanity = sanity,
-    //        agility = agility,
-    //        luck = luck,
-    //        speed = speed,
-    //        //vector2 = transform.position,
-    //    };
-
-    //    string json = JsonUtility.ToJson(data);
-    //    string path = Application.persistentDataPath + "/playerData.json";
-    //    File.WriteAllText(path, json);
-    //    Debug.Log("Данные игрока сохранены!");
-    //}
-
-    // Метод для загрузки данных игрока
-    //public void LoadPlayerData()
-    //{
-    //    string path = Application.persistentDataPath + "/playerData.json";
-
-    //    if (File.Exists(path))
-    //    {
-    //        string json = File.ReadAllText(path);
-    //        PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-
-    //        max_hp = data.maxHp;
-    //        currently_hp = data.currentlyHp;
-    //        max_mana = data.maxMana;
-    //        currently_mana = data.currentlyMana;
-    //        armor = data.armor;
-    //        xp_needed = data.xpNeeded;
-    //        xp_needed_per_lvl = data.xpNeededPerLvl;
-    //        xp_currently = data.xpCurrently;
-    //        lvl = data.lvl;
-    //        ability_points = data.abilityPoints;
-    //        strength = data.strength;
-    //        sanity = data.sanity;
-    //        agility = data.agility;
-    //        luck = data.luck;
-    //        speed = data.speed;
-    //        //GetComponent<Transform>().position = data.vector2;
-    //        Debug.Log("Данные игрока загружены!");
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Файл данных игрока не найден!");
-    //    }
-    //}
-    /// <summary>
-    /// Обновляет все данные при запуске игры
-    /// </summary>
+    
     [Client]
     private void UpdateEverything()
     {
-        UpdateUI();
+        playerUI.UpdateUI();
         UpdateAllStats();
-        //LoadPlayerData();
-
     }
-    /// <summary>
-    /// Корутина для поиска всех UI элементов
-    /// </summary>
+
     [Client]
-    private void FindAllUI()
+    private void FindPlayerComponents()
     {
-        hp_text = find.FindUIElement<TMP_Text>("hp text");
-        hp_text_inv = find.FindUIElement<TMP_Text>("hp text inv");
-
-        mana_text = find.FindUIElement<TMP_Text>("mana text");
-        mana_text_inv = find.FindUIElement<TMP_Text>("mana text inv");
-
-        armor_text = find.FindUIElement<TMP_Text>("armor text");
-
-        strength_text = find.FindUIElement<TMP_Text>("strength text");
-        sanity_text = find.FindUIElement<TMP_Text>("sanity text");
-        agility_text = find.FindUIElement<TMP_Text>("agility text");
-        luck_text = find.FindUIElement<TMP_Text>("luck text");
-        speed_text = find.FindUIElement<TMP_Text>("speed text");
-        level_text = find.FindUIElement<TMP_Text>("lvl full");
-        level_text_percent_for_new_level = find.FindUIElement<TMP_Text>("lvl procent");
-
-        ability_points_text = find.FindUIElement<TMP_Text>("ability points text");
-        exp_text = find.FindUIElement<TMP_Text>("exp text");
-        healthBarFill = find.FindUIElement<Image>("Healthbar");
-        manahBarFill = find.FindUIElement<Image>("Manabar");
-        expBarFill = find.FindUIElement<Image>("xp bar filled");
-
-
-        playerMovement = gameObject.GetComponent<PlayerMovement>();
-
-        strength_up = find.FindGameObject("StrengthUp");
-        strength_up.GetComponent<Button>().onClick.AddListener(IncreaseStrength);
-        sanity_up = find.FindGameObject("SanityUp");
-        sanity_up.GetComponent<Button>().onClick.AddListener(IncreaseSanity);
-        agility_up = find.FindGameObject("AgilityUp");
-        agility_up.GetComponent<Button>().onClick.AddListener(IncreaseAgility);
-        luck_up = find.FindGameObject("LuckUp");
-        luck_up.GetComponent<Button>().onClick.AddListener(IncreaseLuck);
-        speed_up = find.FindGameObject("SpeedUp");
-        speed_up.GetComponent<Button>().onClick.AddListener(IncreaseSpeed);
-
-        UpdateUI();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerUI = GetComponent<PlayerUI>();;
+        
     }
-    /// <summary>
-    /// Выставляет состяние кнопок как активное/неактивное если есть/нет очки(-ов) улучшения
-    /// </summary>
-    private void SetStateOfAbilityUpdateButtons()
-    {
-        if (ability_points > 0)
-        {
-            strength_up.transform.localScale = new Vector3(0.3f, 1, 1); // Устанавливаем нормальный размер, кнопка активна
-            sanity_up.transform.localScale = new Vector3(0.3f, 1, 1);
-            agility_up.transform.localScale = new Vector3(0.3f, 1, 1);
-            luck_up.transform.localScale = new Vector3(0.3f, 1, 1);
-            speed_up.transform.localScale = new Vector3(0.3f, 1, 1);
-            UpdateUI();
-        }
-        else
-        {
-            strength_up.transform.localScale = Vector3.zero; // Устанавливаем размер в ноль, кнопка неактивна
-            sanity_up.transform.localScale = Vector3.zero;
-            agility_up.transform.localScale = Vector3.zero;
-            luck_up.transform.localScale = Vector3.zero;
-            speed_up.transform.localScale = Vector3.zero;
-            ability_points_text.text = "";
-        }
-    }
+
 }
-
-
-
-
-
-
