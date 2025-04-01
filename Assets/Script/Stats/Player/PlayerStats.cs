@@ -14,49 +14,63 @@ public class PlayerStats : NetworkBehaviour
 {
 
     [SyncVar]
-    protected int max_hp = 300;
+    private int max_hp = 300;
     [SyncVar]
-    protected int currently_hp = 300;
+    private int currently_hp = 300;
     [SyncVar]
-    protected int max_mana = 65;
+    private int max_mana = 65;
     [SyncVar]
-    protected int currently_mana = 65;
+    private int currently_mana = 65;
 
     [SyncVar]
-    protected int armor = 35;
+    private int armor = 35;
     [SyncVar]
-    protected int xp_needed = 1000;
+    private int xp_needed = 1000;
     [SyncVar]
-    protected int xp_needed_per_lvl = 1000;
+    private int xp_needed_per_lvl = 1000;
     [SyncVar]
-    protected int xp_currently = 0;
+    private int xp_currently = 0;
     [SyncVar]
-    protected int lvl = 1;
+    private int lvl = 1;
     [SyncVar]
-    protected int ability_points;
+    private int ability_points;
 
     [SyncVar]
-    protected int strength = 1;
+    private int strength = 1;
     [SyncVar]
-    protected int sanity = 1;
+    private int sanity = 1;
     [SyncVar]
-    protected int agility = 1;
+    private int agility = 1;
     [SyncVar]
-    protected int luck = 1;
+    private int luck = 1;
     [SyncVar]
-    protected int speed = 1;
+    private int speed = 1;
 
     [SyncVar]
-    protected float timer = 0f;
+    private float timer;
     [SyncVar]
-    protected float interval = 1f;
+    private float interval_of_one_second = 1f;
 
     [SyncVar]
-    protected float hp_regeneration;
+    private float hp_regeneration;
     [SyncVar]
-    protected float mana_regeneration;
+    private float mana_regeneration;
 
-
+    public int MaxHp => max_hp;
+    public int CurrentlyHp => currently_hp;
+    public int MaxMana => max_mana;
+    public int CurrentlyMana => currently_mana;
+    public int Armor => armor;
+    public int Lvl => lvl;
+    public int XpNeeded => xp_needed;
+    public int XpCurrently => xp_currently;
+    public int AbilityPoints => ability_points;
+    public int Strength => strength;
+    public int Sanity => sanity;
+    public int Agility => agility;
+    public int Luck => luck;
+    public int Speed => speed;
+    
 
     protected PlayerMovement playerMovement;
     private PlayerUI playerUI;
@@ -85,7 +99,7 @@ public class PlayerStats : NetworkBehaviour
         // Регенерация здоровья и маны раз в секунду, если не максимальное здоровье или мана
         // может быть переделать это в карутину в будущем
         timer += Time.deltaTime;
-        if (timer >= interval && max_mana >= currently_mana && max_hp >= currently_hp)
+        if (timer >= interval_of_one_second && max_mana >= currently_mana && max_hp >= currently_hp)
         {
             Regeneration();
             timer = 0f; // Сброс времени на 1 секунду
@@ -214,6 +228,66 @@ public class PlayerStats : NetworkBehaviour
             currently_mana = max_mana;
         }
     }
+    
+    public void IncreaseStrength()
+    {
+        if (ability_points > 0)
+        {
+            strength++;
+            ability_points -= 1;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+        }
+    }
+    public void IncreaseSanity()
+    {
+        if (ability_points > 0)
+        {
+            sanity++;
+            ability_points -= 1;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+        }
+
+    }
+    public void IncreaseAgility()
+    {
+        if (ability_points > 0)
+        {
+            agility++;
+            ability_points -= 1;
+            UpdateAllStats();
+
+            playerUI.SetStateOfAbilityUpdateButtons();
+
+        }
+    }
+    public void IncreaseLuck()
+    {
+        if (ability_points > 0)
+        {
+            luck++;
+            ability_points -= 1;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+
+
+        }
+    }
+    public void IncreaseSpeed()
+    {
+        if (ability_points > 0)
+        {
+            speed++;
+            ability_points -= 1;
+            float speed_multiply = 0.05f;
+            playerMovement.moveSpeed += speed_multiply;
+            UpdateAllStats();
+            playerUI.SetStateOfAbilityUpdateButtons();
+
+
+        }
+    }
     public int GetCurretlyMana()
     {
         return currently_mana;
@@ -237,7 +311,7 @@ public class PlayerStats : NetworkBehaviour
     {
         playerUI.UpdateUI();
         UpdateAllStats();
-        //LoadPlayerData();
+
     }
     /// <summary>
     /// Корутина для поиска всех UI элементов
@@ -245,8 +319,9 @@ public class PlayerStats : NetworkBehaviour
     [Client]
     private void FindPlayerComponents()
     {
-        playerMovement = gameObject.GetComponent<PlayerMovement>();
-        playerUI = gameObject.GetComponent<PlayerUI>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerUI = GetComponent<PlayerUI>();;
+        
     }
 
 }

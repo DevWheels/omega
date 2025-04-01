@@ -11,7 +11,7 @@ using Mirror;
 
 namespace Script.Stats.Player
 {
-    public class PlayerUI : PlayerStats
+    public class PlayerUI : MonoBehaviour
     {
         [Header("Player Stats texts")]
         public TMP_Text hp_text;
@@ -47,9 +47,9 @@ namespace Script.Stats.Player
 
         void Start()
         {
+            playerStats = GetComponent<PlayerStats>();
             FindAllUI();
-            playerStats = gameObject.GetComponent<PlayerStats>();
-            UpdateEverything();
+            // UpdateEverything();
         }
         
         
@@ -61,26 +61,25 @@ namespace Script.Stats.Player
             UpdateEXPBar();
 
             //Обновляет текст
-            Debug.Log(hp_text);
-            hp_text.text = $"{currently_hp}/{max_hp}";
+            hp_text.text = $"{playerStats.CurrentlyHp}/{playerStats.MaxHp}";
             
-            hp_text_inv.text = $"{currently_hp}/{max_hp}";
+            hp_text_inv.text = $"{playerStats.CurrentlyHp}/{playerStats.MaxHp}";
 
-            mana_text.text = $"{currently_mana} / {max_mana}";
-            mana_text_inv.text = $"{currently_mana} / {max_mana}";
+            mana_text.text = $"{playerStats.CurrentlyMana} / {playerStats.MaxMana}";
+            mana_text_inv.text = $"{playerStats.CurrentlyMana} / {playerStats.MaxMana}";
 
-            armor_text.text = $"{armor}";
+            armor_text.text = $"{playerStats.Armor}";
 
-            level_text.text = $"{lvl}";
-            exp_text.text = $"Опыт: {xp_currently}/{xp_needed}";
+            level_text.text = $"{playerStats.Lvl}";
+            exp_text.text = $"Опыт: {playerStats.XpCurrently}/{playerStats.XpNeeded}";
 
-            strength_text.text = $"{strength}";
-            sanity_text.text = $"{sanity}";
-            agility_text.text = $"{agility}";
-            luck_text.text = $"{luck}";
-            speed_text.text = $"{speed}";
-            if (ability_points > 0)
-                ability_points_text.text = $"Очки характеристиков: {ability_points}";
+            strength_text.text = $"{playerStats.Strength}";
+            sanity_text.text = $"{playerStats.Sanity}";
+            agility_text.text = $"{playerStats.Agility}";
+            luck_text.text = $"{playerStats.Luck}";
+            speed_text.text = $"{playerStats.Speed}";
+            if (playerStats.AbilityPoints > 0)
+                ability_points_text.text = $"Очки характеристиков: {playerStats.AbilityPoints}";
             else
                 ability_points_text.text = "";
 
@@ -90,7 +89,7 @@ namespace Script.Stats.Player
 
             if (healthBarFill != null)
             {
-                float healthPercentage = (float)currently_hp / max_hp;
+                float healthPercentage = (float)playerStats.CurrentlyHp / playerStats.MaxHp;
                 healthBarFill.fillAmount = healthPercentage;
             }
         }
@@ -99,7 +98,7 @@ namespace Script.Stats.Player
         {
             if (expBarFill != null)
             {
-                float expPercentage = (float)xp_currently / xp_needed;
+                float expPercentage = (float)playerStats.XpCurrently / playerStats.XpNeeded;
                 expBarFill.fillAmount = expPercentage;
                 level_text_percent_for_new_level.text = expPercentage.ToString("0.00%");
             }
@@ -109,73 +108,15 @@ namespace Script.Stats.Player
         {
             if (manahBarFill != null)
             {
-                float manaPercentage = (float)currently_mana / max_mana;
+                float manaPercentage = (float)playerStats.CurrentlyMana / playerStats.MaxMana;
                 manahBarFill.fillAmount = manaPercentage;
             }
         }
-        public void IncreaseStrength()
-        {
-            if (ability_points > 0)
-            {
-                strength++;
-                ability_points -= 1;
-                UpdateAllStats();
-                SetStateOfAbilityUpdateButtons();
-            }
-        }
-        public void IncreaseSanity()
-        {
-            if (ability_points > 0)
-            {
-                sanity++;
-                ability_points -= 1;
-                UpdateAllStats();
-                SetStateOfAbilityUpdateButtons();
-
-
-            }
-
-        }
-        public void IncreaseAgility()
-        {
-            if (ability_points > 0)
-            {
-                agility++;
-                ability_points -= 1;
-                UpdateAllStats();
-
-                SetStateOfAbilityUpdateButtons();
-
-            }
-        }
-        public void IncreaseLuck()
-        {
-            if (ability_points > 0)
-            {
-                luck++;
-                ability_points -= 1;
-                UpdateAllStats();
-                SetStateOfAbilityUpdateButtons();
-
-            }
-        }
-        public void IncreaseSpeed()
-        {
-            if (ability_points > 0)
-            {
-                speed++;
-                ability_points -= 1;
-                float speed_multiply = 0.05f;
-                playerMovement.moveSpeed += speed_multiply;
-                UpdateAllStats();
-                SetStateOfAbilityUpdateButtons();
-
-            }
-        }
+        
         
         public void SetStateOfAbilityUpdateButtons()
         {
-            if (ability_points > 0)
+            if (playerStats.AbilityPoints > 0)
             {
                 strength_up.transform.localScale = new Vector3(0.3f, 1, 1); // Устанавливаем нормальный размер, кнопка активна
                 sanity_up.transform.localScale = new Vector3(0.3f, 1, 1);
@@ -220,15 +161,15 @@ namespace Script.Stats.Player
             expBarFill = find.FindUIElement<Image>("xp bar filled");
 
             strength_up = find.FindGameObject("StrengthUp");
-            strength_up.GetComponent<Button>().onClick.AddListener(IncreaseStrength);
+            strength_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseStrength);
             sanity_up = find.FindGameObject("SanityUp");
-            sanity_up.GetComponent<Button>().onClick.AddListener(IncreaseSanity);
+            sanity_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseSanity);
             agility_up = find.FindGameObject("AgilityUp");
-            agility_up.GetComponent<Button>().onClick.AddListener(IncreaseAgility);
+            agility_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseAgility);
             luck_up = find.FindGameObject("LuckUp");
-            luck_up.GetComponent<Button>().onClick.AddListener(IncreaseLuck);
+            luck_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseLuck);
             speed_up = find.FindGameObject("SpeedUp");
-            speed_up.GetComponent<Button>().onClick.AddListener(IncreaseSpeed);
+            speed_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseSpeed);
 
             UpdateUI();
         }

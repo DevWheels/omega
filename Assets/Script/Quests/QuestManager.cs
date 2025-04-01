@@ -18,6 +18,7 @@ public class QuestManager : MonoBehaviour
     public GameObject middle;
     public GameObject end;
 
+    //TODO: Fix exposing API
     public PlayerStats playerStats;
     private DialogStart dialogStart;
 
