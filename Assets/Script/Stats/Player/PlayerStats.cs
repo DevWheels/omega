@@ -95,15 +95,10 @@ public class PlayerStats : NetworkBehaviour
         AddExperience(2); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ДЛЯ ТЕСТА удалить потом
         CheckHpAndMana();
         playerUI.UpdateUI();
-
-        // Регенерация здоровья и маны раз в секунду, если не максимальное здоровье или мана
-        // может быть переделать это в карутину в будущем
+        
         timer += Time.deltaTime;
-        if (timer >= interval_of_one_second && max_mana >= currently_mana && max_hp >= currently_hp)
-        {
-            Regeneration();
-            timer = 0f; // Сброс времени на 1 секунду
-        }
+        Regeneration();
+
     }
 
     public void UseItem(Item item)
@@ -129,7 +124,6 @@ public class PlayerStats : NetworkBehaviour
         playerUI.UpdateUI(); // Обновляем интерфейс после использования предмета
     }
     
-
     private void LevelUp()
     {
 
@@ -162,7 +156,7 @@ public class PlayerStats : NetworkBehaviour
     /// <summary>
     /// Обновляет характеристика игрока, выдавая им новые значения
     /// </summary>
-    protected void UpdateAllStats()
+    private void UpdateAllStats()
     {
         xp_needed = (int)(xp_needed_per_lvl + xp_needed_per_lvl * (lvl - 1));
         int strength_hp = (strength - 1) * 20;
@@ -184,22 +178,28 @@ public class PlayerStats : NetworkBehaviour
     [Client]
     private void Regeneration()
     {
+        if (!(timer >= interval_of_one_second && max_mana >= currently_mana && max_hp >= currently_hp))
+        {
+            return;
+        }
         hp_regeneration += 0.05f; // восстановление единицы хп раз в 20 секунд 
         mana_regeneration += 0.2f; // восстановление единицы маны раз в 5 секунд 
 
         if (hp_regeneration >= 1)
         {
             currently_hp += (int)hp_regeneration;
-            hp_regeneration = 0f; // Сбросить значения регенерации
+            hp_regeneration = 0f; 
             playerUI.UpdateUI();
 
         }
         if (mana_regeneration >= 1 && currently_mana > max_mana * 0.1f)
         {
             currently_mana += (int)mana_regeneration;
-            mana_regeneration = 0f; // Сбросить значения регенерации
+            mana_regeneration = 0f; 
             playerUI.UpdateUI();
         }
+
+        timer = 0f;
     }
     public void TakeHit(int damage)
     {
@@ -307,15 +307,12 @@ public class PlayerStats : NetworkBehaviour
     }
     
     [Client]
-    protected void UpdateEverything()
+    private void UpdateEverything()
     {
         playerUI.UpdateUI();
         UpdateAllStats();
-
     }
-    /// <summary>
-    /// Корутина для поиска всех UI элементов
-    /// </summary>
+
     [Client]
     private void FindPlayerComponents()
     {
