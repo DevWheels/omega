@@ -47,7 +47,9 @@ namespace Script.Stats.Player
 
         void Start()
         {
+            FindAllUI();
             playerStats = gameObject.GetComponent<PlayerStats>();
+            UpdateEverything();
         }
         
         
@@ -59,7 +61,9 @@ namespace Script.Stats.Player
             UpdateEXPBar();
 
             //Обновляет текст
+            Debug.Log(hp_text);
             hp_text.text = $"{currently_hp}/{max_hp}";
+            
             hp_text_inv.text = $"{currently_hp}/{max_hp}";
 
             mana_text.text = $"{currently_mana} / {max_mana}";
