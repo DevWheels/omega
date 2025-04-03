@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Mirror.Examples.Basic;
-using PlayerUI = Script.Stats.Player.PlayerUI;
+
 
 //��� ������ ����� ���������� � ������� ������, ��� �� �������� ��� ������ ���������
 //� ��������� scale x = 0 y = 0
