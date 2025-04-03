@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public Item SlotItem;
+    public Item1 SlotItem;
     public GameObject ItemObj;
 
     Image icon;
@@ -17,7 +17,7 @@ public class InventorySlot : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(ShowInfo);
     }
-    public void PutInSlot(Item item, GameObject obj)
+    public void PutInSlot(Item1 item, GameObject obj)
     {
         icon.sprite = item.icon;
         SlotItem = item;

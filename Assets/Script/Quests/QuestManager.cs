@@ -75,7 +75,7 @@ public class QuestManager : MonoBehaviour
         Quest quest = quests.Find(q => q.title == dialogStart.title);
         GameObject inventory = GameObject.Find("Slots_transform");
         
-        List<Item> requiredItems = new();
+        List<Item1> requiredItems = new();
         foreach (var item in quest.quest_items)
         {
             requiredItems.Add(item);
@@ -113,7 +113,7 @@ public class QuestManager : MonoBehaviour
     {
         Quest quest = quests.Find(q => q.title == dialogStart.title);
         
-        List<Item> requiredItems = new();
+        List<Item1> requiredItems = new();
         foreach (var item in quest.quest_items)
         {
             requiredItems.Add(item);

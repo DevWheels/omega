@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public void PutInEmptySlot(Item item, GameObject obj)
+    public void PutInEmptySlot(Item1 item, GameObject obj)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
