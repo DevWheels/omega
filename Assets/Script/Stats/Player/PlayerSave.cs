@@ -1,5 +1,4 @@
-namespace Script.Stats.Player
-{
+
     public class PlayerSave
     { 
         //public void SavePlayerData()
@@ -66,4 +65,3 @@ namespace Script.Stats.Player
     //}
 
     }
-}

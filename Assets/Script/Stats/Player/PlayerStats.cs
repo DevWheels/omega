@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.IO;
 using Mirror;
-using Script.Stats.Player;
+
 
 public class PlayerStats : NetworkBehaviour
 {

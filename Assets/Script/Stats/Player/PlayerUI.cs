@@ -2,8 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace Script.Stats.Player
-{
+
     public class PlayerUI : MonoBehaviour
     {
         //Временно public для будущей проверки в онлайне
@@ -171,4 +170,3 @@ namespace Script.Stats.Player
 
     }
     
-}
