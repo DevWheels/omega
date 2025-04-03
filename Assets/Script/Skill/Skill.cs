@@ -14,4 +14,6 @@ public abstract class Skill {
 
 
     public abstract void Upgrade();
+    
+    public abstract void Deactivate();
 }

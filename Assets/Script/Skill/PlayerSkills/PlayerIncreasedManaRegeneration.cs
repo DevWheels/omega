@@ -27,4 +27,9 @@ public class PlayerIncreasedManaRegeneration : Skill {
     {
         this.Level += 1;
     }
+
+    public override void Deactivate()
+    {
+        playerStats.ManaRegenerationPerSecond -= ManaIncrease;
+    }
 }

@@ -19,4 +19,9 @@ public class PlayerIncreasedSpeed : Skill{
     {
         this.Level += 1;
     }
+
+    public override void Deactivate()
+    {
+        playerMovement.moveSpeed -= speedIncrease;
+    }
 }
