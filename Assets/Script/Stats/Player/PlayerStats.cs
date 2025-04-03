@@ -10,66 +10,115 @@ using System.IO;
 using Mirror;
 
 
-public class PlayerStats : NetworkBehaviour
-{
+public class PlayerStats : NetworkBehaviour {
 
-    [SyncVar]
-    private int max_hp = 300;
-    [SyncVar]
-    private int currently_hp = 300;
-    [SyncVar]
-    private int max_mana = 65;
-    [SyncVar]
-    private int currently_mana = 65;
+    [SyncVar] private int max_hp = 300;
+    [SyncVar] private int currently_hp = 300;
+    [SyncVar] private int max_mana = 65;
+    [SyncVar] private int currently_mana = 65;
 
-    [SyncVar]
-    private int armor = 35;
-    [SyncVar]
-    private int xp_needed = 1000;
-    [SyncVar]
-    private int xp_needed_per_lvl = 1000;
-    [SyncVar]
-    private int xp_currently = 0;
-    [SyncVar]
-    private int lvl = 1;
-    [SyncVar]
-    private int ability_points;
+    [SyncVar] private int armor = 35;
+    [SyncVar] private int xp_needed = 1000;
+    [SyncVar] private int xp_needed_per_lvl = 1000;
+    [SyncVar] private int xp_currently = 0;
+    [SyncVar] private int lvl = 1;
+    [SyncVar] private int ability_points;
 
-    [SyncVar]
-    private int strength = 1;
-    [SyncVar]
-    private int sanity = 1;
-    [SyncVar]
-    private int agility = 1;
-    [SyncVar]
-    private int luck = 1;
-    [SyncVar]
-    private int speed = 1;
+    [SyncVar] private int strength = 1;
+    [SyncVar] private int sanity = 1;
+    [SyncVar] private int agility = 1;
+    [SyncVar] private int luck = 1;
+    [SyncVar] private int speed = 1;
 
-    [SyncVar]
-    private float timer;
-    [SyncVar]
-    private float interval_of_one_second = 1f;
+    [SyncVar] private float timer;
+    [SyncVar] private float interval_of_one_second = 1f;
 
-    [SyncVar]
-    private float hp_regeneration;
-    [SyncVar]
-    private float mana_regeneration;
+    [SyncVar] private float hp_regeneration;
+    [SyncVar] private float mana_regeneration;
 
-    public int MaxHp => max_hp;
-    public int CurrentlyHp => currently_hp;
-    public int MaxMana => max_mana;
-    public int CurrentlyMana => currently_mana;
-    public int Armor => armor;
-    public int Lvl => lvl;
-    public int XpNeeded => xp_needed;
-    public int XpCurrently => xp_currently;
-    public int AbilityPoints => ability_points;
-    public int Strength => strength;
-    public int Sanity => sanity;
-    public int Agility => agility;
-    public int Luck => luck;
-    public int Speed => speed;
+    public int MaxHp
+    {
+        get { return max_hp; }
+        set { max_hp = value; }
+    }
+
+    public int CurrentlyHp
+    {
+        get { return currently_hp; }
+        set { currently_hp = value; }
+    }
+
+    public int MaxMana
+    {
+        get { return max_mana; }
+        set { max_mana = value; }
+    }
+
+    public int CurrentlyMana
+    {
+        get { return currently_mana; }
+        set { currently_mana = value; }
+    }
+
+    public int Armor
+    {
+        get { return armor; }
+        set { armor = value; }
+    }
+
+    public int Lvl
+    {
+        get { return lvl; }
+        set { lvl = value; }
+    }
+
+    public int XpNeeded
+    {
+        get { return xp_needed; }
+        set { xp_needed = value; }
+    }
+
+    public int XpCurrently
+    {
+        get { return xp_currently; }
+        set { xp_currently = value; }
+    }
+
+    public int AbilityPoints
+    {
+        get { return ability_points; }
+        set { ability_points = value; }
+    }
+
+    public int Strength
+    {
+        get { return strength; }
+        set { strength = value; }
+    }
+
+    public int Sanity
+    {
+        get { return sanity; }
+        set { sanity = value; }
+    }
+
+    public int Agility
+    {
+        get { return agility; }
+        set { agility = value; }
+    }
+
+    public int Luck
+    {
+        get { return luck; }
+        set { luck = value; }
+    }
+
+    public int Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
     
 
     private PlayerMovement playerMovement;
