@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 
-public class Item : ScriptableObject
+public class Item1 : ScriptableObject
 {
     [Header("Базовые характеристики")]
     public string Name = " ";

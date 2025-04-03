@@ -410,12 +410,12 @@ MonoBehaviour:
     attackPower: 100
     manaCost: 5
     attackEffectPrefab: {fileID: 0}
-    effectTriggered: 0
+    effectTriggered: 1
   - attackKey: 53
     attackPower: 100
     manaCost: 5
     attackEffectPrefab: {fileID: 0}
-    effectTriggered: 0
+    effectTriggered: 1
   enemyTags:
   - Slaim
   - Player

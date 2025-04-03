@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Не забудьте добавить этот using для работы с UI
+using UnityEngine.UI; 
 
 public class EnemyStats : MonoBehaviour
 {
@@ -13,30 +13,30 @@ public class EnemyStats : MonoBehaviour
     public int armor = 100;
 
     private PlayerStats playerStats;
-    private Animator animator; // Переменная для аниматора
-    private Coroutine hurtCoroutine; // Корутин для сброса анимации
+    //private Animator animator; 
+    private Coroutine hurtCoroutine; 
 
     public Image healthBarFill;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         currently_hp = max_hp;
         playerStats = FindObjectOfType<PlayerStats>();
-        animator = GetComponent<Animator>(); // Получаем компонент Animator
-        UpdateHealthBar(); // Обновляем шкалу здоровья при старте
+        //animator = GetComponent<Animator>(); 
+        UpdateHealthBar(); 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (currently_hp <= 0)
         {
-            Die(); // Вызываем метод смерти
+            Die(); 
         }
         else
         {
-            UpdateHealthBar(); // Обновляем шкалу здоровья каждый кадр
+            UpdateHealthBar(); 
         }
     }
 
@@ -49,23 +49,23 @@ public class EnemyStats : MonoBehaviour
     {
         currently_hp -= damage;
         if (currently_hp < 0) currently_hp = 0;
-        UpdateHealthBar(); // Обновляем шкалу здоровья после получения урона
+        UpdateHealthBar(); 
 
-        animator.SetTrigger("isHurt"); // Запускаем анимацию Hurt
+        //animator.SetTrigger("isHurt"); 
 
-        // Если корутина уже запущена, останавливаем ее
+    
         if (hurtCoroutine != null)
         {
             StopCoroutine(hurtCoroutine);
         }
 
-        // Запускаем новую корутину для сброса анимации
+
         hurtCoroutine = StartCoroutine(ResetHurtAnimation());
     }
 
     public bool IsAlive()
     {
-        return currently_hp > 0; // Враг жив, если здоровье больше нуля
+        return currently_hp > 0; 
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -81,20 +81,24 @@ public class EnemyStats : MonoBehaviour
         if (healthBarFill != null)
         {
             float healthPercentage = (float)currently_hp / max_hp;
-            healthBarFill.fillAmount = healthPercentage; // Устанавливаем значение заполнения
+            healthBarFill.fillAmount = healthPercentage; 
         }
     }
 
     private void Die()
     {
-        animator.SetBool("isDead", true); // Запускаем анимацию Death
-        // Здесь можно добавить задержку перед уничтожением объекта
-        Destroy(gameObject, 1f); // Уничтожаем объект через 1 секунду после смерти
+        //animator.SetBool("isDead", true);
+
+        Enemy enemy = GetComponent<Enemy>();
+
+        enemy.Defeated();
+
+        Destroy(gameObject, 1f); 
     }
 
     private IEnumerator ResetHurtAnimation()
     {
-        yield return new WaitForSeconds(0.5f); // Задержка перед сбросом анимации
-        animator.ResetTrigger("isHurt"); // Сбрасываем триггер Hurt
+        yield return new WaitForSeconds(0.5f);
+        //animator.ResetTrigger("isHurt"); 
     }
 }
