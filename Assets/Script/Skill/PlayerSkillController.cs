@@ -8,6 +8,7 @@ public class PlayerSkillController : MonoBehaviour
     public List<Skill> Skills { get; } = new List<Skill>();
 
     private PlayerStats playerStats;
+    private PlayerMovement playermovement;
 
 
     private void Awake() 
@@ -16,11 +17,16 @@ public class PlayerSkillController : MonoBehaviour
         SkillManager = gameObject.AddComponent<SkillManager>();
         SkillTree = gameObject.AddComponent<SkillTree>();
         playerStats = GetComponent<PlayerStats>();
+        playermovement = GetComponent<PlayerMovement>();
 
 
         var manaRegenSkill = new PlayerIncreasedManaRegeneration(playerStats,Resources.Load<SkillConfig>($"ManaIncrease"));
+        var SpeedIncreaseSkill = new PlayerIncreasedSpeed(playermovement,Resources.Load<SkillConfig>($"SpeedIncrease"));
+
         Skills.Add(manaRegenSkill);
         SkillManager.AddSkill(manaRegenSkill);
+        Skills.Add(SpeedIncreaseSkill);
+        SkillManager.AddSkill(SpeedIncreaseSkill);
         
     }
 }
