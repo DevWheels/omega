@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Script.Skill
 {
-    public class Skill
+    public class Skill : MonoBehaviour
     {
         public string Name { get; set; }
         public string Description { get; set; }
