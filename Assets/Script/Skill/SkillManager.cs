@@ -13,8 +13,8 @@ public class SkillManager : MonoBehaviour
     }
 
     public void UseSkill(string skillName) {
-        Skill skill = Skills.Find(s => s.Name == skillName);
-        if (skill == null || SkillCooldowns.Contains(skill)) return;
+        Skill skill = Skills.Find(s => s.skillConfig.Name == skillName);
+        if (skill == null || SkillCooldowns.Contains(skill)) {return;}
         skill.Activate();
         StartCoroutine(CooldownSkill(skill));
     }

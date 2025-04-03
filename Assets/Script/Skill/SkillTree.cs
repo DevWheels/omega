@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SkillTree : MonoBehaviour
 {
-    public List<Skill> AvailableSkills { get; private set; }  //Все навыки
-    public List<Skill> UnlockedSkills { get; private set; }   //Открытые навыки
+    public List<Skill> AvailableSkills { get; private set; }  //Все навыки которые есть в игре
+    public List<Skill> UnlockedSkills { get; private set; }   //Открытые навыки 
     
     public SkillTree() {
         AvailableSkills = new List<Skill>();
@@ -11,7 +11,7 @@ public class SkillTree : MonoBehaviour
     }
     
     public void UnlockSkill(Skill skill) {
-        if (!AvailableSkills.Contains(skill) || UnlockedSkills.Contains(skill)) return;
+        if (!AvailableSkills.Contains(skill) || UnlockedSkills.Contains(skill)) {return;}
         
         UnlockedSkills.Add(skill);
         skill.Activate();
