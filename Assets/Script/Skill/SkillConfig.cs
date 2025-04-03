@@ -4,6 +4,8 @@ using UnityEngine;
 public class SkillConfig : ScriptableObject {
     public string Name;
     public string Description;
+    
+    
     public GameObject ProjectilePrefab;
 
     public Sprite Icon;

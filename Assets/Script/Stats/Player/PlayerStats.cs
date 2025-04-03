@@ -36,6 +36,8 @@ public class PlayerStats : NetworkBehaviour {
     [SyncVar] private float hp_regeneration;
     [SyncVar] private float mana_regeneration;
 
+    [SyncVar] private float hp_regeneration_per_second = 0.05f;
+    [SyncVar] private float mana_regeneration_per_second = 0.2f;
     public int MaxHp
     {
         get { return max_hp; }
@@ -119,12 +121,35 @@ public class PlayerStats : NetworkBehaviour {
         get { return speed; }
         set { speed = value; }
     }
-    
+
+    public float ManaRegeneration
+    {
+        get{ return mana_regeneration; }
+        set { mana_regeneration = value; }
+    }
+
+    public float HealthRegeneration
+    {
+        get{ return hp_regeneration; }
+        set { hp_regeneration = value; }
+    }
+
+    public float ManaRegenerationPerSecond
+    {
+        get{ return mana_regeneration_per_second; }
+        set { mana_regeneration_per_second = value; }
+    }
+
+    public float HealthRegenerationPerSecond
+    {
+        get{ return hp_regeneration_per_second; }
+        set { hp_regeneration_per_second = value; }
+    }
 
     private PlayerMovement playerMovement;
     private PlayerUI playerUI;
 
-    
+
     private void OnApplicationQuit()
     {
         //SavePlayerData(); // Сохраняем данные при выходе
@@ -144,7 +169,6 @@ public class PlayerStats : NetworkBehaviour {
         AddExperience(2); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ДЛЯ ТЕСТА удалить потом
         CheckHpAndMana();
         playerUI.UpdateUI();
-        
         timer += Time.deltaTime;
         Regeneration();
 
@@ -231,8 +255,8 @@ public class PlayerStats : NetworkBehaviour {
         {
             return;
         }
-        hp_regeneration += 0.05f; // восстановление единицы хп раз в 20 секунд 
-        mana_regeneration += 0.2f; // восстановление единицы маны раз в 5 секунд 
+        hp_regeneration += hp_regeneration_per_second; // восстановление единицы хп раз в 20 секунд 
+        mana_regeneration += mana_regeneration_per_second; // восстановление единицы маны раз в 5 секунд 
 
         if (hp_regeneration >= 1)
         {
