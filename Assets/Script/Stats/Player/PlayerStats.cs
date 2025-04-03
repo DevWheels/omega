@@ -284,10 +284,9 @@ public class PlayerStats : NetworkBehaviour
             playerMovement.moveSpeed += speed_multiply;
             UpdateAllStats();
             playerUI.SetStateOfAbilityUpdateButtons();
-
-
         }
     }
+    
     public int GetCurretlyMana()
     {
         return currently_mana;
@@ -320,5 +319,4 @@ public class PlayerStats : NetworkBehaviour
         playerUI = GetComponent<PlayerUI>();;
         
     }
-
 }

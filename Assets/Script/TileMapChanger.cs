@@ -5,15 +5,15 @@ using UnityEngine.Tilemaps;
 
 public class TileMapChanger : MonoBehaviour
 {
-    public Tilemap tilemap; // Ссылка на ваш тайлмап
-    public Tile newTile; // Новый тайл для замены
+    public Tilemap tilemap; // РЎСЃС‹Р»РєР° РЅР° РІР°С€ С‚Р°Р№Р»РјР°Рї
+    public Tile newTile; // РќРѕРІС‹Р№ С‚Р°Р№Р» РґР»СЏ Р·Р°РјРµРЅС‹
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Проверяем, нажата ли левая кнопка мыши
+        if (Input.GetMouseButtonDown(0)) // РџСЂРѕРІРµСЂСЏРµРј, РЅР°Р¶Р°С‚Р° Р»Рё Р»РµРІР°СЏ РєРЅРѕРїРєР° РјС‹С€Рё
         {
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int Grid = tilemap.WorldToCell(mouseWorldPosition); // Преобразуем в координаты сетки
+            Vector3Int Grid = tilemap.WorldToCell(mouseWorldPosition); // РџСЂРµРѕР±СЂР°Р·СѓРµРј РІ РєРѕРѕСЂРґРёРЅР°С‚С‹ СЃРµС‚РєРё
 
             ChangeTilesInArea(Grid);
         }
@@ -21,7 +21,7 @@ public class TileMapChanger : MonoBehaviour
 
     void ChangeTilesInArea(Vector3Int center)
     {
-        // Измените радиус области, если нужно
+        // РР·РјРµРЅРёС‚Рµ СЂР°РґРёСѓСЃ РѕР±Р»Р°СЃС‚Рё, РµСЃР»Рё РЅСѓР¶РЅРѕ
         int radius = 4;
 
         for (int x = center.x - radius; x <= center.x + radius; x++)
@@ -30,9 +30,9 @@ public class TileMapChanger : MonoBehaviour
             {
                 Vector3Int position = new Vector3Int(x, y, 0);
 
-                if (tilemap.HasTile(position)) // Проверка наличия тайла на позиции
+                if (tilemap.HasTile(position)) // РџСЂРѕРІРµСЂРєР° РЅР°Р»РёС‡РёСЏ С‚Р°Р№Р»Р° РЅР° РїРѕР·РёС†РёРё
                 {
-                    tilemap.SetTile(position, newTile); // Замена тайла
+                    tilemap.SetTile(position, newTile); // Р—Р°РјРµРЅР° С‚Р°Р№Р»Р°
                 }
             }
         }

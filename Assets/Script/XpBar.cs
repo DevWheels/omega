@@ -6,37 +6,37 @@ using UnityEngine.SceneManagement;
 
 public class XpBar : MonoBehaviour
 {
-    public int health = 100; // Текущее здоровье врага
-    public int armor = 100; // Броня врага
+    public int health = 100; // РўРµРєСѓС‰РµРµ Р·РґРѕСЂРѕРІСЊРµ РІСЂР°РіР°
+    public int armor = 100; // Р‘СЂРѕРЅСЏ РІСЂР°РіР°
 
-    // Ссылки на UI элементы TextMeshPro
-    public TMP_Text healthText; // Ссылка на TextMeshPro для здоровья
-    public TMP_Text armorText; // Ссылка на TextMeshPro для брони
+    // РЎСЃС‹Р»РєРё РЅР° UI СЌР»РµРјРµРЅС‚С‹ TextMeshPro
+    public TMP_Text healthText; // РЎСЃС‹Р»РєР° РЅР° TextMeshPro РґР»СЏ Р·РґРѕСЂРѕРІСЊСЏ
+    public TMP_Text armorText; // РЎСЃС‹Р»РєР° РЅР° TextMeshPro РґР»СЏ Р±СЂРѕРЅРё
 
     private void Start()
     {
-        // Устанавливаем начальные значения текста
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅР°С‡Р°Р»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ С‚РµРєСЃС‚Р°
         UpdateUI();
     }
 
     public void TakeDamage(int damage)
     {
-        // Вычисляем, сколько урона поглотит броня (20% от входящего урона)
+        // Р’С‹С‡РёСЃР»СЏРµРј, СЃРєРѕР»СЊРєРѕ СѓСЂРѕРЅР° РїРѕРіР»РѕС‚РёС‚ Р±СЂРѕРЅСЏ (20% РѕС‚ РІС…РѕРґСЏС‰РµРіРѕ СѓСЂРѕРЅР°)
         int damageToArmor = Mathf.FloorToInt(damage * 0.2f);
         int damageToHealth = damage - damageToArmor;
 
-        // Обновляем броню и здоровье
+        // РћР±РЅРѕРІР»СЏРµРј Р±СЂРѕРЅСЋ Рё Р·РґРѕСЂРѕРІСЊРµ
         armor -= damageToArmor;
         health -= damageToHealth;
 
-        // Обновляем UI
+        // РћР±РЅРѕРІР»СЏРµРј UI
         UpdateUI();
 
-        // Выводим информацию о damage
+        // Р’С‹РІРѕРґРёРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ damage
         Debug.Log($"Damage dealt: {damage}, Damage to armor: {damageToArmor}, Damage to health: {damageToHealth}");
         Debug.Log($"Remaining Armor: {armor}, Remaining Health: {health}");
 
-        // Проверяем, если враг мёртв
+        // РџСЂРѕРІРµСЂСЏРµРј, РµСЃР»Рё РІСЂР°Рі РјС‘СЂС‚РІ
         if (health <= 0)
         {
             Die();
@@ -46,19 +46,19 @@ public class XpBar : MonoBehaviour
 
     private void UpdateUI()
     {
-        // Обновляем значения текстовых полей
+        // РћР±РЅРѕРІР»СЏРµРј Р·РЅР°С‡РµРЅРёСЏ С‚РµРєСЃС‚РѕРІС‹С… РїРѕР»РµР№
         healthText.text = $"{health}";
         armorText.text = $"{armor}";
     }
 
     public void Die()
     {
-        // Выводим сообщение о смерти
+        // Р’С‹РІРѕРґРёРј СЃРѕРѕР±С‰РµРЅРёРµ Рѕ СЃРјРµСЂС‚Рё
         Debug.Log("Enemy has died!");
 
-        // Возвращаемся на предыдущую сцену
-        // '1' - это количество сцен назад, на которое нужно вернуться
-        // Например, если у вас была следующая сцена, и вы хотите вернуться на предыдущую
+        // Р’РѕР·РІСЂР°С‰Р°РµРјСЃСЏ РЅР° РїСЂРµРґС‹РґСѓС‰СѓСЋ СЃС†РµРЅСѓ
+        // '1' - СЌС‚Рѕ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС†РµРЅ РЅР°Р·Р°Рґ, РЅР° РєРѕС‚РѕСЂРѕРµ РЅСѓР¶РЅРѕ РІРµСЂРЅСѓС‚СЊСЃСЏ
+        // РќР°РїСЂРёРјРµСЂ, РµСЃР»Рё Сѓ РІР°СЃ Р±С‹Р»Р° СЃР»РµРґСѓСЋС‰Р°СЏ СЃС†РµРЅР°, Рё РІС‹ С…РѕС‚РёС‚Рµ РІРµСЂРЅСѓС‚СЊСЃСЏ РЅР° РїСЂРµРґС‹РґСѓС‰СѓСЋ
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
