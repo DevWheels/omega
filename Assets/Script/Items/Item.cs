@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class Item1 : ScriptableObject
 {
+    //Макс для тетса
+    public bool isStackable = false;
+    public int maxStackAmount = 1;
+
+
     [Header("Базовые характеристики")]
     public string Name = " ";
     public string Description = "Описание предмета";

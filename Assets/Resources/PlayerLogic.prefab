@@ -160,11 +160,10 @@ GameObject:
   - component: {fileID: 1589120652148634184}
   - component: {fileID: 3029300740507279358}
   - component: {fileID: -510250030928325903}
-  - component: {fileID: 4626080165298177306}
-  - component: {fileID: 584345988976868}
   - component: {fileID: 3820933814322284347}
   - component: {fileID: 7339654325217976826}
   - component: {fileID: -7666614221123661290}
+  - component: {fileID: -3036109726912205025}
   m_Layer: 6
   m_Name: PlayerLogic
   m_TagString: Player
@@ -392,48 +391,6 @@ MonoBehaviour:
   healthBarFill: {fileID: 0}
   manahBarFill: {fileID: 0}
   expBarFill: {fileID: 0}
---- !u!114 &4626080165298177306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6909981378074328598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c873ee5d34a397479cdf6e44ea0d4d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackOptions:
-  - attackKey: 52
-    attackPower: 100
-    manaCost: 5
-    attackEffectPrefab: {fileID: 0}
-    effectTriggered: 1
-  - attackKey: 53
-    attackPower: 100
-    manaCost: 5
-    attackEffectPrefab: {fileID: 0}
-    effectTriggered: 1
-  enemyTags:
-  - Slaim
-  - Player
---- !u!114 &584345988976868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6909981378074328598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4601d9a65a770b34c8200902f03ca221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 0}
-  spawnRadius: 7
-  numberOfEnemies: 3
 --- !u!114 &3820933814322284347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +476,27 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &-3036109726912205025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909981378074328598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243756e46a3e9314497ccbd7de2cabae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  attackRange: 5
+  attackCooldown: 0.5
+  attackOffset: {x: 0.5, y: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  animator: {fileID: 0}
+  attackSound: {fileID: 0}
 --- !u!1 &7563778525642114572
 GameObject:
   m_ObjectHideFlags: 0

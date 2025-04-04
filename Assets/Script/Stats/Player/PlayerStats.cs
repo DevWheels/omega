@@ -13,6 +13,8 @@ using Script.Stats.Player;
 public class PlayerStats : NetworkBehaviour
 {
 
+    public static PlayerStats Instance { get; private set; }
+
     [SyncVar]
     private int max_hp = 300;
     [SyncVar]
@@ -75,7 +77,26 @@ public class PlayerStats : NetworkBehaviour
     private PlayerMovement playerMovement;
     private PlayerUI playerUI;
 
-    
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void OnApplicationQuit()
     {
         //SavePlayerData(); // Сохраняем данные при выходе

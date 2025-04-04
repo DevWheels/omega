@@ -85,13 +85,13 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         //animator.SetBool("isDead", true);
 
-        Enemy enemy = GetComponent<Enemy>();
+        //Enemy enemy = GetComponent<Enemy>();
 
-        enemy.Defeated();
+        //enemy.Defeated();
 
         Destroy(gameObject, 1f); 
     }

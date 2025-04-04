@@ -132,7 +132,7 @@ public class QuestManager : MonoBehaviour
             {
                 if (slot.SlotItem == requiredItem && deleted < needToDelete)
                 {
-                    slot.ClearSlot(); // Удаляем предмет для квеста
+                    //slot.ClearSlot(); // Удаляем предмет для квеста
                     deleted++;
                 }
                 else if (deleted >= needToDelete)
