@@ -14,9 +14,7 @@ public class PlayerIncreasedSpeed : Skill{
     public override void Activate()
     {
         playerMovement.moveSpeed += speedIncrease;
-        this.IsPassive = true;
-
-        Debug.Log(playerMovement.moveSpeed);
+        IsPassive = true;
     }
 
     public override void Upgrade()

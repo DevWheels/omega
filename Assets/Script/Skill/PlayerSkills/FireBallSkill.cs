@@ -5,12 +5,14 @@ public class FireBallSkill : Skill {
     private PlayerStats playerStats;
     private GameObject projectilePrefab;
     private Transform SpawnPoint;
+    
     public FireBallSkill(PlayerStats playerStats,SkillConfig skillConfig)
     {
         this.playerStats = playerStats;
         this.skillConfig = skillConfig;
         projectilePrefab = skillConfig.ProjectilePrefab;
         SpawnPoint = this.playerStats.transform;
+        Cooldown = 2f;
     }
 
 

@@ -22,6 +22,6 @@ public class FireBallProjectile : MonoBehaviour{
 
     private void MoveProjectile()
     {
-        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
+        transform.forward = Vector3.Lerp(transform.forward, Vector3.zero, Time.deltaTime * speed);
     }
 }

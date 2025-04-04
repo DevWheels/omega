@@ -46,7 +46,7 @@ public class PlayerSkillController : MonoBehaviour
     private void UseSkill() {
         if (Input.GetKey(KeyCode.Q)) {
             SkillManager.UseSkill(Active_Skills[0]);
-            Active_Skills[0].Activate();
+
         }
     }
 }

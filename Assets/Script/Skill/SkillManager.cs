@@ -17,10 +17,11 @@ public class SkillManager : MonoBehaviour {
 
     public void UseSkill(Skill playerskill) {
         Skill skill = Skills.Find(s => s == playerskill);
+
         if (skill == null || SkillCooldowns.Contains(skill)) {
             return;
         }
-
+        
         skill.Activate();
         StartCoroutine(CooldownSkill(skill));
     }
