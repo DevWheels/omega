@@ -15,8 +15,8 @@ public class SkillManager : MonoBehaviour {
         }
     }
 
-    public void UseSkill(string skillName) {
-        Skill skill = Skills.Find(s => s.skillConfig.Name == skillName);
+    public void UseSkill(Skill playerskill) {
+        Skill skill = Skills.Find(s => s == playerskill);
         if (skill == null || SkillCooldowns.Contains(skill)) {
             return;
         }

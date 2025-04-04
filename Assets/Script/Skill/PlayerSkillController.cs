@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,8 @@ public class PlayerSkillController : MonoBehaviour
 {
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
-    public List<Skill> Skills { get; } = new List<Skill>();
+    public List<Skill> Passive_Skills { get; } = new List<Skill>();
+    public List<Skill> Active_Skills { get; } = new List<Skill>();
 
     private PlayerStats playerStats;
     private PlayerMovement playermovement;
@@ -22,11 +24,29 @@ public class PlayerSkillController : MonoBehaviour
 
         var manaRegenSkill = new PlayerIncreasedManaRegeneration(playerStats,Resources.Load<SkillConfig>($"ManaIncrease"));
         var SpeedIncreaseSkill = new PlayerIncreasedSpeed(playermovement,Resources.Load<SkillConfig>($"SpeedIncrease"));
+        var fireBallSkill = new FireBallSkill(playerStats,Resources.Load<SkillConfig>($"Skills/FireBall"));
 
-        Skills.Add(manaRegenSkill);
+
+
+        Active_Skills.Add(fireBallSkill);
+        SkillManager.Skills.Add(fireBallSkill);
+        
+        Passive_Skills.Add(manaRegenSkill);
         SkillManager.AddSkill(manaRegenSkill);
-        Skills.Add(SpeedIncreaseSkill);
+        
+        Passive_Skills.Add(SpeedIncreaseSkill);
         SkillManager.AddSkill(SpeedIncreaseSkill);
         
+    }
+
+    private void Update() {
+        UseSkill();
+    }
+
+    private void UseSkill() {
+        if (Input.GetKey(KeyCode.Q)) {
+            SkillManager.UseSkill(Active_Skills[0]);
+            Active_Skills[0].Activate();
+        }
     }
 }

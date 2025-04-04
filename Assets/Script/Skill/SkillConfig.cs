@@ -5,7 +5,7 @@ public class SkillConfig : ScriptableObject {
     public string Name;
     public string Description;
     
-    
+    public Transform SpawnPoint;
     public GameObject ProjectilePrefab;
 
     public Sprite Icon;
