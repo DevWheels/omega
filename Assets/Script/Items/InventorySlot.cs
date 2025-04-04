@@ -5,37 +5,59 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    //public Item1 SlotItem;
+    //public GameObject ItemObj;
+
+    //Image icon;
+    //Button button;
+
+    //private void Start()
+    //{
+    //    icon = gameObject.transform.GetChild(0).GetComponent<Image>();
+    //    button = GetComponent<Button>();
+    //    button.onClick.AddListener(ShowInfo);
+    //}
+    //public void PutInSlot(Item1 item, GameObject obj)
+    //{
+    //    icon.sprite = item.icon;
+    //    SlotItem = item;
+    //    ItemObj = obj;
+    //    icon.enabled = true;
+    //}
+
+    //void ShowInfo()
+    //{
+    //    if (SlotItem != null) 
+    //    ItemInfo.instance.Open(SlotItem, ItemObj, this);
+    //}
+
+    //public void ClearSlot()
+    //{ 
+    //    SlotItem = null;
+    //    ItemObj = null;
+    //    icon.sprite = null;
+    //    icon.enabled = false;
+    //}
+
+
+
+    //Макс для тетса
     public Item1 SlotItem;
-    public GameObject ItemObj;
+    public int amount;
+    public Text amountText;
 
-    Image icon;
-    Button button;
-
-    private void Start()
+    public void PutInSlot(Item1 item)
     {
-        icon = gameObject.transform.GetChild(0).GetComponent<Image>();
-        button = GetComponent<Button>();
-        button.onClick.AddListener(ShowInfo);
-    }
-    public void PutInSlot(Item1 item, GameObject obj)
-    {
-        icon.sprite = item.icon;
         SlotItem = item;
-        ItemObj = obj;
-        icon.enabled = true;
-    }
+        amount = 1;
 
-    void ShowInfo()
-    {
-        if (SlotItem != null) 
-        ItemInfo.instance.Open(SlotItem, ItemObj, this);
     }
-    public void ClearSlot()
-    { 
-        SlotItem = null;
-        ItemObj = null;
-        icon.sprite = null;
-        icon.enabled = false;
+    public void UpdateAmountText()
+    {
+        if (amount > 1)
+            amountText.text = amount.ToString();
+        else
+            amountText.text = "";
     }
 
 }
