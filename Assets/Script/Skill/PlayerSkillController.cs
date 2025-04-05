@@ -22,8 +22,8 @@ public class PlayerSkillController : MonoBehaviour
         playermovement = GetComponent<PlayerMovement>();
 
 
-        var manaRegenSkill = new PlayerIncreasedManaRegeneration(playerStats,Resources.Load<SkillConfig>($"ManaIncrease"));
-        var SpeedIncreaseSkill = new PlayerIncreasedSpeed(playermovement,Resources.Load<SkillConfig>($"SpeedIncrease"));
+        var manaRegenSkill = new PlayerIncreasedManaRegeneration(playerStats,Resources.Load<SkillConfig>($"Skills/ManaIncrease"));
+        var SpeedIncreaseSkill = new PlayerIncreasedSpeed(playermovement,Resources.Load<SkillConfig>($"Skills/SpeedIncrease"));
         var fireBallSkill = new FireBallSkill(playerStats,Resources.Load<SkillConfig>($"Skills/FireBall"));
         var ExplosionSkill =
             new ExplosionAroundPlayerSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
