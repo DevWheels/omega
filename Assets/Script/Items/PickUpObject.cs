@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
-    public Item1 item;
+    public Item item;
     private GameObject itemObj;
     private void Start() 
     {
         itemObj = gameObject;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

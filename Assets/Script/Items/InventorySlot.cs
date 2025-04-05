@@ -5,60 +5,42 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    //public Item1 SlotItem;
-    //public GameObject ItemObj;
+    public Item SlotItem;
+    public GameObject ItemObj;
 
-    //Image icon;
-    //Button button;
+    Image icon;
+    Button button;
 
-    //private void Start()
-    //{
-    //    icon = gameObject.transform.GetChild(0).GetComponent<Image>();
-    //    button = GetComponent<Button>();
-    //    button.onClick.AddListener(ShowInfo);
-    //}
-    //public void PutInSlot(Item1 item, GameObject obj)
-    //{
-    //    icon.sprite = item.icon;
-    //    SlotItem = item;
-    //    ItemObj = obj;
-    //    icon.enabled = true;
-    //}
-
-    //void ShowInfo()
-    //{
-    //    if (SlotItem != null) 
-    //    ItemInfo.instance.Open(SlotItem, ItemObj, this);
-    //}
-
-    //public void ClearSlot()
-    //{ 
-    //    SlotItem = null;
-    //    ItemObj = null;
-    //    icon.sprite = null;
-    //    icon.enabled = false;
-    //}
-
-
-
-    //Макс для тетса
-    public Item1 SlotItem;
-    public int amount;
-    public Text amountText;
-
-    public void PutInSlot(Item1 item)
+    private void Start()
     {
+        icon = gameObject.transform.GetChild(0).GetComponent<Image>();
+        button = GetComponent<Button>();
+        button.onClick.AddListener(ShowInfo);
+    }
+    public void PutInSlot(Item item, GameObject obj)
+    {
+        icon.sprite = item.icon;
         SlotItem = item;
-        amount = 1;
+        ItemObj = obj;
+        icon.enabled = true;
+    }
 
-    }
-    public void UpdateAmountText()
+    void ShowInfo()
     {
-        if (amount > 1)
-            amountText.text = amount.ToString();
-        else
-            amountText.text = "";
+        if (SlotItem != null)
+            ItemInfo.instance.Open(SlotItem, ItemObj, this);
     }
+
+    public void ClearSlot()
+    {
+        SlotItem = null;
+        ItemObj = null;
+        icon.sprite = null;
+        icon.enabled = false;
+    }
+
+
+
 
 }
  

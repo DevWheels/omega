@@ -13,7 +13,7 @@ public class UseOfItems : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>(); 
     }
 
-    public void Use(Item1 item)
+    public void Use(Item item)
     {
         if (item.isHealing)
         {

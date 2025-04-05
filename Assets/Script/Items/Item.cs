@@ -3,12 +3,8 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 
-public class Item1 : ScriptableObject
+public class Item : ScriptableObject
 {
-    //Макс для тетса
-    public bool isStackable = false;
-    public int maxStackAmount = 1;
-
 
     [Header("Базовые характеристики")]
     public string Name = " ";
