@@ -13,8 +13,8 @@ public class Quest
     public string thanks;
     [Header("Rewards")]
     public int experience;
-    public List<Item1> reward_items;
-    public List<Item1> quest_items;
+    public List<Item> reward_items;
+    public List<Item> quest_items;
 
     public bool isCompleted;
     public bool isStarted;
