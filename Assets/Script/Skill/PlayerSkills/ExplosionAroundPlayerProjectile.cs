@@ -5,9 +5,9 @@ using System.Collections;
 
 public class ExplosionAroundPlayerProjectile : NetworkBehaviour{
     [SyncVar]
-    public int speed = 10;
+    public int speed;
     [SyncVar]
-    public int damage = 35;
+    public int damage;
 
 
     private void Start()

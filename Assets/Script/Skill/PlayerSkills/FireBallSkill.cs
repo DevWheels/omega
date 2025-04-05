@@ -25,6 +25,7 @@ public class FireBallSkill : Skill {
 
         );
         fireball.AddComponent<FireBallProjectile>();
+        // fireball.GetComponent<FireBallProjectile>().speed = 
         
     }
 

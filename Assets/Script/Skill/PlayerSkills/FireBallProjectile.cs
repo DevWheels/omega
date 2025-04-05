@@ -5,9 +5,9 @@ using Mirror;
 using UnityEngine;
 public class FireBallProjectile : NetworkBehaviour{
     [SyncVar]
-    public int speed = 10;
+    public int speed;
     [SyncVar]
-    public int damage = 35;
+    public int damage;
     private Vector2 target_direction;
 
     private void Start() {
