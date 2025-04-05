@@ -101,7 +101,7 @@ public class PlayerStats : NetworkBehaviour
 
     }
 
-    public void UseItem(Item item)
+    public void UseItem(Item1 item)
     {
         if (item.isHealing)
         {
