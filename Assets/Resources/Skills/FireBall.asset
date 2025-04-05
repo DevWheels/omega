@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a7989522df4abc9c73aabdb15c460a, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: 
-  Name: 
+  Name: FireBallSkill
   Description: 
   SpawnPoint: {fileID: 611564388684225579, guid: 3efa2b639a38ac94f99f90b07be2991b, type: 3}
   ProjectilePrefab: {fileID: 8894036980424771460, guid: 1484a86963bb0d94699192f43f2002f2, type: 3}

@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
-public class FireBallProjectile : MonoBehaviour{
+public class FireBallProjectile : NetworkBehaviour{
     public int speed = 5;
     public int damage = 35;
+    private Vector2 target_direction;
 
     private void Start() {
-        StartCoroutine("DestroyProjectile");
+        StartCoroutine(nameof(DestroyProjectile));
+        Vector3 mouseWorldPos = GetMouseWorldPosition();
+        // Рассчитываем направление
+        target_direction = (mouseWorldPos - transform.position).normalized;
     }
 
     void Update() {
@@ -22,6 +27,14 @@ public class FireBallProjectile : MonoBehaviour{
 
     private void MoveProjectile()
     {
-        transform.forward = Vector3.Lerp(transform.forward, Vector3.zero, Time.deltaTime * speed);
+        // Движемся в направлении курсора
+        transform.position += (Vector3)(target_direction * (speed * Time.deltaTime));
+
+    }
+    private Vector3 GetMouseWorldPosition()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 0; // Или другое значение для Z
+        return Camera.main.ScreenToWorldPoint(mousePos);
     }
 }
