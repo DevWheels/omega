@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 public class FireBallProjectile : NetworkBehaviour{
-    public int speed = 5;
+    [SyncVar]
+    public int speed = 10;
+    [SyncVar]
     public int damage = 35;
     private Vector2 target_direction;
 
     private void Start() {
         StartCoroutine(nameof(DestroyProjectile));
         Vector3 mouseWorldPos = GetMouseWorldPosition();
-        // Рассчитываем направление
+
         target_direction = (mouseWorldPos - transform.position).normalized;
     }
 
@@ -27,14 +29,12 @@ public class FireBallProjectile : NetworkBehaviour{
 
     private void MoveProjectile()
     {
-        // Движемся в направлении курсора
         transform.position += (Vector3)(target_direction * (speed * Time.deltaTime));
-
     }
     private Vector3 GetMouseWorldPosition()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 0; // Или другое значение для Z
+        mousePos.z = 0; 
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
 }

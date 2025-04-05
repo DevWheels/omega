@@ -25,11 +25,15 @@ public class PlayerSkillController : MonoBehaviour
         var manaRegenSkill = new PlayerIncreasedManaRegeneration(playerStats,Resources.Load<SkillConfig>($"ManaIncrease"));
         var SpeedIncreaseSkill = new PlayerIncreasedSpeed(playermovement,Resources.Load<SkillConfig>($"SpeedIncrease"));
         var fireBallSkill = new FireBallSkill(playerStats,Resources.Load<SkillConfig>($"Skills/FireBall"));
+        var ExplosionSkill =
+            new ExplosionAroundPlayerSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
 
-
-
+    
         Active_Skills.Add(fireBallSkill);
         SkillManager.Skills.Add(fireBallSkill);
+        
+        Active_Skills.Add(ExplosionSkill);
+        SkillManager.Skills.Add(ExplosionSkill);
         
         Passive_Skills.Add(manaRegenSkill);
         SkillManager.AddSkill(manaRegenSkill);
@@ -44,8 +48,13 @@ public class PlayerSkillController : MonoBehaviour
     }
 
     private void UseSkill() {
+
         if (Input.GetKey(KeyCode.Q)) {
             SkillManager.UseSkill(Active_Skills[0]);
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            SkillManager.UseSkill(Active_Skills[1]);
 
         }
     }
