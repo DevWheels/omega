@@ -9,6 +9,9 @@ public class SkillConfig : ScriptableObject {
     public GameObject ProjectilePrefab;
 
     public Sprite Icon;
-
+    public float Cooldown { get; set; }
+    public int ManaCost { get; set; }
+    public int Level { get; set; }
+    public bool IsPassive { get; set; }
 
 }
