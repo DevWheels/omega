@@ -10,17 +10,17 @@ public class PlayerSkillController : MonoBehaviour {
 
     private PlayerStats playerStats;
     private PlayerMovement playermovement;
-
+    private RegenerationController regeneration;
 
     private void Awake() {
         SkillManager = gameObject.AddComponent<SkillManager>();
         SkillTree = gameObject.AddComponent<SkillTree>();
         playerStats = GetComponent<PlayerStats>();
         playermovement = GetComponent<PlayerMovement>();
-
+        regeneration = GetComponent<RegenerationController>();
 
         var manaRegenSkill =
-            new PlayerIncreasedManaRegeneration(playerStats, Resources.Load<SkillConfig>($"Skills/ManaIncrease"));
+            new PlayerIncreasedManaRegeneration(regeneration, Resources.Load<SkillConfig>($"Skills/ManaIncrease"));
         var SpeedIncreaseSkill =
             new PlayerIncreasedSpeed(playermovement, Resources.Load<SkillConfig>($"Skills/SpeedIncrease"));
         var fireBallSkill = new FireBallSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));

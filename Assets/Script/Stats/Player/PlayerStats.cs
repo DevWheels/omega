@@ -30,14 +30,7 @@ public class PlayerStats : NetworkBehaviour {
     [SyncVar] private int luck = 1;
     [SyncVar] private int speed = 1;
 
-    [SyncVar] private float timer;
-    [SyncVar] private float interval_of_one_second = 1f;
 
-    [SyncVar] private float hp_regeneration;
-    [SyncVar] private float mana_regeneration;
-
-    [SyncVar] private float hp_regeneration_per_second = 0.05f;
-    [SyncVar] private float mana_regeneration_per_second = 0.2f;
     public int MaxHp
     {
         get { return max_hp; }
@@ -122,29 +115,7 @@ public class PlayerStats : NetworkBehaviour {
         set { speed = value; }
     }
 
-    public float ManaRegeneration
-    {
-        get{ return mana_regeneration; }
-        set { mana_regeneration = value; }
-    }
 
-    public float HealthRegeneration
-    {
-        get{ return hp_regeneration; }
-        set { hp_regeneration = value; }
-    }
-
-    public float ManaRegenerationPerSecond
-    {
-        get{ return mana_regeneration_per_second; }
-        set { mana_regeneration_per_second = value; }
-    }
-
-    public float HealthRegenerationPerSecond
-    {
-        get{ return hp_regeneration_per_second; }
-        set { hp_regeneration_per_second = value; }
-    }
 
     private PlayerMovement playerMovement;
     private PlayerUI playerUI;
@@ -169,8 +140,7 @@ public class PlayerStats : NetworkBehaviour {
         AddExperience(2); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ДЛЯ ТЕСТА удалить потом
         CheckHpAndMana();
         playerUI.UpdateUI();
-        timer += Time.deltaTime;
-        Regeneration();
+
 
     }
 
@@ -249,31 +219,7 @@ public class PlayerStats : NetworkBehaviour {
         playerUI.UpdateUI();
     }
     [Client]
-    private void Regeneration()
-    {
-        if (!(timer >= interval_of_one_second && max_mana >= currently_mana && max_hp >= currently_hp))
-        {
-            return;
-        }
-        hp_regeneration += hp_regeneration_per_second; // восстановление единицы хп раз в 20 секунд 
-        mana_regeneration += mana_regeneration_per_second; // восстановление единицы маны раз в 5 секунд 
-
-        if (hp_regeneration >= 1)
-        {
-            currently_hp += (int)hp_regeneration;
-            hp_regeneration = 0f; 
-            playerUI.UpdateUI();
-
-        }
-        if (mana_regeneration >= 1 && currently_mana > max_mana * 0.1f)
-        {
-            currently_mana += (int)mana_regeneration;
-            mana_regeneration = 0f; 
-            playerUI.UpdateUI();
-        }
-
-        timer = 0f;
-    }
+    
     public void TakeHit(int damage)
     {
         currently_hp -= damage;
