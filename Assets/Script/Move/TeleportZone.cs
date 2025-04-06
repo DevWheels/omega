@@ -3,43 +3,40 @@ using UnityEngine.UI;
 
 public class TeleportZone : MonoBehaviour
 {
-    public GameObject confirmationPanel; // Панель подтверждения
-    public GameObject targetObject; // Объект, на позицию которого будет телепортирован игрок
-    private GameObject player; // Ссылка на игрока
+    public GameObject confirmationPanel; 
+    public GameObject targetObject; 
+    private GameObject player; 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) // Убедитесь, что тег игрока установлен в "Player"
+        if (other.CompareTag("Player")) 
         {
-            player = other.gameObject; // Сохраняем ссылку на игрока
-            // Показываем панель подтверждения
+            player = other.gameObject;
             confirmationPanel.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) // Убедитесь, что тег игрока установлен в "Player"
+        if (other.CompareTag("Player"))
         {
-            // Скрываем панель подтверждения, если игрок покинул зону
             confirmationPanel.SetActive(false);
-            player = null; // Сбрасываем ссылку на игрока
+            player = null; 
         }
     }
 
-    // Метод для подтверждения перемещения
+
     public void ConfirmTeleport()
     {
         if (player != null && targetObject != null)
         {
-            player.transform.position = targetObject.transform.position; // Перемещаем игрока на позицию целевого объекта
+            player.transform.position = targetObject.transform.position;
         }
-        confirmationPanel.SetActive(false); // Скрываем панель
+        confirmationPanel.SetActive(false);
     }
 
-    // Метод для отмены перемещения
     public void CancelTeleport()
     {
-        confirmationPanel.SetActive(false); // Скрываем панель
+        confirmationPanel.SetActive(false); 
     }
 }
