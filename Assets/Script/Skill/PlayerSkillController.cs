@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSkillController : MonoBehaviour 
-{
+public class PlayerSkillController : MonoBehaviour {
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
     public List<Skill> Passive_Skills { get; } = new List<Skill>();
@@ -13,34 +12,33 @@ public class PlayerSkillController : MonoBehaviour
     private PlayerMovement playermovement;
 
 
-    private void Awake() 
-    {
-
+    private void Awake() {
         SkillManager = gameObject.AddComponent<SkillManager>();
         SkillTree = gameObject.AddComponent<SkillTree>();
         playerStats = GetComponent<PlayerStats>();
         playermovement = GetComponent<PlayerMovement>();
 
 
-        var manaRegenSkill = new PlayerIncreasedManaRegeneration(playerStats,Resources.Load<SkillConfig>($"Skills/ManaIncrease"));
-        var SpeedIncreaseSkill = new PlayerIncreasedSpeed(playermovement,Resources.Load<SkillConfig>($"Skills/SpeedIncrease"));
-        var fireBallSkill = new FireBallSkill(playerStats,Resources.Load<SkillConfig>($"Skills/FireBall"));
+        var manaRegenSkill =
+            new PlayerIncreasedManaRegeneration(playerStats, Resources.Load<SkillConfig>($"Skills/ManaIncrease"));
+        var SpeedIncreaseSkill =
+            new PlayerIncreasedSpeed(playermovement, Resources.Load<SkillConfig>($"Skills/SpeedIncrease"));
+        var fireBallSkill = new FireBallSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
         var ExplosionSkill =
             new ExplosionAroundPlayerSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
 
-    
+
         Active_Skills.Add(fireBallSkill);
         SkillManager.Skills.Add(fireBallSkill);
-        
+
         Active_Skills.Add(ExplosionSkill);
         SkillManager.Skills.Add(ExplosionSkill);
-        
+
         Passive_Skills.Add(manaRegenSkill);
         SkillManager.AddSkill(manaRegenSkill);
-        
+
         Passive_Skills.Add(SpeedIncreaseSkill);
         SkillManager.AddSkill(SpeedIncreaseSkill);
-        
     }
 
     private void Update() {
@@ -48,14 +46,11 @@ public class PlayerSkillController : MonoBehaviour
     }
 
     private void UseSkill() {
-
         if (Input.GetKey(KeyCode.Q)) {
             SkillManager.UseSkill(Active_Skills[0]);
         }
-        else if (Input.GetKey(KeyCode.E))
-        {
+        else if (Input.GetKey(KeyCode.E)) {
             SkillManager.UseSkill(Active_Skills[1]);
-
         }
     }
 }

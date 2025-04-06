@@ -3,21 +3,20 @@ using Mirror;
 using UnityEngine;
 using System.Collections;
 
-public class ExplosionAroundPlayerProjectile : NetworkBehaviour{
-    [SyncVar]
-    public int speed;
-    [SyncVar]
-    public int damage;
+public class ExplosionAroundPlayerProjectile : ProjectileBase {
+    private int projectileDamage;
 
 
-    private void Start()
-    {
+    public override void Init(int damage, int speed) {
+        projectileDamage = damage;
+    }
+    private void Start() {
         StartCoroutine(nameof(DestroyProjectile));
     }
 
-    private IEnumerator DestroyProjectile()
-    {
-        yield return new WaitForSeconds(1);
-        Destroy(gameObject);
+    private void DestroyProjectile() {
+        Destroy(gameObject,3);
     }
+
+
 }

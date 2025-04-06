@@ -9,11 +9,13 @@ public abstract class Skill {
     public int Level { get; set; }
     public bool IsPassive { get; set; }
 
-    //Реализация активации навыка
+
     public abstract void Activate();
 
 
-    public abstract void Upgrade();
+    public virtual void Upgrade() {
+        Level++;
+    }
     
     public abstract void Deactivate();
 }

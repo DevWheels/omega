@@ -1,13 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FireBallSkill : Skill {
-
     private PlayerStats playerStats;
-    private GameObject projectilePrefab;
+    private ProjectileBase projectilePrefab;
     private Transform SpawnPoint;
-    
-    public FireBallSkill(PlayerStats playerStats,SkillConfig skillConfig)
-    {
+
+    public FireBallSkill(PlayerStats playerStats, SkillConfig skillConfig) {
         this.playerStats = playerStats;
         this.skillConfig = skillConfig;
         projectilePrefab = skillConfig.ProjectilePrefab;
@@ -18,22 +17,16 @@ public class FireBallSkill : Skill {
 
     public override void Activate() {
 
-        GameObject fireball = Object.Instantiate(
+        var fireball = Object.Instantiate(
             projectilePrefab,
             SpawnPoint.position,
-            SpawnPoint.rotation
-
+            SpawnPoint.rotation 
         );
-        fireball.AddComponent<FireBallProjectile>();
-        // fireball.GetComponent<FireBallProjectile>().speed = 
-        
+
+        fireball.Init(25,10); 
     }
 
-    public override void Upgrade() {
+    public override void Upgrade() { }
 
-    }
-
-    public override void Deactivate() {
-       
-    }
+    public override void Deactivate() { }
 }

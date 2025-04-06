@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a7989522df4abc9c73aabdb15c460a, type: 3}
   m_Name: ManaIncrease
   m_EditorClassIdentifier: 
-  Name: ManaIncrease
+  Name: Mana increase
   Description: Increases player mana
+  isPassive: 1
+  PercenageBuff: 10
+  Damage: 0
   ProjectilePrefab: {fileID: 0}
   Icon: {fileID: 0}
