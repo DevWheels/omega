@@ -25,21 +25,25 @@ public class PlayerSkillController : MonoBehaviour {
             new PlayerIncreasedSpeed(playermovement, Resources.Load<SkillConfig>($"Skills/SpeedIncrease"));
         var fireBallSkill = new FireBallSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
         var ExplosionSkill =
-            new ExplosionAroundPlayerSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
+            new ExplosionAroundPlayerSkill(playerStats, Resources.Load<SkillConfig>($"Skills/ExplosionAroundPlayer"));
+        List<Skill> usedSkills = new List<Skill> {
+            manaRegenSkill,
+            SpeedIncreaseSkill,
+            fireBallSkill,
+            ExplosionSkill
+        };
+
+        foreach (var skill in usedSkills) {
+            if (skill.skillConfig.isPassive) {
+                Passive_Skills.Add(skill);
+            }
+            else { Active_Skills.Add(skill); }
+            SkillManager.AddSkill(skill);
+        }
 
 
-        Active_Skills.Add(fireBallSkill);
-        SkillManager.Skills.Add(fireBallSkill);
-
-        Active_Skills.Add(ExplosionSkill);
-        SkillManager.Skills.Add(ExplosionSkill);
-
-        Passive_Skills.Add(manaRegenSkill);
-        SkillManager.AddSkill(manaRegenSkill);
-
-        Passive_Skills.Add(SpeedIncreaseSkill);
-        SkillManager.AddSkill(SpeedIncreaseSkill);
     }
+    
 
     private void Update() {
         UseSkill();

@@ -11,16 +11,16 @@ public class ExplosionAroundPlayerSkill : Skill {
         this.skillConfig = skillConfig;
         projectilePrefab = skillConfig.ProjectilePrefab;
         SpawnPoint = this.playerStats.transform;
-        Cooldown = 2f;
+
     }
 
     public override void Activate() {
-        ProjectileBase explosion = Object.Instantiate(
+        var explosion = Object.Instantiate(
             projectilePrefab,
             SpawnPoint.position,
             SpawnPoint.rotation
         );
-        explosion.AddComponent<ExplosionAroundPlayerProjectile>();
+        explosion.Init(skillConfig.Damage, skillConfig.Speed,skillConfig.ProjectileLifetime);
     }
 
     public override void Upgrade() {

@@ -11,19 +11,17 @@ public class FireBallSkill : Skill {
         this.skillConfig = skillConfig;
         projectilePrefab = skillConfig.ProjectilePrefab;
         SpawnPoint = this.playerStats.transform;
-        Cooldown = 2f;
     }
 
 
     public override void Activate() {
-
         var fireball = Object.Instantiate(
             projectilePrefab,
             SpawnPoint.position,
-            SpawnPoint.rotation 
+            SpawnPoint.rotation
         );
 
-        fireball.Init(25,10); 
+        fireball.Init(skillConfig.Damage, skillConfig.Speed, skillConfig.ProjectileLifetime);
     }
 
     public override void Upgrade() { }

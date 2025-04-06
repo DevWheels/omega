@@ -13,6 +13,11 @@ public class SkillConfig : ScriptableObject {
     [Header("Set if it's active skill")]
     public int Damage;
 
+    public int Speed;
+    [Header("in seconds")]
+    public int Couldown;
+    public int ProjectileLifetime;
+
     
 
     public ProjectileBase ProjectilePrefab;

@@ -9,11 +9,11 @@ public class FireBallProjectile : ProjectileBase {
     private Vector2 target_direction;
     private int projectileDamage;
     private int projectileSpeed;
-
-    public override void Init(int damage, int speed) {
+    private int projectileLifetime;
+    public override void Init(int damage, int speed, int lifetime) {
         projectileDamage =  damage;
         projectileSpeed = speed;
-        
+        projectileLifetime = lifetime;
     }
     
     private void Start() {
@@ -26,7 +26,7 @@ public class FireBallProjectile : ProjectileBase {
     }
 
     private void DestroyProjectile() {
-        Destroy(gameObject, 3);
+        Destroy(gameObject,projectileLifetime);
     }
 
     private void MoveProjectile() {
