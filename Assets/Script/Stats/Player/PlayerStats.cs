@@ -231,7 +231,6 @@ public class PlayerStats : NetworkBehaviour {
     {
         if (currently_hp <= 0)
         {
-             //Здоровье закончилось, можно умереть
             Destroy(gameObject);
         }
         else if (currently_hp >= max_hp)
@@ -304,24 +303,6 @@ public class PlayerStats : NetworkBehaviour {
             UpdateAllStats();
             playerUI.SetStateOfAbilityUpdateButtons();
         }
-    }
-    
-    public int GetCurretlyMana()
-    {
-        return currently_mana;
-    }
-    public int GetMaxMana()
-    {
-        return max_mana;
-    }
-    public void ConsumeMana(int mana)
-    {
-        currently_mana -= mana;
-    }
-
-    public bool HasEnoughMana(int cost)
-    {
-        return currently_mana >= cost; // Проверка достаточности маны
     }
     
     [Client]

@@ -16,6 +16,9 @@ MonoBehaviour:
   Description: 
   isPassive: 0
   PercenageBuff: 0
-  Damage: 0
+  Damage: 20
+  Speed: 10
+  Couldown: 2
+  ProjectileLifetime: 2
   ProjectilePrefab: {fileID: 1370583368583100452, guid: e7428e3bfc402014a94738fb6f43b24d, type: 3}
   Icon: {fileID: 0}
