@@ -89,11 +89,11 @@ public class EnemyStats : MonoBehaviour
     {
         //animator.SetBool("isDead", true);
 
-        Enemy enemy = GetComponent<Enemy>();
+/*        Enemy enemy = GetComponent<Enemy>();
 
         enemy.Defeated();
 
-        Destroy(gameObject, 1f); 
+        Destroy(gameObject, 1f); */
     }
 
     private IEnumerator ResetHurtAnimation()
