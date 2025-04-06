@@ -16,6 +16,6 @@ public class SkillTree : MonoBehaviour {
         }
 
         UnlockedSkills.Add(skill);
-        skill.Activate();
+
     }
 }
