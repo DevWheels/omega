@@ -25,12 +25,4 @@ public class EquipmentItemConfig : ScriptableObject
             _ => dRankStats
         };
     }
-    // [Header("Attachable Skills")]
-    // public SkillConfig[] possibleSkills;
-    // public SkillConfig GetRandomSkill()
-    // {
-    //     if (possibleSkills.Length == 0) return null;
-    //     return possibleSkills[Random.Range(0, possibleSkills.Length)];
-    // }
-    
 }

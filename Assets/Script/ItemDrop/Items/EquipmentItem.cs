@@ -14,33 +14,12 @@ public class EquipmentItem : EquipmentItemConfig
     public int Attack { get; private set; }
     public SpecialStatType[] SpecialStats { get; private set; }
     public float[] SpecialStatsValues { get; private set; }
-    // public List<Skill> AttachedSkills { get; } = new List<Skill>();
     public EquipmentItem(EquipmentItemConfig config, ItemRank rank, int playerLevel, int mobLevel)
     {
         Config = config;
         Generate(rank, playerLevel, mobLevel);
-        // AttachSkills(config, playerLevel, mobLevel);
-    }
-    /*private void AttachSkills(EquipmentItemConfig config, int playerLevel, int mobLevel)
-    {
-        int skillsCount = rank switch {
-            ItemRank.D => 0,
-            ItemRank.C => 1,
-            ItemRank.B => 1,
-            ItemRank.A => 2,
-            ItemRank.S => 2,
-            _ => 0
-        };
         
-        for (int i = 0; i < skillsCount; i++)
-        {
-            SkillConfig skillConfig = config.GetRandomSkill();
-            if (skillConfig != null)
-            {
-                AttachedSkills.Add(skillConfig.CreateInstance(this.Level));
-            }
-        }
-    }*/
+    }
     public void Generate(ItemRank rank, int playerLevel, int mobLevel)
     {
         Rank = rank;
@@ -104,16 +83,6 @@ public class EquipmentItem : EquipmentItemConfig
     {
         string log = $"[{Rank}] {itemName} (Lvl {Level})\n" +
                     $"HP: {Health} | Armor: {Armor} | ATK: {Attack}\n";
-        // if (AttachedSkills.Count > 0)
-        // {
-        //     log += "\nAttached Skills:";
-        //     foreach (var skill in AttachedSkills)
-        //     {
-        //         log += $"\n- {skill.Config.skillName} " + 
-        //                $"(Effect: {skill.CurrentEffectValue:F1}, " +
-        //                $"CD: {skill.CurrentCooldown:F1}s)";
-        //     }
-        // }
         Debug.Log(log);
     }
 }
