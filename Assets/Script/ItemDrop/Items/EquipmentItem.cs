@@ -14,14 +14,14 @@ public class EquipmentItem : EquipmentItemConfig
     public int Attack { get; private set; }
     public SpecialStatType[] SpecialStats { get; private set; }
     public float[] SpecialStatsValues { get; private set; }
-    public List<Skill> AttachedSkills { get; } = new List<Skill>();
+    // public List<Skill> AttachedSkills { get; } = new List<Skill>();
     public EquipmentItem(EquipmentItemConfig config, ItemRank rank, int playerLevel, int mobLevel)
     {
         Config = config;
         Generate(rank, playerLevel, mobLevel);
-        AttachSkills(config, playerLevel, mobLevel);
+        // AttachSkills(config, playerLevel, mobLevel);
     }
-    private void AttachSkills(EquipmentItemConfig config, int playerLevel, int mobLevel)
+    /*private void AttachSkills(EquipmentItemConfig config, int playerLevel, int mobLevel)
     {
         int skillsCount = rank switch {
             ItemRank.D => 0,
@@ -40,31 +40,28 @@ public class EquipmentItem : EquipmentItemConfig
                 AttachedSkills.Add(skillConfig.CreateInstance(this.Level));
             }
         }
-    }
-    
-    
-    
+    }*/
     public void Generate(ItemRank rank, int playerLevel, int mobLevel)
     {
         Rank = rank;
         Level = playerLevel + Mathf.RoundToInt(mobLevel * 0.5f);
         
         var ranges = Config.GetRangesForRank(rank);
-        int levelBonus = (Level - 1) * ranges.perLevelIncrease;
+         int levelBonus = (Level - 1) * ranges.perLevelIncrease;
         
         Health = Random.Range(
             ranges.health.x + levelBonus,
-            ranges.health.y + levelBonus + 1
+            ranges.health.y + levelBonus + 50
         );
         
         Armor = Random.Range(
             ranges.armor.x + levelBonus,
-            ranges.armor.y + levelBonus + 1
+            ranges.armor.y + levelBonus + 5
         );
         
         Attack = Random.Range(
             ranges.attack.x + levelBonus,
-            ranges.attack.y + levelBonus + 1
+            ranges.attack.y + levelBonus + 5
         );
         
         GenerateSpecialStats();
@@ -107,16 +104,16 @@ public class EquipmentItem : EquipmentItemConfig
     {
         string log = $"[{Rank}] {itemName} (Lvl {Level})\n" +
                     $"HP: {Health} | Armor: {Armor} | ATK: {Attack}\n";
-        if (AttachedSkills.Count > 0)
-        {
-            log += "\nAttached Skills:";
-            foreach (var skill in AttachedSkills)
-            {
-                log += $"\n- {skill.Config.skillName} " + 
-                       $"(Effect: {skill.CurrentEffectValue:F1}, " +
-                       $"CD: {skill.CurrentCooldown:F1}s)";
-            }
-        }
+        // if (AttachedSkills.Count > 0)
+        // {
+        //     log += "\nAttached Skills:";
+        //     foreach (var skill in AttachedSkills)
+        //     {
+        //         log += $"\n- {skill.Config.skillName} " + 
+        //                $"(Effect: {skill.CurrentEffectValue:F1}, " +
+        //                $"CD: {skill.CurrentCooldown:F1}s)";
+        //     }
+        // }
         Debug.Log(log);
     }
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
     health: {x: 5, y: 15}
     armor: {x: 5, y: 15}
     attack: {x: 5, y: 15}
-    perLevelIncrease: 2
+    perLevelIncrease: 10
   cRankStats:
     health: {x: 0, y: 0}
     armor: {x: 0, y: 0}
