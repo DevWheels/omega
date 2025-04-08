@@ -38,6 +38,9 @@ public class PlayerStats : NetworkBehaviour {
 
     [SyncVar] private float hp_regeneration_per_second = 0.05f;
     [SyncVar] private float mana_regeneration_per_second = 0.2f;
+    
+    public static PlayerStats Instance { get; private set; }
+    
     public int MaxHp
     {
         get { return max_hp; }
@@ -145,6 +148,8 @@ public class PlayerStats : NetworkBehaviour {
         get{ return hp_regeneration_per_second; }
         set { hp_regeneration_per_second = value; }
     }
+
+
 
     private PlayerMovement playerMovement;
     private PlayerUI playerUI;
