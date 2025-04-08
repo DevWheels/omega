@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public Item1 SlotItem;
+    public Item SlotItem;
     public GameObject ItemObj;
 
     Image icon;
@@ -17,7 +17,7 @@ public class InventorySlot : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(ShowInfo);
     }
-    public void PutInSlot(Item1 item, GameObject obj)
+    public void PutInSlot(Item item, GameObject obj)
     {
         icon.sprite = item.icon;
         SlotItem = item;
@@ -27,16 +27,20 @@ public class InventorySlot : MonoBehaviour
 
     void ShowInfo()
     {
-        if (SlotItem != null) 
-        ItemInfo.instance.Open(SlotItem, ItemObj, this);
+        if (SlotItem != null)
+            ItemInfo.instance.Open(SlotItem, ItemObj, this);
     }
+
     public void ClearSlot()
-    { 
+    {
         SlotItem = null;
         ItemObj = null;
         icon.sprite = null;
         icon.enabled = false;
     }
+
+
+
 
 }
  

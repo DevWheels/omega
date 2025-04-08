@@ -23,6 +23,8 @@ public class SkillConfig : ScriptableObject {
     public ProjectileBase ProjectilePrefab;
 
     public Sprite Icon;
-
+    public float Cooldown { get; set; }
+    public int ManaCost { get; set; }
+    public bool IsPassive { get; set; }
 
 }

@@ -9,7 +9,7 @@ public class SkillManager : MonoBehaviour {
 
     public void AddSkill(Skill skill) {
         Skills.Add(skill);
-        if (skill.IsPassive)
+        if (skill.skillConfig.IsPassive)
         {
             skill.Activate();
         }

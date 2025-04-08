@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a7989522df4abc9c73aabdb15c460a, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: 
-  Name: FireBallSkill
+  Name: FireBall
   Description: 
   isPassive: 0
   PercenageBuff: 0
@@ -20,5 +20,5 @@ MonoBehaviour:
   Speed: 10
   Couldown: 2
   ProjectileLifetime: 2
-  ProjectilePrefab: {fileID: 1370583368583100452, guid: e7428e3bfc402014a94738fb6f43b24d, type: 3}
-  Icon: {fileID: 0}
+  ProjectilePrefab: {fileID: -5714207820851292603, guid: 1484a86963bb0d94699192f43f2002f2, type: 3}
+  Icon: {fileID: 21300000, guid: d6eb02983ffc8124e9fe4f0285e725cf, type: 3}

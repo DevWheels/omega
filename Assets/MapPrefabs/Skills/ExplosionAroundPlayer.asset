@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56a7989522df4abc9c73aabdb15c460a, type: 3}
-  m_Name: ManaIncrease
+  m_Name: ExplosionAroundPlayer
   m_EditorClassIdentifier: 
-  Name: Mana increase
-  Description: Increases player mana
-  isPassive: 1
-  PercenageBuff: 10
-  Damage: 0
-  ProjectilePrefab: {fileID: 0}
+  Name: ExplosionAroundPlayer
+  Description: 
+  isPassive: 0
+  PercenageBuff: 0
+  Damage: 1
+  Speed: 0
+  Couldown: 3
+  ProjectileLifetime: 1
+  ProjectilePrefab: {fileID: 551974378179888456, guid: 99ed20a651e8d2d40a0fff26c917baeb, type: 3}
   Icon: {fileID: 0}

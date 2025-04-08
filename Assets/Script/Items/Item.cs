@@ -3,8 +3,9 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 
-public class Item1 : ScriptableObject
+public class Item : ScriptableObject
 {
+
     [Header("Базовые характеристики")]
     public string Name = " ";
     public string Description = "Описание предмета";

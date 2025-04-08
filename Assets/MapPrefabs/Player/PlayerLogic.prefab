@@ -160,13 +160,12 @@ GameObject:
   - component: {fileID: 1589120652148634184}
   - component: {fileID: 3029300740507279358}
   - component: {fileID: -510250030928325903}
-  - component: {fileID: 4626080165298177306}
-  - component: {fileID: 584345988976868}
   - component: {fileID: 8766549807833301324}
   - component: {fileID: -6800800320709123403}
   - component: {fileID: 3820933814322284347}
   - component: {fileID: 7339654325217976826}
   - component: {fileID: -7666614221123661290}
+  - component: {fileID: 7355851802689311227}
   m_Layer: 6
   m_Name: PlayerLogic
   m_TagString: Player
@@ -394,48 +393,6 @@ MonoBehaviour:
   healthBarFill: {fileID: 0}
   manahBarFill: {fileID: 0}
   expBarFill: {fileID: 0}
---- !u!114 &4626080165298177306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6909981378074328598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c873ee5d34a397479cdf6e44ea0d4d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackOptions:
-  - attackKey: 52
-    attackPower: 100
-    manaCost: 5
-    attackEffectPrefab: {fileID: 0}
-    effectTriggered: 1
-  - attackKey: 53
-    attackPower: 100
-    manaCost: 5
-    attackEffectPrefab: {fileID: 0}
-    effectTriggered: 1
-  enemyTags:
-  - Slaim
-  - Player
---- !u!114 &584345988976868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6909981378074328598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4601d9a65a770b34c8200902f03ca221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 0}
-  spawnRadius: 7
-  numberOfEnemies: 3
 --- !u!114 &8766549807833301324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +405,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f93031c97e74ec281c01069d8685a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skillConfigs:
+  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
+  - {fileID: 11400000, guid: 7d6a5f1bb2018e649b8b58017bf1483c, type: 2}
+  - {fileID: 11400000, guid: 1a9f1bc82b3d6564bb734a5617aded9a, type: 2}
+  - {fileID: 11400000, guid: d04d6e2b61108b249982272d4be43543, type: 2}
 --- !u!114 &-6800800320709123403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,6 +510,27 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &7355851802689311227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909981378074328598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243756e46a3e9314497ccbd7de2cabae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  attackRange: 1
+  attackCooldown: 0.5
+  attackOffset: {x: 0.5, y: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  animator: {fileID: 7085261678692851948}
+  attackSound: {fileID: 8300000, guid: 91806d6425f834d1897ded278936ac7f, type: 3}
 --- !u!1 &7563778525642114572
 GameObject:
   m_ObjectHideFlags: 0

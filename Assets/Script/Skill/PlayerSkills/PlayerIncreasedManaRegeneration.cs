@@ -9,7 +9,7 @@ public class PlayerIncreasedManaRegeneration : Skill {
     {
         this.regeneration = regenerationController;
         this.skillConfig = skillConfig;
-        this.IsPassive = true;
+        skillConfig.IsPassive = true;
         baseManaRegeneration = regenerationController.ManaRegeneration;
 
     }

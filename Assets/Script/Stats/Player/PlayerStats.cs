@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -121,6 +122,12 @@ public class PlayerStats : NetworkBehaviour {
     private PlayerUI playerUI;
 
 
+    public static PlayerStats Instance;
+
+    private void Awake() {
+        Instance = this;
+    }
+
     private void OnApplicationQuit()
     {
         //SavePlayerData(); // Сохраняем данные при выходе
@@ -144,7 +151,7 @@ public class PlayerStats : NetworkBehaviour {
 
     }
 
-    public void UseItem(Item1 item)
+    public void UseItem(Item item)
     {
         if (item.isHealing)
         {

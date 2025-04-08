@@ -6,15 +6,11 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
     public Transform SlotsParent;
-
     public bool isOpened;
-
     private InventorySlot[] inventorySlots = new InventorySlot[24];
-
 
     private void Start()
     {
-
         instance = this;
         if (SlotsParent != null)
         {
@@ -23,21 +19,17 @@ public class Inventory : MonoBehaviour
                 inventorySlots[i] = SlotsParent.GetChild(i).GetComponent<InventorySlot>();
             }
         }
-
-
-
     }
 
-    public void PutInEmptySlot(Item1 item, GameObject obj)
+    public void PutInEmptySlot(Item item, GameObject obj)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             if (inventorySlots[i].SlotItem == null)
             {
-                inventorySlots[i].PutInSlot(item, obj);
+                inventorySlots[i].PutInSlot(item, obj); 
                 return;
             }
-
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour {
@@ -12,6 +13,9 @@ public class PlayerSkillController : MonoBehaviour {
     private PlayerMovement playermovement;
     private RegenerationController regeneration;
 
+    [SerializeField]
+    private List<SkillConfig> _skillConfigs;
+
     private void Awake() {
         SkillManager = gameObject.AddComponent<SkillManager>();
         SkillTree = gameObject.AddComponent<SkillTree>();
@@ -19,18 +23,15 @@ public class PlayerSkillController : MonoBehaviour {
         playermovement = GetComponent<PlayerMovement>();
         regeneration = GetComponent<RegenerationController>();
 
-        var manaRegenSkill =
-            new PlayerIncreasedManaRegeneration(regeneration, Resources.Load<SkillConfig>($"Skills/ManaIncrease"));
-        var SpeedIncreaseSkill =
-            new PlayerIncreasedSpeed(playermovement, Resources.Load<SkillConfig>($"Skills/SpeedIncrease"));
-        var fireBallSkill = new FireBallSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
-        var ExplosionSkill =
-            new ExplosionAroundPlayerSkill(playerStats, Resources.Load<SkillConfig>($"Skills/ExplosionAroundPlayer"));
+        var manaRegenSkill = new PlayerIncreasedManaRegeneration(regeneration, _skillConfigs.First(s => s.Name == "ManaIncrease"));
+        var speedIncreaseSkill = new PlayerIncreasedSpeed(playermovement, _skillConfigs.First(s => s.Name == "SpeedIncrease"));
+        var fireBallSkill = new FireBallSkill(playerStats, _skillConfigs.First(s => s.Name == "FireBall"));
+        var explosionSkill = new ExplosionAroundPlayerSkill(playerStats, _skillConfigs.First(s => s.Name == "ExplosionAroundPlayer"));
         List<Skill> usedSkills = new List<Skill> {
             manaRegenSkill,
-            SpeedIncreaseSkill,
+            speedIncreaseSkill,
             fireBallSkill,
-            ExplosionSkill
+            explosionSkill
         };
 
         foreach (var skill in usedSkills) {

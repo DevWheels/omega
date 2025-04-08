@@ -75,7 +75,7 @@ public class QuestManager : MonoBehaviour
         Quest quest = quests.Find(q => q.title == dialogStart.title);
         GameObject inventory = GameObject.Find("Slots_transform");
         
-        List<Item1> requiredItems = new();
+        List<Item> requiredItems = new();
         foreach (var item in quest.quest_items)
         {
             requiredItems.Add(item);
@@ -113,7 +113,7 @@ public class QuestManager : MonoBehaviour
     {
         Quest quest = quests.Find(q => q.title == dialogStart.title);
         
-        List<Item1> requiredItems = new();
+        List<Item> requiredItems = new();
         foreach (var item in quest.quest_items)
         {
             requiredItems.Add(item);
@@ -132,7 +132,7 @@ public class QuestManager : MonoBehaviour
             {
                 if (slot.SlotItem == requiredItem && deleted < needToDelete)
                 {
-                    slot.ClearSlot(); // Удаляем предмет для квеста
+                    //slot.ClearSlot(); // Удаляем предмет для квеста
                     deleted++;
                 }
                 else if (deleted >= needToDelete)

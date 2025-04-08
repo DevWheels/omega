@@ -15,7 +15,7 @@ public class ItemInfo : MonoBehaviour
     private Button UseButton;
     private Button DropButton;
 
-    private Item1 InfoItem;
+    private Item InfoItem;
     private GameObject ItemObj;
     private InventorySlot CurrenSlot;
 
@@ -36,7 +36,7 @@ public class ItemInfo : MonoBehaviour
         UseButton.onClick.AddListener(Use);
         DropButton.onClick.AddListener(Drop);
     }
-    public void ChangeInfo(Item1 item)
+    public void ChangeInfo(Item item)
     { 
         Title.text = item.name;
         Description.text = item.Description;
@@ -48,7 +48,7 @@ public class ItemInfo : MonoBehaviour
     { 
         UseOfItems.instance.Use(InfoItem);
 
-        CurrenSlot.ClearSlot();
+        //CurrenSlot.ClearSlot();
         Close();
     }
 
@@ -58,11 +58,11 @@ public class ItemInfo : MonoBehaviour
         ItemObj.SetActive(true);
         ItemObj.transform.position = DropPos;
 
-        CurrenSlot.ClearSlot();
+        //CurrenSlot.ClearSlot();
         Close();
     }
 
-    public void Open(Item1 item, GameObject itemObj, InventorySlot currentSlot)
+    public void Open(Item item, GameObject itemObj, InventorySlot currentSlot)
     { 
         ChangeInfo(item);
         InfoItem = item;
