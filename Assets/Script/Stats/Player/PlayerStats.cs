@@ -8,74 +8,119 @@ using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.IO;
 using Mirror;
-using Script.Stats.Player;
 
-public class PlayerStats : NetworkBehaviour
-{
 
-    [SyncVar]
-    private int max_hp = 300;
-    [SyncVar]
-    private int currently_hp = 300;
-    [SyncVar]
-    private int max_mana = 65;
-    [SyncVar]
-    private int currently_mana = 65;
+public class PlayerStats : NetworkBehaviour {
 
-    [SyncVar]
-    private int armor = 35;
-    [SyncVar]
-    private int xp_needed = 1000;
-    [SyncVar]
-    private int xp_needed_per_lvl = 1000;
-    [SyncVar]
-    private int xp_currently = 0;
-    [SyncVar]
-    private int lvl = 1;
-    [SyncVar]
-    private int ability_points;
+    [SyncVar] private int max_hp = 300;
+    [SyncVar] private int currently_hp = 300;
+    [SyncVar] private int max_mana = 65;
+    [SyncVar] private int currently_mana = 65;
 
-    [SyncVar]
-    private int strength = 1;
-    [SyncVar]
-    private int sanity = 1;
-    [SyncVar]
-    private int agility = 1;
-    [SyncVar]
-    private int luck = 1;
-    [SyncVar]
-    private int speed = 1;
+    [SyncVar] private int armor = 35;
+    [SyncVar] private int xp_needed = 1000;
+    [SyncVar] private int xp_needed_per_lvl = 1000;
+    [SyncVar] private int xp_currently = 0;
+    [SyncVar] private int lvl = 1;
+    [SyncVar] private int ability_points;
 
-    [SyncVar]
-    private float timer;
-    [SyncVar]
-    private float interval_of_one_second = 1f;
+    [SyncVar] private int strength = 1;
+    [SyncVar] private int sanity = 1;
+    [SyncVar] private int agility = 1;
+    [SyncVar] private int luck = 1;
+    [SyncVar] private int speed = 1;
 
-    [SyncVar]
-    private float hp_regeneration;
-    [SyncVar]
-    private float mana_regeneration;
 
-    public int MaxHp => max_hp;
-    public int CurrentlyHp => currently_hp;
-    public int MaxMana => max_mana;
-    public int CurrentlyMana => currently_mana;
-    public int Armor => armor;
-    public int Lvl => lvl;
-    public int XpNeeded => xp_needed;
-    public int XpCurrently => xp_currently;
-    public int AbilityPoints => ability_points;
-    public int Strength => strength;
-    public int Sanity => sanity;
-    public int Agility => agility;
-    public int Luck => luck;
-    public int Speed => speed;
-    
+    public int MaxHp
+    {
+        get { return max_hp; }
+        set { max_hp = value; }
+    }
+
+    public int CurrentlyHp
+    {
+        get { return currently_hp; }
+        set { currently_hp = value; }
+    }
+
+    public int MaxMana
+    {
+        get { return max_mana; }
+        set { max_mana = value; }
+    }
+
+    public int CurrentlyMana
+    {
+        get { return currently_mana; }
+        set { currently_mana = value; }
+    }
+
+    public int Armor
+    {
+        get { return armor; }
+        set { armor = value; }
+    }
+
+    public int Lvl
+    {
+        get { return lvl; }
+        set { lvl = value; }
+    }
+
+    public int XpNeeded
+    {
+        get { return xp_needed; }
+        set { xp_needed = value; }
+    }
+
+    public int XpCurrently
+    {
+        get { return xp_currently; }
+        set { xp_currently = value; }
+    }
+
+    public int AbilityPoints
+    {
+        get { return ability_points; }
+        set { ability_points = value; }
+    }
+
+    public int Strength
+    {
+        get { return strength; }
+        set { strength = value; }
+    }
+
+    public int Sanity
+    {
+        get { return sanity; }
+        set { sanity = value; }
+    }
+
+    public int Agility
+    {
+        get { return agility; }
+        set { agility = value; }
+    }
+
+    public int Luck
+    {
+        get { return luck; }
+        set { luck = value; }
+    }
+
+    public int Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
+
+
 
     private PlayerMovement playerMovement;
     private PlayerUI playerUI;
 
-    
+
     private void OnApplicationQuit()
     {
         //SavePlayerData(); // Сохраняем данные при выходе
@@ -95,9 +140,7 @@ public class PlayerStats : NetworkBehaviour
         AddExperience(2); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ДЛЯ ТЕСТА удалить потом
         CheckHpAndMana();
         playerUI.UpdateUI();
-        
-        timer += Time.deltaTime;
-        Regeneration();
+
 
     }
 
@@ -176,31 +219,7 @@ public class PlayerStats : NetworkBehaviour
         playerUI.UpdateUI();
     }
     [Client]
-    private void Regeneration()
-    {
-        if (!(timer >= interval_of_one_second && max_mana >= currently_mana && max_hp >= currently_hp))
-        {
-            return;
-        }
-        hp_regeneration += 0.05f; // восстановление единицы хп раз в 20 секунд 
-        mana_regeneration += 0.2f; // восстановление единицы маны раз в 5 секунд 
-
-        if (hp_regeneration >= 1)
-        {
-            currently_hp += (int)hp_regeneration;
-            hp_regeneration = 0f; 
-            playerUI.UpdateUI();
-
-        }
-        if (mana_regeneration >= 1 && currently_mana > max_mana * 0.1f)
-        {
-            currently_mana += (int)mana_regeneration;
-            mana_regeneration = 0f; 
-            playerUI.UpdateUI();
-        }
-
-        timer = 0f;
-    }
+    
     public void TakeHit(int damage)
     {
         currently_hp -= damage;
@@ -212,7 +231,6 @@ public class PlayerStats : NetworkBehaviour
     {
         if (currently_hp <= 0)
         {
-             //Здоровье закончилось, можно умереть
             Destroy(gameObject);
         }
         else if (currently_hp >= max_hp)
@@ -284,26 +302,7 @@ public class PlayerStats : NetworkBehaviour
             playerMovement.moveSpeed += speed_multiply;
             UpdateAllStats();
             playerUI.SetStateOfAbilityUpdateButtons();
-
-
         }
-    }
-    public int GetCurretlyMana()
-    {
-        return currently_mana;
-    }
-    public int GetMaxMana()
-    {
-        return max_mana;
-    }
-    public void ConsumeMana(int mana)
-    {
-        currently_mana -= mana;
-    }
-
-    public bool HasEnoughMana(int cost)
-    {
-        return currently_mana >= cost; // Проверка достаточности маны
     }
     
     [Client]
@@ -320,5 +319,4 @@ public class PlayerStats : NetworkBehaviour
         playerUI = GetComponent<PlayerUI>();;
         
     }
-
 }

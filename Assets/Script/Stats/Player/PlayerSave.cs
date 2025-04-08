@@ -1,7 +1,6 @@
-namespace Script.Stats.Player
-{
+
     public class PlayerSave
-    {
+    { 
         //public void SavePlayerData()
     //{
     //    Transform transform = GetComponent<Transform>();
@@ -64,8 +63,5 @@ namespace Script.Stats.Player
     //        Debug.Log("Файл данных игрока не найден!");
     //    }
     //}
-    /// <summary>
-    /// Обновляет все данные при запуске игры
-    /// </summary>
+
     }
-}
