@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerSkillController : MonoBehaviour {
     public SkillManager SkillManager { get; private set; }
@@ -9,42 +10,43 @@ public class PlayerSkillController : MonoBehaviour {
     public List<Skill> Passive_Skills { get; } = new List<Skill>();
     public List<Skill> Active_Skills { get; } = new List<Skill>();
 
-    private PlayerStats playerStats;
-    private PlayerMovement playermovement;
-    private RegenerationController regeneration;
+    public PlayerStats PlayerStats {get; private set;}
+    public PlayerMovement Playermovement{get; private set;}
+    public RegenerationController Regeneration{get; private set;}
 
     [SerializeField]
     private List<SkillConfig> _skillConfigs;
 
+    private List<Skill> _skills = new();
     private void Awake() {
-        SkillManager = gameObject.AddComponent<SkillManager>();
-        SkillTree = gameObject.AddComponent<SkillTree>();
-        playerStats = GetComponent<PlayerStats>();
-        playermovement = GetComponent<PlayerMovement>();
-        regeneration = GetComponent<RegenerationController>();
+        FindComponents();
 
-        var manaRegenSkill = new PlayerIncreasedManaRegeneration(regeneration, _skillConfigs.First(s => s.Name == "ManaIncrease"));
-        var speedIncreaseSkill = new PlayerIncreasedSpeed(playermovement, _skillConfigs.First(s => s.Name == "SpeedIncrease"));
-        var fireBallSkill = new FireBallSkill(playerStats, _skillConfigs.First(s => s.Name == "FireBall"));
-        var explosionSkill = new ExplosionAroundPlayerSkill(playerStats, _skillConfigs.First(s => s.Name == "ExplosionAroundPlayer"));
-        List<Skill> usedSkills = new List<Skill> {
-            manaRegenSkill,
-            speedIncreaseSkill,
-            fireBallSkill,
-            explosionSkill
-        };
+        CreateSkills();
+    }
 
-        foreach (var skill in usedSkills) {
+    private void CreateSkills() {
+        foreach (var skillConfig in _skillConfigs) {
+            var skill = SkillFactory.Create(skillConfig,this);
+            _skills.Add(skill);
+        }
+
+        foreach (var skill in _skills) {
             if (skill.skillConfig.IsPassive) {
                 Passive_Skills.Add(skill);
             }
             else { Active_Skills.Add(skill); }
             SkillManager.AddSkill(skill);
         }
-
-
     }
-    
+
+    private void FindComponents() {
+        SkillManager = gameObject.AddComponent<SkillManager>();
+        SkillTree = gameObject.AddComponent<SkillTree>();
+        PlayerStats = GetComponent<PlayerStats>();
+        Playermovement = GetComponent<PlayerMovement>();
+        Regeneration = GetComponent<RegenerationController>();
+    }
+
 
     private void Update() {
         UseSkill();

@@ -2,23 +2,19 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExplosionAroundPlayerSkill : Skill {
-    private PlayerStats playerStats;
-    private ProjectileBase projectilePrefab;
-    private Transform SpawnPoint;
+    
+    public ExplosionAroundPlayerSkill(SkillConfig skillConfig, PlayerSkillController playerController) : base(skillConfig,playerController) {
+  
 
-    public ExplosionAroundPlayerSkill(PlayerStats playerStats, SkillConfig skillConfig) {
-        this.playerStats = playerStats;
-        this.skillConfig = skillConfig;
-        projectilePrefab = skillConfig.ProjectilePrefab;
-        SpawnPoint = this.playerStats.transform;
+
 
     }
 
     public override void Activate() {
         var explosion = Object.Instantiate(
-            projectilePrefab,
-            SpawnPoint.position,
-            SpawnPoint.rotation
+            skillConfig.ProjectilePrefab,
+            playerController.PlayerStats.transform.position,
+            playerController.PlayerStats.transform.rotation
         );
         explosion.Init(skillConfig.Damage, skillConfig.ProjectileSpeed,skillConfig.ProjectileLifetime);
     }

@@ -1,8 +1,8 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Skill", menuName = "Skill/SkillConfig")]
-public class SkillConfig : ScriptableObject 
-{
+public class SkillConfig : ScriptableObject {
     public string Name;
     [TextArea]
     public string Description;
@@ -10,6 +10,7 @@ public class SkillConfig : ScriptableObject
     
     [Header("Skill Type")]
     public bool IsPassive;
+    public SkillType SkillType;
     
     [Header("Passive Settings")]
     public int PercentageBuff;
@@ -21,4 +22,12 @@ public class SkillConfig : ScriptableObject
     public int Cooldown;
     public int ProjectileLifetime;
     public ProjectileBase ProjectilePrefab;
+}
+[System.Serializable]
+public enum SkillType {
+    FireBallSkill,
+    ExplosionAroundPlayerSkill,
+    ManaIncreaseSkill,
+    SpeedIncreaseSkill
+    
 }

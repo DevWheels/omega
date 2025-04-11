@@ -7,6 +7,7 @@ public class SkillConfigEditor : Editor
     private SerializedProperty nameProp;
     private SerializedProperty descriptionProp;
     private SerializedProperty isPassiveProp;
+    private SerializedProperty skillTypeProp;
     private SerializedProperty percentageBuffProp;
     private SerializedProperty damageProp;
     private SerializedProperty speedProp;
@@ -20,6 +21,7 @@ public class SkillConfigEditor : Editor
         nameProp = serializedObject.FindProperty("Name");
         descriptionProp = serializedObject.FindProperty("Description");
         isPassiveProp = serializedObject.FindProperty("IsPassive");
+        skillTypeProp = serializedObject.FindProperty("SkillType");
         percentageBuffProp = serializedObject.FindProperty("PercentageBuff");
         damageProp = serializedObject.FindProperty("Damage");
         speedProp = serializedObject.FindProperty("ProjectileSpeed");
@@ -40,7 +42,8 @@ public class SkillConfigEditor : Editor
         
 
         EditorGUILayout.PropertyField(isPassiveProp);
-        
+        EditorGUILayout.PropertyField(skillTypeProp);
+
 
         if (isPassiveProp.boolValue)
         {
