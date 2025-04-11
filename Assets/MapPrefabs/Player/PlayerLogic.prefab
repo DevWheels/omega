@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7085261678692851948}
   - component: {fileID: 2008015393715044728}
   - component: {fileID: 7823011347815504460}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerVisual
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 7339654325217976826}
   - component: {fileID: -7666614221123661290}
   - component: {fileID: 7355851802689311227}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerLogic
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 6968111801372071084}
   - component: {fileID: 1503701641316572188}
   - component: {fileID: 9164866099022485078}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ColliderSmech
   m_TagString: Untagged
   m_Icon: {fileID: 0}
