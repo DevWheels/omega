@@ -35,7 +35,7 @@ public class PlayerSkillController : MonoBehaviour {
         };
 
         foreach (var skill in usedSkills) {
-            if (skill.skillConfig.isPassive) {
+            if (skill.skillConfig.IsPassive) {
                 Passive_Skills.Add(skill);
             }
             else { Active_Skills.Add(skill); }

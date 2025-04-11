@@ -14,7 +14,7 @@ public class PlayerIncreasedSpeed : Skill {
 
     public override void Activate()
     {
-        playerMovement.moveSpeed *= 1 + (skillConfig.PercenageBuff / 100);
+        playerMovement.moveSpeed *= 1 + (skillConfig.PercentageBuff / 100);
     }
 
     public override void Upgrade() {

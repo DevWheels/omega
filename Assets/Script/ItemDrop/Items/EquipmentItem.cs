@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class EquipmentItem : EquipmentItemConfig
 {
     public EquipmentItemConfig Config { get; private set; }
-    
+    public Skill Skill { get; private set; }
     public ItemRank Rank { get; private set; }
     public int Level { get; private set; }
     public int Health { get; private set; }

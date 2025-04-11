@@ -16,7 +16,7 @@ public class PlayerIncreasedManaRegeneration : Skill {
     public override void Activate()
     {
         
-        regeneration.ManaRegenerationPerSecond *= 1 + (skillConfig.PercenageBuff / 100);
+        regeneration.ManaRegenerationPerSecond *= 1 + (skillConfig.PercentageBuff / 100);
     }
 
     public override void Upgrade()

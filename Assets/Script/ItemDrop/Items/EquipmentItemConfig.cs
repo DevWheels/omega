@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewEquipmentConfig", menuName = "Items/Equipment Config")]
@@ -6,6 +7,8 @@ public class EquipmentItemConfig : ScriptableObject
     public string itemName;
     public ItemType itemType;
     public GameObject Prefab;
+    [Header("Equipment Config")]
+    [SerializeField] public List<ItemSkills> itemSkills;
     [Header("Stat Ranges By Rank")]
     public RankStatRanges dRankStats;
     public RankStatRanges cRankStats;
@@ -24,5 +27,9 @@ public class EquipmentItemConfig : ScriptableObject
             ItemRank.S => sRankStats,
             _ => dRankStats
         };
+    }
+
+    public class ItemSkills {
+        [SerializeField] Skill skills;
     }
 }

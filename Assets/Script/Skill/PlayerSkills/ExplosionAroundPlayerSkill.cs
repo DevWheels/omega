@@ -20,7 +20,7 @@ public class ExplosionAroundPlayerSkill : Skill {
             SpawnPoint.position,
             SpawnPoint.rotation
         );
-        explosion.Init(skillConfig.Damage, skillConfig.Speed,skillConfig.ProjectileLifetime);
+        explosion.Init(skillConfig.Damage, skillConfig.ProjectileSpeed,skillConfig.ProjectileLifetime);
     }
 
     public override void Upgrade() {

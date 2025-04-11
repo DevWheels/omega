@@ -28,7 +28,7 @@ public class SkillManager : MonoBehaviour {
 
     private IEnumerator CooldownSkill(Skill skill) {
         SkillCooldowns.Add(skill);
-        yield return new WaitForSeconds(skill.skillConfig.Couldown);
+        yield return new WaitForSeconds(skill.skillConfig.Cooldown);
         SkillCooldowns.Remove(skill);
     }
 }

@@ -21,7 +21,7 @@ public class FireBallSkill : Skill {
             SpawnPoint.rotation
         );
 
-        fireball.Init(skillConfig.Damage, skillConfig.Speed, skillConfig.ProjectileLifetime);
+        fireball.Init(skillConfig.Damage, skillConfig.ProjectileSpeed, skillConfig.ProjectileLifetime);
     }
 
     public override void Upgrade() { }

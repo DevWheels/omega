@@ -1,30 +1,24 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Skill", menuName = "Skill")]
-public class SkillConfig : ScriptableObject {
+[CreateAssetMenu(fileName = "Skill", menuName = "Skill/SkillConfig")]
+public class SkillConfig : ScriptableObject 
+{
     public string Name;
     [TextArea]
     public string Description;
-    public bool isPassive;
-
-    [Header("Set if it's passive skill")]
-    public int PercenageBuff;
-    [Header("Set if it's active skill")]
-    public int Damage;
-
-    public int Speed;
-    [Header("in seconds")]
-    public int Couldown;
-    public int ProjectileLifetime;
-
-    
-
-    public ProjectileBase ProjectilePrefab;
-
     public Sprite Icon;
-    public float Cooldown { get; set; }
-    public int ManaCost { get; set; }
-    public bool IsPassive { get; set; }
-
+    
+    [Header("Skill Type")]
+    public bool IsPassive;
+    
+    [Header("Passive Settings")]
+    public int PercentageBuff;
+    
+    [Header("Active Settings")]
+    public int Damage;
+    public int ProjectileSpeed;
+    [Tooltip("Cooldown in seconds")]
+    public int Cooldown;
+    public int ProjectileLifetime;
+    public ProjectileBase ProjectilePrefab;
 }
