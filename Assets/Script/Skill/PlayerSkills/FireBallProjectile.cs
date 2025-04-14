@@ -6,14 +6,17 @@ using UnityEngine;
 
 public class FireBallProjectile : ProjectileBase {
 
-    private Vector2 target_direction;
-    private int projectileDamage;
-    private int projectileSpeed;
-    private int projectileLifetime;
-    public override void Init(int damage, int speed, int lifetime) {
-        projectileDamage =  damage;
-        projectileSpeed = speed;
-        projectileLifetime = lifetime;
+    private Vector2 _targetDirection;
+    private int _projectileDamage;
+    private int _projectileSpeed;
+    private int _projectileLifetime;
+    private GameObject _owner;
+    public override void Init(GameObject player,int damage, int speed, int lifetime) {
+        _projectileDamage =  damage;
+        _projectileSpeed = speed;
+        _projectileLifetime = lifetime;
+        _owner = player;
+        
     }
     
     private void Start() {
@@ -23,14 +26,15 @@ public class FireBallProjectile : ProjectileBase {
 
     void Update() {
         MoveProjectile();
+
     }
 
     private void DestroyProjectile() {
-        Destroy(gameObject,projectileLifetime);
+        Destroy(gameObject,_projectileLifetime);
     }
 
     private void MoveProjectile() {
-        transform.position += (Vector3)(target_direction * (projectileSpeed * Time.deltaTime));
+        transform.position += (Vector3)(_targetDirection * (_projectileSpeed * Time.deltaTime));
     }
 
     private Vector3 GetMouseWorldPosition() {
@@ -42,6 +46,13 @@ public class FireBallProjectile : ProjectileBase {
     private void InitDirection() {
         Vector3 mouseWorldPos = GetMouseWorldPosition();
 
-        target_direction = (mouseWorldPos - transform.position).normalized;
+        _targetDirection = (mouseWorldPos - transform.position).normalized;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject == gameObject || collision.gameObject == _owner) {return;}
+        var enemyPlayer = collision.GetComponent<PlayerStats>();
+        
+        enemyPlayer.TakeHit(_projectileDamage);
     }
 }

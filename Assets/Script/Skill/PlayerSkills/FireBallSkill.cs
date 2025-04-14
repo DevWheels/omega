@@ -12,7 +12,7 @@ public class FireBallSkill : Skill {
             playerController.PlayerStats.transform.rotation
         );
 
-        fireball.Init(skillConfig.Damage, skillConfig.ProjectileSpeed, skillConfig.ProjectileLifetime);
+        fireball.Init(playerController.gameObject,skillConfig.Damage, skillConfig.ProjectileSpeed, skillConfig.ProjectileLifetime);
     }
 
     public override void Upgrade() { }

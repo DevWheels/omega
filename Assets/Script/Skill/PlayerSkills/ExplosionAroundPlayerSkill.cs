@@ -16,7 +16,7 @@ public class ExplosionAroundPlayerSkill : Skill {
             playerController.PlayerStats.transform.position,
             playerController.PlayerStats.transform.rotation
         );
-        explosion.Init(skillConfig.Damage, skillConfig.ProjectileSpeed,skillConfig.ProjectileLifetime);
+        explosion.Init(playerController.gameObject,skillConfig.Damage, skillConfig.ProjectileSpeed,skillConfig.ProjectileLifetime);
     }
 
     public override void Upgrade() {
