@@ -7,7 +7,7 @@ public abstract class Skill {
 
     public int Level { get; set; }
 
-    public Skill(SkillConfig skillConfig, PlayerSkillController playerController) {
+    protected Skill(SkillConfig skillConfig, PlayerSkillController playerController) {
         this.skillConfig = skillConfig;
         this.playerController = playerController;
     }

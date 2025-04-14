@@ -28,6 +28,6 @@ public enum SkillType {
     FireBallSkill,
     ExplosionAroundPlayerSkill,
     ManaIncreaseSkill,
-    SpeedIncreaseSkill
+    SpeedIncreaseSkill,
     
 }

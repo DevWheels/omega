@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10474f9816174301a0724c57d5ad6c48, type: 3}
   m_Name: ItemSkill
   m_EditorClassIdentifier: 
+  ItemSkills:
+  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}

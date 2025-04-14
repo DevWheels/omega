@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 
   itemType: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 2573384821876340015, guid: c8344af6a32ca484b93a1472e2ec9c6d, type: 3}
+  itemSkills: []
   dRankStats:
-    health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
-    attack: {x: 0, y: 0}
-    perLevelIncrease: 0
+    health: {x: 1, y: 10}
+    armor: {x: 1, y: 10}
+    attack: {x: 1, y: 10}
+    perLevelIncrease: 2
   cRankStats:
     health: {x: 0, y: 0}
     armor: {x: 0, y: 0}

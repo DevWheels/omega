@@ -8,7 +8,7 @@ public class EquipmentItemConfig : ScriptableObject
     public ItemType itemType;
     public GameObject Prefab;
     [Header("Equipment Config")]
-    [SerializeField] public List<ItemSkills> itemSkills;
+    public List<SkillConfig> itemSkills;
     [Header("Stat Ranges By Rank")]
     public RankStatRanges dRankStats;
     public RankStatRanges cRankStats;

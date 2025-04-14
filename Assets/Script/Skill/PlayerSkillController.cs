@@ -39,6 +39,7 @@ public class PlayerSkillController : MonoBehaviour {
         }
     }
 
+    
     private void FindComponents() {
         SkillManager = gameObject.AddComponent<SkillManager>();
         SkillTree = gameObject.AddComponent<SkillTree>();

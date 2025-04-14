@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SpeedIncrease
   Description: 
-  isPassive: 1
-  PercenageBuff: 10
+  Icon: {fileID: 0}
+  IsPassive: 1
+  SkillType: 3
+  PercentageBuff: 20
   Damage: 0
-  Speed: 0
-  Couldown: 0
+  ProjectileSpeed: 0
+  Cooldown: 0
   ProjectileLifetime: 0
   ProjectilePrefab: {fileID: 0}
-  Icon: {fileID: 0}
