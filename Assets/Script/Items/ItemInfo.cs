@@ -48,7 +48,7 @@ public class ItemInfo : MonoBehaviour
     { 
         UseOfItems.instance.Use(InfoItem);
 
-        //CurrenSlot.ClearSlot();
+        CurrenSlot.ClearSlot();
         Close();
     }
 
@@ -58,7 +58,7 @@ public class ItemInfo : MonoBehaviour
         ItemObj.SetActive(true);
         ItemObj.transform.position = DropPos;
 
-        //CurrenSlot.ClearSlot();
+        CurrenSlot.ClearSlot();
         Close();
     }
 
