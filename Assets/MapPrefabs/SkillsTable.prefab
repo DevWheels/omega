@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillConfigs:
-  - {fileID: 11400000, guid: 7d6a5f1bb2018e649b8b58017bf1483c, type: 2}
-  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
   - {fileID: 11400000, guid: 1a9f1bc82b3d6564bb734a5617aded9a, type: 2}
   - {fileID: 11400000, guid: d04d6e2b61108b249982272d4be43543, type: 2}
+  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
+  - {fileID: 11400000, guid: 7d6a5f1bb2018e649b8b58017bf1483c, type: 2}
