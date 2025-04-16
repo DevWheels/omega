@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c1970648b5bb34e990db0380b71ece, type: 3}
+  m_Name: FireStuff
+  m_EditorClassIdentifier: 
+  itemName: FireStuff
+  itemType: 0
+  Prefab: {fileID: 2573384821876340015, guid: c8344af6a32ca484b93a1472e2ec9c6d, type: 3}
+  itemSkills:
+  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
+  dRankStats:
+    health: {x: 1, y: 10}
+    armor: {x: 1, y: 10}
+    attack: {x: 1, y: 10}
+    perLevelIncrease: 2
+  cRankStats:
+    health: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    perLevelIncrease: 0
+  bRankStats:
+    health: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    perLevelIncrease: 0
+  aRankStats:
+    health: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    perLevelIncrease: 0
+  sRankStats:
+    health: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    perLevelIncrease: 0
