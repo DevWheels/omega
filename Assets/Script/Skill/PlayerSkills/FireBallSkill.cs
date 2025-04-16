@@ -1,4 +1,5 @@
 using Mirror;
+using UnityEngine;
 
 public class FireBallSkill : Skill {
     public FireBallSkill(SkillConfig skillConfig,PlayerSkillController playerController) : base(skillConfig,playerController) { }
@@ -10,9 +11,10 @@ public class FireBallSkill : Skill {
             playerController.PlayerStats.transform.position,
             playerController.PlayerStats.transform.rotation
         );
+        
+        NetworkServer.Spawn(fireball.gameObject);
 
-
-        fireball.Init(playerController.gameObject,skillConfig.Damage, skillConfig.ProjectileSpeed, skillConfig.ProjectileLifetime);
+        fireball.Init(playerController.gameObject, skillConfig.Damage, skillConfig.ProjectileSpeed, skillConfig.ProjectileLifetime);
     }
 
     public override void Upgrade() { }
