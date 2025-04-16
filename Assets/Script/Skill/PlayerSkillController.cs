@@ -53,6 +53,9 @@ public class PlayerSkillController : MonoBehaviour {
 
 
     private void Update() {
+        if (!Playermovement.isLocalPlayer) {
+            return;
+        }
         UseSkill();
     }
 

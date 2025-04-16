@@ -4,7 +4,7 @@ using UnityEngine;
 public class FireBallSkill : Skill {
     public FireBallSkill(SkillConfig skillConfig,PlayerSkillController playerController) : base(skillConfig,playerController) { }
 
-
+    [Command]
     public override void Activate() {
         var fireball = NetworkBehaviour.Instantiate(
             skillConfig.ProjectilePrefab,

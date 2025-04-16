@@ -9,7 +9,7 @@ public class ExplosionAroundPlayerSkill : Skill {
 
 
     }
-
+    [Command]
     public override void Activate() {
         var explosion = Object.Instantiate(
             skillConfig.ProjectilePrefab,
