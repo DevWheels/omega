@@ -10,13 +10,11 @@ public class PlayerIncreasedManaRegeneration : Skill {
     {
         this.playerStats = playerStats;
         this.skillConfig = skillConfig;
-        this.IsPassive = true;
 
     }
     public PlayerIncreasedManaRegeneration(PlayerStats playerStats)
     {
         this.playerStats = playerStats;
-        this.IsPassive = true;
     }
     public override void Activate()
     {
@@ -25,7 +23,6 @@ public class PlayerIncreasedManaRegeneration : Skill {
 
     public override void Upgrade()
     {
-        this.Level += 1;
     }
 
     public override void Deactivate()

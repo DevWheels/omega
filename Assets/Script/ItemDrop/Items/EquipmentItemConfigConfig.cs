@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewEquipmentConfig", menuName = "Items/Equipment Config")]
-public class EquipmentItemConfig : ScriptableObject
+public class EquipmentItemConfigConfig : ItemConfig
 {
     public string itemName;
     public ItemType itemType;

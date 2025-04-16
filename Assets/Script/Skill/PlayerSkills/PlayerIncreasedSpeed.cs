@@ -8,18 +8,15 @@ public class PlayerIncreasedSpeed : Skill{
     {
         this.playerMovement = PlayerMovement;
         this.skillConfig = skillConfig;
-        this.IsPassive = true;
     }
 
     public override void Activate()
     {
         playerMovement.moveSpeed += speedIncrease;
-        IsPassive = true;
     }
 
     public override void Upgrade()
     {
-        this.Level += 1;
     }
 
     public override void Deactivate()

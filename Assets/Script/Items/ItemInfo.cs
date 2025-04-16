@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemInfo : MonoBehaviour
 { 
     public static ItemInfo instance;
-
+    public ItemData itemData;
     private Image BackGround;
     private Text Title;
     private Text Description;
@@ -14,9 +15,7 @@ public class ItemInfo : MonoBehaviour
     private Button ExitButton;
     private Button UseButton;
     private Button DropButton;
-
-    private Item InfoItem;
-    private GameObject ItemObj;
+    private ItemConfig _infoItemConfig;
     private InventorySlot CurrenSlot;
 
     private void Start()
@@ -36,40 +35,41 @@ public class ItemInfo : MonoBehaviour
         UseButton.onClick.AddListener(Use);
         DropButton.onClick.AddListener(Drop);
     }
-    public void ChangeInfo(Item item)
+    public void ChangeInfo(ItemConfig itemConfig)
     { 
-        Title.text = item.name;
-        Description.text = item.Description;
-        Icon.sprite = item.icon;
+        Title.text = itemConfig.name;
+        Description.text = itemConfig.Description;
+        Icon.sprite = itemConfig.icon;
 
     }
 
     public void Use()
     { 
-        UseOfItems.instance.Use(InfoItem);
-
-        //CurrenSlot.ClearSlot();
+        UseOfItems.instance.Use(_infoItemConfig);
         Close();
+        CurrenSlot.ClearSlot();
     }
 
     public void Drop()
     {
         Vector3 DropPos = new Vector3(Player.instance.transform.position.x + 0.5f, Player.instance.transform.position.y, Player.instance.transform.position.z);
-        ItemObj.SetActive(true);
-        ItemObj.transform.position = DropPos;
-
-        //CurrenSlot.ClearSlot();
+        
+        ItemBase item = ItemFactory.Instance.CreateItemByData(itemData);
+        
+        item.gameObject.SetActive(true);
+        item.gameObject.transform.position = DropPos;
         Close();
+        CurrenSlot.ClearSlot();
     }
 
-    public void Open(Item item, GameObject itemObj, InventorySlot currentSlot)
+    public void Open(ItemConfig itemConfig,ItemData itemData ,InventorySlot currentSlot)
     { 
-        ChangeInfo(item);
-        InfoItem = item;
-        ItemObj = itemObj;
+        ChangeInfo(itemConfig);
+        _infoItemConfig = itemConfig;
         CurrenSlot = currentSlot;
-
+        this.itemData = itemData;
         gameObject.transform.localScale = Vector3.one;
+        UseButton.gameObject.SetActive(itemData.IsUsable);
     }
 
     public void Close() 

@@ -26,23 +26,23 @@ public class EnemyLoot : MonoBehaviour
             return;
         }
         
-        if (item.Config.Prefab != null)
+        if (item.ConfigConfig.Prefab != null)
         {
             GameObject droppedPrefab = Instantiate(
-                item.Config.Prefab, 
+                item.ConfigConfig.Prefab, 
                 transform.position, 
                 Quaternion.identity
             );
-
-            ItemWorld itemWorld = droppedPrefab.GetComponent<ItemWorld>();
-            if (itemWorld != null)
-            {
-                itemWorld.SetItem(item);
-            }
+            //
+            // ItemWorld itemWorld = droppedPrefab.GetComponent<ItemWorld>();
+            // if (itemWorld != null)
+            // {
+            //     itemWorld.SetItem(item);
+            // }
 
             if (enableLogs) 
             {
-                Debug.Log($"Dropped item: {item.Config.itemName}\n" +
+                Debug.Log($"Dropped item: {item.ConfigConfig.itemName}\n" +
                           $"Position: {droppedPrefab.transform.position}\n" +
                           $"Rank: {item.Rank}, Level: {item.Level}\n" +
                           $"Stats: HP={item.Health}, Armor={item.Armor}, ATK={item.Attack}");
@@ -50,7 +50,7 @@ public class EnemyLoot : MonoBehaviour
         }
         else
         {
-            if (enableLogs) Debug.LogWarning($"Item {item.Config.itemName} has no Prefab in config");
+            if (enableLogs) Debug.LogWarning($"Item {item.ConfigConfig.itemName} has no Prefab in config");
         }
     }
 }

@@ -13,18 +13,18 @@ public class UseOfItems : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>(); 
     }
 
-    public void Use(Item item)
+    public void Use(ItemConfig itemConfig)
     {
-        if (item.isHealing)
+        if (itemConfig.isHealing)
         {
-            Debug.Log("Вы восстановили здоровье на " + item.HealingPower);
-            playerStats.UseItem(item); 
+            Debug.Log("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + itemConfig.HealingPower);
+            playerStats.UseItem(itemConfig); 
         }
 
-        if (item.isMana)
+        if (itemConfig.isMana)
         {
-            Debug.Log("Вы восстановили ману на " + item.ManaPower);
-            playerStats.UseItem(item); 
+            Debug.Log("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ " + itemConfig.ManaPower);
+            playerStats.UseItem(itemConfig); 
         }
     }
 }

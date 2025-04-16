@@ -9,10 +9,7 @@ public class SkillManager : MonoBehaviour {
 
     public void AddSkill(Skill skill) {
         Skills.Add(skill);
-        if (skill.IsPassive)
-        {
-            skill.Activate();
-        }
+
     }
 
     public void UseSkill(Skill playerskill) {
@@ -28,7 +25,7 @@ public class SkillManager : MonoBehaviour {
 
     private IEnumerator CooldownSkill(Skill skill) {
         SkillCooldowns.Add(skill);
-        yield return new WaitForSeconds(skill.Cooldown);
+        yield return new WaitForSeconds(1);
         SkillCooldowns.Remove(skill);
     }
 }

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public Item SlotItem;
-    public GameObject ItemObj;
-
+    [FormerlySerializedAs("SlotItem")] public ItemConfig slotItemConfig;
+    public ItemData slotItemData;
     Image icon;
     Button button;
 
@@ -17,24 +17,26 @@ public class InventorySlot : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(ShowInfo);
     }
-    public void PutInSlot(Item item, GameObject obj)
+    public void PutInSlot(ItemConfig itemConfig,ItemData itemData)
     {
-        icon.sprite = item.icon;
-        SlotItem = item;
-        ItemObj = obj;
+        
+        icon.sprite = itemConfig.icon;
+        slotItemConfig = itemConfig;
+        slotItemData = itemData;
         icon.enabled = true;
     }
 
     void ShowInfo()
     {
-        if (SlotItem != null)
-            ItemInfo.instance.Open(SlotItem, ItemObj, this);
+        if (slotItemConfig != null)
+            ItemInfo.instance.Open(slotItemConfig,slotItemData, this);
+        
     }
 
     public void ClearSlot()
     {
-        SlotItem = null;
-        ItemObj = null;
+        slotItemConfig = null;
+        slotItemData = null;
         icon.sprite = null;
         icon.enabled = false;
     }

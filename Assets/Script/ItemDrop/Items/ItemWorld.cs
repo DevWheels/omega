@@ -16,7 +16,7 @@ public class ItemWorld : MonoBehaviour
     private void UpdateVisuals()
     {
         if (nameText != null)
-            nameText.text = _item.Config.itemName;
+            nameText.text = _item.ConfigConfig.itemName;
         
         if (statsText != null)
             statsText.text = $"Rank: {_item.Rank}\nLvl: {_item.Level}";

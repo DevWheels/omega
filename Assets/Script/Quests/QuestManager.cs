@@ -75,8 +75,8 @@ public class QuestManager : MonoBehaviour
         Quest quest = quests.Find(q => q.title == dialogStart.title);
         GameObject inventory = GameObject.Find("Slots_transform");
         
-        List<Item> requiredItems = new();
-        foreach (var item in quest.quest_items)
+        List<ItemConfig> requiredItems = new();
+        foreach (var item in quest.quest_items_config)
         {
             requiredItems.Add(item);
         }
@@ -92,7 +92,7 @@ public class QuestManager : MonoBehaviour
         // Проходим по всем необходимым предметам
         foreach (var requiredItem in requiredItems)
         {
-            List<InventorySlot> itemSlots = slotsWithItems.FindAll(slot => slot.SlotItem == requiredItem);
+            List<InventorySlot> itemSlots = slotsWithItems.FindAll(slot => slot.slotItemConfig == requiredItem);
 
 
             if (itemSlots.Count < requiredItems.Count)
@@ -113,8 +113,8 @@ public class QuestManager : MonoBehaviour
     {
         Quest quest = quests.Find(q => q.title == dialogStart.title);
         
-        List<Item> requiredItems = new();
-        foreach (var item in quest.quest_items)
+        List<ItemConfig> requiredItems = new();
+        foreach (var item in quest.quest_items_config)
         {
             requiredItems.Add(item);
         }
@@ -130,7 +130,7 @@ public class QuestManager : MonoBehaviour
         {
             foreach (var slot in slotsWithItems)
             {
-                if (slot.SlotItem == requiredItem && deleted < needToDelete)
+                if (slot.slotItemConfig == requiredItem && deleted < needToDelete)
                 {
                     //slot.ClearSlot(); // Удаляем предмет для квеста
                     deleted++;
@@ -153,7 +153,7 @@ public class QuestManager : MonoBehaviour
             Transform child = inventory.transform.GetChild(i);
             InventorySlot slot = child.GetComponent<InventorySlot>();
 
-            if (slot != null && slot.SlotItem != null) 
+            if (slot != null && slot.slotItemConfig != null) 
             {
                 slotsWithItems.Add(slot); 
             }

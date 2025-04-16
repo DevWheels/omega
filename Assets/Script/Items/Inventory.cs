@@ -21,13 +21,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void PutInEmptySlot(Item item, GameObject obj)
+    public void PutInEmptySlot(ItemConfig itemConfig,ItemData itemData)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            if (inventorySlots[i].SlotItem == null)
+            if (inventorySlots[i].slotItemConfig == null)
             {
-                inventorySlots[i].PutInSlot(item, obj); 
+                inventorySlots[i].PutInSlot(itemConfig,itemData); 
                 return;
             }
         }

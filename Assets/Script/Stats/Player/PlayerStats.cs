@@ -179,20 +179,20 @@ public class PlayerStats : NetworkBehaviour {
 
     }
 
-    public void UseItem(Item item)
+    public void UseItem(ItemConfig itemConfig)
     {
-        if (item.isHealing)
+        if (itemConfig.isHealing)
         {
-            currently_hp += (int)item.HealingPower;
+            currently_hp += (int)itemConfig.HealingPower;
             if (currently_hp > max_hp)
             {
                 currently_hp = max_hp; // Ограничиваем здоровье максимальным значением
             }
         }
 
-        if (item.isMana)
+        if (itemConfig.isMana)
         {
-            currently_mana += (int)item.ManaPower;
+            currently_mana += (int)itemConfig.ManaPower;
             if (currently_mana > max_mana)
             {
                 currently_mana = max_mana; // Ограничиваем ману максимальным значением

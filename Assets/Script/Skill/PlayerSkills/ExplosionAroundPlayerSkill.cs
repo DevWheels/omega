@@ -12,7 +12,6 @@ public class ExplosionAroundPlayerSkill : Skill {
         this.skillConfig = skillConfig;
         projectilePrefab = skillConfig.ProjectilePrefab;
         SpawnPoint = this.playerStats.transform;
-        Cooldown = 2f;
     }
     public override void Activate()
     {

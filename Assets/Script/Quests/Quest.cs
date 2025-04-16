@@ -13,9 +13,10 @@ public class Quest
     public string thanks;
     [Header("Rewards")]
     public int experience;
-    public List<Item> reward_items;
-    public List<Item> quest_items;
-
+    public List<ItemData> reward_items_data;
+    public List<ItemConfig> reward_items_config;
+    public List<ItemConfig> quest_items_config;
+    public List<ItemData> quest_items_data;
     public bool isCompleted;
     public bool isStarted;
 
@@ -35,14 +36,12 @@ public class Quest
     //}
 
 
-    public void CompleteQuest()
-    {
+    public void CompleteQuest() {
         isCompleted = true;
-        foreach (var item in reward_items)
-        {
-            if (item != null)
-            {
-                Inventory.instance.PutInEmptySlot(item, null);
+        for (var index = 0; index < reward_items_data.Count; index++) {
+            var item = reward_items_data[index];
+            if (item != null) {
+                Inventory.instance.PutInEmptySlot(reward_items_config[index],item);
             }
         }
     }
