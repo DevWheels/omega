@@ -4,9 +4,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "NewEquipment", menuName = "Inventory/Equipment")]
-public class EquipmentItem : EquipmentItemConfigConfig
+public class EquipmentItem : EquipmentItemConfig
 {
-    public EquipmentItemConfigConfig ConfigConfig { get; private set; }
+    public EquipmentItemConfig Config { get; private set; }
     public List<string> Skills { get; private set; }
     private PlayerEquipment playerEquipment;
     public ItemRank Rank { get; private set; }
@@ -16,9 +16,9 @@ public class EquipmentItem : EquipmentItemConfigConfig
     public int Attack { get; private set; }
     public SpecialStatType[] SpecialStats { get; private set; }
     public float[] SpecialStatsValues { get; private set; }
-    public EquipmentItem(EquipmentItemConfigConfig configConfig, ItemRank rank, int playerLevel, int mobLevel)
+    public EquipmentItem(EquipmentItemConfig config, ItemRank rank, int playerLevel, int mobLevel)
     {
-        ConfigConfig = configConfig;
+        Config = config;
         Generate(rank, playerLevel, mobLevel);
         
     }
@@ -27,7 +27,7 @@ public class EquipmentItem : EquipmentItemConfigConfig
         Rank = rank;
         Level = playerLevel + Mathf.RoundToInt(mobLevel * 0.5f);
         
-        var ranges = ConfigConfig.GetRangesForRank(rank);
+        var ranges = Config.GetRangesForRank(rank);
          int levelBonus = (Level - 1) * ranges.perLevelIncrease;
         
         Health = Random.Range(

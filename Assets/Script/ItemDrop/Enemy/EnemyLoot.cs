@@ -26,10 +26,10 @@ public class EnemyLoot : MonoBehaviour
             return;
         }
         
-        if (item.ConfigConfig.Prefab != null)
+        if (item.Config.Prefab != null)
         {
             GameObject droppedPrefab = Instantiate(
-                item.ConfigConfig.Prefab, 
+                item.Config.Prefab, 
                 transform.position, 
                 Quaternion.identity
             );
@@ -42,7 +42,7 @@ public class EnemyLoot : MonoBehaviour
 
             if (enableLogs) 
             {
-                Debug.Log($"Dropped item: {item.ConfigConfig.itemName}\n" +
+                Debug.Log($"Dropped item: {item.Config.itemName}\n" +
                           $"Position: {droppedPrefab.transform.position}\n" +
                           $"Rank: {item.Rank}, Level: {item.Level}\n" +
                           $"Stats: HP={item.Health}, Armor={item.Armor}, ATK={item.Attack}");
@@ -51,7 +51,7 @@ public class EnemyLoot : MonoBehaviour
         }
         else
         {
-            if (enableLogs) Debug.LogWarning($"Item {item.ConfigConfig.itemName} has no Prefab in config");
+            if (enableLogs) Debug.LogWarning($"Item {item.Config.itemName} has no Prefab in config");
         }
     }
 }
