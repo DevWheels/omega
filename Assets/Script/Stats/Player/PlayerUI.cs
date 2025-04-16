@@ -148,7 +148,6 @@ public class PlayerUI : MonoBehaviour {
         luck_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseLuck);
         speed_up = find.FindGameObject("SpeedUp");
         speed_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseSpeed);
-
         UpdateUI();
     }
 }

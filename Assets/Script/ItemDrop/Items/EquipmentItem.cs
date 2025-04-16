@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,7 +7,8 @@ using Random = UnityEngine.Random;
 public class EquipmentItem : EquipmentItemConfig
 {
     public EquipmentItemConfig Config { get; private set; }
-    public Skill Skill { get; private set; }
+    public List<string> Skills { get; private set; }
+    private PlayerEquipment playerEquipment;
     public ItemRank Rank { get; private set; }
     public int Level { get; private set; }
     public int Health { get; private set; }
@@ -42,7 +44,9 @@ public class EquipmentItem : EquipmentItemConfig
             ranges.attack.x + levelBonus,
             ranges.attack.y + levelBonus + 5
         );
-        
+        Skills = SkillsTable.Instance.GetSkillsForItem();
+        playerEquipment = FindAnyObjectByType<PlayerEquipment>();
+
         GenerateSpecialStats();
         LogStats();
     }

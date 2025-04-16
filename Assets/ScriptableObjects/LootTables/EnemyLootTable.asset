@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleItemConfigs:
   - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
+  - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
+  - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
+  - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
   rankChances:
   - rank: 0
     baseChance: 100

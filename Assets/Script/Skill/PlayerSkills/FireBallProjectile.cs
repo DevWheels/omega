@@ -7,10 +7,10 @@ using UnityEngine;
 public class FireBallProjectile : ProjectileBase {
 
     private Vector2 _targetDirection;
-    private int _projectileDamage;
-    private int _projectileSpeed;
-    private int _projectileLifetime;
-    private GameObject _owner;
+    [SyncVar] private int _projectileDamage;
+    [SyncVar] private int _projectileSpeed;
+    [SyncVar] private int _projectileLifetime;
+    [SyncVar] private GameObject _owner;
     public override void Init(GameObject player,int damage, int speed, int lifetime) {
         _projectileDamage =  damage;
         _projectileSpeed = speed;
@@ -50,7 +50,7 @@ public class FireBallProjectile : ProjectileBase {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject == gameObject || collision.gameObject == _owner) {return;}
+        if (collision.gameObject == gameObject || collision.gameObject == _owner) { return; }
         var enemyPlayer = collision.GetComponent<PlayerStats>();
         
         enemyPlayer.TakeHit(_projectileDamage);

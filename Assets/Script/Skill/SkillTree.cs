@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillTree : MonoBehaviour {
+public class SkillTree {
     public List<Skill> AvailableSkills { get; private set; } //Все навыки которые есть в игре
     public List<Skill> UnlockedSkills { get; private set; } //Открытые навыки 
 

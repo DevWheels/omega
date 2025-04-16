@@ -4,10 +4,10 @@ using UnityEngine;
 using System.Collections;
 
 public class ExplosionAroundPlayerProjectile : ProjectileBase {
-    private int _projectileDamage;
-    private int _projectileSpeed;
-    private int _projectileLifetime;
-    private GameObject _owner;
+    [SyncVar] private int _projectileDamage;
+    [SyncVar] private int _projectileSpeed;
+    [SyncVar] private int _projectileLifetime;
+    [SyncVar] private GameObject _owner;
     public override void Init(GameObject player,int damage, int speed, int lifetime) {
         _projectileDamage = damage;
         _projectileSpeed = speed;

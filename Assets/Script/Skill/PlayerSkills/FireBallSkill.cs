@@ -1,3 +1,4 @@
+using Mirror;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,11 +7,12 @@ public class FireBallSkill : Skill {
 
 
     public override void Activate() {
-        var fireball = Object.Instantiate(
+        var fireball = NetworkBehaviour.Instantiate(
             skillConfig.ProjectilePrefab,
             playerController.PlayerStats.transform.position,
             playerController.PlayerStats.transform.rotation
         );
+
 
         fireball.Init(playerController.gameObject,skillConfig.Damage, skillConfig.ProjectileSpeed, skillConfig.ProjectileLifetime);
     }

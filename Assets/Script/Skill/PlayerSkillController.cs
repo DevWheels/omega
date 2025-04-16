@@ -14,9 +14,6 @@ public class PlayerSkillController : MonoBehaviour {
     public PlayerMovement Playermovement{get; private set;}
     public RegenerationController Regeneration{get; private set;}
 
-    [SerializeField]
-    private List<SkillConfig> _skillConfigs;
-
     private List<Skill> _skills = new();
     private void Awake() {
         FindComponents();
@@ -25,7 +22,7 @@ public class PlayerSkillController : MonoBehaviour {
     }
 
     private void CreateSkills() {
-        foreach (var skillConfig in _skillConfigs) {
+        foreach (var skillConfig in SkillsTable.Instance.SkillConfigs) {
             var skill = SkillFactory.Create(skillConfig,this);
             _skills.Add(skill);
         }
@@ -42,7 +39,7 @@ public class PlayerSkillController : MonoBehaviour {
     
     private void FindComponents() {
         SkillManager = gameObject.AddComponent<SkillManager>();
-        SkillTree = gameObject.AddComponent<SkillTree>();
+        SkillTree = new SkillTree();
         PlayerStats = GetComponent<PlayerStats>();
         Playermovement = GetComponent<PlayerMovement>();
         Regeneration = GetComponent<RegenerationController>();
