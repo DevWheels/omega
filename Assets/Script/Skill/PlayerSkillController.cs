@@ -1,61 +1,61 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerSkillController : MonoBehaviour 
-{
+public class PlayerSkillController : MonoBehaviour {
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
     public List<Skill> Passive_Skills { get; } = new List<Skill>();
     public List<Skill> Active_Skills { get; } = new List<Skill>();
 
-    private PlayerStats playerStats;
-    private PlayerMovement playermovement;
+    public PlayerStats PlayerStats {get; private set;}
+    public PlayerMovement Playermovement{get; private set;}
+    public RegenerationController Regeneration{get; private set;}
 
+    private List<Skill> _skills = new();
+    private void Awake() {
+        FindComponents();
 
-    private void Awake() 
-    {
+        CreateSkills();
+    }
 
-        SkillManager = gameObject.AddComponent<SkillManager>();
-        SkillTree = gameObject.AddComponent<SkillTree>();
-        playerStats = GetComponent<PlayerStats>();
-        playermovement = GetComponent<PlayerMovement>();
+    private void CreateSkills() {
+        foreach (var skillConfig in SkillsTable.Instance.SkillConfigs) {
+            var skill = SkillFactory.Create(skillConfig,this);
+            _skills.Add(skill);
+        }
 
-
-        var manaRegenSkill = new PlayerIncreasedManaRegeneration(playerStats,Resources.Load<SkillConfig>($"Skills/ManaIncrease"));
-        var SpeedIncreaseSkill = new PlayerIncreasedSpeed(playermovement,Resources.Load<SkillConfig>($"Skills/SpeedIncrease"));
-        var fireBallSkill = new FireBallSkill(playerStats,Resources.Load<SkillConfig>($"Skills/FireBall"));
-        var ExplosionSkill =
-            new ExplosionAroundPlayerSkill(playerStats, Resources.Load<SkillConfig>($"Skills/FireBall"));
+        foreach (var skill in _skills) {
+            if (skill.skillConfig.IsPassive) {
+                Passive_Skills.Add(skill);
+            }
+            else { Active_Skills.Add(skill); }
+            SkillManager.AddSkill(skill);
+        }
+    }
 
     
-        Active_Skills.Add(fireBallSkill);
-        SkillManager.Skills.Add(fireBallSkill);
-        
-        Active_Skills.Add(ExplosionSkill);
-        SkillManager.Skills.Add(ExplosionSkill);
-        
-        Passive_Skills.Add(manaRegenSkill);
-        SkillManager.AddSkill(manaRegenSkill);
-        
-        Passive_Skills.Add(SpeedIncreaseSkill);
-        SkillManager.AddSkill(SpeedIncreaseSkill);
-        
+    private void FindComponents() {
+        SkillManager = gameObject.AddComponent<SkillManager>();
+        SkillTree = new SkillTree();
+        PlayerStats = GetComponent<PlayerStats>();
+        Playermovement = GetComponent<PlayerMovement>();
+        Regeneration = GetComponent<RegenerationController>();
     }
+
 
     private void Update() {
         UseSkill();
     }
 
     private void UseSkill() {
-
         if (Input.GetKey(KeyCode.Q)) {
             SkillManager.UseSkill(Active_Skills[0]);
         }
-        else if (Input.GetKey(KeyCode.E))
-        {
+        else if (Input.GetKey(KeyCode.E)) {
             SkillManager.UseSkill(Active_Skills[1]);
-
         }
     }
 }

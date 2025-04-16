@@ -10,5 +10,9 @@ EditorBuildSettings:
     guid: 5d80fdaeb7424ee4486d11fdd839efb9
   - enabled: 1
     path: Assets/Scenes/Game.unity
-    guid: 177057e0478e2d04bb9eb55e43015d1c
+    guid: 4a74975f91416594e9ca663cb2bcdbfc
+  - enabled: 0
+    path: Assets/Scenes/Education.unity
+    guid: db2fd8e6b1634c7468975c61ab55bb2f
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

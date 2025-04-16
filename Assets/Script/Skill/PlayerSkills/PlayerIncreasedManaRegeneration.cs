@@ -2,31 +2,28 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerIncreasedManaRegeneration : Skill {
-
-    public float ManaIncrease = 1.1f;
-    private PlayerStats playerStats;
     
-    public PlayerIncreasedManaRegeneration(PlayerStats playerStats,SkillConfig skillConfig)
+    private float baseManaRegeneration;
+    public PlayerIncreasedManaRegeneration(SkillConfig skillConfig,PlayerSkillController playerController) : base(skillConfig, playerController)
     {
-        this.playerStats = playerStats;
-        this.skillConfig = skillConfig;
 
-    }
-    public PlayerIncreasedManaRegeneration(PlayerStats playerStats)
-    {
-        this.playerStats = playerStats;
+
+        baseManaRegeneration = playerController.Regeneration.ManaRegeneration;
+
     }
     public override void Activate()
     {
-        playerStats.ManaRegenerationPerSecond += ManaIncrease;
+        
+        playerController.Regeneration.ManaRegenerationPerSecond *= 1 + (skillConfig.PercentageBuff / 100f);
     }
 
     public override void Upgrade()
     {
+        
     }
 
     public override void Deactivate()
     {
-        playerStats.ManaRegenerationPerSecond -= ManaIncrease;
+        playerController.Regeneration.ManaRegenerationPerSecond -= baseManaRegeneration;
     }
 }

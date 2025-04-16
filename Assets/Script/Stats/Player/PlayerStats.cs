@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -11,7 +12,6 @@ using Mirror;
 
 
 public class PlayerStats : NetworkBehaviour {
-
     [SyncVar] private int max_hp = 300;
     [SyncVar] private int currently_hp = 300;
     [SyncVar] private int max_mana = 65;
@@ -30,153 +30,104 @@ public class PlayerStats : NetworkBehaviour {
     [SyncVar] private int luck = 1;
     [SyncVar] private int speed = 1;
 
-    [SyncVar] private float timer;
-    [SyncVar] private float interval_of_one_second = 1f;
 
-    [SyncVar] private float hp_regeneration;
-    [SyncVar] private float mana_regeneration;
-
-    [SyncVar] private float hp_regeneration_per_second = 0.05f;
-    [SyncVar] private float mana_regeneration_per_second = 0.2f;
-    
-    public static PlayerStats Instance { get; private set; }
-    
-    public int MaxHp
-    {
+    public int MaxHp {
         get { return max_hp; }
         set { max_hp = value; }
     }
 
-    public int CurrentlyHp
-    {
+    public int CurrentlyHp {
         get { return currently_hp; }
         set { currently_hp = value; }
     }
 
-    public int MaxMana
-    {
+    public int MaxMana {
         get { return max_mana; }
         set { max_mana = value; }
     }
 
-    public int CurrentlyMana
-    {
+    public int CurrentlyMana {
         get { return currently_mana; }
         set { currently_mana = value; }
     }
 
-    public int Armor
-    {
+    public int Armor {
         get { return armor; }
         set { armor = value; }
     }
 
-    public int Lvl
-    {
+    public int Lvl {
         get { return lvl; }
         set { lvl = value; }
     }
 
-    public int XpNeeded
-    {
+    public int XpNeeded {
         get { return xp_needed; }
         set { xp_needed = value; }
     }
 
-    public int XpCurrently
-    {
+    public int XpCurrently {
         get { return xp_currently; }
         set { xp_currently = value; }
     }
 
-    public int AbilityPoints
-    {
+    public int AbilityPoints {
         get { return ability_points; }
         set { ability_points = value; }
     }
 
-    public int Strength
-    {
+    public int Strength {
         get { return strength; }
         set { strength = value; }
     }
 
-    public int Sanity
-    {
+    public int Sanity {
         get { return sanity; }
         set { sanity = value; }
     }
 
-    public int Agility
-    {
+    public int Agility {
         get { return agility; }
         set { agility = value; }
     }
 
-    public int Luck
-    {
+    public int Luck {
         get { return luck; }
         set { luck = value; }
     }
 
-    public int Speed
-    {
+    public int Speed {
         get { return speed; }
         set { speed = value; }
     }
-
-    public float ManaRegeneration
-    {
-        get{ return mana_regeneration; }
-        set { mana_regeneration = value; }
-    }
-
-    public float HealthRegeneration
-    {
-        get{ return hp_regeneration; }
-        set { hp_regeneration = value; }
-    }
-
-    public float ManaRegenerationPerSecond
-    {
-        get{ return mana_regeneration_per_second; }
-        set { mana_regeneration_per_second = value; }
-    }
-
-    public float HealthRegenerationPerSecond
-    {
-        get{ return hp_regeneration_per_second; }
-        set { hp_regeneration_per_second = value; }
-    }
-
 
 
     private PlayerMovement playerMovement;
     private PlayerUI playerUI;
 
 
-    private void OnApplicationQuit()
-    {
-        //SavePlayerData(); // Сохраняем данные при выходе
-    }
-    void Start()
-    {
-        FindPlayerComponents();
+    public static PlayerStats Instance;
+
+    private void Awake() {
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isLocalPlayer)
-        {
+    private void OnApplicationQuit() {
+        //SavePlayerData(); // Сохраняем данные при выходе
+    }
+
+    void Start() {
+        FindPlayerComponents();
+    }
+    
+    void Update() {
+        if (!isLocalPlayer) {
             return;
         }
+
         AddExperience(2); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ДЛЯ ТЕСТА удалить потом
         CheckHpAndMana();
         playerUI.UpdateUI();
-        timer += Time.deltaTime;
-        Regeneration();
-
     }
 
     public void UseItem(ItemConfig itemConfig)
@@ -199,18 +150,15 @@ public class PlayerStats : NetworkBehaviour {
             }
         }
 
-        playerUI.UpdateUI(); // Обновляем интерфейс после использования предмета
+        playerUI.UpdateUI(); 
     }
-    
-    private void LevelUp()
-    {
 
+    private void LevelUp() {
         // сохраняем избыток опыта, для перевода его в следующий уровень
         int extra_xp = xp_currently - xp_needed;
 
-        //Повторная проверка на условие опыта и проверка на условный ограничитель в 100 уровней 
-        if (lvl < 100 && xp_currently >= xp_needed)
-        {
+
+        if (lvl < 100 && xp_currently >= xp_needed) {
             lvl += 1;
 
             xp_currently = 0;
@@ -218,24 +166,18 @@ public class PlayerStats : NetworkBehaviour {
             playerUI.SetStateOfAbilityUpdateButtons();
         }
 
-        //если уровень выше 100, то просто прибавляем к нему 1, ничего не выдавая
-        if (lvl >= 100 && xp_currently >= xp_needed)
-        {
+
+        if (lvl >= 100 && xp_currently >= xp_needed) {
             lvl += 1;
             xp_currently = 0;
-
         }
 
         //выдаём остаток опыта, если таковой есть
         xp_currently += extra_xp;
         UpdateAllStats();
-
     }
-    /// <summary>
-    /// Обновляет характеристика игрока, выдавая им новые значения
-    /// </summary>
-    private void UpdateAllStats()
-    {
+    
+    private void UpdateAllStats() {
         xp_needed = (int)(xp_needed_per_lvl + xp_needed_per_lvl * (lvl - 1));
         int strength_hp = (strength - 1) * 20;
         max_hp = (int)300 + strength_hp;
@@ -244,118 +186,77 @@ public class PlayerStats : NetworkBehaviour {
         playerUI.UpdateUI();
     }
 
-    public void AddExperience(int experience)
-    {
+    public void AddExperience(int experience) {
         xp_currently += experience;
-        if (xp_currently >= xp_needed)
-        {
+        if (xp_currently >= xp_needed) {
             LevelUp();
         }
+
         playerUI.UpdateUI();
     }
+
     [Client]
-    private void Regeneration()
-    {
-        if (!(timer >= interval_of_one_second && max_mana >= currently_mana && max_hp >= currently_hp))
-        {
-            return;
-        }
-        hp_regeneration += hp_regeneration_per_second; // восстановление единицы хп раз в 20 секунд 
-        mana_regeneration += mana_regeneration_per_second; // восстановление единицы маны раз в 5 секунд 
-
-        if (hp_regeneration >= 1)
-        {
-            currently_hp += (int)hp_regeneration;
-            hp_regeneration = 0f; 
-            playerUI.UpdateUI();
-
-        }
-        if (mana_regeneration >= 1 && currently_mana > max_mana * 0.1f)
-        {
-            currently_mana += (int)mana_regeneration;
-            mana_regeneration = 0f; 
-            playerUI.UpdateUI();
-        }
-
-        timer = 0f;
-    }
-    public void TakeHit(int damage)
-    {
+    public void TakeHit(int damage) {
         currently_hp -= damage;
         UpdateEverything();
     }
 
     [Client]
-    private void CheckHpAndMana()
-    {
-        if (currently_hp <= 0)
-        {
-             //Здоровье закончилось, можно умереть
+    private void CheckHpAndMana() {
+        if (currently_hp <= 0) {
             Destroy(gameObject);
         }
-        else if (currently_hp >= max_hp)
-        {
+        else if (currently_hp >= max_hp) {
             currently_hp = max_hp;
         }
-        if (currently_mana < 0)
-        {
+
+        if (currently_mana < 0) {
             currently_mana = 0;
         }
-        else if (currently_mana >= max_mana)
-        {
+        else if (currently_mana >= max_mana) {
             currently_mana = max_mana;
         }
     }
-    
-    public void IncreaseStrength()
-    {
-        if (ability_points > 0)
-        {
+
+    public void IncreaseStrength() {
+        if (ability_points > 0) {
             strength++;
             ability_points -= 1;
             UpdateAllStats();
             playerUI.SetStateOfAbilityUpdateButtons();
         }
     }
-    public void IncreaseSanity()
-    {
-        if (ability_points > 0)
-        {
+
+    public void IncreaseSanity() {
+        if (ability_points > 0) {
             sanity++;
             ability_points -= 1;
             UpdateAllStats();
             playerUI.SetStateOfAbilityUpdateButtons();
         }
-
     }
-    public void IncreaseAgility()
-    {
-        if (ability_points > 0)
-        {
+
+    public void IncreaseAgility() {
+        if (ability_points > 0) {
             agility++;
             ability_points -= 1;
             UpdateAllStats();
 
             playerUI.SetStateOfAbilityUpdateButtons();
-
         }
     }
-    public void IncreaseLuck()
-    {
-        if (ability_points > 0)
-        {
+
+    public void IncreaseLuck() {
+        if (ability_points > 0) {
             luck++;
             ability_points -= 1;
             UpdateAllStats();
             playerUI.SetStateOfAbilityUpdateButtons();
-
-
         }
     }
-    public void IncreaseSpeed()
-    {
-        if (ability_points > 0)
-        {
+
+    public void IncreaseSpeed() {
+        if (ability_points > 0) {
             speed++;
             ability_points -= 1;
             float speed_multiply = 0.05f;
@@ -364,37 +265,17 @@ public class PlayerStats : NetworkBehaviour {
             playerUI.SetStateOfAbilityUpdateButtons();
         }
     }
-    
-    public int GetCurretlyMana()
-    {
-        return currently_mana;
-    }
-    public int GetMaxMana()
-    {
-        return max_mana;
-    }
-    public void ConsumeMana(int mana)
-    {
-        currently_mana -= mana;
-    }
 
-    public bool HasEnoughMana(int cost)
-    {
-        return currently_mana >= cost; // Проверка достаточности маны
-    }
-    
     [Client]
-    private void UpdateEverything()
-    {
+    private void UpdateEverything() {
         playerUI.UpdateUI();
         UpdateAllStats();
     }
 
     [Client]
-    private void FindPlayerComponents()
-    {
+    private void FindPlayerComponents() {
         playerMovement = GetComponent<PlayerMovement>();
-        playerUI = GetComponent<PlayerUI>();;
-        
+        playerUI = GetComponent<PlayerUI>();
+        ;
     }
 }

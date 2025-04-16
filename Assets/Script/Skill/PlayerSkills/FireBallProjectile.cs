@@ -3,38 +3,56 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-public class FireBallProjectile : NetworkBehaviour{
-    [SyncVar]
-    public int speed;
-    [SyncVar]
-    public int damage;
-    private Vector2 target_direction;
 
+public class FireBallProjectile : ProjectileBase {
+
+    private Vector2 _targetDirection;
+    [SyncVar] private int _projectileDamage;
+    [SyncVar] private int _projectileSpeed;
+    [SyncVar] private int _projectileLifetime;
+    [SyncVar] private GameObject _owner;
+    public override void Init(GameObject player,int damage, int speed, int lifetime) {
+        _projectileDamage =  damage;
+        _projectileSpeed = speed;
+        _projectileLifetime = lifetime;
+        _owner = player;
+        
+    }
+    
     private void Start() {
         StartCoroutine(nameof(DestroyProjectile));
-        Vector3 mouseWorldPos = GetMouseWorldPosition();
-
-        target_direction = (mouseWorldPos - transform.position).normalized;
+        InitDirection();
     }
 
     void Update() {
         MoveProjectile();
+
     }
 
-    private IEnumerator DestroyProjectile()
-    {
-        yield return new WaitForSeconds(3);
-        Destroy(gameObject);
+    private void DestroyProjectile() {
+        Destroy(gameObject,_projectileLifetime);
     }
 
-    private void MoveProjectile()
-    {
-        transform.position += (Vector3)(target_direction * (speed * Time.deltaTime));
+    private void MoveProjectile() {
+        transform.position += (Vector3)(_targetDirection * (_projectileSpeed * Time.deltaTime));
     }
-    private Vector3 GetMouseWorldPosition()
-    {
+
+    private Vector3 GetMouseWorldPosition() {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 0; 
+        mousePos.z = 0;
         return Camera.main.ScreenToWorldPoint(mousePos);
+    }
+
+    private void InitDirection() {
+        Vector3 mouseWorldPos = GetMouseWorldPosition();
+
+        _targetDirection = (mouseWorldPos - transform.position).normalized;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject == gameObject || collision.gameObject == _owner) { return; }
+        var enemyPlayer = collision.GetComponent<PlayerStats>();
+        
+        enemyPlayer.TakeHit(_projectileDamage);
     }
 }

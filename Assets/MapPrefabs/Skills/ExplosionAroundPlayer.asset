@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a7989522df4abc9c73aabdb15c460a, type: 3}
+  m_Name: ExplosionAroundPlayer
+  m_EditorClassIdentifier: 
+  Name: ExplosionAroundPlayer
+  Description: 
+  Icon: {fileID: 0}
+  IsPassive: 0
+  SkillType: 1
+  PercentageBuff: 0
+  Damage: 1
+  ProjectileSpeed: 0
+  Cooldown: 3
+  ProjectileLifetime: 1
+  ProjectilePrefab: {fileID: 551974378179888456, guid: 99ed20a651e8d2d40a0fff26c917baeb, type: 3}

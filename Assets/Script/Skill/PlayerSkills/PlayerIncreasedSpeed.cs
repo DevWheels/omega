@@ -1,26 +1,24 @@
 using UnityEngine;
 
-public class PlayerIncreasedSpeed : Skill{
+public class PlayerIncreasedSpeed : Skill {
 
-    public float speedIncrease = 1.1f;
-    private PlayerMovement playerMovement;
-    public PlayerIncreasedSpeed(PlayerMovement PlayerMovement,SkillConfig skillConfig)
-    {
-        this.playerMovement = PlayerMovement;
-        this.skillConfig = skillConfig;
+    private float baseSpeed;
+
+    public PlayerIncreasedSpeed(SkillConfig skillConfig,PlayerSkillController playerController) : base(skillConfig,playerController) {
+
+        baseSpeed = playerController.Playermovement.moveSpeed;
     }
 
     public override void Activate()
     {
-        playerMovement.moveSpeed += speedIncrease;
+        playerController.Playermovement.moveSpeed *= 1 + (skillConfig.PercentageBuff / 100f);
     }
 
-    public override void Upgrade()
-    {
+    public override void Upgrade() {
     }
 
     public override void Deactivate()
     {
-        playerMovement.moveSpeed -= speedIncrease;
+        playerController.Playermovement.moveSpeed -= baseSpeed;
     }
 }

@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad27837058a54249a5433057e3bce12, type: 3}
   m_Name: EnemyLootTable
   m_EditorClassIdentifier: 
-  possibleItems:
-  - {fileID: 11400000, guid: 56f00df68748ba449b1dd009f865ab73, type: 2}
+  possibleItemConfigs:
+  - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
+  - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
+  - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
+  - {fileID: 11400000, guid: f72ea8ceeeed6c940be5caeacdb3bcc4, type: 2}
   rankChances:
   - rank: 0
     baseChance: 100

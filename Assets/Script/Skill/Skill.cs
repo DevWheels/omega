@@ -1,16 +1,23 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-
+[System.Serializable]
 public abstract class Skill {
     public SkillConfig skillConfig { get; set; }
+    public PlayerSkillController playerController { get; set; }
 
-    
+    public int Level { get; set; }
 
-    //Реализация активации навыка
+    protected Skill(SkillConfig skillConfig, PlayerSkillController playerController) {
+        this.skillConfig = skillConfig;
+        this.playerController = playerController;
+    }
+
     public abstract void Activate();
 
 
-    public abstract void Upgrade();
+    public virtual void Upgrade() {
+        Level++;
+    }
     
     public abstract void Deactivate();
 }

@@ -4,10 +4,8 @@ using UnityEngine;
 using System.IO;
 
 [System.Serializable]
-public class Quest
-{
-    [Header("NPC_Text")]
-    public string title;
+public class Quest {
+    [Header("NPC_Text")] public string title;
     public string description;
     public string question;
     public string thanks;

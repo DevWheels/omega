@@ -1,36 +1,29 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExplosionAroundPlayerSkill : Skill {
     
-    private PlayerStats playerStats;
-    private GameObject projectilePrefab;
-    private Transform SpawnPoint;
-    
-    public ExplosionAroundPlayerSkill(PlayerStats playerStats,SkillConfig skillConfig)
-    {
-        this.playerStats = playerStats;
-        this.skillConfig = skillConfig;
-        projectilePrefab = skillConfig.ProjectilePrefab;
-        SpawnPoint = this.playerStats.transform;
-    }
-    public override void Activate()
-    {
-        GameObject Explosion = Object.Instantiate(
-            projectilePrefab,
-            SpawnPoint.position,
-            SpawnPoint.rotation
+    public ExplosionAroundPlayerSkill(SkillConfig skillConfig, PlayerSkillController playerController) : base(skillConfig,playerController) {
+  
 
+
+
+    }
+
+    public override void Activate() {
+        var explosion = Object.Instantiate(
+            skillConfig.ProjectilePrefab,
+            playerController.PlayerStats.transform.position,
+            playerController.PlayerStats.transform.rotation
         );
-        Explosion.AddComponent<ExplosionAroundPlayerProjectile>();
+        explosion.Init(playerController.gameObject,skillConfig.Damage, skillConfig.ProjectileSpeed,skillConfig.ProjectileLifetime);
     }
 
-    public override void Upgrade()
-    {
+    public override void Upgrade() {
         throw new System.NotImplementedException();
     }
 
-    public override void Deactivate()
-    {
+    public override void Deactivate() {
         throw new System.NotImplementedException();
     }
 }

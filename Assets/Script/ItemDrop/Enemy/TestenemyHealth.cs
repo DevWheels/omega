@@ -16,7 +16,8 @@ public class TestenemyHealth : MonoBehaviour
     {
         _currentHealth = _maxHealth;
         if (_playerStats == null)
-            _playerStats = PlayerStats.Instance; 
+            _playerStats = PlayerStats.Instance;
+        _playerStats = FindAnyObjectByType<PlayerStats>();
     }
 
     public void TakeDamage(int damage)

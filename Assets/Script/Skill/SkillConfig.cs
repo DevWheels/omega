@@ -1,17 +1,33 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Skill", menuName = "Skill")]
+[CreateAssetMenu(fileName = "Skill", menuName = "Skill/SkillConfig")]
 public class SkillConfig : ScriptableObject {
     public string Name;
+    [TextArea]
     public string Description;
-    
-    public Transform SpawnPoint;
-    public GameObject ProjectilePrefab;
-
     public Sprite Icon;
-    public float Cooldown { get; set; }
-    public int ManaCost { get; set; }
-    public int Level { get; set; }
-    public bool IsPassive { get; set; }
-
+    
+    [Header("Skill Type")]
+    public bool IsPassive;
+    public SkillType SkillType;
+    
+    [Header("Passive Settings")]
+    public int PercentageBuff;
+    
+    [Header("Active Settings")]
+    public int Damage;
+    public int ProjectileSpeed;
+    [Tooltip("Cooldown in seconds")]
+    public int Cooldown;
+    public int ProjectileLifetime;
+    public ProjectileBase ProjectilePrefab;
+}
+[System.Serializable]
+public enum SkillType {
+    FireBallSkill,
+    ExplosionAroundPlayerSkill,
+    ManaIncreaseSkill,
+    SpeedIncreaseSkill,
+    
 }
