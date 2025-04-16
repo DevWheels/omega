@@ -1144,6 +1144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1285411575813866912, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
+      propertyPath: port
+      value: 7770
+      objectReference: {fileID: 0}
     - target: {fileID: 8565215977007170163, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: m_Name
       value: NetworkManager
