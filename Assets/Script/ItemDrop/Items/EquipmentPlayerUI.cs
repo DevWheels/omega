@@ -7,9 +7,6 @@ public class EquipmentPlayerUI : MonoBehaviour{
                 PlayerEquipment.Instance.PlayerInventory.FindAll((e) => e.itemType == ItemType.Armor);
             foreach (var item in equipmentItems) {
                 Debug.Log(item.name);
-                if (item.name == "FireStuff") {
-                    SkillsTable.Instance.SkillConfigs.Add(item.itemSkills[0]);
-                }
             }
         }
 
