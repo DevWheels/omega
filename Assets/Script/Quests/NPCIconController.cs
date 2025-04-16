@@ -1,7 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UIElements;
-
 
 public class NPCIconController : MonoBehaviour {
     public Sprite Icon;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UseOfItems : MonoBehaviour
@@ -10,7 +8,7 @@ public class UseOfItems : MonoBehaviour
     private void Start()
     {
         instance = this;
-        playerStats = FindObjectOfType<PlayerStats>(); 
+        playerStats = FindAnyObjectByType<PlayerStats>(); 
     }
 
     public void Use(ItemConfig itemConfig)

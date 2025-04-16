@@ -1,5 +1,3 @@
-using UnityEditor;
-
 public static class SkillFactory {
     public static Skill Create(SkillConfig skillConfig,PlayerSkillController skillController) {
         switch (skillConfig.SkillType) {

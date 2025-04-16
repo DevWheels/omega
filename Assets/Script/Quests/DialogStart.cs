@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using Mirror;
 
@@ -16,7 +12,7 @@ public class DialogStart : NetworkBehaviour {
     private QuestManager questManager;
 
     private void Start() {
-        questManager = FindObjectOfType<QuestManager>();
+        questManager = FindAnyObjectByType<QuestManager>();
         quest = questManager.quests.Find(q => q.title == title);
     }
 
@@ -39,7 +35,7 @@ public class DialogStart : NetworkBehaviour {
         questManager.playerStats = collider.GetComponent<PlayerStats>();
         player = collider.GetComponent<PlayerStats>();
         questManager.LoadAllQuests();
-        QuestManager questmanager = FindObjectOfType<QuestManager>();
+        QuestManager questmanager = FindAnyObjectByType<QuestManager>();
         Quest quest = questmanager.quests.Find(q => q.title == title);
 
         if (collider.CompareTag("Player") && !quest.isCompleted) {

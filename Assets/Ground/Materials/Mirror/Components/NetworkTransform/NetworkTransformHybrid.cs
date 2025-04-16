@@ -7,9 +7,8 @@
 // => which means we don't need teleport detection either
 //
 // several functions are virtual in case someone needs to modify a part.
-using System;
+
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Mirror

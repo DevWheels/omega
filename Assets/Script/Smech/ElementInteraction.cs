@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class ElementInteraction : MonoBehaviour
 {
-    public GameObject firePrefab; // Префаб огня
-    public GameObject icePrefab; // Префаб льда
-    public GameObject waterPrefab; // Префаб воды
+    public GameObject firePrefab; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    public GameObject icePrefab; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    public GameObject waterPrefab; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
-    private GameObject currentWater; // Ссылка на текущий префаб воды
+    private GameObject currentWater; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
     void Update()
     {
@@ -18,7 +15,7 @@ public class ElementInteraction : MonoBehaviour
 
     private void CheckElementInteractions()
     {
-        // Получаем все объекты в сцене
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
         GameObject[] fireObjects = GameObject.FindGameObjectsWithTag("Fire");
         GameObject[] iceObjects = GameObject.FindGameObjectsWithTag("Ice");
 
@@ -26,7 +23,7 @@ public class ElementInteraction : MonoBehaviour
         {
             foreach (GameObject ice in iceObjects)
             {
-                // Проверяем расстояние между огнем и льдом
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
                 if (Vector3.Distance(fire.transform.position, ice.transform.position) <= 0.5f)
                 {
                     CreateWaterAtInteractionPoint(fire.transform.position, ice.transform.position);
@@ -37,36 +34,36 @@ public class ElementInteraction : MonoBehaviour
 
     private void CreateWaterAtInteractionPoint(Vector3 firePosition, Vector3 icePosition)
     {
-        // Если вода уже создана, выходим
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (currentWater != null)
         {
             return;
         }
 
-        // Находим среднюю позицию между огнем и льдом
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
         Vector3 waterPosition = (firePosition + icePosition) / 2;
 
-        // Создаем префаб воды
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         currentWater = Instantiate(waterPrefab, waterPosition, Quaternion.identity);
 
-        // Удаляем огонь и лед по тегам
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         GameObject fireObject = GameObject.FindGameObjectWithTag("Fire");
         GameObject iceObject = GameObject.FindGameObjectWithTag("Ice");
 
         if (fireObject != null)
         {
-            Destroy(fireObject); // Удаляем объект огня
+            Destroy(fireObject); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         }
 
         if (iceObject != null)
         {
-            Destroy(iceObject); // Удаляем объект льда
+            Destroy(iceObject); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         }
     }
 
     public void RemoveWater()
     {
-        // Удаляем префаб воды, если он существует
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (currentWater != null)
         {
             Destroy(currentWater);

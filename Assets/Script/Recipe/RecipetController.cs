@@ -24,7 +24,7 @@ public class RecipetController : MonoBehaviour
         // Находим панель деталей (можно заменить на ссылку через инспектор)
         if (detailsPanel == null)
         {
-            detailsPanel = FindObjectOfType<RecipeDetailsPanel>(true);
+            detailsPanel = FindAnyObjectByType<RecipeDetailsPanel>(FindObjectsInactive.Include);
         }
 
         // Защита от null reference

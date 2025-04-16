@@ -1,5 +1,4 @@
 using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(SkillConfig))]
 public class SkillConfigEditor : Editor

@@ -11,7 +11,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace Edgegap

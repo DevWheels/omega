@@ -1,5 +1,5 @@
 using System;
-using UnityEngine;
+
 [Serializable]
 public class ItemData {
     public PickItemType Type;

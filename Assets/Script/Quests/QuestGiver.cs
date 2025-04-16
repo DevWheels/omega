@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestGiver : MonoBehaviour {
@@ -6,7 +5,7 @@ public class QuestGiver : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            QuestManager questManager = FindObjectOfType<QuestManager>();
+            QuestManager questManager = FindAnyObjectByType<QuestManager>();
             questManager.CompleteQuest(questTitle);
         }
     }

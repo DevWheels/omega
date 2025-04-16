@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SkillTree {
     public List<Skill> AvailableSkills { get; private set; } //Все навыки которые есть в игре

@@ -1,5 +1,3 @@
-using UnityEngine;
-using UnityEngine.UIElements;
 [System.Serializable]
 public abstract class Skill {
     public SkillConfig skillConfig { get; set; }

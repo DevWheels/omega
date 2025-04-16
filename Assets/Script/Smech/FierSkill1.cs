@@ -1,51 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
 public class FierSkil1 : MonoBehaviour
 {
-    public Tilemap tilemap; // Ссылка на ваш тайлмап
-    public GameObject prefabToPlace; // Префаб, который будет устанавливаться (например, земля)
-    public GameObject highlightPrefab; // Префаб для подсветки тайла
-    private GameObject highlightInstance; // Экземпляр подсветки
-    private Vector3Int currentCellPosition; // Текущая позиция тайла
-    public Vector2Int offset; // Смещение для изменения тайлов
-    private float lastChangeTime; // Время последнего изменения тайлов
-    public float changeInterval = 0.1f; // Интервал между изменениями тайлов
-    public float prefabDuration = 5f; // Время, через которое префаб исчезнет
-    private bool isButtonActive = false; // Состояние кнопки
-    // Публичное поле для настройки значения z
-    public float mouseWorldZPosition = 1.0f; // Значение z для позиционирования мыши
-    public TileBase stoneTile; // Тайл льда
-    public TileBase fireTile; // Тайл огня
-    public TileBase waterTile; // Тайл воды
-    // Словарь для хранения оригинальных тайлов
+    public Tilemap tilemap; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public GameObject prefabToPlace; // пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ)
+    public GameObject highlightPrefab; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    private GameObject highlightInstance; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private Vector3Int currentCellPosition; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    public Vector2Int offset; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    private float lastChangeTime; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public float changeInterval = 0.1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public float prefabDuration = 5f; // пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private bool isButtonActive = false; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ z
+    public float mouseWorldZPosition = 1.0f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ z пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    public TileBase stoneTile; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    public TileBase fireTile; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    public TileBase waterTile; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private Dictionary<Vector3Int, TileBase> originalTiles = new Dictionary<Vector3Int, TileBase>();
     void Start()
     {
-        highlightInstance = Instantiate(highlightPrefab); // Создаем экземпляр подсветки
-        highlightInstance.SetActive(false); // Скрываем подсветку по умолчанию
+        highlightInstance = Instantiate(highlightPrefab); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        highlightInstance.SetActive(false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     void Update()
     {
-        // Переключение состояния кнопки с помощью клавиши, например, "Space"
-        if (Input.GetKeyDown(KeyCode.Alpha2)) // Замените на нужную клавишу
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, "Space"
+        if (Input.GetKeyDown(KeyCode.Alpha2)) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         {
-            ToggleButton(); // Переключаем состояние
+            ToggleButton(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
-        // Если кнопка не активна, скрываем подсветку
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (!isButtonActive)
         {
             highlightInstance.SetActive(false);
-            return; // Выходим из метода
+            return; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
-        if (!isButtonActive) return; // Если кнопка не активна, выходим из метода
+        if (!isButtonActive) return; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         Vector3 mouseScreenPosition = Input.mousePosition;
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
-        mouseWorldPosition.z = mouseWorldZPosition; // Используем значение из инспектора
+        mouseWorldPosition.z = mouseWorldZPosition; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Vector3Int cellPosition = tilemap.WorldToCell(mouseWorldPosition);
 
         if (tilemap.HasTile(cellPosition))
@@ -59,21 +58,21 @@ public class FierSkil1 : MonoBehaviour
             highlightInstance.SetActive(false);
         }
 
-        // Проверяем, зажата ли левая кнопка мыши
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (Input.GetMouseButton(0) && highlightInstance.activeSelf)
         {
-            // Проверяем, прошло ли достаточно времени с последнего изменения
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if (Time.time - lastChangeTime >= changeInterval)
             {
                 ChangeSoilTilesInArea(currentCellPosition, offset);
-                lastChangeTime = Time.time; // Обновляем время последнего изменения
+                lastChangeTime = Time.time; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             }
         }
     }
-    public void ToggleButton() // Метод для переключения состояния кнопки
+    public void ToggleButton() // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     {
-        isButtonActive = !isButtonActive; // Переключаем состояние 
-        highlightInstance.SetActive(isButtonActive); // Устанавливаем состояние подсветки в зависимости от кнопки
+        isButtonActive = !isButtonActive; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+        highlightInstance.SetActive(isButtonActive); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
     void ChangeSoilTilesInArea(Vector3Int centerPosition, Vector2Int offset)
     {
@@ -81,27 +80,27 @@ public class FierSkil1 : MonoBehaviour
         {
             for (int y = 0; y < 2; y++)
             {
-                // Применяем смещение к позиции
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 Vector3Int position = new Vector3Int(centerPosition.x + x + offset.x, centerPosition.y + y + offset.y, centerPosition.z);
-                // Проверяем, есть ли на позиции тайл
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 if (tilemap.HasTile(position) && tilemap.GetTile(position) is TileBase)
                 {
                     TileBase originalTile = tilemap.GetTile(position);
 
-                    // Условие для исключения огня и воды
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
                     if (originalTile != fireTile && originalTile != waterTile && originalTile != stoneTile)
                     {
-                        originalTiles[position] = originalTile; // Сохраняем оригинальный тайл в словаре
+                        originalTiles[position] = originalTile; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                         Debug.Log($"Original tile saved at {position}: {originalTile}");
                     }
 
                  
                 }
 
-                // Устанавливаем новый тайл
-                tilemap.SetTile(position, fireTile); // Устанавливаем новый тайл, выбранный в инспекторе
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+                tilemap.SetTile(position, fireTile); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-                // Проверка на соседние тайлы для создания воды
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 CheckForWaterCreation(position);
             }
         }
@@ -111,12 +110,12 @@ public class FierSkil1 : MonoBehaviour
         bool hasIce = false;
         bool hasFire = false;
 
-        // Проверяем соседние позиции
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Vector3Int[] neighborPositions = {
-            new Vector3Int(position.x - 1, position.y, position.z), // Слева
-            new Vector3Int(position.x + 1, position.y, position.z), // Справа
-            new Vector3Int(position.x, position.y - 1, position.z), // Снизу
-            new Vector3Int(position.x, position.y + 1, position.z)  // Сверху
+            new Vector3Int(position.x - 1, position.y, position.z), // пїЅпїЅпїЅпїЅпїЅ
+            new Vector3Int(position.x + 1, position.y, position.z), // пїЅпїЅпїЅпїЅпїЅпїЅ
+            new Vector3Int(position.x, position.y - 1, position.z), // пїЅпїЅпїЅпїЅпїЅ
+            new Vector3Int(position.x, position.y + 1, position.z)  // пїЅпїЅпїЅпїЅпїЅпїЅ
         };
 
         foreach (var neighbor in neighborPositions)
@@ -126,35 +125,35 @@ public class FierSkil1 : MonoBehaviour
                 TileBase tile = tilemap.GetTile(neighbor);
                 if (tile == waterTile)
                 {
-                    hasIce = true; // Найден тайл льда
+                    hasIce = true; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 }
                 else if (tile == fireTile)
                 {
-                    hasFire = true; // Найден тайл огня
+                    hasFire = true; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 }
             }
         }
 
-        // Если оба тайла найдены, устанавливаем тайл воды
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (hasIce && hasFire)
         {
-            tilemap.SetTile(position, stoneTile); // Устанавливаем тайл воды
+            tilemap.SetTile(position, stoneTile); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         }
         else
         {
-            // Запускаем корутину для исчезновения тайла
-            StartCoroutine(RestoreTileAfterDelay(position, 3f)); // Задержка 3 секунды перед удалением
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+            StartCoroutine(RestoreTileAfterDelay(position, 3f)); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
     private IEnumerator RestoreTileAfterDelay(Vector3Int position, float delay)
     {
-        yield return new WaitForSeconds(delay); // Ждем указанное время
+        yield return new WaitForSeconds(delay); // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-        // Проверяем, является ли тайл водой
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (originalTiles.TryGetValue(position, out TileBase originalTile))
         {
-            tilemap.SetTile(position, originalTile); // Восстанавливаем оригинальный тайл (воду)
-            originalTiles.Remove(position); // Удаляем запись из словаря
+            tilemap.SetTile(position, originalTile); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ)
+            originalTiles.Remove(position); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 }

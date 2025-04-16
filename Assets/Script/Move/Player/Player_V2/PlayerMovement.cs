@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 public class PlayerMovement : NetworkBehaviour
 {
     public float moveSpeed = 5f;
-    public float stairSpeedReductionFactor = 0.25f; // Уменьшенный фактор уменьшения скорости на лестнице
-    public float ladderClimbSpeed; // Скорость подъема по лестнице (будет вычисляться)
+    public float stairSpeedReductionFactor = 0.25f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float ladderClimbSpeed; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
     public Rigidbody2D rb;
     public Animator animator;
 
-    private bool isOnStairs = false; // Флаг, указывающий, находится ли игрок на лестнице
-    private Vector2 movement; // Объявляем переменную на уровне класса
+    private bool isOnStairs = false; // пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private Vector2 movement; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private Camera mainCam;
 
     private void Awake()
@@ -21,58 +19,58 @@ public class PlayerMovement : NetworkBehaviour
 
     void Start()
     {
-        // Устанавливаем начальную скорость подъема по лестнице
-        ladderClimbSpeed = moveSpeed * stairSpeedReductionFactor; // Уменьшаем скорость на фактор
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        ladderClimbSpeed = moveSpeed * stairSpeedReductionFactor; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     void Update()
     {
         if (!isLocalPlayer) return;
-        // Обнуляем вектор движения
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         movement = Vector2.zero;
 
-        // Проверяем нажатие клавиш и задаем направление движения
-        if (Input.GetKey(KeyCode.W)) // Вверх
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        if (Input.GetKey(KeyCode.W)) // пїЅпїЅпїЅпїЅпїЅ
         {
             if (isOnStairs)
             {
-                movement.y += 1; // Увеличиваем y при подъеме
+                movement.y += 1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ y пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             }
             else
             {
-                movement.y += 1; // Движение вверх на земле
+                movement.y += 1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             }
         }
-        if (Input.GetKey(KeyCode.S)) // Вниз
+        if (Input.GetKey(KeyCode.S)) // пїЅпїЅпїЅпїЅ
         {
             if (isOnStairs)
             {
-                movement.y -= 1; // Уменьшаем y при спуске
+                movement.y -= 1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ y пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             }
             else
             {
-                movement.y -= 1; // Движение вниз на земле
+                movement.y -= 1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             }
         }
-        if (Input.GetKey(KeyCode.A)) // Влево
+        if (Input.GetKey(KeyCode.A)) // пїЅпїЅпїЅпїЅпїЅ
         {
             movement.x -= 1;
         }
-        if (Input.GetKey(KeyCode.D)) // Вправо
+        if (Input.GetKey(KeyCode.D)) // пїЅпїЅпїЅпїЅпїЅпїЅ
         {
             movement.x += 1;
         }
 
-        // Нормализуем вектор движения для равномерной скорости
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (movement.magnitude > 1)
         {
             movement.Normalize();
         }
 
-        // Умножаем на скорость перемещения
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         movement *= moveSpeed;
 
-        // Устанавливаем параметры анимации
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
@@ -91,19 +89,19 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        // Определяем скорость движения
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         float currentSpeed = isOnStairs ? ladderClimbSpeed : moveSpeed;
 
-        // Двигаем игрока
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         Vector2 moveDirection = movement.normalized * currentSpeed * Time.fixedDeltaTime;
 
-        // Двигаем игрока
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         rb.MovePosition(rb.position + moveDirection);
         CameraMovement();
 
     }
 
-    // Метод для установки флага, указывающего, находится ли игрок на лестнице
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void SetOnStairs(bool onStairs)
     {
         isOnStairs = onStairs;

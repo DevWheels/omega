@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Mirror;
-using UnityEngine;
 
 public class PlayerEquipment : NetworkBehaviour {
         public List<EquipmentItemConfig> PlayerInventory;

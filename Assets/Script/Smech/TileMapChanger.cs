@@ -1,25 +1,26 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI; // Не забудьте добавить этот using для работы с UI
+
+// пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ using пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ UI
 public class MousePositionHandler : MonoBehaviour
 {
-    public Tilemap tilemap; // Ссылка на ваш тайлмап
-    public GameObject prefabToPlace; // Префаб, который будет устанавливаться (например, снег)
-    public GameObject highlightPrefab; // Префаб для подсветки тайла
-    private GameObject highlightInstance; // Экземпляр подсветки
-    private Vector3Int currentCellPosition; // Текущая позиция тайла
-    public Vector2Int offset; // Смещение для изменения тайлов
-    private float lastChangeTime; // Время последнего изменения тайлов
-    public float changeInterval = 0.1f; // Интервал между изменениями тайлов
-    private bool isButtonActive = false; // Состояние кнопки
+    public Tilemap tilemap; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public GameObject prefabToPlace; // пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ)
+    public GameObject highlightPrefab; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    private GameObject highlightInstance; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private Vector3Int currentCellPosition; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    public Vector2Int offset; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    private float lastChangeTime; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public float changeInterval = 0.1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    private bool isButtonActive = false; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     void Start()
     {
-        highlightInstance = Instantiate(highlightPrefab); // Создаем экземпляр подсветки
-        highlightInstance.SetActive(false); // Скрываем подсветку по умолчанию
+        highlightInstance = Instantiate(highlightPrefab); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        highlightInstance.SetActive(false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
     void Update()
     {
-        if (!isButtonActive) return; // Если кнопка не активна, выходим из метода
+        if (!isButtonActive) return; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         Vector3 mouseScreenPosition = Input.mousePosition;
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
         mouseWorldPosition.z = 0;
@@ -34,20 +35,20 @@ public class MousePositionHandler : MonoBehaviour
         {
             highlightInstance.SetActive(false);
         }
-        // Проверяем, зажата ли левая кнопка мыши
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         if (Input.GetMouseButton(0) && highlightInstance.activeSelf)
         {
-            // Проверяем, прошло ли достаточно времени с последнего изменения
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if (Time.time - lastChangeTime >= changeInterval)
             {
                 ChangeTilesInArea(currentCellPosition, offset);
-                lastChangeTime = Time.time; // Обновляем время последнего изменения
+                lastChangeTime = Time.time; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             }
         }
     }
-    public void ToggleButton() // Метод для переключения состояния кнопки
+    public void ToggleButton() // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     {
-        isButtonActive = !isButtonActive; // Переключаем состояние
+        isButtonActive = !isButtonActive; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
     void ChangeTilesInArea(Vector3Int centerPosition, Vector2Int offset)
     {
@@ -55,20 +56,20 @@ public class MousePositionHandler : MonoBehaviour
         {
             for (int y = 0; y < 2; y++)
             {
-                // Применяем смещение к позиции
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 Vector3Int position = new Vector3Int(centerPosition.x + x + offset.x, centerPosition.y + y + offset.y, centerPosition.z);
-                // Проверяем, есть ли на позиции вода
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 Collider2D hit = Physics2D.OverlapPoint(tilemap.GetCellCenterWorld(position));
                 if (hit != null && hit.CompareTag("Water"))
                 {
-                    // Удаляем тайл, если он существует
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     if (tilemap.HasTile(position))
                     {
-                        tilemap.SetTile(position, null); // Удаляем тайл
+                        tilemap.SetTile(position, null); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                     }
-                    // Устанавливаем префаб на ту же позицию
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     Vector3 worldPosition = tilemap.GetCellCenterWorld(position);
-                    Instantiate(prefabToPlace, worldPosition, Quaternion.identity); // Устанавливаем префаб
+                    Instantiate(prefabToPlace, worldPosition, Quaternion.identity); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 }
             }
         }

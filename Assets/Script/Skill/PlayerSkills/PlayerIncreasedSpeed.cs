@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PlayerIncreasedSpeed : Skill {
 
     private float baseSpeed;

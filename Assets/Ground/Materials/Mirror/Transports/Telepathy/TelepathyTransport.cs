@@ -1,7 +1,6 @@
 // wraps Telepathy for use as HLAPI TransportLayer
 using System;
 using System.Net;
-using System.Net.Sockets;
 using UnityEngine;
 
 // Replaced by Kcp November 2020

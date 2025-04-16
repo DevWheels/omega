@@ -1,28 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Kdr : MonoBehaviour
 {
-    public Button skillButton; // Ссылка на кнопку навыка
-    public Image cooldownOverlayImage; // Ссылка на изображение с визуальным эффектом охлаждения
+    public Button skillButton; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public Image cooldownOverlayImage; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    private bool _isCooldown = false; // Флаг доступности навыка
-    private float lastActivationTime; // Время последнего использования
+    private bool _isCooldown = false; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    private float lastActivationTime; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     private void Start()
     {
-        // Подключаем методы к кнопке навыка
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         skillButton.onClick.AddListener(ActivateSkill);
     }
 
     private void Update()
     {
-        // Если навык находится на кулдауне, то меняем прозрачность
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (_isCooldown)
         {
-            float cooldown = 10f; // Время КД в секундах
+            float cooldown = 10f; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             float timeLeft = cooldown - (Time.time - lastActivationTime);
 
             if (timeLeft <= 0)
@@ -30,7 +28,7 @@ public class Kdr : MonoBehaviour
                 _isCooldown = false;
                 cooldownOverlayImage.fillAmount = 0f;
                 cooldownOverlayImage.gameObject.SetActive(false);
-                skillButton.interactable = true; // Включаем кнопку снова
+                skillButton.interactable = true; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                 return;
             }
 
@@ -40,11 +38,11 @@ public class Kdr : MonoBehaviour
 
     private void ActivateSkill()
     {
-        if (_isCooldown) return; // Если навык на КД - то мы не можем его использовать
-        _isCooldown = true; // Навык в КД
-        lastActivationTime = Time.time; // Запоминаем время последнего использования
-        cooldownOverlayImage.gameObject.SetActive(true); // Отображаем визуальный эффект КД
+        if (_isCooldown) return; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ - пїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        _isCooldown = true; // пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ
+        lastActivationTime = Time.time; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        cooldownOverlayImage.gameObject.SetActive(true); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 
-        skillButton.interactable = false; // Отключаем кнопку навыка
+        skillButton.interactable = false; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
 }

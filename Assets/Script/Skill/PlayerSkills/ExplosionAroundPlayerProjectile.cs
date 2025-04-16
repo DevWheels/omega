@@ -1,7 +1,5 @@
-using System;
 using Mirror;
 using UnityEngine;
-using System.Collections;
 
 public class ExplosionAroundPlayerProjectile : ProjectileBase {
     [SyncVar] private int _projectileDamage;

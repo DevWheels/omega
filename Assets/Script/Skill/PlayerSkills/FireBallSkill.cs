@@ -1,6 +1,4 @@
 using Mirror;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public class FireBallSkill : Skill {
     public FireBallSkill(SkillConfig skillConfig,PlayerSkillController playerController) : base(skillConfig,playerController) { }

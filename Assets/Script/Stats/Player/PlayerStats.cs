@@ -1,13 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using UnityEngine.Tilemaps;
-using System.IO;
 using Mirror;
 
 
