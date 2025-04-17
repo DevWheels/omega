@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
     public Transform SlotsParent;
     public bool isOpened;
     private InventorySlot[] inventorySlots = new InventorySlot[24];
-
+    public GameObject Player;
     private void Start()
     {
         instance = this;

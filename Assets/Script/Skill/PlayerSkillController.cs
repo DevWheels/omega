@@ -24,6 +24,11 @@ public class PlayerSkillController : MonoBehaviour {
             _skills.Add(skill);
         }
 
+        SortActiveOrPassiveSkill();
+
+    }
+
+    private void SortActiveOrPassiveSkill() {
         foreach (var skill in _skills) {
             if (skill.skillConfig.IsPassive) {
                 Passive_Skills.Add(skill);
@@ -32,8 +37,12 @@ public class PlayerSkillController : MonoBehaviour {
             SkillManager.AddSkill(skill);
         }
     }
-
-    
+    public void AddNewSkillFromItem(Skill skill) {
+        _skills.Add(skill);
+        SkillManager.AddSkill(skill);
+        SortActiveOrPassiveSkill();
+        Debug.Log(skill.skillConfig.Name);
+    }
     private void FindComponents() {
         SkillManager = gameObject.AddComponent<SkillManager>();
         SkillTree = new SkillTree();
@@ -48,6 +57,8 @@ public class PlayerSkillController : MonoBehaviour {
     }
 
     private void UseSkill() {
+        if (Active_Skills == null || Active_Skills.Count == 0) { return; }
+        
         if (Input.GetKey(KeyCode.Q)) {
             SkillManager.UseSkill(Active_Skills[0]);
         }
