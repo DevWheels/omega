@@ -11,10 +11,11 @@ public class ItemInfo : MonoBehaviour
     private Image Icon;
     private Button ExitButton;
     private Button UseButton;
+    private Button EquipButton;
     private Button DropButton;
     private ItemConfig _infoItemConfig;
     private InventorySlot CurrenSlot;
-
+    
     private void Start()
     { 
         instance = this;
@@ -26,11 +27,13 @@ public class ItemInfo : MonoBehaviour
         ExitButton = transform.GetChild(3).GetComponent<Button>();
         UseButton = transform.GetChild(4).GetComponent<Button>();
         DropButton = transform.GetChild(5).GetComponent<Button>();
+        EquipButton = transform.GetChild(6).GetComponent<Button>();
 
 
         ExitButton.onClick.AddListener(Close);
         UseButton.onClick.AddListener(Use);
         DropButton.onClick.AddListener(Drop);
+        EquipButton.onClick.AddListener(Equip);
     }
     public void ChangeInfo(ItemConfig itemConfig)
     { 
@@ -57,6 +60,12 @@ public class ItemInfo : MonoBehaviour
         item.gameObject.transform.position = DropPos;
         Close();
         CurrenSlot.ClearSlot();
+    }
+
+    public void Equip() {
+        var equipment = CurrenSlot.slotItemConfig;
+        if (equipment is not EquipmentItemConfig config) { return; }
+            PlayerEquipment.Instance.WearItem(config);
     }
 
     public void Open(ItemConfig itemConfig,ItemData itemData ,InventorySlot currentSlot)

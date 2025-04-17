@@ -25,6 +25,8 @@ MonoBehaviour:
   itemName: Boots
   itemType: 1
   Prefab: {fileID: 828090784902224273, guid: 2c7f5901471a5bd4c8cb62932edc5e06, type: 3}
+  itemSkills:
+  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
   dRankStats:
     health: {x: 1, y: 1}
     armor: {x: 1, y: 1}

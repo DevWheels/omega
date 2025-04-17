@@ -28,4 +28,7 @@ public enum SkillType {
     ExplosionAroundPlayerSkill,
     ManaIncreaseSkill,
     SpeedIncreaseSkill,
+    FireBallSkillSmall,
+    HealingSkill,
+    
 }
