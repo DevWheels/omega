@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 public class ExplosionAroundPlayerSkill : Skill {
@@ -8,13 +9,16 @@ public class ExplosionAroundPlayerSkill : Skill {
 
 
     }
-
+    [Command]
     public override void Activate() {
         var explosion = Object.Instantiate(
             skillConfig.ProjectilePrefab,
             playerController.PlayerStats.transform.position,
             playerController.PlayerStats.transform.rotation
         );
+        
+        NetworkServer.Spawn(explosion.gameObject);
+        
         explosion.Init(playerController.gameObject,skillConfig.Damage, skillConfig.ProjectileSpeed,skillConfig.ProjectileLifetime);
     }
 
