@@ -1,5 +1,5 @@
 [System.Serializable]
-public abstract class Skill {
+public abstract class Skill  {
     public SkillConfig skillConfig { get; set; }
     public PlayerSkillController playerController { get; set; }
 

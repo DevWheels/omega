@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,9 +17,6 @@ public class PlayerEquipment : NetworkBehaviour {
         private void Start() {
                 _panel = GameObject.Find("Left");
                 _imageForArmor = _panel.transform.GetChild(0).transform.GetChild(0).gameObject;
-                // Debug.Log(_panel.transform.GetChild(0));
-                // Debug.Log(_panel.transform.GetChild(0).transform.GetChild(0).GetComponent<UnityEngine.UI.Image>());
-
         }
 
         public List<EquipmentItemConfig> GetPlayerInventory() {
@@ -26,20 +24,26 @@ public class PlayerEquipment : NetworkBehaviour {
         }
 
         public void WearItem(EquipmentItemConfig equipmentItemConfig) {
-                PlayerInventory.Add(equipmentItemConfig);
-                SetEquipmentImage(equipmentItemConfig);
-                
                 if (equipmentItemConfig.itemSkills.Count < 0) {
                         return;
                 }
                 var skillController = Inventory.instance.Player.GetComponent<PlayerSkillController>();
-                
+                var resSkills = new List<SkillConfig>();
                 foreach (var skillIndex in equipmentItemConfig.itemSkills) {
+                        resSkills.Add(skillIndex);
+                }
+
+                resSkills = resSkills.DistinctBy(s => s.Name).ToList();
+
+                foreach (var skillIndex in resSkills) {
                         var skill = SkillFactory.Create(skillIndex, skillController);
                         skillController.AddNewSkillFromItem(skill);
+                        
+                        PlayerInventory.Add(equipmentItemConfig);
                 }
+                PlayerInventory = PlayerInventory.DistinctBy(s => s.Name).ToList();
                 
-
+                SetEquipmentImage(equipmentItemConfig);
         }
 
         private void SetEquipmentImage(EquipmentItemConfig equipmentItemConfig) {

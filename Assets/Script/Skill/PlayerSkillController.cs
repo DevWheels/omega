@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour {
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
     public List<Skill> Passive_Skills { get; } = new List<Skill>();
-    public List<Skill> Active_Skills { get; } = new List<Skill>();
+    public List<Skill> Active_Skills { get; set; } = new List<Skill>();
 
     public PlayerStats PlayerStats {get; private set;}
     public PlayerMovement Playermovement{get; private set;}
@@ -15,7 +17,7 @@ public class PlayerSkillController : MonoBehaviour {
     private void Awake() {
         FindComponents();
 
-        CreateSkills();
+        // CreateSkills();
     }
 
     private void CreateSkills() {
@@ -35,13 +37,14 @@ public class PlayerSkillController : MonoBehaviour {
             }
             else { Active_Skills.Add(skill); }
             SkillManager.AddSkill(skill);
+            Active_Skills = Active_Skills.DistinctBy(e => e.skillConfig.Name).ToList();
         }
     }
     public void AddNewSkillFromItem(Skill skill) {
         _skills.Add(skill);
         SkillManager.AddSkill(skill);
+        
         SortActiveOrPassiveSkill();
-        Debug.Log(skill.skillConfig.Name);
     }
     private void FindComponents() {
         SkillManager = gameObject.AddComponent<SkillManager>();
@@ -61,7 +64,8 @@ public class PlayerSkillController : MonoBehaviour {
 
     private void UseSkill() {
         if (Active_Skills == null || Active_Skills.Count == 0) { return; }
-        
+
+
         if (Input.GetKey(KeyCode.Q)) {
             SkillManager.UseSkill(Active_Skills[0]);
         }
