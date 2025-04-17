@@ -14,7 +14,7 @@ public class ItemInfo : MonoBehaviour
     private Button EquipButton;
     private Button DropButton;
     private ItemConfig _infoItemConfig;
-    private InventorySlot CurrenSlot;
+    private InventorySlotView CurrenSlot;
     
     private void Start()
     { 
@@ -68,7 +68,7 @@ public class ItemInfo : MonoBehaviour
             PlayerEquipment.Instance.WearItem(config);
     }
 
-    public void Open(ItemConfig itemConfig,ItemData itemData ,InventorySlot currentSlot)
+    public void Open(ItemConfig itemConfig,ItemData itemData ,InventorySlotView currentSlot)
     { 
         ChangeInfo(itemConfig);
         _infoItemConfig = itemConfig;
@@ -76,6 +76,7 @@ public class ItemInfo : MonoBehaviour
         this.itemData = itemData;
         gameObject.transform.localScale = Vector3.one;
         UseButton.gameObject.SetActive(itemData.IsUsable);
+        EquipButton.gameObject.SetActive(!itemData.IsUsable);
     }
 
     public void Close() 

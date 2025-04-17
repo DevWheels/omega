@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
@@ -17,11 +18,17 @@ public class PlayerSkillController : NetworkBehaviour {
     public RegenerationController Regeneration{get; private set;}
 
     private List<Skill> _skills = new();
-    private bool _greenZone = true; // Добавляем булеву переменную (true - город, false - зона скиллов)
+    public bool GreenZone = true; // Добавляем булеву переменную (true - город, false - зона скиллов)
     private void Awake() {
         FindComponents();
-        _greenZone = true;
+        GreenZone = true;
         // CreateSkills();
+    }
+
+    private void Start() {
+        if (isLocalPlayer) {
+            InventoryManager.Instance.PlayerSkillController = this;
+        }
     }
 
     private void CreateSkills() {
@@ -63,9 +70,14 @@ public class PlayerSkillController : NetworkBehaviour {
         if (!isLocalPlayer) {
             return;
         }
-        if (!_greenZone)
-        {
+
+        if (!GreenZone) {
             UseSkill();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            GetComponent<PlayerUI>().UpdateUI();
+            InventoryManager.Instance.InventoryToggle(GetComponent<PlayerInventory>());
         }
     }
 
@@ -89,6 +101,6 @@ public class PlayerSkillController : NetworkBehaviour {
     }
 
     public void TeleportToArena() {
-        _greenZone = false;
+        GreenZone = false;
     }
 }

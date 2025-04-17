@@ -7,8 +7,8 @@ public class PickUpObject : MonoBehaviour
     {
         if (collision.CompareTag("Player")) {
             var itemBase = GetComponent<ItemBase>();
-            InventoryView.instance.PutInEmptySlot(itemBase.itemConfig,itemBase.itemData);
-            InventoryView.instance.Player = collision.gameObject;
+            var inventory = collision.gameObject.GetComponent<PlayerInventory>();
+            inventory.PutInEmptySlot(itemBase.itemConfig,itemBase.itemData);
             Destroy(gameObject);
         }
     }

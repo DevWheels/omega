@@ -1,31 +1,24 @@
 using UnityEngine;
 
-public class InventoryView : MonoBehaviour
-{
-    public static InventoryView instance;
-    public Transform SlotsParent;
-    public bool isOpened;
-    private InventorySlot[] inventorySlots = new InventorySlot[24];
-    public GameObject Player;
-    private void Start()
-    {
-        instance = this;
-        if (SlotsParent != null)
-        {
-            for (int i = 0; i < inventorySlots.Length; i++)
-            {
-                inventorySlots[i] = SlotsParent.GetChild(i).GetComponent<InventorySlot>();
+public class InventoryView : MonoBehaviour {
+    [SerializeField]
+    private InventorySlotView[] inventorySlots = new InventorySlotView[24];
+
+    public void SetData(PlayerInventory playerInventory) {
+        for (int index = 0; index < playerInventory.Slots.Count; index++) {
+            InventorySlot var = playerInventory.Slots[index];
+            if (var != null && var.ItemConfig != null) {
+                inventorySlots[index].PutInSlot(var.ItemConfig, var.ItemData);
+            } else {
+                inventorySlots[index].ClearSlot();
             }
         }
     }
 
-    public void PutInEmptySlot(ItemConfig itemConfig,ItemData itemData)
-    {
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            if (inventorySlots[i].slotItemConfig == null)
-            {
-                inventorySlots[i].PutInSlot(itemConfig,itemData); 
+    public void PutInEmptySlot(ItemConfig itemConfig, ItemData itemData) {
+        for (int i = 0; i < inventorySlots.Length; i++) {
+            if (inventorySlots[i].slotItemConfig == null) {
+                inventorySlots[i].PutInSlot(itemConfig, itemData);
                 return;
             }
         }

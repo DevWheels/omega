@@ -1,56 +1,42 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelManager : MonoBehaviour
-{
-    public GameObject[] panels; // Массив для хранения панелей
-    public Button[] buttons; // Массив для хранения кнопок
+public class PanelManager : MonoBehaviour {
+    public GameObject[] panels;
+    public Button[] buttons;
     private bool isOpened = false;
     private int lastOpened;
-    void Start()
-    {
-        // Привязываем методы к кнопкам
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            int index = i; // Локальная переменная для правильного доступа в лямбда-выражении
+
+    void Start() {
+        for (int i = 0; i < buttons.Length; i++) {
+            int index = i;
             buttons[i].onClick.AddListener(() => ShowPanel(index));
         }
 
-        // Деактивируем все панели, кроме первой
         //ShowPanel(0);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
 
-            if (!isOpened)
-            {
-                panels[lastOpened].transform.localScale = Vector3.one;
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            if (!isOpened) {
+                panels[lastOpened].gameObject.SetActive(true);
                 isOpened = true;
-            }
-            else
-            {
-                panels[lastOpened].transform.localScale = Vector3.zero;
+            } else {
+                panels[lastOpened].gameObject.SetActive(false);
                 isOpened = false;
             }
         }
     }
-    // Метод для активации нужной панели
-    public void ShowPanel(int panelIndex)
-    {
-        for (int i = 0; i < panels.Length; i++)
-        {
-            if (i == panelIndex)
-            {
-                panels[i].transform.localScale = Vector3.one;
+
+    public void ShowPanel(int panelIndex) {
+        for (int i = 0; i < panels.Length; i++) {
+            if (i == panelIndex) {
+                panels[i].gameObject.SetActive(true);
                 lastOpened = i;
+            } else {
+                panels[i].gameObject.SetActive(false);
             }
-            else
-            {
-                panels[i].transform.localScale = Vector3.zero;
-            }
-            //panels[i].SetActive(i == panelIndex); // Активируем нужную панель, остальные деактивируем
+            //panels[i].SetActive(i == panelIndex); 
         }
     }
 }

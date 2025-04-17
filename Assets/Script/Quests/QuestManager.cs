@@ -72,7 +72,7 @@ public class QuestManager : MonoBehaviour {
             requiredItems.Add(item);
         }
 
-        List<InventorySlot> slotsWithItems = new();
+        List<InventorySlotView> slotsWithItems = new();
 
         CheckThroughPlayerInventoryForItems(slotsWithItems);
 
@@ -83,7 +83,7 @@ public class QuestManager : MonoBehaviour {
         
         foreach (var requiredItem in requiredItems)
         {
-            List<InventorySlot> itemSlots = slotsWithItems.FindAll(slot => slot.slotItemConfig == requiredItem);
+            List<InventorySlotView> itemSlots = slotsWithItems.FindAll(slot => slot.slotItemConfig == requiredItem);
 
             if (itemSlots.Count < requiredItems.Count) {
                 allItemsAvailable = false;
@@ -106,7 +106,7 @@ public class QuestManager : MonoBehaviour {
             requiredItems.Add(item);
         }
 
-        List<InventorySlot> slotsWithItems = new();
+        List<InventorySlotView> slotsWithItems = new();
         int needToDelete = requiredItems.Count;
         int deleted = 0;
 
@@ -129,13 +129,13 @@ public class QuestManager : MonoBehaviour {
         }
     }
 
-    private void CheckThroughPlayerInventoryForItems(List<InventorySlot> slotsWithItems) {
+    private void CheckThroughPlayerInventoryForItems(List<InventorySlotView> slotsWithItems) {
         GameObject inventory = GameObject.Find("Slots_transform");
 
         // Проходим по всем слотам в инвентаре
         for (int i = 0; i < inventory.transform.childCount; i++) {
             Transform child = inventory.transform.GetChild(i);
-            InventorySlot slot = child.GetComponent<InventorySlot>();
+            InventorySlotView slot = child.GetComponent<InventorySlotView>();
 
             if (slot != null && slot.slotItemConfig != null) 
             {

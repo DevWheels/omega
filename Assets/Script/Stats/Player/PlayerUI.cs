@@ -2,152 +2,86 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-
 public class PlayerUI : MonoBehaviour {
-    //Временно public для будущей проверки в онлайне
-    [Header("Player Stats texts")] public TMP_Text hp_text;
-    public TMP_Text hp_text_inv;
-
-    public TMP_Text mana_text;
-    public TMP_Text mana_text_inv;
-
-    public TMP_Text armor_text;
-    public TMP_Text strength_text;
-    public TMP_Text sanity_text;
-    public TMP_Text agility_text;
-    public TMP_Text luck_text;
-    public TMP_Text speed_text;
-    public TMP_Text level_text;
-    public TMP_Text level_text_percent_for_new_level;
-    public TMP_Text ability_points_text;
-    public TMP_Text exp_text;
-
-    [Header("Player Stats UI buttons")] public GameObject strength_up;
-    public GameObject sanity_up;
-    public GameObject agility_up;
-    public GameObject luck_up;
-    public GameObject speed_up;
-
-    public Image healthBarFill;
-    public Image manahBarFill; 
-    public Image expBarFill; 
-
-    private PlayerStats playerStats;
-    private Find find => new();
+    private PlayerStats _playerStats;
 
     void Start() {
-        playerStats = GetComponent<PlayerStats>();
-        FindAllUI();
+        _playerStats = GetComponent<PlayerStats>();
+        UpdateUI();
+        //FindAllUI();
         // UpdateEverything();
     }
 
-
     public void UpdateUI() {
+        if (!_playerStats.isLocalPlayer) {
+            return;
+        }
 
         UpdateHealthBar();
         UpdateManaBar();
         UpdateEXPBar();
 
-        hp_text.text = $"{playerStats.CurrentlyHp}/{playerStats.MaxHp}";
+        UiContainer.Instance.hp_text.text = $"{_playerStats.CurrentlyHp}/{_playerStats.MaxHp}";
 
-        hp_text_inv.text = $"{playerStats.CurrentlyHp}/{playerStats.MaxHp}";
+        UiContainer.Instance.hp_text_inv.text = $"{_playerStats.CurrentlyHp}/{_playerStats.MaxHp}";
 
-        mana_text.text = $"{playerStats.CurrentlyMana} / {playerStats.MaxMana}";
-        mana_text_inv.text = $"{playerStats.CurrentlyMana} / {playerStats.MaxMana}";
+        UiContainer.Instance.mana_text.text = $"{_playerStats.CurrentlyMana} / {_playerStats.MaxMana}";
+        UiContainer.Instance.mana_text_inv.text = $"{_playerStats.CurrentlyMana} / {_playerStats.MaxMana}";
 
-        armor_text.text = $"{playerStats.Armor}";
+        UiContainer.Instance.armor_text.text = $"{_playerStats.Armor}";
 
-        level_text.text = $"{playerStats.Lvl}";
-        exp_text.text = $"Опыт: {playerStats.XpCurrently}/{playerStats.XpNeeded}";
+        UiContainer.Instance.level_text.text = $"{_playerStats.Lvl}";
+        UiContainer.Instance.exp_text.text = $"Опыт: {_playerStats.XpCurrently}/{_playerStats.XpNeeded}";
 
-        strength_text.text = $"{playerStats.Strength}";
-        sanity_text.text = $"{playerStats.Sanity}";
-        agility_text.text = $"{playerStats.Agility}";
-        luck_text.text = $"{playerStats.Luck}";
-        speed_text.text = $"{playerStats.Speed}";
+        UiContainer.Instance.strength_text.text = $"{_playerStats.Strength}";
+        UiContainer.Instance.sanity_text.text = $"{_playerStats.Sanity}";
+        UiContainer.Instance.agility_text.text = $"{_playerStats.Agility}";
+        UiContainer.Instance.luck_text.text = $"{_playerStats.Luck}";
+        UiContainer.Instance.speed_text.text = $"{_playerStats.Speed}";
 
-        if (playerStats.AbilityPoints > 0)
-            ability_points_text.text = $"Очки характеристиков: {playerStats.AbilityPoints}";
+        if (_playerStats.AbilityPoints > 0)
+            UiContainer.Instance.ability_points_text.text = $"Очки характеристиков: {_playerStats.AbilityPoints}";
         else
-            ability_points_text.text = "";
+            UiContainer.Instance.ability_points_text.text = "";
     }
 
     private void UpdateHealthBar() {
-        if (healthBarFill != null) {
-            float healthPercentage = (float)playerStats.CurrentlyHp / playerStats.MaxHp;
-            healthBarFill.fillAmount = healthPercentage;
+        if (UiContainer.Instance.healthBarFill != null) {
+            float healthPercentage = (float)_playerStats.CurrentlyHp / _playerStats.MaxHp;
+            UiContainer.Instance.healthBarFill.fillAmount = healthPercentage;
         }
     }
 
     private void UpdateEXPBar() {
-        if (expBarFill != null) {
-            float expPercentage = (float)playerStats.XpCurrently / playerStats.XpNeeded;
-            expBarFill.fillAmount = expPercentage;
-            level_text_percent_for_new_level.text = expPercentage.ToString("0.00%");
+        if (UiContainer.Instance.expBarFill != null) {
+            float expPercentage = (float)_playerStats.XpCurrently / _playerStats.XpNeeded;
+            UiContainer.Instance.expBarFill.fillAmount = expPercentage;
+            UiContainer.Instance.level_text_percent_for_new_level.text = expPercentage.ToString("0.00%");
         }
     }
 
     private void UpdateManaBar() {
-        if (manahBarFill != null) {
-            float manaPercentage = (float)playerStats.CurrentlyMana / playerStats.MaxMana;
-            manahBarFill.fillAmount = manaPercentage;
+        if (UiContainer.Instance.manahBarFill != null) {
+            float manaPercentage = (float)_playerStats.CurrentlyMana / _playerStats.MaxMana;
+            UiContainer.Instance.manahBarFill.fillAmount = manaPercentage;
         }
     }
-
 
     public void SetStateOfAbilityUpdateButtons() {
-        if (playerStats.AbilityPoints > 0) {
-            strength_up.transform.localScale =
-                new Vector3(0.3f, 1, 1); // Устанавливаем нормальный размер, кнопка активна
-            sanity_up.transform.localScale = new Vector3(0.3f, 1, 1);
-            agility_up.transform.localScale = new Vector3(0.3f, 1, 1);
-            luck_up.transform.localScale = new Vector3(0.3f, 1, 1);
-            speed_up.transform.localScale = new Vector3(0.3f, 1, 1);
+        if (_playerStats.AbilityPoints > 0) {
+            UiContainer.Instance.strength_up.transform.localScale = new Vector3(0.3f, 1, 1); // Устанавливаем нормальный размер, кнопка активна
+            UiContainer.Instance.sanity_up.transform.localScale = new Vector3(0.3f, 1, 1);
+            UiContainer.Instance.agility_up.transform.localScale = new Vector3(0.3f, 1, 1);
+            UiContainer.Instance.luck_up.transform.localScale = new Vector3(0.3f, 1, 1);
+            UiContainer.Instance.speed_up.transform.localScale = new Vector3(0.3f, 1, 1);
             UpdateUI();
+        } else {
+            UiContainer.Instance.strength_up.transform.localScale = Vector3.zero; // Устанавливаем размер в ноль, кнопка неактивна
+            UiContainer.Instance.sanity_up.transform.localScale = Vector3.zero;
+            UiContainer.Instance.agility_up.transform.localScale = Vector3.zero;
+            UiContainer.Instance.luck_up.transform.localScale = Vector3.zero;
+            UiContainer.Instance.speed_up.transform.localScale = Vector3.zero;
+            UiContainer.Instance.ability_points_text.text = "";
         }
-        else {
-            strength_up.transform.localScale = Vector3.zero; // Устанавливаем размер в ноль, кнопка неактивна
-            sanity_up.transform.localScale = Vector3.zero;
-            agility_up.transform.localScale = Vector3.zero;
-            luck_up.transform.localScale = Vector3.zero;
-            speed_up.transform.localScale = Vector3.zero;
-            ability_points_text.text = "";
-        }
-    }
-
-    private void FindAllUI() {
-        hp_text = find.FindUIElement<TMP_Text>("hp text");
-        hp_text_inv = find.FindUIElement<TMP_Text>("hp text inv");
-
-        mana_text = find.FindUIElement<TMP_Text>("mana text");
-        mana_text_inv = find.FindUIElement<TMP_Text>("mana text inv");
-
-        armor_text = find.FindUIElement<TMP_Text>("armor text");
-
-        strength_text = find.FindUIElement<TMP_Text>("strength text");
-        sanity_text = find.FindUIElement<TMP_Text>("sanity text");
-        agility_text = find.FindUIElement<TMP_Text>("agility text");
-        luck_text = find.FindUIElement<TMP_Text>("luck text");
-        speed_text = find.FindUIElement<TMP_Text>("speed text");
-        level_text = find.FindUIElement<TMP_Text>("lvl full");
-        level_text_percent_for_new_level = find.FindUIElement<TMP_Text>("lvl procent");
-
-        ability_points_text = find.FindUIElement<TMP_Text>("ability points text");
-        exp_text = find.FindUIElement<TMP_Text>("exp text");
-        healthBarFill = find.FindUIElement<Image>("Healthbar");
-        manahBarFill = find.FindUIElement<Image>("Manabar");
-        expBarFill = find.FindUIElement<Image>("xp bar filled");
-
-        strength_up = find.FindGameObject("StrengthUp");
-        strength_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseStrength);
-        sanity_up = find.FindGameObject("SanityUp");
-        sanity_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseSanity);
-        agility_up = find.FindGameObject("AgilityUp");
-        agility_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseAgility);
-        luck_up = find.FindGameObject("LuckUp");
-        luck_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseLuck);
-        speed_up = find.FindGameObject("SpeedUp");
-        speed_up.GetComponent<Button>().onClick.AddListener(playerStats.IncreaseSpeed);
-        UpdateUI();
     }
 }

@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: -7666614221123661290}
   - component: {fileID: 7355851802689311227}
   - component: {fileID: -1568228476913601040}
+  - component: {fileID: -3095385020681225760}
   m_Layer: 0
   m_Name: PlayerLogic
   m_TagString: Player
@@ -360,6 +361,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  greenZone: 1
 --- !u!114 &-510250030928325903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,28 +374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac43051a0695413ea297c81f5e544a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp_text: {fileID: 0}
-  hp_text_inv: {fileID: 0}
-  mana_text: {fileID: 0}
-  mana_text_inv: {fileID: 0}
-  armor_text: {fileID: 0}
-  strength_text: {fileID: 0}
-  sanity_text: {fileID: 0}
-  agility_text: {fileID: 0}
-  luck_text: {fileID: 0}
-  speed_text: {fileID: 0}
-  level_text: {fileID: 0}
-  level_text_percent_for_new_level: {fileID: 0}
-  ability_points_text: {fileID: 0}
-  exp_text: {fileID: 0}
-  strength_up: {fileID: 0}
-  sanity_up: {fileID: 0}
-  agility_up: {fileID: 0}
-  luck_up: {fileID: 0}
-  speed_up: {fileID: 0}
-  healthBarFill: {fileID: 0}
-  manahBarFill: {fileID: 0}
-  expBarFill: {fileID: 0}
 --- !u!114 &8766549807833301324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f93031c97e74ec281c01069d8685a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!114 &-6800800320709123403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,6 +531,94 @@ MonoBehaviour:
     m_Bits: 128
   animator: {fileID: 0}
   attackSound: {fileID: 0}
+--- !u!114 &-3095385020681225760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909981378074328598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01fd719364c84ebca19fd873ba1db12d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  Slots:
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
+  - ItemConfig: {fileID: 0}
+    ItemData:
+      Type: 0
 --- !u!1 &7563778525642114572
 GameObject:
   m_ObjectHideFlags: 0
