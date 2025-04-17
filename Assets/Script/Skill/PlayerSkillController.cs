@@ -103,4 +103,8 @@ public class PlayerSkillController : NetworkBehaviour {
     public void TeleportToArena() {
         GreenZone = false;
     }
+
+    public void TeleportToGreenZone() {
+        GreenZone = true;
+    }
 }
