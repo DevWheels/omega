@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mirror;
+using UnityEngine;
 
 public class PlayerInventory : NetworkBehaviour {
     public List<InventorySlot> Slots = new List<InventorySlot>(24);
@@ -17,6 +18,25 @@ public class PlayerInventory : NetworkBehaviour {
             };
             return;
         }
+    }
+
+    public void DropOnDie() {
+        foreach (InventorySlot t in Slots) {
+            if (t.ItemConfig == null) {
+                continue;
+            }
+            DropItem(t.ItemData);
+            t.ItemConfig = null;
+            t.ItemData = null;
+        }
+    }
+    [Command]
+    private void DropItem(ItemData itemData) {
+        Vector3 dropPos = new(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+        ItemBase item = ItemFactory.Instance.CreateItemByData(itemData);
+        item.gameObject.SetActive(true);
+        item.gameObject.transform.position = dropPos;
+        NetworkServer.Spawn(item.gameObject);
     }
 }
 
