@@ -2,24 +2,10 @@ using Mirror;
 using UnityEngine;
 
 public class ExplosionAroundPlayerSkill : Skill {
-    
-    public ExplosionAroundPlayerSkill(SkillConfig skillConfig, PlayerSkillController playerController) : base(skillConfig,playerController) {
-  
+    public ExplosionAroundPlayerSkill(SkillConfig skillConfig, PlayerSkillController playerController) : base(skillConfig, playerController) { }
 
-
-
-    }
-    [Command]
     public override void Activate() {
-        var explosion = Object.Instantiate(
-            skillConfig.ProjectilePrefab,
-            playerController.PlayerStats.transform.position,
-            playerController.PlayerStats.transform.rotation
-        );
-        
-        NetworkServer.Spawn(explosion.gameObject);
-        
-        explosion.Init(playerController.gameObject,skillConfig.Damage, skillConfig.ProjectileSpeed,skillConfig.ProjectileLifetime);
+        playerController.SpawnProjectile(skillConfig);
     }
 
     public override void Upgrade() {

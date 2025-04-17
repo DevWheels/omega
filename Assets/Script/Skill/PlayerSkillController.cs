@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class PlayerSkillController : MonoBehaviour {
+public class PlayerSkillController : NetworkBehaviour {
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
     public List<Skill> Passive_Skills { get; } = new List<Skill>();
@@ -44,7 +45,7 @@ public class PlayerSkillController : MonoBehaviour {
 
 
     private void Update() {
-        if (!Playermovement.isLocalPlayer) {
+        if (!isLocalPlayer) {
             return;
         }
         UseSkill();
@@ -57,5 +58,13 @@ public class PlayerSkillController : MonoBehaviour {
         else if (Input.GetKey(KeyCode.E)) {
             SkillManager.UseSkill(Active_Skills[1]);
         }
+    }
+    
+    [Command]
+    public void SpawnProjectile(SkillConfig config) {
+        var projectileObject = ProjectileFactory.Instance.GetProjectileByType(config.ProjectileType);
+        ProjectileBase projectile = Instantiate(projectileObject, PlayerStats.transform.position, PlayerStats.transform.rotation);
+        projectile.Init(gameObject, config.Damage, config.ProjectileSpeed, config.ProjectileLifetime);
+        NetworkServer.Spawn(projectile.gameObject);
     }
 }

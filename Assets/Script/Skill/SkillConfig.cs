@@ -5,7 +5,6 @@ public class SkillConfig : ScriptableObject {
     public string Name;
     [TextArea]
     public string Description;
-    public Sprite Icon;
     
     [Header("Skill Type")]
     public bool IsPassive;
@@ -20,7 +19,8 @@ public class SkillConfig : ScriptableObject {
     [Tooltip("Cooldown in seconds")]
     public int Cooldown;
     public int ProjectileLifetime;
-    public ProjectileBase ProjectilePrefab;
+
+    public ProjectileType ProjectileType;
 }
 [System.Serializable]
 public enum SkillType {
@@ -28,5 +28,4 @@ public enum SkillType {
     ExplosionAroundPlayerSkill,
     ManaIncreaseSkill,
     SpeedIncreaseSkill,
-    
 }

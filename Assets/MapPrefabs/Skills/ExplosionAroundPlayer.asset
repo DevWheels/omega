@@ -22,4 +22,4 @@ MonoBehaviour:
   ProjectileSpeed: 0
   Cooldown: 3
   ProjectileLifetime: 1
-  ProjectilePrefab: {fileID: 551974378179888456, guid: 99ed20a651e8d2d40a0fff26c917baeb, type: 3}
+  ProjectileType: 1

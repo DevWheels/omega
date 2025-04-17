@@ -12,7 +12,7 @@ public class SkillConfigEditor : Editor
     private SerializedProperty speedProp;
     private SerializedProperty cooldownProp;
     private SerializedProperty projectileLifetimeProp;
-    private SerializedProperty projectilePrefabProp;
+    private SerializedProperty projectileTypeProp;
     private SerializedProperty iconProp;
 
     private void OnEnable()
@@ -26,7 +26,7 @@ public class SkillConfigEditor : Editor
         speedProp = serializedObject.FindProperty("ProjectileSpeed");
         cooldownProp = serializedObject.FindProperty("Cooldown");
         projectileLifetimeProp = serializedObject.FindProperty("ProjectileLifetime");
-        projectilePrefabProp = serializedObject.FindProperty("ProjectilePrefab");
+        projectileTypeProp = serializedObject.FindProperty("ProjectileType");
         iconProp = serializedObject.FindProperty("Icon");
     }
 
@@ -54,7 +54,7 @@ public class SkillConfigEditor : Editor
             EditorGUILayout.PropertyField(speedProp);
             EditorGUILayout.PropertyField(cooldownProp);
             EditorGUILayout.PropertyField(projectileLifetimeProp);
-            EditorGUILayout.PropertyField(projectilePrefabProp);
+            EditorGUILayout.PropertyField(projectileTypeProp);
         }
 
         serializedObject.ApplyModifiedProperties();
