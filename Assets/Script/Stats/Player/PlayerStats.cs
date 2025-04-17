@@ -19,7 +19,10 @@ public class PlayerStats : NetworkBehaviour {
     [SyncVar] private int agility = 1;
     [SyncVar] private int luck = 1;
     [SyncVar] private int speed = 1;
-
+    [SyncVar] 
+    
+    public bool greenZone = true; 
+    
 
     public int MaxHp {
         get { return max_hp; }
@@ -196,7 +199,7 @@ public class PlayerStats : NetworkBehaviour {
     [Client]
     private void CheckHpAndMana() {
         if (currently_hp <= 0) {
-            Destroy(gameObject);
+            Die();
         }
         else if (currently_hp >= max_hp) {
             currently_hp = max_hp;
@@ -208,6 +211,13 @@ public class PlayerStats : NetworkBehaviour {
         else if (currently_mana >= max_mana) {
             currently_mana = max_mana;
         }
+    }
+
+    private void Die() {
+
+        greenZone = true;
+        currently_hp = max_hp / 2;
+
     }
 
     public void IncreaseStrength() {

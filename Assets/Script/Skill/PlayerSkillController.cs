@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkillController : NetworkBehaviour {
+    public bool greenZone = true; // Добавляем булеву переменную (true - город, false - зона скиллов)
+
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
     public List<Skill> Passive_Skills { get; } = new List<Skill>();
@@ -17,7 +19,7 @@ public class PlayerSkillController : NetworkBehaviour {
     private List<Skill> _skills = new();
     private void Awake() {
         FindComponents();
-
+        greenZone = true;
         // CreateSkills();
     }
 
@@ -60,7 +62,10 @@ public class PlayerSkillController : NetworkBehaviour {
         if (!isLocalPlayer) {
             return;
         }
-        UseSkill();
+        if (!greenZone)
+        {
+            UseSkill();
+        }
     }
 
     private void UseSkill() {
