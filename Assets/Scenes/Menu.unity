@@ -1124,7 +1124,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 192004921754874985, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 658380116975165537, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1166,13 +1166,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1285411575813866912, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
+      propertyPath: port
+      value: 30272
+      objectReference: {fileID: 0}
     - target: {fileID: 8565215977007170163, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
     - target: {fileID: 9200088368779723516, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
+      propertyPath: networkAddress
+      value: 08a63e05535b.pr.edgegap.net
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200088368779723516, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9200088368779723516, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: 'spawnPrefabs.Array.data[0]'
@@ -1217,7 +1225,7 @@ PrefabInstance:
     - target: {fileID: 9200088368779723516, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: 'spawnPrefabs.Array.data[10]'
       value: 
-      objectReference: {fileID: 6909981378074328598, guid: 3efa2b639a38ac94f99f90b07be2991b, type: 3}
+      objectReference: {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
     - target: {fileID: 9200088368779723516, guid: 44c40121fbadb91418f48b77198feb59, type: 3}
       propertyPath: 'spawnPrefabs.Array.data[11]'
       value: 
