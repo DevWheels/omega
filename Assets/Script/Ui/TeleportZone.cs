@@ -41,7 +41,7 @@ public class TeleportZone : MonoBehaviour
             
             if (playerSkillController != null)
             {
-                playerSkillController.greenZone = setGreenZone;
+                playerSkillController.TeleportToArena();
             }
         }
         confirmationPanel.SetActive(false);

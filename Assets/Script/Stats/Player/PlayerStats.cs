@@ -21,7 +21,9 @@ public class PlayerStats : NetworkBehaviour {
     [SyncVar] private int speed = 1;
     [SyncVar] 
     
-    public bool greenZone = true; 
+    public bool greenZone = true;
+
+    private Vector3 _spawnPosition;
     
 
     public int MaxHp {
@@ -103,6 +105,7 @@ public class PlayerStats : NetworkBehaviour {
 
     private void Awake() {
         Instance = this;
+        _spawnPosition = transform.position;
     }
 
     private void OnApplicationQuit() {
@@ -214,10 +217,9 @@ public class PlayerStats : NetworkBehaviour {
     }
 
     private void Die() {
-
         greenZone = true;
         currently_hp = max_hp / 2;
-
+        transform.position = _spawnPosition;
     }
 
     public void IncreaseStrength() {

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkillController : NetworkBehaviour {
-    public bool greenZone = true; // Добавляем булеву переменную (true - город, false - зона скиллов)
+   
 
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
@@ -17,9 +17,10 @@ public class PlayerSkillController : NetworkBehaviour {
     public RegenerationController Regeneration{get; private set;}
 
     private List<Skill> _skills = new();
+    private bool _greenZone = true; // Добавляем булеву переменную (true - город, false - зона скиллов)
     private void Awake() {
         FindComponents();
-        greenZone = true;
+        _greenZone = true;
         // CreateSkills();
     }
 
@@ -62,20 +63,18 @@ public class PlayerSkillController : NetworkBehaviour {
         if (!isLocalPlayer) {
             return;
         }
-        if (!greenZone)
+        if (!_greenZone)
         {
             UseSkill();
         }
     }
 
     private void UseSkill() {
-        if (Active_Skills == null || Active_Skills.Count == 0) { return; }
-
-
-        if (Input.GetKey(KeyCode.Q)) {
+        if (Input.GetKey(KeyCode.Q) && Active_Skills.Count > 0) {
             SkillManager.UseSkill(Active_Skills[0]);
         }
-        else if (Input.GetKey(KeyCode.E)) {
+
+        if (Input.GetKey(KeyCode.E) && Active_Skills.Count > 1) {
             SkillManager.UseSkill(Active_Skills[1]);
         }
     }
@@ -87,5 +86,9 @@ public class PlayerSkillController : NetworkBehaviour {
         projectile.InitDirection(direction);
         projectile.Init(gameObject, config.Damage, config.ProjectileSpeed, config.ProjectileLifetime);
         NetworkServer.Spawn(projectile.gameObject);
+    }
+
+    public void TeleportToArena() {
+        _greenZone = false;
     }
 }
