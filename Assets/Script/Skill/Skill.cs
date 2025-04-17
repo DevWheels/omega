@@ -1,3 +1,5 @@
+using UnityEngine;
+
 [System.Serializable]
 public abstract class Skill {
     public SkillConfig skillConfig { get; set; }
@@ -10,7 +12,7 @@ public abstract class Skill {
         this.playerController = playerController;
     }
 
-    public abstract void Activate();
+    public abstract void Activate(Vector3 mousePos);
 
 
     public virtual void Upgrade() {

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerIncreasedSpeed : Skill {
 
     private float baseSpeed;
@@ -7,7 +9,7 @@ public class PlayerIncreasedSpeed : Skill {
         baseSpeed = playerController.Playermovement.moveSpeed;
     }
 
-    public override void Activate()
+    public override void Activate(Vector3 mousePosition)
     {
         playerController.Playermovement.moveSpeed *= 1 + (skillConfig.PercentageBuff / 100f);
     }

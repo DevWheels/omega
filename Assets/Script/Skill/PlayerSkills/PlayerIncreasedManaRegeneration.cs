@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerIncreasedManaRegeneration : Skill {
     
     private float baseManaRegeneration;
@@ -8,7 +10,7 @@ public class PlayerIncreasedManaRegeneration : Skill {
         baseManaRegeneration = playerController.Regeneration.ManaRegeneration;
 
     }
-    public override void Activate()
+    public override void Activate(Vector3 mousePosition)
     {
         
         playerController.Regeneration.ManaRegenerationPerSecond *= 1 + (skillConfig.PercentageBuff / 100f);

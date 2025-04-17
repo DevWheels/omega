@@ -11,7 +11,7 @@ public class SkillManager : MonoBehaviour {
         Skills.Add(skill);
         if (skill.skillConfig.IsPassive)
         {
-            skill.Activate();
+            skill.Activate(GetMouseWorldPosition());
         }
     }
 
@@ -22,7 +22,7 @@ public class SkillManager : MonoBehaviour {
             return;
         }
         
-        skill.Activate();
+        skill.Activate(GetMouseWorldPosition());
         StartCoroutine(CooldownSkill(skill));
     }
 
@@ -30,5 +30,11 @@ public class SkillManager : MonoBehaviour {
         SkillCooldowns.Add(skill);
         yield return new WaitForSeconds(skill.skillConfig.Cooldown);
         SkillCooldowns.Remove(skill);
+    }
+    
+    private Vector3 GetMouseWorldPosition() {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 0;
+        return Camera.main.ScreenToWorldPoint(mousePos);
     }
 }

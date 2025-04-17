@@ -2,54 +2,47 @@ using Mirror;
 using UnityEngine;
 
 public class FireBallProjectile : ProjectileBase {
+    [SyncVar]
+    private int _projectileDamage;
 
-    private Vector2 _targetDirection;
-    [SyncVar] private int _projectileDamage;
-    [SyncVar] private int _projectileSpeed;
-    [SyncVar] private int _projectileLifetime;
-    [SyncVar] private GameObject _owner;
-    public override void Init(GameObject player,int damage, int speed, int lifetime) {
-        _projectileDamage =  damage;
+    [SyncVar]
+    private int _projectileSpeed;
+
+    [SyncVar]
+    private int _projectileLifetime;
+
+    [SyncVar]
+    private GameObject _owner;
+
+    public override void Init(GameObject player, int damage, int speed, int lifetime) {
+        _projectileDamage = damage;
         _projectileSpeed = speed;
         _projectileLifetime = lifetime;
         _owner = player;
-        
     }
-    
+
     private void Start() {
-        StartCoroutine(nameof(DestroyProjectile));
-        InitDirection();
+        Destroy(gameObject, _projectileLifetime);
     }
 
     void Update() {
         MoveProjectile();
-
-    }
-
-    private void DestroyProjectile() {
-        Destroy(gameObject,_projectileLifetime);
     }
 
     private void MoveProjectile() {
-        transform.position += (Vector3)(_targetDirection * (_projectileSpeed * Time.deltaTime));
-    }
-
-    private Vector3 GetMouseWorldPosition() {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 0;
-        return Camera.main.ScreenToWorldPoint(mousePos);
-    }
-
-    private void InitDirection() {
-        Vector3 mouseWorldPos = GetMouseWorldPosition();
-
-        _targetDirection = (mouseWorldPos - transform.position).normalized;
+        transform.position += (Vector3)(TargetDirection * (_projectileSpeed * Time.deltaTime));
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject == gameObject || collision.gameObject == _owner) { return; }
-        var enemyPlayer = collision.GetComponent<PlayerStats>();
-        
+        if (collision.gameObject == gameObject || collision.gameObject == _owner) {
+            return;
+        }
+
+        PlayerStats enemyPlayer = collision.GetComponent<PlayerStats>();
+        if (enemyPlayer.isLocalPlayer) {
+            return;
+        }
+
         enemyPlayer.TakeHit(_projectileDamage);
     }
 }

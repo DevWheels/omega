@@ -61,9 +61,10 @@ public class PlayerSkillController : NetworkBehaviour {
     }
     
     [Command]
-    public void SpawnProjectile(SkillConfig config) {
-        var projectileObject = ProjectileFactory.Instance.GetProjectileByType(config.ProjectileType);
+    public void SpawnProjectile(SkillConfig config, Vector3 direction) {
+        ProjectileBase projectileObject = ProjectileFactory.Instance.GetProjectileByType(config.ProjectileType);
         ProjectileBase projectile = Instantiate(projectileObject, PlayerStats.transform.position, PlayerStats.transform.rotation);
+        projectile.InitDirection(direction);
         projectile.Init(gameObject, config.Damage, config.ProjectileSpeed, config.ProjectileLifetime);
         NetworkServer.Spawn(projectile.gameObject);
     }

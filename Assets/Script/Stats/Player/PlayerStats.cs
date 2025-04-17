@@ -1,5 +1,5 @@
 using Mirror;
-
+using UnityEngine;
 
 public class PlayerStats : NetworkBehaviour {
     [SyncVar] private int max_hp = 300;
@@ -187,6 +187,7 @@ public class PlayerStats : NetworkBehaviour {
 
     [Client]
     public void TakeHit(int damage) {
+        Debug.Log($"Took hit for damage: {damage}");
         currently_hp -= damage;
         UpdateEverything();
     }
