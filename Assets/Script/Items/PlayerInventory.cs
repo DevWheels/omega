@@ -34,9 +34,9 @@ public class PlayerInventory : NetworkBehaviour {
     private void DropItem(ItemData itemData) {
         Vector3 dropPos = new(transform.position.x + 0.5f, transform.position.y, transform.position.z);
         ItemBase item = ItemFactory.Instance.CreateItemByData(itemData);
-
         item.gameObject.SetActive(true);
         item.gameObject.transform.position = dropPos;
+        NetworkServer.Spawn(item.gameObject);
     }
 }
 
