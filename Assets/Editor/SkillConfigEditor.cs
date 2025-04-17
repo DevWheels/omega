@@ -13,7 +13,6 @@ public class SkillConfigEditor : Editor
     private SerializedProperty cooldownProp;
     private SerializedProperty projectileLifetimeProp;
     private SerializedProperty projectileTypeProp;
-    private SerializedProperty iconProp;
 
     private void OnEnable()
     {
@@ -27,7 +26,6 @@ public class SkillConfigEditor : Editor
         cooldownProp = serializedObject.FindProperty("Cooldown");
         projectileLifetimeProp = serializedObject.FindProperty("ProjectileLifetime");
         projectileTypeProp = serializedObject.FindProperty("ProjectileType");
-        iconProp = serializedObject.FindProperty("Icon");
     }
 
     public override void OnInspectorGUI()
@@ -37,7 +35,6 @@ public class SkillConfigEditor : Editor
 
         EditorGUILayout.PropertyField(nameProp);
         EditorGUILayout.PropertyField(descriptionProp);
-        EditorGUILayout.PropertyField(iconProp);
         
 
         EditorGUILayout.PropertyField(isPassiveProp);

@@ -3,6 +3,7 @@ using Mirror;
 using UnityEngine;
 
 public class HealingProjectile : ProjectileBase {
+   
     [SyncVar] private int _projectileDamage;
     [SyncVar] private int _projectileSpeed;
     [SyncVar] private int _projectileLifetime;

@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c1970648b5bb34e990db0380b71ece, type: 3}
-  m_Name: Staff
+  m_Name: ChestplateConfig
   m_EditorClassIdentifier: 
-  Name: Staff
-  Description: Healing staff
-  icon: {fileID: 21300000, guid: 798a0192e5e2a1c45a1f6786703af909, type: 3}
+  Name: "\u041D\u0430\u0433\u0440\u0443\u0434\u043D\u0438\u043A"
+  Description: "\u0417\u0430\u0449\u0438\u0449\u0430\u0435\u0442 \u043D\u0430 \u0433\u0440\u0443\u0434\u0438"
+  icon: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
   isHealing: 0
   HealingPower: 0
   isMana: 0
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: Staff
-  itemName: Staff
-  itemType: 0
-  Prefab: {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
+  PlayerPrefsName: Boots
+  itemName: Boots
+  itemType: 1
+  Prefab: {fileID: 828090784902224273, guid: 2c7f5901471a5bd4c8cb62932edc5e06, type: 3}
   itemSkills:
-  - {fileID: 11400000, guid: e84f82415d5d12b41899dc0ec872a603, type: 2}
+  - {fileID: 11400000, guid: 7d6a5f1bb2018e649b8b58017bf1483c, type: 2}
   dRankStats:
-    health: {x: 2, y: 2}
-    armor: {x: 2, y: 2}
-    attack: {x: 2, y: 2}
+    health: {x: 1, y: 1}
+    armor: {x: 1, y: 1}
+    attack: {x: 1, y: 1}
     perLevelIncrease: 1
   cRankStats:
     health: {x: 0, y: 0}
