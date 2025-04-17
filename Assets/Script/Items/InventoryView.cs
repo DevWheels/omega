@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class InventoryView : MonoBehaviour
 {
-    public static Inventory instance;
+    public static InventoryView instance;
     public Transform SlotsParent;
     public bool isOpened;
     private InventorySlot[] inventorySlots = new InventorySlot[24];

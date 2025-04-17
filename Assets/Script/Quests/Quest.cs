@@ -37,7 +37,7 @@ public class Quest {
         for (var index = 0; index < reward_items_data.Count; index++) {
             var item = reward_items_data[index];
             if (item != null) {
-                Inventory.instance.PutInEmptySlot(reward_items_config[index],item);
+                InventoryView.instance.PutInEmptySlot(reward_items_config[index],item);
             }
         }
     }

@@ -15,18 +15,27 @@ public class TeleportZone : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             player = other.gameObject;
-            playerSkillController = player.GetComponent<PlayerSkillController>();
-            confirmationPanel.SetActive(true);
+            var ps = player.GetComponent<PlayerSkillController>();
+            if (ps.Playermovement.isLocalPlayer) {
+                playerSkillController = ps;
+                confirmationPanel.SetActive(true);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (playerSkillController == null) {
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
-            confirmationPanel.SetActive(false);
-            player = null; 
-            playerSkillController = null;
+            if (other.gameObject.GetComponent<PlayerSkillController>() == playerSkillController) {
+                confirmationPanel.SetActive(false);
+                player = null; 
+                playerSkillController = null;
+            }
         }
     }
 

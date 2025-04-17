@@ -55,7 +55,7 @@ MonoBehaviour:
   onlineScene: Assets/Scenes/Game.unity
   offlineSceneLoadDelay: 0
   transport: {fileID: 1285411575813866912}
-  networkAddress: 355fdb67892f.pr.edgegap.net
+  networkAddress: 4771e047b582.pr.edgegap.net
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
@@ -120,7 +120,7 @@ MonoBehaviour:
   sslEnabled: 0
   sslProtocols: 3072
   sslCertJson: ./cert.json
-  port: 30522
+  port: 30647
   batchSend: 1
   waitBeforeSend: 1
   clientUseWss: 0

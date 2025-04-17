@@ -27,7 +27,7 @@ public class PlayerEquipment : NetworkBehaviour {
                 if (equipmentItemConfig.itemSkills.Count < 0) {
                         return;
                 }
-                var skillController = Inventory.instance.Player.GetComponent<PlayerSkillController>();
+                var skillController = InventoryView.instance.Player.GetComponent<PlayerSkillController>();
                 var resSkills = new List<SkillConfig>();
                 foreach (var skillIndex in equipmentItemConfig.itemSkills) {
                         resSkills.Add(skillIndex);
