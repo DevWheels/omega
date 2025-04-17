@@ -217,6 +217,7 @@ public class PlayerStats : NetworkBehaviour {
     }
 
     private void Die() {
+        GetComponent<PlayerInventory>().DropOnDie();
         GetComponent<PlayerSkillController>().GreenZone = true;
         greenZone = true;
         currently_hp = max_hp / 2;
