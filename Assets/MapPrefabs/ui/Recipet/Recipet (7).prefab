@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4273b2888db846a4a92a4c3822d91e8b, type: 2}
-  m_sharedMaterial: {fileID: -5347274001891885001, guid: 4273b2888db846a4a92a4c3822d91e8b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ca370a6926e17d44999983953afaecda, type: 2}
+  m_sharedMaterial: {fileID: 6812139182840226338, guid: ca370a6926e17d44999983953afaecda, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -278,8 +278,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0421\u0435\u0440\u0435\u0431\u0440\u044F\u043D\u044B \u043C\u0435\u0447"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4273b2888db846a4a92a4c3822d91e8b, type: 2}
-  m_sharedMaterial: {fileID: -5347274001891885001, guid: 4273b2888db846a4a92a4c3822d91e8b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ca370a6926e17d44999983953afaecda, type: 2}
+  m_sharedMaterial: {fileID: 6812139182840226338, guid: ca370a6926e17d44999983953afaecda, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -705,6 +705,7 @@ MonoBehaviour:
   itemIcon: {fileID: 952571036712565584}
   itemDescription: {fileID: 8070946144153211793}
   showRecipeButton: {fileID: 1880354978633357028}
+  currentRecipe: {fileID: 0}
 --- !u!1 &8306589546284871582
 GameObject:
   m_ObjectHideFlags: 0
