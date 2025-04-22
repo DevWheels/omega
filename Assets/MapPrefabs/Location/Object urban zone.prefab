@@ -1431,7 +1431,7 @@ Transform:
   m_GameObject: {fileID: 673444364383649048}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54.27913, y: 10.822563, z: 5.2694583}
+  m_LocalPosition: {x: 147.92, y: -13.56, z: 5.2694583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2120,7 +2120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052642750586445340}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.502625, y: 5.4195366, z: -1.183205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15514,9 +15514,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7134938228894003618}
   - component: {fileID: 104012507748717524}
-  - component: {fileID: 6984857645858604891}
+  - component: {fileID: 2245251878395776283}
   m_Layer: 0
-  m_Name: TeleportZone
+  m_Name: TeleportZoneOut
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15588,7 +15588,7 @@ PolygonCollider2D:
       - {x: -2.782079, y: -2.7061167}
       - {x: -0.12787831, y: -2.776158}
   m_UseDelaunayMesh: 0
---- !u!114 &6984857645858604891
+--- !u!114 &2245251878395776283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15597,11 +15597,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7936891050688905907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f3147fa0854124439cac17b1ebbaca4, type: 3}
+  m_Script: {fileID: 11500000, guid: e196d460448742643b16f639da0412c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   confirmationPanel: {fileID: 0}
-  targetMarkers: []
+  targetMarker: {fileID: 673444364383649048}
   setGreenZone: 0
 --- !u!1 &8046063563643153058
 GameObject:
