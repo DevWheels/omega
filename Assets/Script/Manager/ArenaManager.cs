@@ -2,144 +2,139 @@ using UnityEngine;
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
-[RequireComponent(typeof(NetworkIdentity))]
-public class ArenaManager : NetworkBehaviour
+using System;
+using Random = UnityEngine.Random;
+
+public class ArenaManager : MonoBehaviour
 {
-    public static ArenaManager Instance { get; private set; }
+    [System.Serializable]
+    public class SpawnPoint
+    {
+        public Transform point;
+        public float spawnRadius = 1f;
+        [HideInInspector] public float nextSpawnTime;
+    }
+
+    [System.Serializable]
+    public class SpawnableItem
+    {
+        public GameObject prefab;
+        public float spawnWeight = 1f;
+        public int maxInstances = 5;
+        [HideInInspector] public int currentInstances;
+    }
 
     [Header("Spawn Settings")]
-    [SerializeField] private GameObject[] itemPrefabs;
-    [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] [Range(1f, 60f)] private float spawnInterval = 30f;
-    [SerializeField] [Min(1)] private int maxItems = 20;
+    public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
+    public List<SpawnableItem> spawnableItems = new List<SpawnableItem>();
+    public float initialSpawnDelay = 5f;
+    public float respawnInterval = 60f;
+    public int maxTotalItems = 20;
 
-    [Header("Debug")]
-    [SerializeField] private List<GameObject> spawnedItems = new List<GameObject>();
-    [SerializeField] private bool debugLogs = true;
+    private List<GameObject> spawnedItems = new List<GameObject>();
+    private bool isInitialized = false;
 
-    private void Awake()
+    private void Start()
     {
-        if (Instance == null)
+        if (!isInitialized)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            Initialize();
         }
     }
 
-    public override void OnStartServer()
+    private void Initialize()
     {
-        base.OnStartServer();
-        if (debugLogs) Debug.Log("ArenaManager: Server initialization");
-        
-        ValidateReferences();
-        StartCoroutine(SpawnItemsRoutine());
+        isInitialized = true;
+        Invoke(nameof(SpawnInitialItems), initialSpawnDelay);
+        InvokeRepeating(nameof(RespawnItems), initialSpawnDelay + respawnInterval, respawnInterval);
     }
 
-    private void ValidateReferences()
+    private void SpawnInitialItems()
     {
-        if (itemPrefabs == null || itemPrefabs.Length == 0)
-            Debug.LogError("ArenaManager: No item prefabs assigned!");
-        
-        if (spawnPoints == null || spawnPoints.Length == 0)
-            Debug.LogError("ArenaManager: No spawn points assigned!");
-    }
-
-    private IEnumerator SpawnItemsRoutine()
-    {
-        if (debugLogs) Debug.Log("ArenaManager: Spawn routine started");
-
-        while (true)
+        foreach (var point in spawnPoints)
         {
-            yield return new WaitForSeconds(spawnInterval);
-
-            CleanupDestroyedItems();
-
-            if (CanSpawnMoreItems())
-            {
-                SpawnRandomItem();
-            }
+            TrySpawnItemAtPoint(point);
+            point.nextSpawnTime = Time.time + respawnInterval;
         }
     }
 
-    private void CleanupDestroyedItems()
+    private void RespawnItems()
     {
         spawnedItems.RemoveAll(item => item == null);
-    }
 
-    private bool CanSpawnMoreItems()
-    {
-        if (spawnedItems.Count >= maxItems)
+        foreach (var point in spawnPoints)
         {
-            if (debugLogs) Debug.Log("ArenaManager: Max items reached, skipping spawn");
-            return false;
-        }
-        return true;
-    }
-
-    private void SpawnRandomItem()
-    {
-        var itemToSpawn = GetRandomPrefab();
-        var spawnPoint = GetRandomSpawnPoint();
-
-        if (itemToSpawn == null || spawnPoint == null)
-        {
-            if (debugLogs) Debug.LogWarning("ArenaManager: Invalid spawn parameters");
-            return;
-        }
-
-        var spawnedItem = Instantiate(itemToSpawn, spawnPoint.position, spawnPoint.rotation);
-        NetworkServer.Spawn(spawnedItem);
-        spawnedItems.Add(spawnedItem);
-
-        if (debugLogs) Debug.Log($"ArenaManager: Spawned {itemToSpawn.name} at {spawnPoint.position}");
-    }
-
-    private GameObject GetRandomPrefab()
-    {
-        if (itemPrefabs.Length == 0) return null;
-        return itemPrefabs[Random.Range(0, itemPrefabs.Length)];
-    }
-
-    private Transform GetRandomSpawnPoint()
-    {
-        if (spawnPoints.Length == 0) return null;
-        return spawnPoints[Random.Range(0, spawnPoints.Length)];
-    }
-
-    [Server]
-    public void ItemPickedUp(GameObject item)
-    {
-        if (spawnedItems.Contains(item))
-        {
-            spawnedItems.Remove(item);
-            if (debugLogs) Debug.Log($"ArenaManager: Item {item.name} picked up");
-        }
-    }
-
-    [Server]
-    public void ClearAllItems()
-    {
-        foreach (var item in spawnedItems)
-        {
-            if (item != null)
+            if (Time.time >= point.nextSpawnTime && spawnedItems.Count < maxTotalItems)
             {
-                NetworkServer.Destroy(item);
+                TrySpawnItemAtPoint(point);
+                point.nextSpawnTime = Time.time + respawnInterval;
             }
         }
-        spawnedItems.Clear();
-        
-        if (debugLogs) Debug.Log("ArenaManager: All items cleared");
     }
 
-    private void OnDestroy()
+    private void TrySpawnItemAtPoint(SpawnPoint spawnPoint)
     {
-        if (Instance == this)
+        if (spawnableItems.Count == 0) return;
+
+        SpawnableItem itemToSpawn = GetRandomItemToSpawn();
+        if (itemToSpawn == null) return;
+
+        Vector3 spawnPosition = spawnPoint.point.position + 
+                              Random.insideUnitSphere * spawnPoint.spawnRadius;
+        spawnPosition.y = spawnPoint.point.position.y;
+
+        GameObject spawnedItem = Instantiate(itemToSpawn.prefab, spawnPosition, 
+                                           Quaternion.identity);
+        spawnedItems.Add(spawnedItem);
+        itemToSpawn.currentInstances++;
+
+ 
+        var pickup = spawnedItem.GetComponent<PickUpObject>() ?? spawnedItem.AddComponent<PickUpObject>();
+        
+
+        if (spawnedItem.GetComponent<ItemBase>() == null)
         {
-            Instance = null;
+            Debug.LogWarning($"Prefab {spawnedItem.name} doesn't have ItemBase component!");
+        }
+    }
+
+    private SpawnableItem GetRandomItemToSpawn()
+    {
+        var availableItems = spawnableItems.FindAll(item => 
+            item.currentInstances < item.maxInstances);
+
+        if (availableItems.Count == 0) return null;
+
+        float totalWeight = 0;
+        foreach (var item in availableItems)
+        {
+            totalWeight += item.spawnWeight;
+        }
+
+        float randomValue = Random.Range(0, totalWeight);
+        float currentWeight = 0;
+
+        foreach (var item in availableItems)
+        {
+            currentWeight += item.spawnWeight;
+            if (randomValue <= currentWeight)
+            {
+                return item;
+            }
+        }
+
+        return availableItems[0];
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        foreach (var point in spawnPoints)
+        {
+            if (point.point != null)
+            {
+                Gizmos.DrawWireSphere(point.point.position, point.spawnRadius);
+            }
         }
     }
 }

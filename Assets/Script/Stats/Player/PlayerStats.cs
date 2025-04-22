@@ -101,10 +101,10 @@ public class PlayerStats : NetworkBehaviour {
     private PlayerUI playerUI;
 
 
-    public static PlayerStats Instance;
+
 
     private void Awake() {
-        Instance = this;
+
         _spawnPosition = transform.position;
     }
 

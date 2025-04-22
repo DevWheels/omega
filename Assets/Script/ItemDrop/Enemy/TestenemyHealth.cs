@@ -8,35 +8,55 @@ public class TestenemyHealth : MonoBehaviour
     
     [Header("Dependencies")]
     [SerializeField] private EnemyLoot _enemyLoot;
-    [SerializeField] private PlayerStats _playerStats; 
     
     private int _currentHealth;
+    private PlayerStats _lastAttacker;
     
     private void Start()
     {
         _currentHealth = _maxHealth;
-        if (_playerStats == null)
-            _playerStats = PlayerStats.Instance;
-        _playerStats = FindAnyObjectByType<PlayerStats>();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, PlayerStats attacker)
     {
         _currentHealth = Mathf.Max(0, _currentHealth - damage);
-        if (_currentHealth <= 0) Die();
+        _lastAttacker = attacker; 
+        
+        if (_currentHealth <= 0) 
+            Die();
     }
 
     private void Die()
     {
-        Debug.Log("Enemy died!"); 
-        if (_enemyLoot != null && _playerStats != null)
+        Debug.Log("Enemy died! Killer: " + (_lastAttacker != null ? _lastAttacker.name : "unknown"));
+        
+        if (_enemyLoot != null)
         {
-            _enemyLoot.DropItem(_playerStats.Lvl);
+            if (_lastAttacker != null)
+            {
+                _enemyLoot.DropItem(_lastAttacker.Lvl);
+            }
+            else
+            {
+                Debug.LogWarning("No attacker registered, using default level");
+                _enemyLoot.DropItem(1); 
+            }
         }
         else
         {
-            Debug.LogWarning($"EnemyLoot: {_enemyLoot}, PlayerStats: {_playerStats}");
+            Debug.LogWarning("EnemyLoot reference is missing!");
         }
+        
         Destroy(gameObject);
     }
+
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     var playerAttack = other.GetComponent<PlayerAttack>();
+    //     if (playerAttack != null && playerAttack.PlayerStats != null)
+    //     {
+    //         TakeDamage(playerAttack.damage, playerAttack.PlayerStats);
+    //     }
+    // }
 }

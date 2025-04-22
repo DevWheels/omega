@@ -25,7 +25,7 @@ public class EnemyLootTable : ScriptableObject
 
         if (config is not null)
         {
-            EquipmentItem droppedItem = new EquipmentItem(config, itemRank, playerLevel, mobLevel);
+            EquipmentItem droppedItem = new EquipmentItem(config,  mobLevel);
             return droppedItem;
         }
 

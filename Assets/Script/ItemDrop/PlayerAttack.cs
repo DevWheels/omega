@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
-{
-    [Header("Attack Settings")]
-    public int damage = 10;
+public class PlayerAttack : MonoBehaviour {
+    [Header("Attack Settings")] public int Damage = 10;
+    public PlayerStats PlayerStats;
     public float attackRange = 1f;
     public float attackCooldown = 0.5f;
     public Vector2 attackOffset = new Vector2(0.5f, 0);
-
+    public TestenemyHealth enemyHealth;
+    
     [Header("References")]
     public LayerMask enemyLayer;
     public Animator animator;
     public AudioClip attackSound;
-
+    
     private float lastAttackTime;
     private bool isAttacking;
 
@@ -20,21 +20,17 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && Time.time > lastAttackTime + attackCooldown)
         {
-            Attack();
+            Attack(enemyHealth);
         }
     }
 
-    void Attack()
+   
+    
+    
+    void Attack(TestenemyHealth enemyHealth)
     {
-  
-        //if (animator != null)
-        //    animator.SetTrigger("Attack");
-
-  
-        //if (attackSound != null)
-        //    AudioSource.PlayClipAtPoint(attackSound, transform.position);
-
-
+        
+        enemyHealth.TakeDamage(Damage, PlayerStats);
         Vector2 attackPos = (Vector2)transform.position +
                           attackOffset * (transform.localScale.x > 0 ? 1 : -1);
 
@@ -51,8 +47,8 @@ public class PlayerAttack : MonoBehaviour
             TestenemyHealth testenemyHealth = enemy.GetComponent<TestenemyHealth>();
             if (testenemyHealth != null)
             {
-                testenemyHealth.TakeDamage(damage);
-                Debug.Log($"Hit {enemy.name} for {damage} damage");
+                testenemyHealth.TakeDamage(Damage,PlayerStats);
+                Debug.Log($"Hit {enemy.name} for {Damage} damage");
             }
         }
 

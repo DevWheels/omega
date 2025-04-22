@@ -16,12 +16,79 @@ public class EquipmentItem : EquipmentItemConfig
     public int Attack { get; private set; }
     public SpecialStatType[] SpecialStats { get; private set; }
     public float[] SpecialStatsValues { get; private set; }
-    public EquipmentItem(EquipmentItemConfig config, ItemRank rank, int playerLevel, int mobLevel)
+    public EquipmentItem(EquipmentItemConfig config, int mobLevel)
     {
         Config = config;
-        Generate(rank, playerLevel, mobLevel);
-        
+        ItemRank rank = DetermineRankByMobLevel(mobLevel);
+        Generate(rank, mobLevel, mobLevel); 
     }
+    private ItemRank DetermineRankByMobLevel(int mobLevel)
+    {
+   
+        Dictionary<ItemRank, float> rankChances = GetRankChancesForMobLevel(mobLevel);
+
+
+        float randomValue = UnityEngine.Random.Range(0f, 100f);
+        float cumulativeChance = 0f;
+
+
+        foreach (var kvp in rankChances)
+        {
+            cumulativeChance += kvp.Value;
+            if (randomValue <= cumulativeChance)
+            {
+                return kvp.Key;
+            }
+        }
+        
+        return ItemRank.D;
+    }
+    
+    private Dictionary<ItemRank, float> GetRankChancesForMobLevel(int mobLevel)
+    {
+        var chances = new Dictionary<ItemRank, float>();
+        if (mobLevel <= 5)
+        {
+            chances[ItemRank.D] = 100f;
+        }
+        else if (mobLevel <= 10)
+        {
+            chances[ItemRank.D] = 80f;
+            chances[ItemRank.C] = 20f;
+        }
+        else if (mobLevel <= 15)
+        {
+            chances[ItemRank.D] = 60f;
+            chances[ItemRank.C] = 35f;
+            chances[ItemRank.B] = 5f;
+        }
+        else if (mobLevel <= 20)
+        {
+            chances[ItemRank.D] = 40f;
+            chances[ItemRank.C] = 45f;
+            chances[ItemRank.B] = 14f;
+            chances[ItemRank.A] = 1f;
+        }
+        else if (mobLevel <= 25)
+        {
+            chances[ItemRank.D] = 30f;
+            chances[ItemRank.C] = 40f;
+            chances[ItemRank.B] = 25f;
+            chances[ItemRank.A] = 4.5f;
+            chances[ItemRank.S] = 0.5f;
+        }
+        else 
+        {
+            chances[ItemRank.D] = 20f;
+            chances[ItemRank.C] = 30f;
+            chances[ItemRank.B] = 35f;
+            chances[ItemRank.A] = 12f;
+            chances[ItemRank.S] = 3f;
+        }
+
+        return chances;
+    }
+    
     public void Generate(ItemRank rank, int playerLevel, int mobLevel)
     {
         Rank = rank;

@@ -2,27 +2,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EquipmentPlayerUI : MonoBehaviour{
-        public void GetPlayerEquipmentArmor() {
-            List<EquipmentItemConfig> equipmentItems =
-                PlayerEquipment.Instance.PlayerInventory.FindAll((e) => e.itemType == ItemType.Armor);
-            foreach (var item in equipmentItems) {
-                Debug.Log(item.name);
-            }
+
+    public List<EquipmentItemConfig> GetPlayerEquipmentByType(ItemType type)
+    {
+        if (PlayerEquipment.Instance == null)
+        {
+            Debug.LogError("PlayerEquipment instance is missing!");
+            return new List<EquipmentItemConfig>();
         }
 
-        public void GetPlayerEquipmentAccessories() {
-            List<EquipmentItemConfig> equipmentItems =
-                PlayerEquipment.Instance.PlayerInventory.FindAll((e) => e.itemType == ItemType.Accessory);
-            foreach (var item in equipmentItems) {
-                Debug.Log(item.name);
-            }
-        }
+        return PlayerEquipment.Instance.PlayerInventory.FindAll(item => 
+            item != null && item.itemType == type);
+    }
+
+ 
+    public void LogEquipmentByType(ItemType type)
+    {
+        var items = GetPlayerEquipmentByType(type);
+        Debug.Log($"Found {items.Count} items of type {type}:");
         
-        public void GetPlayerEquipmentWeapons() {
-            List<EquipmentItemConfig> equipmentItems =
-                PlayerEquipment.Instance.PlayerInventory.FindAll((e) => e.itemType == ItemType.Weapon);
-            foreach (var item in equipmentItems) {
+        foreach (var item in items)
+        {
+            if (item != null)
+            {
                 Debug.Log(item.name);
             }
         }
+    }
 }
