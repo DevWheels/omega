@@ -7,47 +7,74 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerEquipment : NetworkBehaviour {
-    public List<EquipmentItemConfig> PlayerInventory;
+    public Dictionary<ItemType,EquipmentItemConfig> PlayerInventory = new();
     public static PlayerEquipment Instance;
 
-    [SerializeField]
-    private Image _imageForArmor;
+    [SerializeField] private Image _imageForArmor;
+    [SerializeField] private Image _imageForAccessory;
+    [SerializeField] private Image _imageForWeapon;
 
     private void Awake() {
         Instance = this;
-    }
 
-    public List<EquipmentItemConfig> GetPlayerInventory() {
-        return PlayerInventory;
     }
-
     public void WearItem(EquipmentItemConfig equipmentItemConfig) {
         if (equipmentItemConfig.itemSkills.Count < 0) {
             return;
         }
 
         var skillController = InventoryManager.Instance.PlayerSkillController;
-        var resSkills = new List<SkillConfig>();
-        foreach (var skillIndex in equipmentItemConfig.itemSkills) {
-            resSkills.Add(skillIndex);
+
+
+
+
+        if (PlayerInventory.ContainsKey(equipmentItemConfig.itemType)) {
+
+                PlayerInventory[equipmentItemConfig.itemType] = equipmentItemConfig;
+                
+
+
+        }
+        else {
+
+                PlayerInventory.Add(equipmentItemConfig.itemType, equipmentItemConfig);
         }
 
-        resSkills = resSkills.DistinctBy(s => s.Name).ToList();
+        skillController.SkillManager.Skills.Clear();
+        // foreach (var skill in PlayerInventory) {
+        //     foreach (var itemSkill in skill.Value.itemSkills) {
+        //         skillController.SkillManager.Skills.Add(itemSkill.);
+        //     }
+        //
+        // }
+        
+        foreach (var skillIndex in PlayerInventory) {
+            foreach (var itemskill in skillIndex.Value.itemSkills) {
+                var skill = SkillFactory.Create(itemskill, skillController);
+                skillController.AddNewSkillFromItem(skill);                
+            }
 
-        foreach (var skillIndex in resSkills) {
-            var skill = SkillFactory.Create(skillIndex, skillController);
-            skillController.AddNewSkillFromItem(skill);
-
-            PlayerInventory.Add(equipmentItemConfig);
         }
-
-        PlayerInventory = PlayerInventory.DistinctBy(s => s.Name).ToList();
-
         SetEquipmentImage(equipmentItemConfig);
     }
 
     private void SetEquipmentImage(EquipmentItemConfig equipmentItemConfig) {
-        _imageForArmor.gameObject.SetActive(true);
-        _imageForArmor.sprite = equipmentItemConfig.icon;
+        switch (equipmentItemConfig.itemType) {
+            case ItemType.Armor: 
+
+                _imageForArmor.gameObject.SetActive(true);
+                _imageForArmor.sprite = equipmentItemConfig.icon; break;
+            case ItemType.Accessory:
+
+                _imageForAccessory.gameObject.SetActive(true);
+                _imageForAccessory.sprite = equipmentItemConfig.icon; break;
+            case ItemType.Weapon:
+                
+                _imageForWeapon.gameObject.SetActive(true);
+                _imageForWeapon.sprite = equipmentItemConfig.icon; break;
+            default: Debug.LogError("not correct item type or no type"); break;
+        }
     }
+
+
 }

@@ -42,13 +42,20 @@ public class PlayerSkillController : NetworkBehaviour {
     }
 
     private void SortActiveOrPassiveSkill() {
+        Active_Skills.Clear();
+        Passive_Skills.Clear();
+
         foreach (var skill in _skills) {
             if (skill.skillConfig.IsPassive) {
                 Passive_Skills.Add(skill);
             }
             else { Active_Skills.Add(skill); }
             SkillManager.AddSkill(skill);
-            Active_Skills = Active_Skills.DistinctBy(e => e.skillConfig.Name).ToList();
+
+        }
+        Active_Skills = Active_Skills.DistinctBy(e => e.skillConfig.Name).ToList();
+        foreach (var activeSkill_skill in Active_Skills) { 
+            Debug.Log(activeSkill_skill);
         }
     }
     public void AddNewSkillFromItem(Skill skill) {

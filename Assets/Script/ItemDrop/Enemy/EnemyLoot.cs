@@ -46,7 +46,7 @@ public class EnemyLoot : MonoBehaviour
                           $"Position: {droppedPrefab.transform.position}\n" +
                           $"Rank: {item.Rank}, Level: {item.Level}\n" +
                           $"Stats: HP={item.Health}, Armor={item.Armor}, ATK={item.Attack}");
-                FindAnyObjectByType<PlayerEquipment>().PlayerInventory.Add(item.Config);
+                FindAnyObjectByType<PlayerEquipment>().PlayerInventory.Add(item.itemType,item.Config);
             }
         }
         else
