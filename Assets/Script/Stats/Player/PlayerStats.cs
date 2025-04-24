@@ -191,8 +191,7 @@ public class PlayerStats : NetworkBehaviour {
 
         playerUI.UpdateUI();
     }
-
-    [Client]
+    
     public void TakeHit(int damage) {
         Debug.Log($"Took hit for damage: {damage}");
         currently_hp -= damage;

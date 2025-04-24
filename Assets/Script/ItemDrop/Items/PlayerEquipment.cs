@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerEquipment : NetworkBehaviour {
-    public Dictionary<ItemType,EquipmentItemConfig> PlayerInventory = new();
+    private Dictionary<ItemType,EquipmentItemConfig> PlayerInventory = new();
     public static PlayerEquipment Instance;
 
     [SerializeField] private Image _imageForArmor;
@@ -18,15 +18,18 @@ public class PlayerEquipment : NetworkBehaviour {
         Instance = this;
 
     }
+
+    public Dictionary<ItemType, EquipmentItemConfig> GetAllItems() {
+        return PlayerInventory;
+    }
     public void WearItem(EquipmentItemConfig equipmentItemConfig) {
         if (equipmentItemConfig.itemSkills.Count < 0) {
+            SetEquipmentImage(equipmentItemConfig);
             return;
         }
-
         var skillController = InventoryManager.Instance.PlayerSkillController;
-
-
-
+        skillController.SkillManager.Skills.Clear();
+        
 
         if (PlayerInventory.ContainsKey(equipmentItemConfig.itemType)) {
 
@@ -39,22 +42,15 @@ public class PlayerEquipment : NetworkBehaviour {
 
                 PlayerInventory.Add(equipmentItemConfig.itemType, equipmentItemConfig);
         }
-
-        skillController.SkillManager.Skills.Clear();
-        // foreach (var skill in PlayerInventory) {
-        //     foreach (var itemSkill in skill.Value.itemSkills) {
-        //         skillController.SkillManager.Skills.Add(itemSkill.);
+        
+        // foreach (var skillIndex in PlayerInventory) {
+        //     foreach (var itemskill in skillIndex.Value.itemSkills) {
+        //         var skill = SkillFactory.Create(itemskill, skillController);
+        //         skillController.AddNewSkillFromItem();                
         //     }
         //
         // }
-        
-        foreach (var skillIndex in PlayerInventory) {
-            foreach (var itemskill in skillIndex.Value.itemSkills) {
-                var skill = SkillFactory.Create(itemskill, skillController);
-                skillController.AddNewSkillFromItem(skill);                
-            }
-
-        }
+        skillController.AddNewSkillFromItem();
         SetEquipmentImage(equipmentItemConfig);
     }
 
