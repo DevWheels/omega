@@ -27,7 +27,6 @@ public class FireBallProjectile : ProjectileBase {
 
     void Update() {
         MoveProjectile();
-        //uihewfihuerf
     }
 
     private void MoveProjectile() {
