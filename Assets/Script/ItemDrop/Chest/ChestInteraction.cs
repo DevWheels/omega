@@ -16,10 +16,7 @@ public class ChestInteraction : NetworkBehaviour{
 
     private void OnTriggerEnter2D(Collider2D other) {
         _isNearby = true;
-        if (_playerStats.TryGetComponent<PlayerStats>(out PlayerStats player)) {
-            _playerStats = player;
-        }
-
+        _playerStats = other.GetComponent<PlayerStats>();
     }
 
     private void OnTriggerExit2D(Collider2D other) {
