@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: EnemyLootTable
   m_EditorClassIdentifier: 
   possibleItemConfigs:
-  - {fileID: 11400000, guid: 478b649fde604424bb329c8221195740, type: 2}
+  - {fileID: 11400000, guid: 2910effb9c7063a4e9b2404d56d8c89e, type: 2}
+  - {fileID: 11400000, guid: d6b0230772ee21647932a172359deaa5, type: 2}
   rankChances: []
