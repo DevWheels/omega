@@ -1,36 +1,33 @@
+using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "NewEquipment", menuName = "Inventory/Equipment")]
 public class EquipmentItem : EquipmentItemConfig
 {
     public EquipmentItemConfig Config { get; private set; }
     public List<string> Skills { get; private set; }
-    private PlayerEquipment playerEquipment;
-    public ItemRank Rank { get; private set; }
+    private ItemRank Rank { get ;  set; }
     public int Level { get; private set; }
     public int Health { get; private set; }
     public int Armor { get; private set; }
     public int Attack { get; private set; }
     public SpecialStatType[] SpecialStats { get; private set; }
     public float[] SpecialStatsValues { get; private set; }
-    public EquipmentItem(EquipmentItemConfig config, int mobLevel)
+
+    public void Initialize(EquipmentItemConfig config, TestenemyHealth enemyHealth)
     {
         Config = config;
-        ItemRank rank = DetermineRankByMobLevel(mobLevel);
-        Generate(rank, mobLevel, mobLevel); 
+        Rank = DetermineRankByEnemyLevel(enemyHealth.Level);
+        Generate(Rank, enemyHealth);
     }
-    private ItemRank DetermineRankByMobLevel(int mobLevel)
+
+    private ItemRank DetermineRankByEnemyLevel(int enemyLevel)
     {
-   
-        Dictionary<ItemRank, float> rankChances = GetRankChancesForMobLevel(mobLevel);
-
-
+        Dictionary<ItemRank, float> rankChances = GetRankChancesForEnemyLevel(enemyLevel);
+        
         float randomValue = UnityEngine.Random.Range(0f, 100f);
         float cumulativeChance = 0f;
-
 
         foreach (var kvp in rankChances)
         {
@@ -43,33 +40,34 @@ public class EquipmentItem : EquipmentItemConfig
         
         return ItemRank.D;
     }
-    
-    private Dictionary<ItemRank, float> GetRankChancesForMobLevel(int mobLevel)
+
+    private Dictionary<ItemRank, float> GetRankChancesForEnemyLevel(int enemyLevel)
     {
         var chances = new Dictionary<ItemRank, float>();
-        if (mobLevel <= 5)
+        
+        if (enemyLevel <= 5)
         {
             chances[ItemRank.D] = 100f;
         }
-        else if (mobLevel <= 10)
+        else if (enemyLevel <= 10)
         {
             chances[ItemRank.D] = 80f;
             chances[ItemRank.C] = 20f;
         }
-        else if (mobLevel <= 15)
+        else if (enemyLevel <= 15)
         {
             chances[ItemRank.D] = 60f;
             chances[ItemRank.C] = 35f;
             chances[ItemRank.B] = 5f;
         }
-        else if (mobLevel <= 20)
+        else if (enemyLevel <= 20)
         {
             chances[ItemRank.D] = 40f;
             chances[ItemRank.C] = 45f;
             chances[ItemRank.B] = 14f;
             chances[ItemRank.A] = 1f;
         }
-        else if (mobLevel <= 25)
+        else if (enemyLevel <= 25)
         {
             chances[ItemRank.D] = 30f;
             chances[ItemRank.C] = 40f;
@@ -88,34 +86,37 @@ public class EquipmentItem : EquipmentItemConfig
 
         return chances;
     }
-    
-    public void Generate(ItemRank rank, int playerLevel, int mobLevel)
+
+    public void Generate(ItemRank rank, TestenemyHealth enemyHealth)
     {
         Rank = rank;
-        Level = playerLevel + Mathf.RoundToInt(mobLevel * 0.5f);
+        Level = CalculateItemLevel(enemyHealth);
         
         var ranges = Config.GetRangesForRank(rank);
-         int levelBonus = (Level - 1) * ranges.perLevelIncrease;
+        int levelBonus = (Level - 1) * ranges.perLevelIncrease;
         
-        Health = Random.Range(
-            ranges.health.x + levelBonus,
-            ranges.health.y + levelBonus + 50
-        );
+        Health = CalculateStat(ranges.health, levelBonus, 50);
+        Armor = CalculateStat(ranges.armor, levelBonus, 5);
+        Attack = CalculateStat(ranges.attack, levelBonus, 5);
         
-        Armor = Random.Range(
-            ranges.armor.x + levelBonus,
-            ranges.armor.y + levelBonus + 5
-        );
-        
-        Attack = Random.Range(
-            ranges.attack.x + levelBonus,
-            ranges.attack.y + levelBonus + 5
-        );
-        Skills = SkillsTable.Instance.GetSkillsForItem();
-        playerEquipment = FindAnyObjectByType<PlayerEquipment>();
-
+        Skills = SkillsTable.Instance?.GetSkillsForItem() ?? new List<string>();
         GenerateSpecialStats();
+        
         LogStats();
+    }
+
+    private int CalculateItemLevel(TestenemyHealth enemyHealth)
+    {
+        
+        return enemyHealth.Level + UnityEngine.Random.Range(0, 3);
+    }
+
+    private int CalculateStat(Vector2Int range, int levelBonus, int maxRandomBonus)
+    {
+        return UnityEngine.Random.Range(
+            range.x + levelBonus,
+            range.y + levelBonus + UnityEngine.Random.Range(0, maxRandomBonus + 1)
+        );
     }
     
     private void GenerateSpecialStats()
@@ -127,33 +128,56 @@ public class EquipmentItem : EquipmentItemConfig
             ItemRank.A or ItemRank.S => 2,
             _ => 0
         };
+
         SpecialStats = new SpecialStatType[statsCount];
         SpecialStatsValues = new float[statsCount];
+
         for (int i = 0; i < statsCount; i++)
         {
             SpecialStats[i] = GetRandomSpecialStat();
             SpecialStatsValues[i] = CalculateSpecialStatValue(SpecialStats[i]);
         }
     }
+
     private SpecialStatType GetRandomSpecialStat()
     {
         Array values = Enum.GetValues(typeof(SpecialStatType));
-        return (SpecialStatType)values.GetValue(Random.Range(0, values.Length));
+        return (SpecialStatType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
     }
+
     private float CalculateSpecialStatValue(SpecialStatType stat)
     {
         float baseValue = stat switch
         {
-            SpecialStatType.Dodge => Random.Range(1f, 3f),
-            SpecialStatType.CRIT => Random.Range(2f, 5f),
+            SpecialStatType.Dodge => UnityEngine.Random.Range(1f, 3f),
+            SpecialStatType.CRIT => UnityEngine.Random.Range(2f, 5f),
+            SpecialStatType.DodgeRES => UnityEngine.Random.Range(1f, 2.5f),
+            SpecialStatType.CRITRES => UnityEngine.Random.Range(1.5f, 3f),
+            SpecialStatType.HPSteel => UnityEngine.Random.Range(0.5f, 1.5f),
+            SpecialStatType.BoostCRITDMG => UnityEngine.Random.Range(3f, 7f),
+            SpecialStatType.ReduceCRITDMG => UnityEngine.Random.Range(2f, 5f),
+            SpecialStatType.RestoreHP => UnityEngine.Random.Range(1f, 3f),
+            SpecialStatType.BoostDMG => UnityEngine.Random.Range(2f, 4f),
             _ => 0f
         };
+
         return baseValue * (1 + (Level * 0.05f));
     }
+
     public void LogStats()
     {
-        string log = $"[{Rank}] {itemName} (Lvl {Level})\n" +
+        string log = $"[{Rank}] {Config.itemName} (Lvl {Level})\n" +
                     $"HP: {Health} | Armor: {Armor} | ATK: {Attack}\n";
+        
+        if (SpecialStats.Length > 0)
+        {
+            log += "Special Stats:\n";
+            for (int i = 0; i < SpecialStats.Length; i++)
+            {
+                log += $"- {SpecialStats[i]}: {SpecialStatsValues[i]:F1}\n";
+            }
+        }
+
         Debug.Log(log);
     }
 }

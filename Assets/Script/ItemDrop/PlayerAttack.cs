@@ -1,39 +1,38 @@
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour {
-    [Header("Attack Settings")] public int Damage = 10;
-    public PlayerStats PlayerStats;
+public class PlayerAttack : MonoBehaviour 
+{
+    [Header("Attack Settings")] 
+    public int baseDamage = 10;
     public float attackRange = 1f;
     public float attackCooldown = 0.5f;
     public Vector2 attackOffset = new Vector2(0.5f, 0);
-    public TestenemyHealth enemyHealth;
     
     [Header("References")]
     public LayerMask enemyLayer;
     public Animator animator;
     public AudioClip attackSound;
+    public PlayerStats playerStats;
     
     private float lastAttackTime;
     private bool isAttacking;
+    private int calculatedDamage;
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && Time.time > lastAttackTime + attackCooldown)
         {
-            Attack(enemyHealth);
+            Attack();
         }
     }
 
-   
-    
-    
-    void Attack(TestenemyHealth enemyHealth)
+    void Attack()
     {
+       
+        calculatedDamage = baseDamage + Mathf.FloorToInt(3 * 0.5f);
         
-        enemyHealth.TakeDamage(Damage, PlayerStats);
-        Vector2 attackPos = (Vector2)transform.position +
+        Vector2 attackPos = (Vector2)transform.position + 
                           attackOffset * (transform.localScale.x > 0 ? 1 : -1);
-
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
             attackPos,
@@ -41,20 +40,40 @@ public class PlayerAttack : MonoBehaviour {
             enemyLayer
         );
 
-
+        bool hitConnected = false;
+        
         foreach (Collider2D enemy in hitEnemies)
         {
-            TestenemyHealth testenemyHealth = enemy.GetComponent<TestenemyHealth>();
-            if (testenemyHealth != null)
+            TestenemyHealth enemyHealth = enemy.GetComponent<TestenemyHealth>();
+            if (enemyHealth != null)
             {
-                testenemyHealth.TakeDamage(Damage,PlayerStats);
-                Debug.Log($"Hit {enemy.name} for {Damage} damage");
+                enemyHealth.TakeDamage(calculatedDamage, playerStats);
+                Debug.Log($"Hit {enemy.name} for {calculatedDamage} damage");
+                hitConnected = true;
             }
+        }
+
+        if (hitConnected)
+        {
+            PlayAttackEffects();
         }
 
         lastAttackTime = Time.time;
     }
 
+    void PlayAttackEffects()
+    {
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+        }
+
+        if (attackSound != null)
+        {
+            AudioSource.PlayClipAtPoint(attackSound, transform.position);
+        }
+    }
 
     void OnDrawGizmosSelected()
     {
@@ -64,5 +83,8 @@ public class PlayerAttack : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos, attackRange);
     }
+
+
+    public int CurrentDamage => calculatedDamage;
 }
 

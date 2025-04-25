@@ -113,6 +113,7 @@ public class PlayerStats : NetworkBehaviour {
     }
 
     void Start() {
+        
         FindPlayerComponents();
         currently_hp -= 150;
     }
@@ -127,6 +128,12 @@ public class PlayerStats : NetworkBehaviour {
         playerUI.UpdateUI();
     }
 
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+    
     public void UseItem(ItemConfig itemConfig)
     {
         if (itemConfig.isHealing)
@@ -192,11 +199,35 @@ public class PlayerStats : NetworkBehaviour {
         playerUI.UpdateUI();
     }
 
-    [Client]
-    public void TakeHit(int damage) {
-        Debug.Log($"Took hit for damage: {damage}");
+    [Server]
+    public void TakeHit(int damage)
+    {
+        if (!isServer) return;
+        
         currently_hp -= damage;
-        UpdateEverything();
+        
+        if (currently_hp <= 0)
+        {
+            currently_hp = 0;
+            RpcDie();
+        }
+    }
+    
+    [ClientRpc]
+    private void RpcDie()
+    {
+        // Логика смерти игрока (перерождение, анимация и т.д.)
+        Debug.Log("Player died!");
+    }
+
+    [ClientRpc]
+    private void RpcUpdateHealth(int newHealth)
+    {
+        currently_hp = newHealth;
+        if (playerUI != null)
+        {
+            playerUI.UpdateUI();
+        }
     }
 
     [Client]
