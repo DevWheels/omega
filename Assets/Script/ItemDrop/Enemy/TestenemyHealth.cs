@@ -47,9 +47,11 @@ public class TestenemyHealth : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-        CalculateEnemyLevel(); 
-        ScaleStats();          
-        _currentHealth = MaxHp; 
+        _isDead = false;
+        CalculateEnemyLevel();
+        ScaleStats();
+        _currentHealth = MaxHp;
+        enabled = true; 
     }
 
 
@@ -125,13 +127,6 @@ public class TestenemyHealth : NetworkBehaviour
     {
         var collider = GetComponent<Collider>();
         if (collider != null) collider.enabled = false;
-        
-        var movement = GetComponent<EnemyMovement>();
-        if (movement != null) movement.enabled = false;
-        
-        var attack = GetComponent<EnemyMeleeAttack>();
-        if (attack != null) attack.enabled = false;
-
         if (_deathEffectPrefab != null)
         {
             Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);

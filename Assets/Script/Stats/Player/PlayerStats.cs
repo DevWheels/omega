@@ -128,11 +128,11 @@ public class PlayerStats : NetworkBehaviour {
         playerUI.UpdateUI();
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-        gameObject.layer = LayerMask.NameToLayer("Player");
-    }
+    // public override void OnStartLocalPlayer()
+    // {
+    //     base.OnStartLocalPlayer();
+    //     gameObject.layer = LayerMask.NameToLayer("Player");
+    // }
     
     public void UseItem(ItemConfig itemConfig)
     {
@@ -202,23 +202,24 @@ public class PlayerStats : NetworkBehaviour {
     [Server]
     public void TakeHit(int damage)
     {
-        if (!isServer) return;
-        
+        if (!isServer) 
+        {
+            Debug.Log("TakeHit called on client, ignoring");
+            return;
+        }
+    
         currently_hp -= damage;
-        
+        Debug.Log($"Player took {damage} damage, health now: {currently_hp}");
+    
         if (currently_hp <= 0)
         {
             currently_hp = 0;
-            RpcDie();
+            Die();
         }
+    
+        RpcUpdateHealth(currently_hp);
     }
     
-    [ClientRpc]
-    private void RpcDie()
-    {
-        // Логика смерти игрока (перерождение, анимация и т.д.)
-        Debug.Log("Player died!");
-    }
 
     [ClientRpc]
     private void RpcUpdateHealth(int newHealth)
