@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 public class EnemyLoot : MonoBehaviour
@@ -18,21 +19,21 @@ public class EnemyLoot : MonoBehaviour
             if (enableLogs) Debug.Log("Drop failed: chance not passed or lootTable missing");
             return;
         }
-        EquipmentItem item = lootTable.GetRandomItem(enemyRank, playerLevel, mobLevel);
+        EquipmentItemData item = lootTable.GetRandomItem(enemyRank, playerLevel, mobLevel);
         
         if (item == null)
         {
             if (enableLogs) Debug.LogWarning("Failed to get item from lootTable");
             return;
+            
         }
+        
+       
         
         if (item.Config.Prefab != null)
         {
-            GameObject droppedPrefab = Instantiate(
-                item.Config.Prefab, 
-                transform.position, 
-                Quaternion.identity
-            );
+            
+            DropItemObj(new ItemData() { Type = item.Type });
             //
             // ItemWorld itemWorld = droppedPrefab.GetComponent<ItemWorld>();
             // if (itemWorld != null)
@@ -43,7 +44,6 @@ public class EnemyLoot : MonoBehaviour
             if (enableLogs) 
             {
                 Debug.Log($"Dropped item: {item.Config.itemName}\n" +
-                          $"Position: {droppedPrefab.transform.position}\n" +
                           $"Rank: {item.Rank}, Level: {item.Level}\n" +
                           $"Stats: HP={item.Health}, Armor={item.Armor}, ATK={item.Attack}");
             }
@@ -52,5 +52,14 @@ public class EnemyLoot : MonoBehaviour
         {
             if (enableLogs) Debug.LogWarning($"Item {item.Config.itemName} has no Prefab in config");
         }
+    }
+    
+    [Server]
+    private void DropItemObj(ItemData itemData) {
+        Vector3 dropPos = new(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+        ItemBase item = ItemFactory.Instance.CreateItemByData(itemData);
+        item.gameObject.SetActive(true);
+        item.gameObject.transform.position = dropPos;
+        NetworkServer.Spawn(item.gameObject);
     }
 }

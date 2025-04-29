@@ -18,14 +18,14 @@ public class EnemyLootTable : ScriptableObject
 
     public EquipmentItemConfig[] possibleItemConfigs;
     public RankDropSettings[] rankChances;
-    public EquipmentItem GetRandomItem(EnemyRank enemyRank, int playerLevel, int mobLevel)
+    public EquipmentItemData GetRandomItem(EnemyRank enemyRank, int playerLevel, int mobLevel)
     {
         ItemRank itemRank = DetermineItemRank(enemyRank);
         EquipmentItemConfig config = GetRandomItemOfRank(itemRank);
 
         if (config is not null)
         {
-            EquipmentItem droppedItem = new EquipmentItem(config, itemRank, playerLevel, mobLevel);
+            EquipmentItemData droppedItem = new EquipmentItemData(config, itemRank, playerLevel, mobLevel);
             return droppedItem;
         }
 

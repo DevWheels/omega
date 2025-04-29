@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "NewEquipment", menuName = "Inventory/Equipment")]
-public class EquipmentItem : EquipmentItemConfig
+public class EquipmentItemData : ItemData 
 {
     public EquipmentItemConfig Config { get; private set; }
     public List<string> Skills { get; private set; }
-    private PlayerEquipment playerEquipment;
     public ItemRank Rank { get; private set; }
     public int Level { get; private set; }
     public int Health { get; private set; }
@@ -16,7 +14,7 @@ public class EquipmentItem : EquipmentItemConfig
     public int Attack { get; private set; }
     public SpecialStatType[] SpecialStats { get; private set; }
     public float[] SpecialStatsValues { get; private set; }
-    public EquipmentItem(EquipmentItemConfig config, ItemRank rank, int playerLevel, int mobLevel)
+    public EquipmentItemData(EquipmentItemConfig config, ItemRank rank, int playerLevel, int mobLevel)
     {
         Config = config;
         Generate(rank, playerLevel, mobLevel);
@@ -45,7 +43,6 @@ public class EquipmentItem : EquipmentItemConfig
             ranges.attack.y + levelBonus + 5
         );
         Skills = SkillsTable.Instance.GetSkillsForItem();
-        playerEquipment = FindAnyObjectByType<PlayerEquipment>();
 
         GenerateSpecialStats();
         LogStats();
@@ -85,7 +82,7 @@ public class EquipmentItem : EquipmentItemConfig
     }
     public void LogStats()
     {
-        string log = $"[{Rank}] {itemName} (Lvl {Level})\n" +
+        string log = $"[{Rank}] {Config.itemName} (Lvl {Level})\n" +
                     $"HP: {Health} | Armor: {Armor} | ATK: {Attack}\n";
         Debug.Log(log);
     }
