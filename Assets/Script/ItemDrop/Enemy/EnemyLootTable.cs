@@ -30,9 +30,8 @@ public class EnemyLootTable : ScriptableObject
         ItemRank itemRank = DetermineItemRank(enemyRank);
         EquipmentItemConfig config = GetRandomItemOfRank(itemRank);
 
-        if (config != null)
-        {
-            EquipmentItemData item = ScriptableObject.CreateInstance<EquipmentItem>();
+        if (config != null) {
+            EquipmentItemData item = new EquipmentItemData();
             item.Initialize(config, enemyHealth);
             return item;
         }

@@ -33,7 +33,14 @@ public class ZoneEnemyAI : NetworkBehaviour
 
     private void Update()
     {
-        if (!isServer || _enemyHealth.IsDead) return;
+        if (!isServer) {
+            return;
+        }
+        
+        if( _enemyHealth.IsDead) {
+            Debug.Log("Im dead");
+            return;
+        }
 
         FindNearestPlayerByTag();
 
@@ -90,7 +97,7 @@ public class ZoneEnemyAI : NetworkBehaviour
     private void Patrol()
     {
 
-        if (Vector3.Distance(transform.position, _currentPatrolPoint) < 0.5f)
+        if (Vector2.Distance(transform.position, _currentPatrolPoint) < 0.5f)
         {
             _idleTimer += Time.deltaTime;
             
@@ -106,7 +113,8 @@ public class ZoneEnemyAI : NetworkBehaviour
 
             Vector3 direction = (_currentPatrolPoint - transform.position).normalized;
             transform.position += direction * _moveSpeed * Time.deltaTime;
-            transform.LookAt(new Vector3(_currentPatrolPoint.x, transform.position.y, _currentPatrolPoint.z));
+            transform.up = direction;
+            //transform.LookAt(new Vector3(_currentPatrolPoint.x, transform.position.y, _currentPatrolPoint.z));
         }
     }
 
@@ -116,23 +124,25 @@ public class ZoneEnemyAI : NetworkBehaviour
         if (_currentTarget == null) return;
 
 
-        Vector3 toPlayer = _currentTarget.position - _startPosition;
+        Vector2 toPlayer = _currentTarget.position - _startPosition;
         if (toPlayer.magnitude > _patrolRadius)
         {
+            Debug.Log("Stop chasing player");
             toPlayer = toPlayer.normalized * _patrolRadius;
             _currentTarget = null;
             return;
         }
 
-        Vector3 direction = (_currentTarget.position - transform.position).normalized;
-        transform.position += direction * _moveSpeed * Time.deltaTime;
-        transform.LookAt(new Vector3(_currentTarget.position.x, transform.position.y, _currentTarget.position.z));
+        Vector2 direction = (_currentTarget.position - transform.position).normalized;
+        transform.position += (Vector3)(direction * _moveSpeed * Time.deltaTime);
+        transform.up = direction;
+        //transform.LookAt(new Vector2(_currentTarget.position.x, transform.position.y));
     }
 
     [Server]
     private void SetNewPatrolPoint()
     {
- 
+        Debug.Log("Set new patrol point");
         Vector2 randomPoint = Random.insideUnitCircle * _patrolRadius;
         _currentPatrolPoint = _startPosition + new Vector3(randomPoint.x, 0, randomPoint.y);
     }
@@ -141,7 +151,7 @@ public class ZoneEnemyAI : NetworkBehaviour
     private bool CanAttack()
     {
         return _currentTarget != null && 
-               Vector3.Distance(transform.position, _currentTarget.position) <= _attackRange &&
+               Vector2.Distance(transform.position, _currentTarget.position) <= _attackRange &&
                Time.time > _lastAttackTime + _attackCooldown;
     }
 
@@ -149,8 +159,11 @@ public class ZoneEnemyAI : NetworkBehaviour
     private void Attack()
     {
         if (!CanAttack()) return;
+        Debug.Log("Attack");
 
-        transform.LookAt(new Vector3(_currentTarget.position.x, transform.position.y, _currentTarget.position.z));
+        Vector2 dir = _currentTarget.position - transform.position;
+        transform.up = dir;
+        //transform.LookAt(new Vector3(_currentTarget.position.x, transform.position.y, _currentTarget.position.z));
         
         PlayerStats playerStats = _currentTarget.GetComponent<PlayerStats>();
         if (playerStats != null)

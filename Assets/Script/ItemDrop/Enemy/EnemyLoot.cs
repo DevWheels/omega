@@ -24,7 +24,7 @@ public class EnemyLoot : MonoBehaviour
             return;
         }
 
-        EquipmentItem item = lootTable.GetRandomItem(enemyRank, playerLevel, GetComponent<TestenemyHealth>());
+        EquipmentItemData item = lootTable.GetRandomItem(enemyRank, playerLevel, GetComponent<TestenemyHealth>());
         
         if (item == null)
         {

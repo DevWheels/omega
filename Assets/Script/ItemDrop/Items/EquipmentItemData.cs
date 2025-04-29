@@ -2,8 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "NewEquipment", menuName = "Inventory/Equipment")]
-public class EquipmentItem : EquipmentItemConfig
+public class EquipmentItemData : EquipmentItemConfig
 {
     public EquipmentItemConfig Config { get; private set; }
     public List<string> Skills { get; private set; }
