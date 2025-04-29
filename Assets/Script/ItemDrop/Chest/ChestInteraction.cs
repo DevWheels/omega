@@ -27,32 +27,25 @@ public class ChestInteraction : NetworkBehaviour
                 ResetChest();
             }
         }
-        
-        if (_isNearby && Input.GetKeyDown(KeyCode.E))
-        {
-            TryOpenChest();
-        }
     }
-
-    private void TryOpenChest()
+    [Server]
+    public void TryOpenChest(int playerlvl)
     {
         if (!_isOpened)
         {
-            OpenChest();
+            OpenChest(playerlvl);
         }
     }
-
-    [Server]
-    private void OpenChest()
+    
+    private void OpenChest(int playerlvl)
     {
         _isOpened = true;
         _cooldownTimer = _cooldownDuration;
         
-        GetComponent<EnemyLoot>().DropItem(_playerStats.Lvl);
+        GetComponent<EnemyLoot>().DropItem(playerlvl);
         RpcUpdateChestState(true);
     }
-
-    [Server]
+    
     private void ResetChest()
     {
         _isOpened = false;
