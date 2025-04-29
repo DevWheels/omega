@@ -18,15 +18,23 @@ public class EnemyLootTable : ScriptableObject
 
     public EquipmentItemConfig[] possibleItemConfigs;
     public RankDropSettings[] rankChances;
-    public EquipmentItemData GetRandomItem(EnemyRank enemyRank, int playerLevel, int mobLevel)
+
+    public EquipmentItemData GetRandomItem(EnemyRank enemyRank, int playerLevel, TestenemyHealth enemyHealth)
     {
+        if (possibleItemConfigs == null || possibleItemConfigs.Length == 0)
+        {
+            Debug.LogWarning("No item configs available in loot table");
+            return null;
+        }
+
         ItemRank itemRank = DetermineItemRank(enemyRank);
         EquipmentItemConfig config = GetRandomItemOfRank(itemRank);
 
-        if (config is not null)
+        if (config != null)
         {
-            EquipmentItemData droppedItem = new EquipmentItemData(config, itemRank, playerLevel, mobLevel);
-            return droppedItem;
+            EquipmentItemData item = ScriptableObject.CreateInstance<EquipmentItem>();
+            item.Initialize(config, enemyHealth);
+            return item;
         }
 
         return null;
@@ -65,7 +73,7 @@ public class EnemyLootTable : ScriptableObject
 
     private EquipmentItemConfig GetRandomItemOfRank(ItemRank rank)
     {
-        var availableConfigs = possibleItemConfigs.Where(config => config is not null).ToArray();
+        var availableConfigs = possibleItemConfigs.Where(config => config != null && config.Rank == rank).ToArray();
         return availableConfigs.Length == 0 ? null : availableConfigs[Random.Range(0, availableConfigs.Length)];
     }
 }
