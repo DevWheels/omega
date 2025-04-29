@@ -41,7 +41,7 @@ public class PlayerSkillController : NetworkBehaviour {
 
     }
 
-    private void SortActiveOrPassiveSkill() {
+    public void SortActiveOrPassiveSkill() {
         
         foreach (var skill in _skills) {
             if (skill.skillConfig.IsPassive) {

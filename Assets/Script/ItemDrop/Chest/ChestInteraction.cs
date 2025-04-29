@@ -9,11 +9,11 @@ public class ChestInteraction : NetworkBehaviour{
     private void Update() {
         if (_isNearby && Input.GetKeyDown(KeyCode.E)) {
             GetComponent<EnemyLoot>().DropItem(_playerStats.Lvl);
-            
         }
 
     }
-
+    
+    
     private void OnTriggerEnter2D(Collider2D other) {
         _isNearby = true;
         _playerStats = other.GetComponent<PlayerStats>();
