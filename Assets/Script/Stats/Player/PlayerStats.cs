@@ -113,7 +113,6 @@ public class PlayerStats : NetworkBehaviour {
     }
 
     void Start() {
-        
         FindPlayerComponents();
         currently_hp -= 150;
     }

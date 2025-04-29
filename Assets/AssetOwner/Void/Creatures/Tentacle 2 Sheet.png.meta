@@ -157,9 +157,9 @@ TextureImporter:
       name: Tentacle 2 Sheet_0
       rect:
         serializedVersion: 2
-        x: 10
+        x: 0
         y: 0
-        width: 29
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: Tentacle 2 Sheet_1
       rect:
         serializedVersion: 2
-        x: 60
+        x: 48
         y: 0
-        width: 27
-        height: 63
+        width: 48
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: Tentacle 2 Sheet_2
       rect:
         serializedVersion: 2
-        x: 108
+        x: 96
         y: 0
-        width: 27
-        height: 63
+        width: 48
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,9 +223,9 @@ TextureImporter:
       name: Tentacle 2 Sheet_3
       rect:
         serializedVersion: 2
-        x: 155
+        x: 144
         y: 0
-        width: 28
+        width: 48
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: Tentacle 2 Sheet_4
       rect:
         serializedVersion: 2
-        x: 201
+        x: 192
         y: 0
-        width: 30
-        height: 63
+        width: 48
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: Tentacle 2 Sheet_5
       rect:
         serializedVersion: 2
-        x: 250
+        x: 240
         y: 0
-        width: 29
-        height: 63
+        width: 48
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ca4f42a5be2510040a0501f22568ff78
     internalID: 0
     vertices: []
     indices: 

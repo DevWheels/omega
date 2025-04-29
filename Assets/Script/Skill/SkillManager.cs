@@ -8,6 +8,11 @@ public class SkillManager : MonoBehaviour {
     private List<Skill> SkillCooldowns = new List<Skill>();
 
     public void AddSkill(Skill skill) {
+        foreach (var itemSkill in Skills) {
+            if (skill == itemSkill) {
+                return;
+            }
+        }
         Skills.Add(skill);
         if (skill.skillConfig.IsPassive)
         {

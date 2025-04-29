@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boots
   m_EditorClassIdentifier: 
   Name: Boots
-  Description: "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+  Description: "\u0427\u0442\u043E \u0442\u043E"
   icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   isHealing: 0
   HealingPower: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
   PlayerPrefsName: Boots
   itemName: Boots
   itemType: 1
-  Prefab: {fileID: 828090784902224273, guid: 2c7f5901471a5bd4c8cb62932edc5e06, type: 3}
+  Prefab: {fileID: 828090784902224273, guid: c8c55e48a63518545a7714e21efa9675, type: 3}
   itemSkills:
   - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
   dRankStats:

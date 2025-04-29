@@ -34,15 +34,13 @@ public class FireBallProjectile : ProjectileBase {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject == gameObject || collision.gameObject == _owner) {
-            return;
+        if (_owner == null || collision.gameObject == _owner) {
+            return; 
         }
 
         PlayerStats enemyPlayer = collision.GetComponent<PlayerStats>();
-        if (enemyPlayer.isLocalPlayer) {
-            return;
+        if (enemyPlayer != null || !enemyPlayer.isLocalPlayer) {
+            enemyPlayer.TakeHit(_projectileDamage);
         }
-
-        enemyPlayer.TakeHit(_projectileDamage);
     }
 }
