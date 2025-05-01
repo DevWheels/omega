@@ -13,6 +13,7 @@ public class SkillManager : MonoBehaviour {
                 return;
             }
         }
+        Debug.Log(skill.ToString());
         Skills.Add(skill);
         if (skill.skillConfig.IsPassive)
         {

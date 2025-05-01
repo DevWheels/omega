@@ -24,31 +24,44 @@ MonoBehaviour:
   PlayerPrefsName: Boots
   itemName: Boots
   itemType: 1
+  Rank: 4
   Prefab: {fileID: 828090784902224273, guid: c8c55e48a63518545a7714e21efa9675, type: 3}
   itemSkills:
   - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
   dRankStats:
     health: {x: 1, y: 1}
-    armor: {x: 1, y: 1}
     attack: {x: 1, y: 1}
+    armor: {x: 1, y: 1}
     perLevelIncrease: 1
+    possibleSpecialStats: 
+    specialStatRanges: []
   cRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
   bRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
   aRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
   sRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
+  itemColor: {r: 1, g: 1, b: 1, a: 1}

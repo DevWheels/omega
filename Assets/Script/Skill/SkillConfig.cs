@@ -2,6 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Skill", menuName = "Skill/SkillConfig")]
 public class SkillConfig : ScriptableObject {
+
     public Sprite skillIcon;
     public string Name;
     [TextArea]

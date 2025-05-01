@@ -62,7 +62,11 @@ public class PlayerEquipment : NetworkBehaviour {
                 
                 imageForWeapon.gameObject.SetActive(true);
                 imageForWeapon.sprite = equipmentItemConfig.icon; break;
-            default: Debug.LogError("not correct item type or no type"); break;
+            
+            default: 
+                // Debug.LogError("not correct item type or no type: " + equipmentItemConfig.itemType);
+                imageForArmor.gameObject.SetActive(true);
+                imageForArmor.sprite = equipmentItemConfig.icon; break;
         }
     }
 

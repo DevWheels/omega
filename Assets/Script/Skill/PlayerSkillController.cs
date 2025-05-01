@@ -87,6 +87,9 @@ public class PlayerSkillController : NetworkBehaviour {
             UseSkill();
         }
 
+        if (Active_Skills.Count > 0) {
+            Debug.Log(Active_Skills[0].skillConfig.skillIcon.ToString());
+        }
         if (Input.GetKeyDown(KeyCode.Tab)) {
             GetComponent<PlayerUI>().UpdateUI();
             InventoryManager.Instance.InventoryToggle(GetComponent<PlayerInventory>());

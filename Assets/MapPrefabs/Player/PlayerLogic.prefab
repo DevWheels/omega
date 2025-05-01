@@ -508,6 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f8a08bc2554d11ab84b71e22424817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillContainer: {fileID: 3857607078893262765, guid: 76e5a2a674d3ab245bf742a0c1f1c069, type: 3}
+  _gameObjectEquipment: {fileID: 4223194317599826411, guid: 78a7a1e0d762afb4baa51dbb1680ba8e, type: 3}
   equipment: {fileID: 0}
   buttons: []
 --- !u!1 &2494208576925611429
