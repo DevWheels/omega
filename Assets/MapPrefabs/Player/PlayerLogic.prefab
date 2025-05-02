@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 6223419629915707401}
   - component: {fileID: 3943498394387329860}
   - component: {fileID: 5730459053750150668}
-  - component: {fileID: 871869330249240541}
   m_Layer: 6
   m_Name: PlayerLogic
   m_TagString: Player
@@ -496,22 +495,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
---- !u!114 &871869330249240541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027513326529032562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8a08bc2554d11ab84b71e22424817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillContainer: {fileID: 3857607078893262765, guid: 76e5a2a674d3ab245bf742a0c1f1c069, type: 3}
-  _gameObjectEquipment: {fileID: 4223194317599826411, guid: 78a7a1e0d762afb4baa51dbb1680ba8e, type: 3}
-  equipment: {fileID: 0}
-  buttons: []
 --- !u!1 &2494208576925611429
 GameObject:
   m_ObjectHideFlags: 0

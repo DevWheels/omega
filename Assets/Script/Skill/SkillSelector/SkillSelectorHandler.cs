@@ -7,13 +7,8 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SkillSelectorHandler : MonoBehaviour {
-    [SerializeField] private GameObject skillContainer;
-    // [SerializeField] private GameObject _gameObjectEquipment;
-
-    
-
     private void Start() {
-        // equipment = _gameObjectEquipment.GetComponent<PlayerEquipment>();
+
 
         foreach (var button in GameUI.Instance.SkillContainerView.buttons) {
             button.Disable();
