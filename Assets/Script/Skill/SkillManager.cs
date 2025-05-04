@@ -13,15 +13,15 @@ public class SkillManager : MonoBehaviour {
                 return;
             }
         }
+
         Skills.Add(skill);
-        if (skill.skillConfig.IsPassive)
-        {
+        if (skill.skillConfig.IsPassive) {
             skill.Activate(GetMouseWorldPosition());
         }
     }
 
     public void RemoveSkill(Skill skill) {
-        Skills.Remove(skill);
+        Skills.RemoveAll(s => s.skillConfig.Name == skill.skillConfig.Name);
     }
 
     public void UseSkill(Skill playerskill) {
@@ -30,7 +30,8 @@ public class SkillManager : MonoBehaviour {
         if (skill == null || SkillCooldowns.Contains(skill)) {
             return;
         }
-        
+
+        GetComponent<PlayerStats>().CurrentlyMana -= playerskill.skillConfig.ManaCost;
         skill.Activate(GetMouseWorldPosition());
         StartCoroutine(CooldownSkill(skill));
     }
@@ -40,7 +41,7 @@ public class SkillManager : MonoBehaviour {
         yield return new WaitForSeconds(skill.skillConfig.Cooldown);
         SkillCooldowns.Remove(skill);
     }
-    
+
     private Vector3 GetMouseWorldPosition() {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;

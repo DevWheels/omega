@@ -18,6 +18,7 @@ public class SkillConfig : ScriptableObject {
     [Header("Active Settings")]
     public int Damage;
     public int ProjectileSpeed;
+    public int ManaCost;
     [Tooltip("Cooldown in seconds")]
     public int Cooldown;
     public int ProjectileLifetime;

@@ -20,6 +20,7 @@ MonoBehaviour:
   PercentageBuff: 0
   Damage: 35
   ProjectileSpeed: 10
+  ManaCost: 31
   Cooldown: 2
   ProjectileLifetime: 2
   ProjectileType: 2

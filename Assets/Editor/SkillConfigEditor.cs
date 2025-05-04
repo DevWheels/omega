@@ -10,6 +10,7 @@ public class SkillConfigEditor : Editor {
     private SerializedProperty percentageBuffProp;
     private SerializedProperty damageProp;
     private SerializedProperty speedProp;
+    private SerializedProperty ManaCostProp;
     private SerializedProperty cooldownProp;
     private SerializedProperty projectileLifetimeProp;
     private SerializedProperty projectileTypeProp;
@@ -23,6 +24,7 @@ public class SkillConfigEditor : Editor {
         skillTypeProp = serializedObject.FindProperty("SkillType");
         percentageBuffProp = serializedObject.FindProperty("PercentageBuff");
         damageProp = serializedObject.FindProperty("Damage");
+        ManaCostProp = serializedObject.FindProperty("ManaCost");
         speedProp = serializedObject.FindProperty("ProjectileSpeed");
         cooldownProp = serializedObject.FindProperty("Cooldown");
         projectileLifetimeProp = serializedObject.FindProperty("ProjectileLifetime");
@@ -51,6 +53,7 @@ public class SkillConfigEditor : Editor {
         {
             EditorGUILayout.PropertyField(damageProp);
             EditorGUILayout.PropertyField(speedProp);
+            EditorGUILayout.PropertyField(ManaCostProp);
             EditorGUILayout.PropertyField(cooldownProp);
             EditorGUILayout.PropertyField(projectileLifetimeProp);
             EditorGUILayout.PropertyField(projectileTypeProp);

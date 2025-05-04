@@ -6,19 +6,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerSkillController : NetworkBehaviour {
-   
-
     public SkillManager SkillManager { get; private set; }
     public SkillTree SkillTree { get; private set; }
     public List<Skill> Passive_Skills { get; } = new List<Skill>();
     public List<Skill> Active_Skills { get; set; } = new List<Skill>();
 
-    public PlayerStats PlayerStats {get; private set;}
-    public PlayerMovement Playermovement{get; private set;}
-    public RegenerationController Regeneration{get; private set;}
+    public PlayerStats PlayerStats { get; private set; }
+    public PlayerMovement Playermovement { get; private set; }
+    public RegenerationController Regeneration { get; private set; }
 
     private List<Skill> _skills = new();
     public bool GreenZone = true; // Добавляем булеву переменную (true - город, false - зона скиллов)
+
     private void Awake() {
         FindComponents();
         GreenZone = true;
@@ -33,40 +32,41 @@ public class PlayerSkillController : NetworkBehaviour {
 
     private void CreateSkills() {
         foreach (var skillConfig in SkillsTable.Instance.SkillConfigs) {
-            var skill = SkillFactory.Create(skillConfig,this);
+            var skill = SkillFactory.Create(skillConfig, this);
             _skills.Add(skill);
         }
 
         SortActiveOrPassiveSkill();
-
     }
 
     public void SortActiveOrPassiveSkill() {
-        
         foreach (var skill in _skills) {
             if (skill.skillConfig.IsPassive) {
                 Passive_Skills.Add(skill);
             }
-            else { Active_Skills.Add(skill); }
+            else {
+                Active_Skills.Add(skill);
+            }
+
             SkillManager.AddSkill(skill);
         }
-        Active_Skills = Active_Skills.DistinctBy(e => e.skillConfig.Name).ToList();
 
+        Active_Skills = Active_Skills.DistinctBy(e => e.skillConfig.Name).ToList();
     }
+
     public void AddNewSkillFromItem() {
         Active_Skills.Clear();
         Passive_Skills.Clear();
         _skills.Clear();
-        
+
         var newSkills = PlayerEquipment.Instance.GetAllItems();
         foreach (var pair in newSkills) {
             foreach (var t in pair.Value.itemSkills) {
-                var createdSkill = SkillFactory.Create(t,this);
+                var createdSkill = SkillFactory.Create(t, this);
                 _skills.Add(createdSkill);
-                Debug.Log("added skill: " + createdSkill.skillConfig.Name);
             }
         }
-        
+
         SortActiveOrPassiveSkill();
     }
 
@@ -74,9 +74,10 @@ public class PlayerSkillController : NetworkBehaviour {
         Active_Skills.RemoveAll(s => s.skillConfig.Name == skill.skillConfig.Name);
         Passive_Skills.RemoveAll(s => s.skillConfig.Name == skill.skillConfig.Name);
         _skills.RemoveAll(s => s.skillConfig.Name == skill.skillConfig.Name);
-    
+
         SkillManager.RemoveSkill(skill);
     }
+
     private void FindComponents() {
         SkillManager = gameObject.AddComponent<SkillManager>();
         SkillTree = new SkillTree();
@@ -94,7 +95,7 @@ public class PlayerSkillController : NetworkBehaviour {
         if (!GreenZone) {
             UseSkill();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Tab)) {
             GetComponent<PlayerUI>().UpdateUI();
             InventoryManager.Instance.InventoryToggle(GetComponent<PlayerInventory>());
@@ -110,11 +111,12 @@ public class PlayerSkillController : NetworkBehaviour {
             SkillManager.UseSkill(Active_Skills[1]);
         }
     }
-    
+
     [Command]
     public void SpawnProjectile(SkillConfig config, Vector3 direction) {
         ProjectileBase projectileObject = ProjectileFactory.Instance.GetProjectileByType(config.ProjectileType);
-        ProjectileBase projectile = Instantiate(projectileObject, PlayerStats.transform.position, PlayerStats.transform.rotation);
+        ProjectileBase projectile =
+            Instantiate(projectileObject, PlayerStats.transform.position, PlayerStats.transform.rotation);
         projectile.InitDirection(direction);
         projectile.Init(gameObject, config.Damage, config.ProjectileSpeed, config.ProjectileLifetime);
         NetworkServer.Spawn(projectile.gameObject);

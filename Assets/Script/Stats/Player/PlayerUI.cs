@@ -8,7 +8,7 @@ public class PlayerUI : MonoBehaviour {
     void Start() {
         _playerStats = GetComponent<PlayerStats>();
         UpdateUI();
-        //FindAllUI();
+
         // UpdateEverything();
     }
 
