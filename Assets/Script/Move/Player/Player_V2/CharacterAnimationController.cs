@@ -2,73 +2,62 @@ using UnityEngine;
 
 public class CharacterAnimationController : MonoBehaviour
 {
-    public Animator animator; // Ссылка на компонент Animator
-    public Transform player; // Ссылка на персонажа
+    public Animator animator;
+    public Transform player;
+    public float movementThreshold = 0.1f; // РџРѕСЂРѕРі РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ РґРІРёР¶РµРЅРёСЏ
 
-    private Vector3 lastPosition; // Хранит последнюю позицию персонажа
+    private Vector3 lastPosition;
+    private bool isMoving = false;
 
     void Start()
     {
-        lastPosition = player.position; // Инициализируем последнюю позицию
+        lastPosition = player.position;
     }
 
     void Update()
     {
-        // Получаем позицию мыши в мировых координатах
+        // РћРїСЂРµРґРµР»СЏРµРј, РґРІРёР¶РµС‚СЃСЏ Р»Рё РїРµСЂСЃРѕРЅР°Р¶
+        isMoving = Vector3.Distance(player.position, lastPosition) > movementThreshold;
+        lastPosition = player.position;
+
+        // РџРѕР»СѓС‡Р°РµРј РїРѕР·РёС†РёСЋ РјС‹С€Рё
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Убираем Z-компонент
+        mousePosition.z = 0;
 
-        // Вычисляем направление от персонажа к мыши
+        // Р’С‹С‡РёСЃР»СЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ
         Vector3 direction = mousePosition - player.position;
+        direction.Normalize();
 
-        // Проверяем, движется ли персонаж
-        if (player.position != lastPosition)
-        {
-            // Если персонаж движется, обновляем последнюю позицию
-            lastPosition = player.position;
-            return; // Выходим из метода, чтобы не обновлять анимацию
-        }
-
-        // Обновляем анимацию в зависимости от положения мыши
-        UpdateAnimation(direction);
+        // РћР±РЅРѕРІР»СЏРµРј Р°РЅРёРјР°С†РёСЋ
+        UpdateAnimation(direction, isMoving);
     }
 
-    private void UpdateAnimation(Vector3 direction)
+    private void UpdateAnimation(Vector3 direction, bool moving)
     {
-        // Сбрасываем триггеры, чтобы избежать конфликтов
-        animator.ResetTrigger("lookUp");
-        animator.ResetTrigger("lookDown");
-        animator.ResetTrigger("lookRight");
-        animator.ResetTrigger("lookLeft");
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїР°СЂР°РјРµС‚СЂ РґРІРёР¶РµРЅРёСЏ
+        animator.SetBool("isMoving", moving);
 
-        // Сравниваем абсолютные значения для определения направления
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        if (!moving)
         {
-            // Горизонтальное направление преобладает
-            if (direction.x > 0)
-            {
-                // Мышь справа от персонажа
-                animator.SetTrigger("lookLeft");
-            }
-            else
-            {
-                // Мышь слева от персонажа
-                animator.SetTrigger("lookRight");
-            }
+            // Р”Р»СЏ 8 РЅР°РїСЂР°РІР»РµРЅРёР№ РІ РїРѕРєРѕРµ
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            
+            // РќРѕСЂРјР°Р»РёР·СѓРµРј СѓРіРѕР» РѕС‚ 0 РґРѕ 360
+            if (angle < 0) angle += 360;
+
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РІР·РіР»СЏРґР°
+            animator.SetFloat("directionAngle", angle);
         }
         else
         {
-            // Вертикальное направление преобладает
-            if (direction.y > 0)
-            {
-                // Мышь выше персонажа
-                animator.SetTrigger("lookUp");
-            }
-            else
-            {
-                // Мышь ниже персонажа
-                animator.SetTrigger("lookDown");
-            }
+            // Р”Р»СЏ 8 РЅР°РїСЂР°РІР»РµРЅРёР№ РІ РґРІРёР¶РµРЅРёРё
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            
+            // РќРѕСЂРјР°Р»РёР·СѓРµРј СѓРіРѕР» РѕС‚ 0 РґРѕ 360
+            if (angle < 0) angle += 360;
+
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ
+            animator.SetFloat("moveAngle", angle);
         }
     }
 }
