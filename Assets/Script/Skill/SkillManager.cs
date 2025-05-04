@@ -13,12 +13,15 @@ public class SkillManager : MonoBehaviour {
                 return;
             }
         }
-        Debug.Log(skill.ToString());
         Skills.Add(skill);
         if (skill.skillConfig.IsPassive)
         {
             skill.Activate(GetMouseWorldPosition());
         }
+    }
+
+    public void RemoveSkill(Skill skill) {
+        Skills.Remove(skill);
     }
 
     public void UseSkill(Skill playerskill) {

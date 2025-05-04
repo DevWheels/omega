@@ -141,7 +141,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8538873614861676017}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -304,7 +304,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401271005570702109}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -467,7 +467,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 69275604706617433}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -630,7 +630,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1161641768636282281}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -793,7 +793,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1224904868124885830}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -956,7 +956,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2218949885826406666}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1119,7 +1119,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5815494181448805704}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1282,7 +1282,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6050696483938813158}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1445,7 +1445,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8127932558200288718}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1617,7 +1617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f8a08bc2554d11ab84b71e22424817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillContainer: {fileID: 3857607078893262765}
 --- !u!1 &3867790275873121404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,7 +1758,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7297347649947051264}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1922,7 +1921,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 277940257715347998}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2085,7 +2084,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4117946286048861598}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2248,7 +2247,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5442767919134845428}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2411,7 +2410,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1390143615134794616}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2574,7 +2573,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4518217863273238376}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2737,7 +2736,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7124234328863701632}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2900,7 +2899,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8700886567217729865}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3063,7 +3062,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6520478550514773276}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3226,7 +3225,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1208927479447091704}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3389,7 +3388,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1296777259475412262}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3552,7 +3551,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4215128249678612915}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3715,7 +3714,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5456214832406398925}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3878,7 +3877,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8699289327948320553}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4041,7 +4040,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4288434762077482299}
         m_TargetAssemblyTypeName: SkillSelectorButton, Assembly-CSharp
-        m_MethodName: AddSkill
+        m_MethodName: ToggleSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -43,7 +43,9 @@ public class PlayerEquipment : NetworkBehaviour {
                 PlayerInventory.Add(equipmentItemConfig.itemType, equipmentItemConfig);
         }
 
-        skillController.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
+        // gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
+        GameUI.Instance.SkillContainerView.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
+            
         // skillController.AddNewSkillFromItem();
         SetEquipmentImage(equipmentItemConfig);
     }

@@ -57,17 +57,25 @@ public class PlayerSkillController : NetworkBehaviour {
         Active_Skills.Clear();
         Passive_Skills.Clear();
         _skills.Clear();
-
-
-        var newSkills = FindAnyObjectByType<PlayerEquipment>().GetAllItems();
+        
+        var newSkills = PlayerEquipment.Instance.GetAllItems();
         foreach (var pair in newSkills) {
             foreach (var t in pair.Value.itemSkills) {
                 var createdSkill = SkillFactory.Create(t,this);
                 _skills.Add(createdSkill);
+                Debug.Log("added skill: " + createdSkill.skillConfig.Name);
             }
         }
         
         SortActiveOrPassiveSkill();
+    }
+
+    public void DeleteSkill(Skill skill) {
+        Active_Skills.RemoveAll(s => s.skillConfig.Name == skill.skillConfig.Name);
+        Passive_Skills.RemoveAll(s => s.skillConfig.Name == skill.skillConfig.Name);
+        _skills.RemoveAll(s => s.skillConfig.Name == skill.skillConfig.Name);
+    
+        SkillManager.RemoveSkill(skill);
     }
     private void FindComponents() {
         SkillManager = gameObject.AddComponent<SkillManager>();
