@@ -70,7 +70,10 @@ public class PlayerEquipment : NetworkBehaviour {
                 imageForWeapon.gameObject.SetActive(true);
                 imageForWeapon.sprite = equipmentItemConfig.icon;
                 break;
-
+            case ItemType.weapon:
+                imageForWeapon.gameObject.SetActive(true);
+                imageForWeapon.sprite = equipmentItemConfig.icon;
+                break;
             case ItemType.boots:
 
                 imageForBoots.gameObject.SetActive(true);
@@ -101,7 +104,7 @@ public class PlayerEquipment : NetworkBehaviour {
                 imageForHelmet.sprite = equipmentItemConfig.icon;
                 break;
             default:
-                Debug.LogError("not correct item type or no type: " + equipmentItemConfig.itemType); 
+                Debug.LogError("not correct item type or no type: " + equipmentItemConfig.itemType);
                 break;
         }
     }
