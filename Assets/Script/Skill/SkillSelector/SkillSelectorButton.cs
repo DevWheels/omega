@@ -12,7 +12,7 @@ public class SkillSelectorButton : MonoBehaviour {
                 _skillConfig = skillConfig;
                 _onSelected = onSelected;
                 _onDeselected = onDeselected;
-                GetComponent<Image>().sprite = _skillConfig.skillIcon;
+                GetComponent<Image>().sprite = Resources.Load<SkillViewConfig>("ViewConfig/"+_skillConfig.SkillViewConfigName).SkillIcon;
         }
         public void ToggleSkill() 
         {

@@ -23,32 +23,45 @@ MonoBehaviour:
   Coins: 0
   PlayerPrefsName: Staff
   itemName: Staff
-  itemType: 0
+  itemType: 8
+  Rank: 0
   Prefab: {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
   itemSkills:
   - {fileID: 11400000, guid: e84f82415d5d12b41899dc0ec872a603, type: 2}
   dRankStats:
     health: {x: 2, y: 2}
-    armor: {x: 2, y: 2}
     attack: {x: 2, y: 2}
+    armor: {x: 2, y: 2}
     perLevelIncrease: 1
+    possibleSpecialStats: 
+    specialStatRanges: []
   cRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
   bRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
   aRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
   sRankStats:
     health: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
     attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
     perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  icon: {fileID: 21300000, guid: 798a0192e5e2a1c45a1f6786703af909, type: 3}
+  itemColor: {r: 1, g: 1, b: 1, a: 1}
