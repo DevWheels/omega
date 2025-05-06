@@ -101,10 +101,10 @@ public class PlayerStats : NetworkBehaviour {
     private PlayerUI playerUI;
 
 
-    public static PlayerStats Instance;
+
 
     private void Awake() {
-        Instance = this;
+
         _spawnPosition = transform.position;
     }
 
@@ -127,6 +127,12 @@ public class PlayerStats : NetworkBehaviour {
         playerUI.UpdateUI();
     }
 
+    // public override void OnStartLocalPlayer()
+    // {
+    //     base.OnStartLocalPlayer();
+    //     gameObject.layer = LayerMask.NameToLayer("Player");
+    // }
+    
     public void UseItem(ItemConfig itemConfig)
     {
         if (itemConfig.isHealing)
@@ -191,11 +197,37 @@ public class PlayerStats : NetworkBehaviour {
 
         playerUI.UpdateUI();
     }
+
+    [Server]
+    public void TakeHit(int damage)
+    {
+        if (!isServer) 
+        {
+            Debug.Log("TakeHit called on client, ignoring");
+            return;
+        }
     
-    public void TakeHit(int damage) {
-        Debug.Log($"Took hit for damage: {damage}");
         currently_hp -= damage;
-        UpdateEverything();
+        Debug.Log($"Player took {damage} damage, health now: {currently_hp}");
+    
+        if (currently_hp <= 0)
+        {
+            currently_hp = 0;
+            Die();
+        }
+    
+        RpcUpdateHealth(currently_hp);
+    }
+    
+
+    [ClientRpc]
+    private void RpcUpdateHealth(int newHealth)
+    {
+        currently_hp = newHealth;
+        if (playerUI != null)
+        {
+            playerUI.UpdateUI();
+        }
     }
 
     [Client]

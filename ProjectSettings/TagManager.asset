@@ -10,6 +10,7 @@ TagManager:
   - Fire
   - Ice
   - Slaim
+  - Chest
   layers:
   - Default
   - TransparentFX

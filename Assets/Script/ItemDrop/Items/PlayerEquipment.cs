@@ -4,16 +4,18 @@ using System.Linq;
 using Mirror;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerEquipment : NetworkBehaviour {
     private Dictionary<ItemType,EquipmentItemConfig> PlayerInventory = new();
     public static PlayerEquipment Instance;
 
-    [SerializeField] private Image _imageForArmor;
-    [SerializeField] private Image _imageForAccessory;
-    [SerializeField] private Image _imageForWeapon;
+    [SerializeField] private Image imageForArmor;
+    [SerializeField] private Image imageForAccessory;
+    [SerializeField] private Image imageForWeapon;
 
+    [SerializeField] private Image skillSelectorPanel;
     private void Awake() {
         Instance = this;
 
@@ -35,22 +37,14 @@ public class PlayerEquipment : NetworkBehaviour {
 
                 PlayerInventory[equipmentItemConfig.itemType] = equipmentItemConfig;
                 
-
-
         }
         else {
 
                 PlayerInventory.Add(equipmentItemConfig.itemType, equipmentItemConfig);
         }
-        
-        // foreach (var skillIndex in PlayerInventory) {
-        //     foreach (var itemskill in skillIndex.Value.itemSkills) {
-        //         var skill = SkillFactory.Create(itemskill, skillController);
-        //         skillController.AddNewSkillFromItem();                
-        //     }
-        //
-        // }
-        skillController.AddNewSkillFromItem();
+
+        skillController.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
+        // skillController.AddNewSkillFromItem();
         SetEquipmentImage(equipmentItemConfig);
     }
 
@@ -58,16 +52,16 @@ public class PlayerEquipment : NetworkBehaviour {
         switch (equipmentItemConfig.itemType) {
             case ItemType.Armor: 
 
-                _imageForArmor.gameObject.SetActive(true);
-                _imageForArmor.sprite = equipmentItemConfig.icon; break;
+                imageForArmor.gameObject.SetActive(true);
+                imageForArmor.sprite = equipmentItemConfig.icon; break;
             case ItemType.Accessory:
 
-                _imageForAccessory.gameObject.SetActive(true);
-                _imageForAccessory.sprite = equipmentItemConfig.icon; break;
+                imageForAccessory.gameObject.SetActive(true);
+                imageForAccessory.sprite = equipmentItemConfig.icon; break;
             case ItemType.Weapon:
                 
-                _imageForWeapon.gameObject.SetActive(true);
-                _imageForWeapon.sprite = equipmentItemConfig.icon; break;
+                imageForWeapon.gameObject.SetActive(true);
+                imageForWeapon.sprite = equipmentItemConfig.icon; break;
             default: Debug.LogError("not correct item type or no type"); break;
         }
     }

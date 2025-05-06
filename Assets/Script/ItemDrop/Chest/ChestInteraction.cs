@@ -1,112 +1,102 @@
-using System;
 using Mirror;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ChestInteraction : NetworkBehaviour
-{
-    [SyncVar] private bool _isNearby = false;
-    [SyncVar] private PlayerStats _playerStats;
-    [SyncVar] private bool _isOpened = false;
-    [SyncVar] private float _cooldownTimer = 0f;
-    
-    [SerializeField] private Sprite _closedChestSprite;
-    [SerializeField] private Sprite _openedChestSprite;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private GameObject _interactionPrompt;
-    [SerializeField] private float _cooldownDuration = 30f;
-    
-    private void Update() 
-    {
+public class ChestInteraction : NetworkBehaviour {
+    [SyncVar]
+    private bool _isNearby = false;
+
+    [SyncVar]
+    private bool _isOpened = false;
+
+    [SyncVar]
+    private float _cooldownTimer = 0f;
+
+    [SerializeField]
+    private Sprite _closedChestSprite;
+
+    [SerializeField]
+    private Sprite _openedChestSprite;
+
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
+
+    [SerializeField]
+    private GameObject _interactionPrompt;
+
+    [SerializeField]
+    private float _cooldownDuration = 30f;
+
+    private void Update() {
         // Обновляем таймер перезарядки
-        if (_isOpened && _cooldownTimer > 0)
-        {
+        if (_isOpened && _cooldownTimer > 0) {
             _cooldownTimer -= Time.deltaTime;
-            if (_cooldownTimer <= 0)
-            {
+            if (_cooldownTimer <= 0) {
                 ResetChest();
             }
         }
-        
-        if (_isNearby && Input.GetKeyDown(KeyCode.E))
-        {
-            TryOpenChest();
-        }
-    }
-
-    private void TryOpenChest()
-    {
-        if (!_isOpened)
-        {
-            OpenChest();
-        }
     }
 
     [Server]
-    private void OpenChest()
-    {
+    public void TryOpenChest(int playerLvl) {
+        if (!_isOpened) {
+            OpenChest(playerLvl);
+        }
+    }
+
+    private void OpenChest(int playerLvl) {
         _isOpened = true;
         _cooldownTimer = _cooldownDuration;
-        
-        GetComponent<EnemyLoot>().DropItem(_playerStats.Lvl);
-        RpcUpdateChestState(true);
+
+        GetComponent<EnemyLoot>().DropItem(playerLvl);
+        if (isServer) {
+            RpcUpdateChestState(true);
+        }
     }
 
-    [Server]
-    private void ResetChest()
-    {
+    private void ResetChest() {
         _isOpened = false;
-        RpcUpdateChestState(false);
+        if(isServer) {
+            RpcUpdateChestState(false);
+        }
     }
 
     [ClientRpc]
-    private void RpcUpdateChestState(bool opened)
-    {
-        if (_spriteRenderer != null)
-        {
+    private void RpcUpdateChestState(bool opened) {
+        if (_spriteRenderer != null) {
             _spriteRenderer.sprite = opened ? _openedChestSprite : _closedChestSprite;
         }
-        
+
         // Скрываем подсказку если сундук открыт
-        if (opened)
-        {
+        if (opened) {
             HidePrompt();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
-    {
+    private void OnTriggerEnter2D(Collider2D other) {
         if (!other.CompareTag("Player")) return;
-        
+
         _isNearby = true;
-        _playerStats = other.GetComponent<PlayerStats>();
-        
-        if (!_isOpened)
-        {
+
+        if (!_isOpened) {
             ShowPrompt();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) 
-    {
+    private void OnTriggerExit2D(Collider2D other) {
         if (!other.CompareTag("Player")) return;
-        
+
         _isNearby = false;
         HidePrompt();
     }
 
-    private void ShowPrompt()
-    {
-        if (_interactionPrompt != null && !_isOpened)
-        {
+    private void ShowPrompt() {
+        if (_interactionPrompt != null && !_isOpened) {
             _interactionPrompt.SetActive(true);
         }
     }
 
-    private void HidePrompt()
-    {
-        if (_interactionPrompt != null)
-        {
+    private void HidePrompt() {
+        if (_interactionPrompt != null) {
             _interactionPrompt.SetActive(false);
         }
     }

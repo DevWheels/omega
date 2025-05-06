@@ -9,7 +9,8 @@ public enum EnemyRank
     Legendary  
 }
 public enum ItemRank { D, C, B, A, S }
-public enum ItemType { Weapon, Armor, Accessory }
+public enum ItemType {
+    helmet, shoulderPads, bracers, chestPlate, boots, weapon, bracelet, necklace,Armor,Accessory,Weapon }
 public enum SpecialStatType
 {
     Dodge, CRIT, DodgeRES, CRITRES,

@@ -5,7 +5,34 @@ using UnityEngine;
 
 public class PlayerInventory : NetworkBehaviour {
     public List<InventorySlot> Slots = new List<InventorySlot>(24);
-
+    public bool HasItems(PickItemType type, int amount)
+    {
+        int count = 0;
+        foreach (var slot in Slots)
+        {
+            if (slot.ItemData != null && slot.ItemData.Type == type)
+            {
+                count++;
+                if (count >= amount) return true;
+            }
+        }
+        return false;
+    }
+    [Command]
+    public void RemoveItems(PickItemType type, int amount)
+    {
+        int remaining = amount;
+        for (int i = 0; i < Slots.Count && remaining > 0; i++)
+        {
+            if (Slots[i].ItemData != null && Slots[i].ItemData.Type == type)
+            {
+                Slots[i].ItemConfig = null;
+                Slots[i].ItemData = null;
+                remaining--;
+            }
+        }
+    }
+    
     public void PutInEmptySlot(ItemConfig itemConfig, ItemData itemData) {
         for (int i = 0; i < Slots.Count; i++) {
             if (Slots[i].ItemConfig != null) {

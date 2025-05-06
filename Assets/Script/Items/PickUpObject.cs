@@ -2,7 +2,7 @@ using UnityEngine;
 [RequireComponent(typeof(ItemBase))]
 public class PickUpObject : MonoBehaviour
 {
-    
+    public System.Action OnPickup;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) {

@@ -5,9 +5,9 @@ public class ItemWorld : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI statsText;
     
-    private EquipmentItem _item;
+    private EquipmentItemData _item;
 
-    public void SetItem(EquipmentItem item)
+    public void SetItem(EquipmentItemData item)
     {
         _item = item;
         UpdateVisuals();

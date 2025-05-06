@@ -1,8 +1,8 @@
 using UnityEditor;
 
 [CustomEditor(typeof(SkillConfig))]
-public class SkillConfigEditor : Editor
-{
+public class SkillConfigEditor : Editor {
+    private SerializedProperty skillIconProp;
     private SerializedProperty nameProp;
     private SerializedProperty descriptionProp;
     private SerializedProperty isPassiveProp;
@@ -16,6 +16,7 @@ public class SkillConfigEditor : Editor
 
     private void OnEnable()
     {
+        skillIconProp = serializedObject.FindProperty("skillIcon");
         nameProp = serializedObject.FindProperty("Name");
         descriptionProp = serializedObject.FindProperty("Description");
         isPassiveProp = serializedObject.FindProperty("IsPassive");
@@ -33,6 +34,7 @@ public class SkillConfigEditor : Editor
         serializedObject.Update();
 
 
+        EditorGUILayout.PropertyField(skillIconProp);
         EditorGUILayout.PropertyField(nameProp);
         EditorGUILayout.PropertyField(descriptionProp);
         
