@@ -55,7 +55,7 @@ MonoBehaviour:
   onlineScene: Assets/Scenes/Game.unity
   offlineSceneLoadDelay: 0
   transport: {fileID: 1285411575813866912}
-  networkAddress: af62eae27a92.pr.edgegap.net
+  networkAddress: 11e65bb76920.pr.edgegap.net
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
@@ -73,7 +73,6 @@ MonoBehaviour:
   - {fileID: 8894036980424771460, guid: 3a24f405b8924e34b98f8f76f5a5e4f1, type: 3}
   - {fileID: 828090784902224273, guid: 8cc184bb3cc284c4d8fa52d5a700c97c, type: 3}
   - {fileID: 6661974916675127876, guid: 9e03cb29852581145909f2c24942aeca, type: 3}
-  - {fileID: 6909981378074328598, guid: fa64d0bc3a14ca043837a9e118cd204d, type: 3}
   - {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
