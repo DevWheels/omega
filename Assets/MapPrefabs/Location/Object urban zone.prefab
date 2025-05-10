@@ -15600,7 +15600,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e196d460448742643b16f639da0412c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confirmationPanel: {fileID: 0}
+  timerPanel: {fileID: 0}
+  timerText: {fileID: 0}
+  progressBar: {fileID: 0}
   targetMarker: {fileID: 673444364383649048}
   setGreenZone: 0
 --- !u!1 &8046063563643153058

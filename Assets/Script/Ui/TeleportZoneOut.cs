@@ -1,14 +1,58 @@
 using UnityEngine;
-using System.Collections.Generic;
+using TMPro;
+using UnityEngine.UI; // Добавляем для работы с Image (Filled)
 
 public class TeleportZoneOut : MonoBehaviour
 {
-    public GameObject confirmationPanel;
-    public GameObject targetMarker;  // Теперь это один конкретный маркер
-    public bool setGreenZone = false; // Какое состояние установить после телепортации
+    [Header("UI Elements")]
+    public GameObject timerPanel; // Новая панель с таймером
+    public TMP_Text timerText;
+    public Image progressBar; // Ссылка на компонент Image с типом Filled
+    
+    [Header("Teleport Settings")]
+    public GameObject targetMarker;
+    public bool setGreenZone = false;
+    private const float TELEPORT_DELAY = 30f;
     
     private GameObject player; 
     private PlayerSkillController playerSkillController;
+    private float remainingTime = 0f;
+    private bool isCounting = false;
+
+    private void Update()
+    {
+        if (isCounting)
+        {
+            remainingTime -= Time.deltaTime;
+            UpdateTimerUI();
+
+            if (remainingTime <= 0f)
+            {
+                TeleportPlayer();
+                ResetTimer();
+            }
+        }
+    }
+
+    private void UpdateTimerUI()
+    {
+        if (timerText != null)
+        {
+            timerText.text = Mathf.CeilToInt(remainingTime).ToString();
+        }
+        
+        if (progressBar != null)
+        {
+            progressBar.fillAmount = remainingTime / TELEPORT_DELAY;
+        }
+    }
+
+    private void ResetTimer()
+    {
+        isCounting = false;
+        remainingTime = 0f;
+        timerPanel.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,45 +60,47 @@ public class TeleportZoneOut : MonoBehaviour
         {
             player = other.gameObject;
             var ps = player.GetComponent<PlayerSkillController>();
-            if (ps.Playermovement.isLocalPlayer) {
+            if (ps.Playermovement.isLocalPlayer) 
+            {
                 playerSkillController = ps;
-                confirmationPanel.SetActive(true);
+                timerPanel.SetActive(true); // Активируем панель таймера
+                isCounting = true;
+                remainingTime = TELEPORT_DELAY;
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (playerSkillController == null) {
-            return;
-        }
-
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && player != null)
         {
-            if (other.gameObject.GetComponent<PlayerSkillController>() == playerSkillController) {
-                confirmationPanel.SetActive(false);
-                player = null; 
+            if (other.gameObject == player)
+            {
+                ResetTimer();
+                player = null;
                 playerSkillController = null;
             }
         }
     }
 
-    public void ConfirmTeleport()
+    private void TeleportPlayer()
     {
         if (player != null && targetMarker != null)
         {
             player.transform.position = targetMarker.transform.position;
-            
-            if (playerSkillController != null)
-            {
-                playerSkillController.TeleportToGreenZone();
-            }
+            playerSkillController?.TeleportToGreenZone();
         }
-        confirmationPanel.SetActive(false);
+    }
+
+    // Эти методы можно удалить, если они больше не нужны
+    public void ConfirmTeleport()
+    {
+        TeleportPlayer();
+        ResetTimer();
     }
 
     public void CancelTeleport()
     {
-        confirmationPanel.SetActive(false); 
+        ResetTimer();
     }
 }
