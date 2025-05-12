@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class PlayerEquipment : NetworkBehaviour {
     private Dictionary<ItemType, EquipmentItemConfig> PlayerInventory = new();
     public static PlayerEquipment Instance;
+    private ItemBase _itemBase;
 
     [SerializeField] private Image imageForArmor;
     [SerializeField] private Image imageForAccessory;
@@ -22,7 +23,8 @@ public class PlayerEquipment : NetworkBehaviour {
     [SerializeField] private Image imageForNecklace;
     [SerializeField] private Image imageForBracelet;
 
-    [SerializeField] private Image skillSelectorPanel;
+    
+    [SerializeField] private UnwearItemButton UnwearButton;
 
     private void Awake() {
         Instance = this;
@@ -53,12 +55,23 @@ public class PlayerEquipment : NetworkBehaviour {
         SetEquipmentImage(equipmentItemConfig);
     }
 
+    private void Unwear(ItemBase itemBase,List<SkillConfig> skillConfig) {
+        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(itemBase.itemConfig,itemBase.itemData);
+
+        foreach (var skillConf in skillConfig) {
+            InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(skillConf,InventoryManager.Instance.PlayerSkillController));
+            
+        }
+        
+    }
     private void SetEquipmentImage(EquipmentItemConfig equipmentItemConfig) {
         switch (equipmentItemConfig.itemType) {
             case ItemType.Armor:
 
                 imageForArmor.gameObject.SetActive(true);
                 imageForArmor.sprite = equipmentItemConfig.icon;
+                
+                // UnwearButton.SetData();
                 break;
             case ItemType.Accessory:
 
