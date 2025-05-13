@@ -9,10 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<<< HEAD:Assets/Prefabs/Items/Boots 1.asset
   m_Script: {fileID: 11500000, guid: 0a6668cfaf7a9d546a0a3c1b38a876f6, type: 3}
   m_Name: Boots 1
   m_EditorClassIdentifier: 
   Description: "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+========
+  m_Script: {fileID: 11500000, guid: 76c1970648b5bb34e990db0380b71ece, type: 3}
+  m_Name: BootsConfig
+  m_EditorClassIdentifier: 
+  Name: Boots12
+  Description: "\u0427\u0442\u043E \u0442\u043E"
+>>>>>>>> origin/main:Assets/Prefabs/Items/BootsConfig.asset
   icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   isHealing: 0
   HealingPower: 0
@@ -20,9 +28,15 @@ MonoBehaviour:
   ManaPower: 0
   time: 0
   Coins: 0
+<<<<<<<< HEAD:Assets/Prefabs/Items/Boots 1.asset
   PlayerPrefsName: 
   itemName: kk
   itemType: 4
+========
+  PlayerPrefsName: Boots31
+  itemName: Boots41
+  itemType: 1
+>>>>>>>> origin/main:Assets/Prefabs/Items/BootsConfig.asset
   Rank: 4
   Prefab: {fileID: 828090784902224273, guid: c8c55e48a63518545a7714e21efa9675, type: 3}
   itemSkills: []
