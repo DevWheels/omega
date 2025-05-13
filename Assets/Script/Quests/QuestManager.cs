@@ -19,9 +19,10 @@ public class QuestManager : MonoBehaviour {
     public PlayerStats playerStats;
     private DialogStart dialogStart;
 
-    private Find Find;
+    private Find find; // Изменил регистр для соответствия стилю C#
 
     void Awake() {
+        find = new Find(); // Инициализация Find перед использованием
         LoadAllQuests();
         PlayerPrefs.DeleteAll(); // удаляет сохранения для квестов
         FindAll();
@@ -169,7 +170,6 @@ public class QuestManager : MonoBehaviour {
         return loadedQuests;
     }
 
-    [Client]
     public void LoadAllQuests() {
         foreach (var quest in quests) {
             // Загружаем квесты по названию
@@ -208,13 +208,12 @@ public class QuestManager : MonoBehaviour {
         end.transform.localScale = Vector3.zero;
     }
 
-    [Client]
     private void FindAll() {
-        dialogueStart = Find.FindUIElement<TMP_Text>("DialogStart");
-        dialogueMiddle = Find.FindUIElement<TMP_Text>("DialogMiddle");
-        dialogueEnd = Find.FindUIElement<TMP_Text>("DialogFinish");
-        start = Find.FindGameObject("PanelDialogStart");
-        middle = Find.FindGameObject("PanelDialogMiddle");
-        end = Find.FindGameObject("PanelDialogFinish");
+        dialogueStart = find.FindUIElement<TMP_Text>("DialogStart");
+        dialogueMiddle = find.FindUIElement<TMP_Text>("DialogMiddle");
+        dialogueEnd = find.FindUIElement<TMP_Text>("DialogFinish");
+        start = find.FindGameObject("PanelDialogStart");
+        middle = find.FindGameObject("PanelDialogMiddle");
+        end = find.FindGameObject("PanelDialogFinish");
     }
 }
