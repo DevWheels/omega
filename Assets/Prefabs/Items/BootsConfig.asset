@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c1970648b5bb34e990db0380b71ece, type: 3}
-  m_Name: Staff
+  m_Name: BootsConfig
   m_EditorClassIdentifier: 
-  Name: Staff
-  Description: Healing staff
-  icon: {fileID: 21300000, guid: 798a0192e5e2a1c45a1f6786703af909, type: 3}
+  Name: Boots1
+  Description: "\u0427\u0442\u043E \u0442\u043E"
+  icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   isHealing: 0
   HealingPower: 0
   isMana: 0
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: Staff
-  itemName: Staff
-  itemType: 8
-  Rank: 0
-  Prefab: {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
+  PlayerPrefsName: Boots3
+  itemName: Boots4
+  itemType: 1
+  Rank: 4
+  Prefab: {fileID: 828090784902224273, guid: c8c55e48a63518545a7714e21efa9675, type: 3}
   itemSkills:
-  - {fileID: 11400000, guid: e84f82415d5d12b41899dc0ec872a603, type: 2}
+  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
   dRankStats:
-    health: {x: 2, y: 2}
-    attack: {x: 2, y: 2}
-    armor: {x: 2, y: 2}
+    health: {x: 1, y: 1}
+    attack: {x: 1, y: 1}
+    armor: {x: 1, y: 1}
     perLevelIncrease: 1
     possibleSpecialStats: 
     specialStatRanges: []
@@ -63,5 +63,5 @@ MonoBehaviour:
     perLevelIncrease: 0
     possibleSpecialStats: 
     specialStatRanges: []
-  icon: {fileID: 21300000, guid: 798a0192e5e2a1c45a1f6786703af909, type: 3}
+  icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   itemColor: {r: 1, g: 1, b: 1, a: 1}
