@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c1970648b5bb34e990db0380b71ece, type: 3}
   m_Name: StaffConfig
   m_EditorClassIdentifier: 
-  Name: Staff1
+  Name: Staff12
   Description: Healing staff
   icon: {fileID: 21300000, guid: 798a0192e5e2a1c45a1f6786703af909, type: 3}
   isHealing: 0
@@ -21,8 +21,8 @@ MonoBehaviour:
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: Staff3
-  itemName: Staff4
+  PlayerPrefsName: Staff33
+  itemName: Staff43
   itemType: 8
   Rank: 0
   Prefab: {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 774178185083263100}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: -1.3, z: -0.25}
+  m_LocalPosition: {x: -0.08, y: -1.3, z: -1}
   m_LocalScale: {x: 8.921978, y: 12.2430315, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -362,6 +362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9aa55225c41fde479d9ca7449915659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   minimapCamera: {fileID: 6516114445454936773}
   minimapDisplay: {fileID: 1627217401050213668}
 --- !u!1 &6805075029602466760
@@ -796,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243756e46a3e9314497ccbd7de2cabae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  baseDamage: 10
   attackRange: 1
   attackCooldown: 0.5
   attackOffset: {x: 0.5, y: 0}
@@ -805,6 +808,7 @@ MonoBehaviour:
     m_Bits: 128
   animator: {fileID: 7085261678692851948}
   attackSound: {fileID: 8300000, guid: 91806d6425f834d1897ded278936ac7f, type: 3}
+  playerStats: {fileID: 0}
 --- !u!114 &-1568228476913601040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243756e46a3e9314497ccbd7de2cabae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  baseDamage: 10
   attackRange: 1
   attackCooldown: 0.5
   attackOffset: {x: 0.5, y: 0}
@@ -826,6 +830,7 @@ MonoBehaviour:
     m_Bits: 128
   animator: {fileID: 0}
   attackSound: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!114 &-3095385020681225760
 MonoBehaviour:
   m_ObjectHideFlags: 0

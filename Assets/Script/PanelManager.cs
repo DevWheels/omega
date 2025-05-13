@@ -13,16 +13,23 @@ public class PanelManager : MonoBehaviour {
             buttons[i].onClick.AddListener(() => ShowPanel(index));
         }
 
-        //ShowPanel(0);
+        // Инициализация: все панели скрыты
+        foreach (var panel in panels) {
+            panel.SetActive(false);
+        }
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Tab)) {
             if (!isOpened) {
-                panels[lastOpened].gameObject.SetActive(true);
+                // Показываем последнюю открытую панель
+                panels[lastOpened].SetActive(true);
                 isOpened = true;
             } else {
-                panels[lastOpened].gameObject.SetActive(false);
+                // Скрываем все панели
+                foreach (var panel in panels) {
+                    panel.SetActive(false);
+                }
                 isOpened = false;
             }
         }
@@ -30,13 +37,11 @@ public class PanelManager : MonoBehaviour {
 
     public void ShowPanel(int panelIndex) {
         for (int i = 0; i < panels.Length; i++) {
+            panels[i].SetActive(i == panelIndex);
             if (i == panelIndex) {
-                panels[i].gameObject.SetActive(true);
                 lastOpened = i;
-            } else {
-                panels[i].gameObject.SetActive(false);
             }
-            //panels[i].SetActive(i == panelIndex); 
         }
+        isOpened = true; // Устанавливаем флаг, что панель открыта
     }
 }

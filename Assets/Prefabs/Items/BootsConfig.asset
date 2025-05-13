@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c1970648b5bb34e990db0380b71ece, type: 3}
   m_Name: BootsConfig
   m_EditorClassIdentifier: 
-  Name: Boots1
+  Name: Boots12
   Description: "\u0427\u0442\u043E \u0442\u043E"
   icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   isHealing: 0
@@ -21,8 +21,8 @@ MonoBehaviour:
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: Boots3
-  itemName: Boots4
+  PlayerPrefsName: Boots31
+  itemName: Boots41
   itemType: 1
   Rank: 4
   Prefab: {fileID: 828090784902224273, guid: c8c55e48a63518545a7714e21efa9675, type: 3}

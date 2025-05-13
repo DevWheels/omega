@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a7989522df4abc9c73aabdb15c460a, type: 3}
   m_Name: ExplosionAroundPlayer
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 0}
+  SkillViewConfigName: ExplosionAroundOnPlayerIcon
   Name: ExplosionAroundPlayer
   Description: 
   IsPassive: 0

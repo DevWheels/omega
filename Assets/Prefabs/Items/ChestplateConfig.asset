@@ -21,8 +21,8 @@ MonoBehaviour:
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: Boots3
-  itemName: Boots4
+  PlayerPrefsName: Boots32
+  itemName: Boots42
   itemType: 1
   Rank: 0
   Prefab: {fileID: 828090784902224273, guid: 2c7f5901471a5bd4c8cb62932edc5e06, type: 3}
