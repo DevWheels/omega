@@ -18,7 +18,7 @@ public class InventoryView : MonoBehaviour {
     public void PutInEmptySlot(ItemConfig itemConfig, ItemData itemData) {
         for (int i = 0; i < inventorySlots.Length; i++) {
             if (inventorySlots[i].slotItemConfig == null) {
-                inventorySlots[i].PutInSlot(itemConfig, itemData);
+                inventorySlots[i].PutInSlot(itemConfig,itemData);
                 return;
             }
         }

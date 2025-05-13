@@ -16,7 +16,7 @@ public class EnemyLootTable : ScriptableObject
         public float legendaryModifier = 3f;
     }
 
-    public EquipmentItemConfig[] possibleItemConfigs;
+    public ItemConfig[] possibleItemConfigs;
     public RankDropSettings[] rankChances;
 
     public EquipmentItemData GetRandomItem(EnemyRank enemyRank, int playerLevel, TestenemyHealth enemyHealth)
@@ -28,7 +28,7 @@ public class EnemyLootTable : ScriptableObject
         }
 
         ItemRank itemRank = DetermineItemRank(enemyRank);
-        EquipmentItemConfig config = GetRandomItemOfRank(itemRank);
+        ItemConfig config = GetRandomItemOfRank(itemRank);
 
         if (config != null) {
             EquipmentItemData item = new EquipmentItemData();
@@ -70,7 +70,7 @@ public class EnemyLootTable : ScriptableObject
         });
     }
 
-    private EquipmentItemConfig GetRandomItemOfRank(ItemRank rank)
+    private ItemConfig GetRandomItemOfRank(ItemRank rank)
     {
         var availableConfigs = possibleItemConfigs.Where(config => config != null && config.Rank == rank).ToArray();
         return availableConfigs.Length == 0 ? null : availableConfigs[Random.Range(0, availableConfigs.Length)];

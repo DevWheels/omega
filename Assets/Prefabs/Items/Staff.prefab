@@ -164,9 +164,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  itemConfig: {fileID: 11400000, guid: 2910effb9c7063a4e9b2404d56d8c89e, type: 2}
   itemData:
     Type: 3
+  itemConfig: {fileID: 11400000, guid: c6d9263ae9e1c4940bbe6c8458d483ff, type: 2}
 --- !u!114 &3777453876243841646
 MonoBehaviour:
   m_ObjectHideFlags: 0

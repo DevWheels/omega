@@ -2,9 +2,9 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class EquipmentItemData : EquipmentItemConfig
+public class EquipmentItemData : ItemConfig
 {
-    public EquipmentItemConfig Config { get; private set; }
+    public ItemConfig Config { get; private set; }
     public List<string> Skills { get; private set; }
     private ItemRank Rank { get ;  set; }
     public int Level { get; private set; }
@@ -14,7 +14,7 @@ public class EquipmentItemData : EquipmentItemConfig
     public SpecialStatType[] SpecialStats { get; private set; }
     public float[] SpecialStatsValues { get; private set; }
 
-    public void Initialize(EquipmentItemConfig config, TestenemyHealth enemyHealth)
+    public void Initialize(ItemConfig config, TestenemyHealth enemyHealth)
     {
         Config = config;
         Rank = DetermineRankByEnemyLevel(enemyHealth.Level);

@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a6668cfaf7a9d546a0a3c1b38a876f6, type: 3}
-  m_Name: Staff
+  m_Name: NewEquipmentConfig
   m_EditorClassIdentifier: 
-  Description: "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
-  icon: {fileID: 0}
+  itemName: sss
+  itemType: 4
+  Rank: 0
+  Prefab: {fileID: 828090784902224273, guid: c8c55e48a63518545a7714e21efa9675, type: 3}
+  Description: Item Description
+  icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   isHealing: 0
   HealingPower: 0
   isMana: 0
@@ -21,16 +25,12 @@ MonoBehaviour:
   time: 0
   Coins: 0
   PlayerPrefsName: 
-  itemName: 
-  itemType: 0
-  Rank: 0
-  Prefab: {fileID: 0}
   itemSkills: []
   dRankStats:
-    health: {x: 0, y: 0}
-    attack: {x: 0, y: 0}
-    armor: {x: 0, y: 0}
-    perLevelIncrease: 0
+    health: {x: 111, y: 444}
+    attack: {x: 111, y: 444}
+    armor: {x: 111, y: 444}
+    perLevelIncrease: 1
     possibleSpecialStats: 
     specialStatRanges: []
   cRankStats:
@@ -61,5 +61,6 @@ MonoBehaviour:
     perLevelIncrease: 0
     possibleSpecialStats: 
     specialStatRanges: []
-  itemColor: {r: 1, g: 1, b: 1, a: 1}
-  rarity: 0
+  rankParticleEffect: {fileID: 6972393356621409847, guid: c8c55e48a63518545a7714e21efa9675, type: 3}
+  rankColor: {r: 1, g: 1, b: 1, a: 1}
+  glowIntensity: 1

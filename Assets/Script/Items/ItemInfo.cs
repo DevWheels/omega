@@ -64,8 +64,8 @@ public class ItemInfo : MonoBehaviour
 
     public void Equip() {
         var equipment = CurrenSlot.slotItemConfig;
-        if (equipment is not EquipmentItemConfig config) { return; }
-            PlayerEquipment.Instance.WearItem(config,CurrenSlot.slotItemConfig,CurrenSlot.slotItemData);
+        if (equipment is not ItemConfig config) { return; }
+            // PlayerEquipment.Instance.WearItem(config,CurrenSlot.slotItemConfig,CurrenSlot.slotItemData);
     }
 
     public void Open(ItemConfig itemConfig,ItemData itemData ,InventorySlotView currentSlot)

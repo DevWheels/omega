@@ -16,6 +16,10 @@ public class PlayerInventory : NetworkBehaviour {
                 ItemConfig = itemConfig,
                 ItemData = itemData
             };
+        
+            if (Slots[i].SlotView != null) {
+                Slots[i].SlotView.PutInSlot(itemConfig, itemData);
+            }
             return;
         }
     }
@@ -44,4 +48,6 @@ public class PlayerInventory : NetworkBehaviour {
 public class InventorySlot {
     public ItemConfig ItemConfig;
     public ItemData ItemData;
+    [NonSerialized]
+    public InventorySlotView SlotView;
 }

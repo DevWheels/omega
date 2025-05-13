@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6668cfaf7a9d546a0a3c1b38a876f6, type: 3}
-  m_Name: Staff
+  m_Script: {fileID: 11500000, guid: 76c1970648b5bb34e990db0380b71ece, type: 3}
+  m_Name: HealthPotionConfig
   m_EditorClassIdentifier: 
+  Name: HealthPotion
   Description: "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
-  icon: {fileID: 0}
-  isHealing: 0
-  HealingPower: 0
+  icon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
+  isHealing: 1
+  HealingPower: 80
   isMana: 0
   ManaPower: 0
   time: 0
@@ -61,5 +62,5 @@ MonoBehaviour:
     perLevelIncrease: 0
     possibleSpecialStats: 
     specialStatRanges: []
+  icon: {fileID: 0}
   itemColor: {r: 1, g: 1, b: 1, a: 1}
-  rarity: 0

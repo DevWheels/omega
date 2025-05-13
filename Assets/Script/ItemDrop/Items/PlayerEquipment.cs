@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerEquipment : NetworkBehaviour {
-    private Dictionary<ItemType, EquipmentItemConfig> PlayerInventory = new();
+    private Dictionary<ItemType, ItemConfig> PlayerInventory = new();
     public static PlayerEquipment Instance;
     private ItemConfig _itemConfig;
     private ItemData _itemData;
@@ -31,13 +31,12 @@ public class PlayerEquipment : NetworkBehaviour {
         Instance = this;
     }
 
-    public Dictionary<ItemType, EquipmentItemConfig> GetAllItems() {
+    public Dictionary<ItemType, ItemConfig> GetAllItems() {
         return PlayerInventory;
     }
 
-    public void WearItem(EquipmentItemConfig equipmentItemConfig,ItemConfig itemConfig,ItemData itemData) {
-
-        _itemConfig = itemConfig;
+    public void WearItem(ItemConfig equipmentItemConfig,ItemData itemData) {
+        
         _itemData = itemData;
         if (equipmentItemConfig.itemSkills.Count < 0) {
             SetEquipmentImage(equipmentItemConfig);
@@ -59,15 +58,15 @@ public class PlayerEquipment : NetworkBehaviour {
         SetEquipmentImage(equipmentItemConfig);
     }
 
-    private void Unwear(ItemConfig itemConfig,ItemData itemData,List<SkillConfig> skillConfig) {
-        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(itemConfig,itemData);
+    private void Unwear(ItemConfig equipmentItemConfig,ItemData itemData,List<SkillConfig> skillConfig) {
+        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(equipmentItemConfig,itemData);
 
         foreach (var skillConf in skillConfig) {
             InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(skillConf,InventoryManager.Instance.PlayerSkillController));
         }
         
     }
-    private void SetEquipmentImage(EquipmentItemConfig equipmentItemConfig) {
+    private void SetEquipmentImage(ItemConfig equipmentItemConfig) {
         switch (equipmentItemConfig.itemType) {
             case ItemType.Armor:
 
