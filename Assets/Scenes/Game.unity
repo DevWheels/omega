@@ -1933,10 +1933,10 @@ RectTransform:
   - {fileID: 389774761}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 847.5, y: -65}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86822061
 MonoBehaviour:
@@ -2033,7 +2033,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 389774762}
+  _slotBackground: {fileID: 86822062}
   _button: {fileID: 86822061}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -3270,10 +3276,10 @@ RectTransform:
   - {fileID: 1249148211}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 692.5, y: -485}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157110657
 MonoBehaviour:
@@ -3370,7 +3376,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1249148212}
+  _slotBackground: {fileID: 157110658}
   _button: {fileID: 157110657}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -4319,10 +4331,10 @@ RectTransform:
   - {fileID: 1745001004}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 227.5, y: -205}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &187905732
 MonoBehaviour:
@@ -4419,7 +4431,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1745001005}
+  _slotBackground: {fileID: 187905733}
   _button: {fileID: 187905732}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -5270,7 +5288,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -5436,10 +5460,10 @@ RectTransform:
   - {fileID: 186003250}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 72.5, y: -65}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237731940
 MonoBehaviour:
@@ -5536,7 +5560,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 186003251}
+  _slotBackground: {fileID: 237731941}
   _button: {fileID: 237731940}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -6095,10 +6125,10 @@ RectTransform:
   - {fileID: 1822102963}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 537.5, y: -65}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &263312672
 MonoBehaviour:
@@ -6195,7 +6225,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1822102964}
+  _slotBackground: {fileID: 263312673}
   _button: {fileID: 263312672}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -7269,10 +7305,10 @@ RectTransform:
   - {fileID: 1409681958}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 382.5, y: -205}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &308465248
 MonoBehaviour:
@@ -7369,7 +7405,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1409681959}
+  _slotBackground: {fileID: 308465249}
   _button: {fileID: 308465248}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -9696,7 +9738,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -12204,10 +12252,10 @@ RectTransform:
   - {fileID: 1750336504}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 692.5, y: -65}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &536996393
 MonoBehaviour:
@@ -12304,7 +12352,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1750336505}
+  _slotBackground: {fileID: 536996394}
   _button: {fileID: 536996393}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -13111,7 +13165,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -15049,7 +15109,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -15767,12 +15833,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b21be48d094334492d3e3e1b5f7532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  title: "\u041F\u043E\u043C\u043E\u0447\u044C \u043D\u0435\u0437\u043D\u0430\u043A\u043E\u043C\u0446\u0443
-    \u0441 \u044F\u0431\u043B\u043E\u043A\u0430\u043C\u0438"
-  Button: {fileID: 2103660848}
 --- !u!114 &702910250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16112,10 +16172,10 @@ RectTransform:
   - {fileID: 1965386600}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 227.5, y: -485}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &720006656
 MonoBehaviour:
@@ -16212,7 +16272,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1965386601}
+  _slotBackground: {fileID: 720006657}
   _button: {fileID: 720006656}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -18365,10 +18431,10 @@ RectTransform:
   - {fileID: 892986486}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 537.5, y: -205}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &843719452
 MonoBehaviour:
@@ -18465,7 +18531,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 892986487}
+  _slotBackground: {fileID: 843719453}
   _button: {fileID: 843719452}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -20492,10 +20564,10 @@ RectTransform:
   - {fileID: 1429786300}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 72.5, y: -345}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &913412359
 MonoBehaviour:
@@ -20592,7 +20664,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1429786301}
+  _slotBackground: {fileID: 913412360}
   _button: {fileID: 913412359}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -22778,7 +22856,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -24615,7 +24699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14.958984, y: -20.378}
+  m_AnchoredPosition: {x: -14.958984, y: -20.37799}
   m_SizeDelta: {x: 30.519, y: 39.315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116710047
@@ -25453,10 +25537,10 @@ RectTransform:
   - {fileID: 636367265}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 847.5, y: -485}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1159551398
 MonoBehaviour:
@@ -25553,7 +25637,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 636367266}
+  _slotBackground: {fileID: 1159551399}
   _button: {fileID: 1159551398}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -25869,7 +25959,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -25916,10 +26012,10 @@ RectTransform:
   - {fileID: 1012019747}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 847.5, y: -345}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1169042893
 MonoBehaviour:
@@ -26016,7 +26112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1012019748}
+  _slotBackground: {fileID: 1169042894}
   _button: {fileID: 1169042893}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -26149,6 +26251,171 @@ RectTransform:
   m_AnchoredPosition: {x: 91, y: 11}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!43 &1180683324
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 36
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 20
+    localAABB:
+      m_Center: {x: 0.01666832, y: 0.50833416, z: 0}
+      m_Extent: {x: 0.4300022, y: 0.56999874, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 03000400050005000000030000000800090009000100000001000c000d000d000200010002001000110011000300020003000600070000000a000b0001000e000f00020012001300
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 20
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 560
+    _typelessdata: 80a0d3be00947cbd00000000000080bf0000000080a0d3bed0068a3f80a0d3bed0068a3f00000000000080bf0000000000b2e43ed0068a3f00b2e43ed0068a3f00000000000080bf0000000000b2e43e00947cbd00b2e43e00947cbd00000000000080bf0000000080a0d3be00947cbd00b2e43e00947cbd00000000000000000000000080a0d3be00947cbd80a0d3be00947cbd00000000000000000000000000b2e43e00947cbd00b2e43e00947cbd000000000000803f0000000080a0d3be00947cbd00b2e43e00947cbd00000000000040400000000080a0d3be00947cbd80a0d3be00947cbd00000000000000000000000080a0d3bed0068a3f80a0d3bed0068a3f00000000000000000000000080a0d3be00947cbd80a0d3be00947cbd000000000000803f0000000080a0d3bed0068a3f80a0d3be00947cbd00000000000040400000000080a0d3bed0068a3f80a0d3bed0068a3f00000000000000000000000000b2e43ed0068a3f00b2e43ed0068a3f00000000000000000000000080a0d3bed0068a3f80a0d3bed0068a3f000000000000803f0000000000b2e43ed0068a3f80a0d3bed0068a3f00000000000040400000000000b2e43ed0068a3f00b2e43ed0068a3f00000000000000000000000000b2e43e00947cbd00b2e43e00947cbd00000000000000000000000000b2e43ed0068a3f00b2e43ed0068a3f000000000000803f0000000000b2e43e00947cbd00b2e43ed0068a3f00000000000040400000000000b2e43e00947cbd
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  'm_MeshMetrics[0]': 1
+  'm_MeshMetrics[1]': 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1185541104
 GameObject:
   m_ObjectHideFlags: 0
@@ -27746,171 +28013,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!43 &1237610607
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 11
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 36
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 20
-    localAABB:
-      m_Center: {x: 0.01666832, y: 0.50833416, z: 0}
-      m_Extent: {x: 0.4300022, y: 0.56999874, z: 0}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_BonesAABB: []
-  m_VariableBoneCountWeights:
-    m_Data: 
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 03000400050005000000030000000800090009000100000001000c000d000d000200010002001000110011000300020003000600070000000a000b0001000e000f00020012001300
-  m_VertexData:
-    serializedVersion: 3
-    m_VertexCount: 20
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 560
-    _typelessdata: 80a0d3be00947cbd00000000000080bf0000000080a0d3bed0068a3f80a0d3bed0068a3f00000000000080bf0000000000b2e43ed0068a3f00b2e43ed0068a3f00000000000080bf0000000000b2e43e00947cbd00b2e43e00947cbd00000000000080bf0000000080a0d3be00947cbd00b2e43e00947cbd00000000000000000000000080a0d3be00947cbd80a0d3be00947cbd00000000000000000000000000b2e43e00947cbd00b2e43e00947cbd000000000000803f0000000080a0d3be00947cbd00b2e43e00947cbd00000000000040400000000080a0d3be00947cbd80a0d3be00947cbd00000000000000000000000080a0d3bed0068a3f80a0d3bed0068a3f00000000000000000000000080a0d3be00947cbd80a0d3be00947cbd000000000000803f0000000080a0d3bed0068a3f80a0d3be00947cbd00000000000040400000000080a0d3bed0068a3f80a0d3bed0068a3f00000000000000000000000000b2e43ed0068a3f00b2e43ed0068a3f00000000000000000000000080a0d3bed0068a3f80a0d3bed0068a3f000000000000803f0000000000b2e43ed0068a3f80a0d3bed0068a3f00000000000040400000000000b2e43ed0068a3f00b2e43ed0068a3f00000000000000000000000000b2e43e00947cbd00b2e43e00947cbd00000000000000000000000000b2e43ed0068a3f00b2e43ed0068a3f000000000000803f0000000000b2e43e00947cbd00b2e43ed0068a3f00000000000040400000000000b2e43e00947cbd
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_MeshUsageFlags: 0
-  m_CookingOptions: 30
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  'm_MeshMetrics[0]': 1
-  'm_MeshMetrics[1]': 1
-  m_MeshOptimizationFlags: 1
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1244580882
 GameObject:
   m_ObjectHideFlags: 0
@@ -29692,10 +29794,10 @@ RectTransform:
   - {fileID: 1185541105}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 382.5, y: -345}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1305858024
 MonoBehaviour:
@@ -29792,7 +29894,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1185541106}
+  _slotBackground: {fileID: 1305858025}
   _button: {fileID: 1305858024}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -30730,74 +30838,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0ae64f622c2cd4c8ce718b3b6096b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quests:
-  - title: "\u041F\u043E\u043C\u043E\u0447\u044C \u043D\u0435\u0437\u043D\u0430\u043A\u043E\u043C\u0446\u0443
-      \u0441 \u044F\u0431\u043B\u043E\u043A\u0430\u043C\u0438"
-    description: "\u0414\u043E\u0431\u0440\u044B\u0439 \u0447\u0435\u043B\u043E\u0432\u0435\u043A
-      \u043F\u043E\u043C\u043E\u0433\u0438\u0442\u0435 \u0441\u043E\u0431\u0440\u0430\u0442\u044C
-      \u043C\u043E\u0438 \u044F\u0431\u043B\u043E\u0447\u043A\u0438, \u044F \u0443\u0436\u0435
-      \u0441\u0442\u0430\u0440\u044B\u0439 \u0438 \u0441\u0430\u043C \u0434\u043E\u043B\u0433\u043E
-      \u0431\u0443\u0434\u0443 \u0441\u043E\u0431\u0438\u0440\u0430\u0442\u044C."
-    question: "\u0422\u044B \u043F\u0440\u0438\u043D\u0435\u0441 \u043C\u043D\u0435
-      \u044F\u0431\u043B\u043E\u0447\u043A\u0438?"
-    thanks: "\u0421\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u043F\u043E\u043C\u043E\u0449\u044C.
-      \u0415\u0441\u043B\u0438 \u0432\u044B \u043F\u0440\u0438\u0448\u043B\u0438
-      \u043A \u043D\u0430\u043C \u0432 \u0434\u0435\u0440\u0435\u0432\u043D\u044E,
-      \u0437\u0430\u0439\u0434\u0438\u0442\u0435 \u043A \u0441\u0442\u0430\u0440\u0435\u0439\u0448\u0438\u043D\u0435
-      \u043E\u043D \u0436\u0438\u0432\u0435\u0442 \u0432 \u0434\u043E\u043C\u0435
-      \u0441 \u0441\u0438\u043D\u0435\u0439 \u043A\u0440\u044B\u0448\u0435\u0439."
-    experience: 100
-    reward_items_data: []
-    reward_items_config: []
-    quest_items_config: []
-    quest_items_data: []
-    isCompleted: 0
-    isStarted: 0
-  - title: "\u041E\u0434\u043E\u043B\u0435\u0442\u044C \u0441\u043B\u0438\u0437\u044C"
-    description: "\u041C\u0430\u0433 \u043A\u0430\u043A \u044F \u0432\u0438\u0436\u0443,
-      \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u0438\u0433\u043E\u0434\u0438\u0442\u044C\u0441\u044F.
-      \u041D\u0430 \u043D\u0430\u0448\u0438 \u043F\u043E\u043B\u044F \u043D\u0430\u043F\u0430\u043B\u0430
-      \u0441\u0438\u043D\u044F\u044F \u0441\u043B\u0438\u0437\u044C, \u041C\u043E\u0436\u0435\u0442\u0435
-      \u0435\u0435 \u0438\u043D\u0438\u0447\u0442\u043E\u0436\u0438\u0442\u044C \u0438
-      \u0432 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u0434\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
-      \u043F\u0440\u0438\u043D\u0438\u0441\u0442\u0438 \u0435\u0433\u043E \u044F\u0434\u0440\u043E."
-    question: "\u0412\u044B \u0441\u043F\u0440\u0430\u0432\u0438\u043B\u0438\u0441\u044C?"
-    thanks: "\u041E\u0442\u043B\u0438\u0447\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430,
-      \u0435\u0441\u043B\u0438 \u0445\u043E\u0442\u0438\u0442\u0435 \u0435\u0449\u0435
-      \u0440\u0430\u0431\u043E\u0442\u044B \u0437\u0430\u0433\u043B\u0435\u043D\u0438\u0442\u0435
-      \u043D\u0430 \u043D\u0430\u0448 \u0440\u044B\u043D\u043E\u043A \u0442\u0430\u043C
-      \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u043A\u0430 \u0441 \u043E\u0431\u044C\u0435\u0432\u043B\u0435\u043D\u0438\u0435\u043C\u0438. "
-    experience: 1400
-    reward_items_data: []
-    reward_items_config: []
-    quest_items_config: []
-    quest_items_data: []
-    isCompleted: 0
-    isStarted: 0
-  DialogueTexts:
-  - "\u041A \u0441\u043E\u0436\u0430\u043B\u0435\u043D\u0438\u044E, \u0443 \u043D\u0430\u0441
-    \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u044B\u0445
-    \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B
-    \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C."
-  - "\u041C\u043D\u0435 \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432,
-    \u0447\u0442\u043E\u0431\u044B \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C
-    \u044D\u0442\u0443 \u0437\u0430\u0434\u0430\u0447\u0443. \u041C\u043E\u0436\u0435\u0448\u044C
-    \u043F\u0440\u0438\u043D\u0435\u0441\u0442\u0438 \u0447\u0442\u043E-\u043D\u0438\u0431\u0443\u0434\u044C?"
-  - "\u041A\u0430\u043A \u0436\u0430\u043B\u044C, \u0447\u0442\u043E \u0443 \u043D\u0430\u0441
-    \u043D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B\u043E\u0432
-    \u0434\u043B\u044F \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F
-    \u043D\u0430\u0447\u0438\u043D\u0430\u043D\u0438\u0439."
-  - "\u041C\u044B \u043D\u0435 \u0441\u043C\u043E\u0436\u0435\u043C \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C,
-    \u043F\u043E\u043A\u0430 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043C \u0432\u0441\u0435
-    \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u044B\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B
-    \u0434\u043B\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u044F."
-  dialogueStart: {fileID: 345276010}
-  dialogueMiddle: {fileID: 1274265997}
-  dialogueEnd: {fileID: 767370976}
-  start: {fileID: 2054325225}
-  middle: {fileID: 993041231}
-  end: {fileID: 1496313205}
-  playerStats: {fileID: 0}
 --- !u!4 &1348128210
 Transform:
   m_ObjectHideFlags: 0
@@ -30825,7 +30865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a1bcddf30a57a488dc0243f0baaf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questListText: {fileID: 271633968}
 --- !u!1 &1350685787
 GameObject:
   m_ObjectHideFlags: 0
@@ -31686,7 +31725,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -32309,7 +32354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1411123224
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34460,7 +34505,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -35082,10 +35133,10 @@ RectTransform:
   - {fileID: 484588606}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 227.5, y: -345}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548175530
 MonoBehaviour:
@@ -35182,7 +35233,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 484588607}
+  _slotBackground: {fileID: 1548175531}
   _button: {fileID: 1548175530}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -35707,10 +35764,10 @@ RectTransform:
   - {fileID: 1548685466}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 227.5, y: -65}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1565992749
 MonoBehaviour:
@@ -35807,7 +35864,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1548685467}
+  _slotBackground: {fileID: 1565992750}
   _button: {fileID: 1565992749}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -35921,10 +35984,10 @@ RectTransform:
   - {fileID: 998199331}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 847.5, y: -205}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1570459119
 MonoBehaviour:
@@ -36021,7 +36084,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 998199332}
+  _slotBackground: {fileID: 1570459120}
   _button: {fileID: 1570459119}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -37000,10 +37069,10 @@ RectTransform:
   - {fileID: 1064298118}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 72.5, y: -485}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1651643226
 MonoBehaviour:
@@ -37100,7 +37169,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1064298119}
+  _slotBackground: {fileID: 1651643227}
   _button: {fileID: 1651643226}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -39067,10 +39142,10 @@ RectTransform:
   - {fileID: 1202861221}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 382.5, y: -65}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1749921449
 MonoBehaviour:
@@ -39167,7 +39242,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1202861222}
+  _slotBackground: {fileID: 1749921450}
   _button: {fileID: 1749921449}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -39779,7 +39860,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
+  _slotBackground: {fileID: 0}
   _button: {fileID: 0}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -40887,10 +40974,10 @@ RectTransform:
   - {fileID: 1870676644}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 72.5, y: -205}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804890421
 MonoBehaviour:
@@ -40987,7 +41074,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1870676645}
+  _slotBackground: {fileID: 1804890422}
   _button: {fileID: 1804890421}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -41804,10 +41897,10 @@ RectTransform:
   - {fileID: 1522627838}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 537.5, y: -345}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1849018909
 MonoBehaviour:
@@ -41904,7 +41997,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1522627839}
+  _slotBackground: {fileID: 1849018910}
   _button: {fileID: 1849018909}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -42713,10 +42812,10 @@ RectTransform:
   - {fileID: 1575617222}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 537.5, y: -485}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1914024103
 MonoBehaviour:
@@ -42813,7 +42912,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1575617223}
+  _slotBackground: {fileID: 1914024104}
   _button: {fileID: 1914024103}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -43842,10 +43947,10 @@ RectTransform:
   - {fileID: 1313152500}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 692.5, y: -205}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1954956425
 MonoBehaviour:
@@ -43942,7 +44047,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1313152501}
+  _slotBackground: {fileID: 1954956426}
   _button: {fileID: 1954956425}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -45157,10 +45268,10 @@ RectTransform:
   - {fileID: 95793206}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 692.5, y: -345}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2007993098
 MonoBehaviour:
@@ -45257,7 +45368,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 95793207}
+  _slotBackground: {fileID: 2007993099}
   _button: {fileID: 2007993098}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -45334,10 +45451,10 @@ RectTransform:
   - {fileID: 459398713}
   m_Father: {fileID: 717525735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 382.5, y: -485}
-  m_SizeDelta: {x: 145, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2018812548
 MonoBehaviour:
@@ -45434,7 +45551,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 459398714}
+  _slotBackground: {fileID: 2018812549}
   _button: {fileID: 2018812548}
+  commonColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  uncommonColor: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  rareColor: {r: 0.2, g: 0.4, b: 1, a: 1}
+  epicColor: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+  legendaryColor: {r: 1, g: 0.5, b: 0, a: 1}
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
@@ -46569,7 +46692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a1bcddf30a57a488dc0243f0baaf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questListText: {fileID: 271633968}
 --- !u!114 &2061466226
 MonoBehaviour:
   m_ObjectHideFlags: 0
