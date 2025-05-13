@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 519212672257681932}
   - component: {fileID: -4049161071963623303}
   - component: {fileID: 5505104998413798256}
+  - component: {fileID: -6692168735777689365}
   m_Layer: 0
   m_Name: Chestplate
   m_TagString: Untagged
@@ -168,7 +169,7 @@ MonoBehaviour:
   syncInterval: 0
   itemData:
     Type: 4
-  itemConfig: {fileID: 11400000, guid: 70fa78e596797304c8143a0187febbda, type: 2}
+  itemConfig: {fileID: 11400000, guid: 493ce8ddc670dbc489d55f5446ecdb9f, type: 2}
 --- !u!198 &519212672257681932
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4986,3 +4987,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-6692168735777689365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828090784902224273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da461400f53d4794285bf31257200f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemRank: 0
+  rankColor: {r: 1, g: 1, b: 1, a: 1}
+  glowIntensity: 1
+  particleEffect: {fileID: 519212672257681932}
