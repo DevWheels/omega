@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4573752416090738940}
   - component: {fileID: 1672426756953898866}
-  - component: {fileID: 4596864931029173497}
   - component: {fileID: 1460373431872477171}
   m_Layer: 0
   m_Name: EquipmentManager
@@ -49,19 +48,17 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  PlayerInventory: []
---- !u!114 &4596864931029173497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223194317599826411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 281e6fbf59814ea39724454492211bed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  imageForArmor: {fileID: 0}
+  imageForAccessory: {fileID: 0}
+  imageForWeapon: {fileID: 0}
+  imageForBoots: {fileID: 0}
+  imageForHelmet: {fileID: 0}
+  imageForShoulderPads: {fileID: 0}
+  imageForChestPlate: {fileID: 0}
+  imageForBracers: {fileID: 0}
+  imageForNecklace: {fileID: 0}
+  imageForBracelet: {fileID: 0}
+  UnwearButton: {fileID: 0}
 --- !u!114 &1460373431872477171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 0
+  _assetId: 3803468590
   serverOnly: 0
   visibility: 0
   hasSpawned: 0

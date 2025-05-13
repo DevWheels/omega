@@ -188,8 +188,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   moveSpeed: 1.5
-  stairSpeedReductionFactor: 0.25
-  ladderClimbSpeed: 1.25
   rb: {fileID: 7364872424806606963}
   animator: {fileID: 2373481969828480964}
 --- !u!114 &9113738734727951333
@@ -506,7 +504,6 @@ GameObject:
   - component: {fileID: 2287805556478128517}
   - component: {fileID: 1078289463156087275}
   - component: {fileID: 2373481969828480964}
-  - component: {fileID: 320107928309836114}
   - component: {fileID: 6776037271033280541}
   m_Layer: 6
   m_Name: PlayerVisual
@@ -607,20 +604,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &320107928309836114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2494208576925611429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d381b36d07345642b5c8fb29c3855b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 2373481969828480964}
-  player: {fileID: 5816192160496902662}
 --- !u!114 &6776037271033280541
 MonoBehaviour:
   m_ObjectHideFlags: 0
