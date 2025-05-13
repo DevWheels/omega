@@ -21,8 +21,8 @@ MonoBehaviour:
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: Boots1
-  itemName: Boots2
+  PlayerPrefsName: Boots
+  itemName: Boots
   itemType: 1
   Rank: 4
   Prefab: {fileID: 828090784902224273, guid: c8c55e48a63518545a7714e21efa9675, type: 3}

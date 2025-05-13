@@ -21,8 +21,8 @@ MonoBehaviour:
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: Staff1
-  itemName: Staff2
+  PlayerPrefsName: Staff
+  itemName: Staff
   itemType: 8
   Rank: 0
   Prefab: {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}

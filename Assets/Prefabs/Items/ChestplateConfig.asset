@@ -21,47 +21,34 @@ MonoBehaviour:
   ManaPower: 0
   time: 0
   Coins: 0
-  PlayerPrefsName: ChestPlate1
-  itemName: ChestPlate2
+  PlayerPrefsName: Boots
+  itemName: Boots
   itemType: 1
-  Rank: 0
   Prefab: {fileID: 828090784902224273, guid: 2c7f5901471a5bd4c8cb62932edc5e06, type: 3}
   itemSkills:
   - {fileID: 11400000, guid: 7d6a5f1bb2018e649b8b58017bf1483c, type: 2}
   dRankStats:
     health: {x: 1, y: 1}
-    attack: {x: 1, y: 1}
     armor: {x: 1, y: 1}
+    attack: {x: 1, y: 1}
     perLevelIncrease: 1
-    possibleSpecialStats: 
-    specialStatRanges: []
   cRankStats:
     health: {x: 0, y: 0}
-    attack: {x: 0, y: 0}
     armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
     perLevelIncrease: 0
-    possibleSpecialStats: 
-    specialStatRanges: []
   bRankStats:
     health: {x: 0, y: 0}
-    attack: {x: 0, y: 0}
     armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
     perLevelIncrease: 0
-    possibleSpecialStats: 
-    specialStatRanges: []
   aRankStats:
     health: {x: 0, y: 0}
-    attack: {x: 0, y: 0}
     armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
     perLevelIncrease: 0
-    possibleSpecialStats: 
-    specialStatRanges: []
   sRankStats:
     health: {x: 0, y: 0}
-    attack: {x: 0, y: 0}
     armor: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
     perLevelIncrease: 0
-    possibleSpecialStats: 
-    specialStatRanges: []
-  icon: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
-  itemColor: {r: 1, g: 1, b: 1, a: 1}
