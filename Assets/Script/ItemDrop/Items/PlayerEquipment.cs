@@ -10,7 +10,8 @@ using UnityEngine.UI;
 public class PlayerEquipment : NetworkBehaviour {
     private Dictionary<ItemType, EquipmentItemConfig> PlayerInventory = new();
     public static PlayerEquipment Instance;
-    private ItemBase _itemBase;
+    private ItemConfig _itemConfig;
+    private ItemData _itemData;
 
     [SerializeField] private Image imageForArmor;
     [SerializeField] private Image imageForAccessory;
@@ -34,7 +35,10 @@ public class PlayerEquipment : NetworkBehaviour {
         return PlayerInventory;
     }
 
-    public void WearItem(EquipmentItemConfig equipmentItemConfig) {
+    public void WearItem(EquipmentItemConfig equipmentItemConfig,ItemConfig itemConfig,ItemData itemData) {
+
+        _itemConfig = itemConfig;
+        _itemData = itemData;
         if (equipmentItemConfig.itemSkills.Count < 0) {
             SetEquipmentImage(equipmentItemConfig);
             return;
@@ -55,12 +59,11 @@ public class PlayerEquipment : NetworkBehaviour {
         SetEquipmentImage(equipmentItemConfig);
     }
 
-    private void Unwear(ItemBase itemBase,List<SkillConfig> skillConfig) {
-        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(itemBase.itemConfig,itemBase.itemData);
+    private void Unwear(ItemConfig itemConfig,ItemData itemData,List<SkillConfig> skillConfig) {
+        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(itemConfig,itemData);
 
         foreach (var skillConf in skillConfig) {
             InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(skillConf,InventoryManager.Instance.PlayerSkillController));
-            
         }
         
     }
@@ -71,7 +74,7 @@ public class PlayerEquipment : NetworkBehaviour {
                 imageForArmor.gameObject.SetActive(true);
                 imageForArmor.sprite = equipmentItemConfig.icon;
                 
-                // UnwearButton.SetData();
+                // UnwearButton.SetData(equipmentItemConfig.itemSkills,_itemConfig,_itemData,Unwear);
                 break;
             case ItemType.Accessory:
 
