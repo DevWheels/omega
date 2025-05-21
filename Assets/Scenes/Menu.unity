@@ -6426,7 +6426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   book1: {fileID: 1741357838}
-  book2: {fileID: 92256384}
+  book2: {fileID: 1007035299}
   arrow: {fileID: 570496864}
 --- !u!114 &1575685121
 MonoBehaviour:
