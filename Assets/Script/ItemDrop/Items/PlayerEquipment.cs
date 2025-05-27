@@ -23,7 +23,7 @@ public class PlayerEquipment : NetworkBehaviour {
     [SerializeField] private Image imageForBracers;
     [SerializeField] private Image imageForNecklace;
     [SerializeField] private Image imageForBracelet;
-
+    [SerializeField] private PlayerStats playerStats;
     
     [SerializeField] private UnwearItemButton UnwearButton;
 
@@ -35,10 +35,13 @@ public class PlayerEquipment : NetworkBehaviour {
         return PlayerInventory;
     }
 
-    public void WearItem(ItemConfig equipmentItemConfig,ItemData itemData) {
-        
+    public void WearItem(ItemConfig equipmentItemConfig, ItemData itemData)
+    {
         _itemData = itemData;
-        if (equipmentItemConfig.itemSkills.Count < 0) {
+        ApplyItemStats(equipmentItemConfig);
+
+        if (equipmentItemConfig.itemSkills.Count < 0)
+        {
             SetEquipmentImage(equipmentItemConfig);
             return;
         }
@@ -46,11 +49,14 @@ public class PlayerEquipment : NetworkBehaviour {
         var skillController = InventoryManager.Instance.PlayerSkillController;
         skillController.SkillManager.Skills.Clear();
 
+        if (PlayerInventory.ContainsKey(equipmentItemConfig.itemType))
+        {
 
-        if (PlayerInventory.ContainsKey(equipmentItemConfig.itemType)) {
+            RemoveItemStats(PlayerInventory[equipmentItemConfig.itemType]);
             PlayerInventory[equipmentItemConfig.itemType] = equipmentItemConfig;
         }
-        else {
+        else
+        {
             PlayerInventory.Add(equipmentItemConfig.itemType, equipmentItemConfig);
         }
 
@@ -58,14 +64,50 @@ public class PlayerEquipment : NetworkBehaviour {
         SetEquipmentImage(equipmentItemConfig);
     }
 
-    private void Unwear(ItemConfig equipmentItemConfig,ItemData itemData,List<SkillConfig> skillConfig) {
-        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(equipmentItemConfig,itemData);
+    private void Unwear(ItemConfig equipmentItemConfig, ItemData itemData, List<SkillConfig> skillConfig)
+    {
 
-        foreach (var skillConf in skillConfig) {
-            InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(skillConf,InventoryManager.Instance.PlayerSkillController));
+        RemoveItemStats(equipmentItemConfig);
+    
+        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(equipmentItemConfig, itemData);
+
+        foreach (var skillConf in skillConfig)
+        {
+            InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(skillConf, InventoryManager.Instance.PlayerSkillController));
         }
-        
     }
+    private void RemoveItemStats(ItemConfig itemConfig)
+    {
+        var playerStats = GetComponent<PlayerStats>();
+        if (playerStats == null) return;
+
+        if (itemConfig is EquipmentItemData equipmentData)
+        {
+            playerStats.MaxHp -= equipmentData.Health;
+            playerStats.Armor -= equipmentData.Armor;
+            
+            for (int i = 0; i < equipmentData.SpecialStats.Length; i++)
+            {
+               
+            }
+        }
+    }
+    private void ApplyItemStats(ItemConfig itemConfig)
+    {
+        var playerStats = GetComponent<PlayerStats>();
+        if (playerStats == null) return;
+        if (itemConfig is EquipmentItemData equipmentData)
+        {
+            playerStats.MaxHp += equipmentData.Health;
+            playerStats.Armor += equipmentData.Armor;
+            for (int i = 0; i < equipmentData.SpecialStats.Length; i++)
+            {
+                // Здесь можно добавить логику для специальных характеристик
+                // Например, увеличение крит. шанса, уклонения и т.д.
+            }
+        }
+    }
+    
     private void SetEquipmentImage(ItemConfig equipmentItemConfig) {
         switch (equipmentItemConfig.itemType) {
             case ItemType.Armor:

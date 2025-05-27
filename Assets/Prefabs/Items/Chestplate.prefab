@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4049161071963623303}
   - component: {fileID: 5505104998413798256}
   - component: {fileID: -6692168735777689365}
+  - component: {fileID: 2726491251815476860}
   m_Layer: 0
   m_Name: Chestplate
   m_TagString: Untagged
@@ -5003,3 +5004,17 @@ MonoBehaviour:
   rankColor: {r: 1, g: 1, b: 1, a: 1}
   glowIntensity: 1
   particleEffect: {fileID: 519212672257681932}
+--- !u!114 &2726491251815476860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828090784902224273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69ae2f4e43144bf999a2a6680625f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabs:
+  - {fileID: 6567919549906520209}
