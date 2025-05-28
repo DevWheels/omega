@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4001869255207713855}
   - component: {fileID: 7634208553844630066}
   - component: {fileID: 6840286848825541268}
+  - component: {fileID: 6840532669782684769}
   m_Layer: 0
   m_Name: Staff
   m_TagString: Untagged
@@ -5003,3 +5004,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6840532669782684769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828090784902224273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69ae2f4e43144bf999a2a6680625f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabs:
+  - {fileID: 6567919549906520209}

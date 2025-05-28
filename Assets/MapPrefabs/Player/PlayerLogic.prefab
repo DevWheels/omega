@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 6223419629915707401}
   - component: {fileID: 3943498394387329860}
   - component: {fileID: 5730459053750150668}
+  - component: {fileID: 2663867998250603857}
   m_Layer: 6
   m_Name: PlayerLogic
   m_TagString: Player
@@ -187,9 +188,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  moveSpeed: 1.5
-  rb: {fileID: 7364872424806606963}
-  animator: {fileID: 2373481969828480964}
+  moveSpeed: 5
+  rb: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &9113738734727951333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,9 +365,9 @@ MonoBehaviour:
   attackOffset: {x: 0.5, y: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
-  animator: {fileID: 2373481969828480964}
-  attackSound: {fileID: 8300000, guid: 91806d6425f834d1897ded278936ac7f, type: 3}
+    m_Bits: 0
+  animator: {fileID: 0}
+  attackSound: {fileID: 0}
   playerStats: {fileID: 0}
 --- !u!114 &6223419629915707401
 MonoBehaviour:
@@ -386,7 +387,7 @@ MonoBehaviour:
   attackOffset: {x: 0.5, y: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   animator: {fileID: 0}
   attackSound: {fileID: 0}
   playerStats: {fileID: 0}
@@ -405,79 +406,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  Slots:
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
-  - ItemConfig: {fileID: 0}
-    ItemData:
-      Type: 0
+  Slots: []
 --- !u!114 &5730459053750150668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +422,18 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+--- !u!114 &2663867998250603857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027513326529032562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2be3b1dbc0702458f8e51ba0f9c8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2494208576925611429
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,6 +659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6990afa78291fc24394a0a7621ab5769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2287805556478128517}
-  radius: 0.1
-  rotationSpeed: 100
+  player: {fileID: 0}
+  radius: 1.5
+  rotationSpeed: 5

@@ -419,7 +419,7 @@ MonoBehaviour:
   itemIcon: {fileID: 8783446473567277813}
   itemDescription: {fileID: 8713125563495032471}
   showRecipeButton: {fileID: 3311787864357014037}
-  currentRecipe: {fileID: 0}
+  currentRecipe: {fileID: 11400000, guid: 1b892976c365dad4f8459b9f17f28b79, type: 2}
 --- !u!1 &6491805316513174767
 GameObject:
   m_ObjectHideFlags: 0

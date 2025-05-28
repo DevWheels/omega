@@ -9,74 +9,64 @@ public class RecipetController : MonoBehaviour
     [SerializeField] private TMP_Text itemDescription;
     [SerializeField] private Button showRecipeButton;
 
-    [Header("Debug")]
-    [SerializeField] private ItemRecipe currentRecipe;
+    private ItemRecipe currentRecipe;
+    private Building currentBuilding;
     private RecipeDetailsPanel detailsPanel;
 
     private void Awake()
     {
-        // Автоматически находим кнопку, если не назначена вручную
-        if (showRecipeButton == null)
-        {
-            showRecipeButton = GetComponentInChildren<Button>();
-        }
+        showRecipeButton = showRecipeButton ?? GetComponentInChildren<Button>();
+        detailsPanel = detailsPanel ?? FindObjectOfType<RecipeDetailsPanel>(true);
 
-        // Находим панель деталей (можно заменить на ссылку через инспектор)
-        if (detailsPanel == null)
-        {
-            detailsPanel = FindAnyObjectByType<RecipeDetailsPanel>(FindObjectsInactive.Include);
-        }
-
-        // Защита от null reference
         if (showRecipeButton != null)
         {
             showRecipeButton.onClick.AddListener(ShowRecipeDetails);
         }
         else
         {
-            Debug.LogError("ShowRecipeButton not assigned!", this);
+            Debug.LogError("ShowRecipeButton not found!", this);
         }
     }
 
-    public void Setup(ItemRecipe recipe)
+    public void Setup(ItemRecipe recipe, Building building)
     {
         currentRecipe = recipe;
-        
-        if (itemIcon != null)
+        currentBuilding = building;
+
+        if (itemIcon != null && recipe?.recipeIcon != null)
         {
-            itemIcon.sprite = recipe.itemIcon;
+            itemIcon.sprite = recipe.recipeIcon;
             itemIcon.preserveAspect = true;
         }
 
         if (itemDescription != null)
         {
-            itemDescription.text = recipe.description;
+            itemDescription.text = recipe?.description ?? "No description available";
         }
     }
 
-    public void ShowRecipeDetails()
+    private void ShowRecipeDetails()
     {
         if (detailsPanel == null)
         {
-            Debug.LogError("Details panel not found!", this);
+            Debug.LogError("Details panel reference is null!", this);
             return;
         }
 
-        if (currentRecipe == null)
+        if (currentRecipe == null || currentBuilding == null)
         {
-            Debug.LogError("Current recipe not set!", this);
+            Debug.LogError("Recipe or Building reference is null!", this);
             return;
         }
 
-        detailsPanel.ShowRecipe(currentRecipe);
+        detailsPanel.ShowRecipe(currentRecipe, currentBuilding);
     }
 
-    // Очистка listeners при уничтожении
     private void OnDestroy()
     {
         if (showRecipeButton != null)
         {
-            showRecipeButton.onClick.RemoveAllListeners();
+            showRecipeButton.onClick.RemoveListener(ShowRecipeDetails);
         }
     }
 }
