@@ -328,8 +328,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7487428417848448689}
-  - component: {fileID: 7781036956045105295}
   - component: {fileID: 7460304208043176312}
+  - component: {fileID: 714435088085638273}
   m_Layer: 0
   m_Name: interect
   m_TagString: Untagged
@@ -352,8 +352,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4856292537035618258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &7781036956045105295
-CircleCollider2D:
+--- !u!114 &7460304208043176312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7307993326589073928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb95c3608bbfab74d9b3823df44de445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
+--- !u!60 &714435088085638273
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -387,20 +400,22 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.58
---- !u!114 &7460304208043176312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7307993326589073928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb95c3608bbfab74d9b3823df44de445, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.15643851, y: 0.43342024}
+      - {x: -1.3940467, y: -0.06803346}
+      - {x: 0.19236162, y: -0.71336496}
+      - {x: 1.4570823, y: -0.21451002}
+  m_UseDelaunayMesh: 0
 --- !u!1 &8504896148643632253
 GameObject:
   m_ObjectHideFlags: 0
