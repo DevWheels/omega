@@ -8,10 +8,10 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerEquipment : NetworkBehaviour {
-    private Dictionary<ItemType, ItemConfig> PlayerInventory = new();
+    private Dictionary<ItemType, ItemConfig> PlayerInventoryConfig = new();
+    private Dictionary<ItemType, ItemData> PlayerInventoryData = new();
+
     public static PlayerEquipment Instance;
-    private ItemConfig _itemConfig;
-    private ItemData _itemData;
 
     [SerializeField] private Image imageForArmor;
     [SerializeField] private Image imageForAccessory;
@@ -32,37 +32,42 @@ public class PlayerEquipment : NetworkBehaviour {
     }
 
     public Dictionary<ItemType, ItemConfig> GetAllItems() {
-        return PlayerInventory;
+        return PlayerInventoryConfig;
     }
 
+    public ItemConfig GetItemConfig(ItemType itemType) {
+        return PlayerInventoryConfig[itemType];
+    }
+
+    public ItemData GetItemData(ItemType itemType) {
+        return PlayerInventoryData[itemType];
+    }
     public void WearItem(ItemConfig equipmentItemConfig,ItemData itemData) {
         
-        _itemData = itemData;
-        if (equipmentItemConfig.itemSkills.Count < 0) {
+        if (equipmentItemConfig.Skills.Count < 0) {
             SetEquipmentImage(equipmentItemConfig);
             return;
         }
 
         var skillController = InventoryManager.Instance.PlayerSkillController;
         skillController.SkillManager.Skills.Clear();
-
-
-        if (PlayerInventory.ContainsKey(equipmentItemConfig.itemType)) {
-            PlayerInventory[equipmentItemConfig.itemType] = equipmentItemConfig;
-        }
-        else {
-            PlayerInventory.Add(equipmentItemConfig.itemType, equipmentItemConfig);
-        }
+        
+        EquipmentFilter(equipmentItemConfig, itemData);
 
         GameUI.Instance.SkillContainerView.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
         SetEquipmentImage(equipmentItemConfig);
     }
 
-    private void Unwear(ItemConfig equipmentItemConfig,ItemData itemData,List<SkillConfig> skillConfig) {
+    private void EquipmentFilter(ItemConfig equipmentItemConfig, ItemData itemData) {
+        PlayerInventoryConfig[equipmentItemConfig.itemType] = equipmentItemConfig;
+        PlayerInventoryData[equipmentItemConfig.itemType] = itemData;
+    }
+
+    public void Unwear(ItemConfig equipmentItemConfig,ItemData itemData) {
         InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(equipmentItemConfig,itemData);
 
-        foreach (var skillConf in skillConfig) {
-            InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(skillConf,InventoryManager.Instance.PlayerSkillController));
+        foreach (var skillType in itemData.Skills) {
+            InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(ConfigsManager.GetSkillConfig(skillType),InventoryManager.Instance.PlayerSkillController));
         }
         
     }
@@ -73,7 +78,6 @@ public class PlayerEquipment : NetworkBehaviour {
                 imageForArmor.gameObject.SetActive(true);
                 imageForArmor.sprite = equipmentItemConfig.icon;
                 
-                // UnwearButton.SetData(equipmentItemConfig.itemSkills,_itemConfig,_itemData,Unwear);
                 break;
             case ItemType.Accessory:
 
@@ -122,5 +126,9 @@ public class PlayerEquipment : NetworkBehaviour {
                 Debug.LogError("not correct item type or no type: " + equipmentItemConfig.itemType);
                 break;
         }
+        Debug.Log(PlayerInventoryConfig[equipmentItemConfig.itemType]);
+        Debug.Log(PlayerInventoryData[equipmentItemConfig.itemType]);
+    
+        GameUI.Instance.button.SetData(PlayerInventoryConfig[equipmentItemConfig.itemType],PlayerInventoryData[equipmentItemConfig.itemType],Unwear);
     }
 }

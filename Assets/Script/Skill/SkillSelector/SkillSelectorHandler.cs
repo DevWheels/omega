@@ -21,8 +21,8 @@ public class SkillSelectorHandler : MonoBehaviour {
         
         foreach (var item in allSkills) {
             
-            foreach (var skillConfig in item.Value.itemSkills) {
-                skillConfigs.Add(skillConfig);
+            foreach (var skillName in item.Value.Skills) {
+                skillConfigs.Add(ConfigsManager.GetSkillConfig(skillName));
             }
         }
 

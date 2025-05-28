@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnwearItemButton : MonoBehaviour{
-    private List<SkillConfig> _skillConfig;
     private ItemConfig _itemConfig;
     private ItemData _itemData;
-    private Action<ItemConfig,ItemData,List<SkillConfig>> _onSelected;
+    private Action<ItemConfig,ItemData> _onSelected;
     
-    public void SetData(List<SkillConfig> skillConfig,ItemConfig itemConfig,ItemData data,Action<ItemConfig,ItemData,List<SkillConfig>> onSelected) {
+    public void SetData(ItemConfig itemConfig,ItemData data,Action<ItemConfig,ItemData> onSelected) {
         _itemConfig = itemConfig;
-        _skillConfig = skillConfig;
+        _itemData = data;
         _onSelected = onSelected;
-        _skillConfig = skillConfig;
+
     }
     public void Disable() {
-        GameUI.Instance.button.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void Enable() {
-        GameUI.Instance.button.SetActive(true);
+        gameObject.SetActive(true);
+        GameUI.Instance.button.transform.SetParent(transform);
         
     }
-    private void OnUnwearItem() {
-        _onSelected?.Invoke(_itemConfig,_itemData,_skillConfig);
+    public void OnUnwearItem() {
+        _onSelected?.Invoke(_itemConfig,_itemData);
         Disable();
     }
 }
