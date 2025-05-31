@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 7093322444509862997}
   - component: {fileID: 8531415492750783535}
   - component: {fileID: 1361046342418410514}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 4288758021023967005}
   - component: {fileID: 6598115924664884681}
   - component: {fileID: 4229147086829535194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 5344552785298565874}
   - component: {fileID: 7085665958519902179}
   - component: {fileID: 4739844430587834773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8701406182340213416}
   - component: {fileID: 4193698719847539534}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1651,7 +1651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4125398937321732156}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object underground zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1666,7 +1666,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341165868808833573}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -132.85666, y: 26.844372, z: 1.2016649}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1826,7 +1826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 566168034164044300}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4375596263283715006}
   - component: {fileID: 4974753016269754936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2303,7 +2303,7 @@ GameObject:
   - component: {fileID: 1733436348973101919}
   - component: {fileID: 1739802308025217884}
   - component: {fileID: 6837385420389205272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2648,7 +2648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3704158646210475694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Active objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2681,7 +2681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4504453586004052505}
   - component: {fileID: 8485349153007982876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2769,7 +2769,7 @@ GameObject:
   - component: {fileID: 120038872028919054}
   - component: {fileID: 1333972179402723630}
   - component: {fileID: 8628972643025330901}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3159,7 +3159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5532256435467124047}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3483,7 +3483,7 @@ GameObject:
   - component: {fileID: 1397899764426434310}
   - component: {fileID: 2128795924768075191}
   - component: {fileID: 9110022317985562779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3734,7 +3734,7 @@ GameObject:
   - component: {fileID: 2811843725175910958}
   - component: {fileID: 5377555038934449633}
   - component: {fileID: 8441061319934227460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3843,7 +3843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8354735161062650241}
   - component: {fileID: 3665549541168608}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3931,7 +3931,7 @@ GameObject:
   - component: {fileID: 617664644047661065}
   - component: {fileID: 3623196555041852173}
   - component: {fileID: 7326355771807160925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4138,7 +4138,7 @@ GameObject:
   - component: {fileID: 498556041974858096}
   - component: {fileID: 4607951192041589181}
   - component: {fileID: 2890948999264661630}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4345,7 +4345,7 @@ GameObject:
   - component: {fileID: 7531503376030283707}
   - component: {fileID: 6824811146003390459}
   - component: {fileID: 3628812313104749837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4469,7 +4469,7 @@ GameObject:
   - component: {fileID: 684561341561719569}
   - component: {fileID: 6581341077927486204}
   - component: {fileID: 5684468106395585454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4579,13 +4579,13 @@ GameObject:
   - component: {fileID: 2615857282972095031}
   - component: {fileID: 2388256738335073725}
   - component: {fileID: 6288587640145287126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TeleportZone
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2615857282972095031
 Transform:
   m_ObjectHideFlags: 0
@@ -4682,7 +4682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3218235424966379746}
   - component: {fileID: 9215166720810255287}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4770,7 +4770,7 @@ GameObject:
   - component: {fileID: 3586594340829853142}
   - component: {fileID: 6972198527563816327}
   - component: {fileID: 6490777853930145472}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4786,7 +4786,7 @@ Transform:
   m_GameObject: {fileID: 3514710519674495456}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.91, y: 13.35, z: -0.89651346}
+  m_LocalPosition: {x: 37.283, y: 14.752, z: -0.89651346}
   m_LocalScale: {x: 0.79999995, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4982,7 +4982,7 @@ GameObject:
   - component: {fileID: 591436291434356281}
   - component: {fileID: 8989655182763801877}
   - component: {fileID: 5500989516669019828}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5239,7 +5239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1400307038819870002}
   - component: {fileID: 5823782292542979434}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5327,7 +5327,7 @@ GameObject:
   - component: {fileID: 7166575562224597689}
   - component: {fileID: 1600572195330212884}
   - component: {fileID: 3558865009654343161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5726,7 +5726,7 @@ GameObject:
   - component: {fileID: 50424559729354978}
   - component: {fileID: 8209091632339742288}
   - component: {fileID: 806633741679516705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5850,7 +5850,7 @@ GameObject:
   - component: {fileID: 4347235396771301702}
   - component: {fileID: 3047911464879672014}
   - component: {fileID: 3884851783638511391}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5960,7 +5960,7 @@ GameObject:
   - component: {fileID: 6100225576178394551}
   - component: {fileID: 1371826255194423918}
   - component: {fileID: 7783206513929843004}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6488,7 +6488,7 @@ GameObject:
   - component: {fileID: 1911872246261838537}
   - component: {fileID: 6888972755213599610}
   - component: {fileID: 7864636597754016006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6612,7 +6612,7 @@ GameObject:
   - component: {fileID: 2914406897254433214}
   - component: {fileID: 1852417102966959835}
   - component: {fileID: 6814853030441620388}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7183,7 +7183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3251422590355573513}
   - component: {fileID: 1462340575292194298}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7271,7 +7271,7 @@ GameObject:
   - component: {fileID: 3334810567206954198}
   - component: {fileID: 7293568616776463197}
   - component: {fileID: 51037525411735247}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7287,7 +7287,7 @@ Transform:
   m_GameObject: {fileID: 4930983336174589253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.41, y: 9.75, z: -0.89651346}
+  m_LocalPosition: {x: 44.398, y: 11.297, z: -0.89651346}
   m_LocalScale: {x: 0.79999995, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7789,7 +7789,7 @@ GameObject:
   - component: {fileID: 1369203039061347663}
   - component: {fileID: 6242532668931498958}
   - component: {fileID: 5109858009129449518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8010,7 +8010,7 @@ GameObject:
   - component: {fileID: 2212518499878547497}
   - component: {fileID: 4336306278331320360}
   - component: {fileID: 6970315433623076914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8133,7 +8133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1648665361974151421}
   - component: {fileID: 4820674508577434823}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8221,7 +8221,7 @@ GameObject:
   - component: {fileID: 8711956135116805683}
   - component: {fileID: 1458598455840442887}
   - component: {fileID: 1028314646443203788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8442,7 +8442,7 @@ GameObject:
   - component: {fileID: 3087425834788400094}
   - component: {fileID: 2439956475622962571}
   - component: {fileID: 6572912789314457144}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8832,7 +8832,7 @@ GameObject:
   - component: {fileID: 7402031660846194508}
   - component: {fileID: 9160452644905559787}
   - component: {fileID: 6130279253276873105}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9176,7 +9176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4021333616432852672}
   - component: {fileID: 3500059533324001652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9361,7 +9361,7 @@ GameObject:
   - component: {fileID: 5960617672385599184}
   - component: {fileID: 6240799273768887082}
   - component: {fileID: 4889544415032961792}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9703,7 +9703,7 @@ GameObject:
   - component: {fileID: 3633205917506630601}
   - component: {fileID: 9128434575781261196}
   - component: {fileID: 4304754477759003110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10303,7 +10303,7 @@ GameObject:
   - component: {fileID: 206207332398883154}
   - component: {fileID: 7743398811096593989}
   - component: {fileID: 2837673897108318480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10418,7 +10418,7 @@ GameObject:
   - component: {fileID: 7848427248308759935}
   - component: {fileID: 5393313821351532910}
   - component: {fileID: 5095054575020245976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10528,7 +10528,7 @@ GameObject:
   - component: {fileID: 5657971706503966652}
   - component: {fileID: 5626397724365769714}
   - component: {fileID: 8843821117951790167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10643,7 +10643,7 @@ GameObject:
   - component: {fileID: 8214015084676104709}
   - component: {fileID: 3345177705015255421}
   - component: {fileID: 3520570133056695830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tableChairsBroken_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11032,7 +11032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2314375616220371118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11633,7 +11633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2355183879675630366}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Vegetation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11762,7 +11762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3539858035554343579}
   - component: {fileID: 5169148148729878936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11849,7 +11849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8725340659042427460}
   - component: {fileID: 4515992582175462581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Anime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12187,7 +12187,7 @@ GameObject:
   - component: {fileID: 9197920203960582901}
   - component: {fileID: 5766043800934922319}
   - component: {fileID: 5907187413316913479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fire1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12302,7 +12302,7 @@ GameObject:
   - component: {fileID: 8006935502266404559}
   - component: {fileID: 6944421598334456592}
   - component: {fileID: 1625339986828706291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

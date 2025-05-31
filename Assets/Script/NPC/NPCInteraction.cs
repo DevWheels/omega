@@ -12,19 +12,32 @@ public class NPCInteraction : MonoBehaviour
     [Header("Dialog Settings")]
     public Dialog[] dialogs; // Список реплик NPC
     private int currentDialogIndex = 0;
+    private PlayerMovement playerMovement; // Ссылка на скрипт управления игроком
 
     private void Start()
     {
         panel.SetActive(false);
+        // Находим скрипт управления игроком по тегу
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerMovement = player.GetComponent<PlayerMovement>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            // Отключаем управление игроком
+            if (playerMovement != null)
+            {
+                playerMovement.enabled = false;
+            }
+
             panel.SetActive(true);
             ShowNextDialog();
-            Debug.Log("Диалог начат!");
+            Debug.Log("Диалог начат! Управление отключено.");
         }
     }
 
@@ -34,7 +47,14 @@ public class NPCInteraction : MonoBehaviour
         {
             panel.SetActive(false);
             currentDialogIndex = 0; // Сброс диалога при выходе
-            Debug.Log("Диалог завершен!");
+
+            // Включаем управление игроком
+            if (playerMovement != null)
+            {
+                playerMovement.enabled = true;
+            }
+
+            Debug.Log("Диалог завершен! Управление возвращено.");
         }
     }
 
@@ -68,6 +88,12 @@ public class NPCInteraction : MonoBehaviour
             // Закрываем панель когда диалоги закончились
             panel.SetActive(false);
             currentDialogIndex = 0;
+
+            // Включаем управление игроком при завершении диалога
+            if (playerMovement != null)
+            {
+                playerMovement.enabled = true;
+            }
         }
     }
 }
