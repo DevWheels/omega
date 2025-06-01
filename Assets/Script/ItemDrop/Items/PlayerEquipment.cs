@@ -93,6 +93,22 @@ public class PlayerEquipment : NetworkBehaviour {
         }
     }
 
+    private void ApplyItemStats(ItemConfig itemConfig)
+    {
+        var playerStats = GetComponent<PlayerStats>();
+        if (playerStats == null) return;
+        if (itemConfig is EquipmentItemData equipmentData)
+        {
+            playerStats.MaxHp += equipmentData.Health;
+            playerStats.Armor += equipmentData.Armor;
+            for (int i = 0; i < equipmentData.SpecialStats.Length; i++)
+            {
+                // Здесь можно добавить логику для специальных характеристик
+                // Например, увеличение крит. шанса, уклонения и т.д.
+            }
+        }
+    }
+    
     private void SetEquipmentImage(ItemConfig equipmentItemConfig) {
         if (_itemTypeToImageMap.TryGetValue(equipmentItemConfig.itemType, out var image)) {
             SetImage(image, equipmentItemConfig.icon);

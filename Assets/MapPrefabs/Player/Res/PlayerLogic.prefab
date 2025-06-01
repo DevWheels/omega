@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: -1568228476913601040}
   - component: {fileID: -3095385020681225760}
   - component: {fileID: 6197982689662656025}
+  - component: {fileID: 4722248026660128851}
   m_Layer: 0
   m_Name: PlayerLogic
   m_TagString: Player
@@ -588,7 +589,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -850,75 +851,123 @@ MonoBehaviour:
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      configId: 
+      rank: 0
 --- !u!114 &6197982689662656025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +983,18 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+--- !u!114 &4722248026660128851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909981378074328598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2be3b1dbc0702458f8e51ba0f9c8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7563778525642114572
 GameObject:
   m_ObjectHideFlags: 0

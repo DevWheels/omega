@@ -28,7 +28,8 @@ public class PlayerStats : NetworkBehaviour {
 
     public int MaxHp {
         get { return max_hp; }
-        set { max_hp = value; }
+        set {  max_hp = value;
+            if (playerUI != null) playerUI.UpdateUI();}
     }
 
     public int CurrentlyHp {
@@ -38,7 +39,8 @@ public class PlayerStats : NetworkBehaviour {
 
     public int MaxMana {
         get { return max_mana; }
-        set { max_mana = value; }
+        set {  max_mana = value;
+            if (playerUI != null) playerUI.UpdateUI(); }
     }
 
     public int CurrentlyMana {
@@ -48,7 +50,8 @@ public class PlayerStats : NetworkBehaviour {
 
     public int Armor {
         get { return armor; }
-        set { armor = value; }
+        set { armor = value;
+            if (playerUI != null) playerUI.UpdateUI();}
     }
 
     public int Lvl {
