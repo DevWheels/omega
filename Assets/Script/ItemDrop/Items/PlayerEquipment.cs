@@ -34,7 +34,6 @@ public class PlayerEquipment : NetworkBehaviour {
     }
 
     public Dictionary<ItemType, ItemConfig> GetAllItems() {
-        Debug.Log(_playerInventoryConfig.Count);
         return _playerInventoryConfig;
     }
 

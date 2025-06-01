@@ -18,10 +18,14 @@ public class SkillSelectorHandler : MonoBehaviour {
     public void UpdateSkillSelector() {
         var allSkills = PlayerEquipment.Instance.GetAllItems();
         List<SkillConfig> skillConfigs = new();
-        Debug.Log(allSkills.Count);
+
+        if (allSkills.Count <= 0) {
+            UnsetAllButtons();
+            return;
+        }
         
         foreach (var item in allSkills) {
-            Debug.Log(item.Value.itemType);
+
             foreach (var skillName in item.Value.Skills) {
                 skillConfigs.Add(ConfigsManager.GetSkillConfig(skillName));
             }
@@ -33,6 +37,12 @@ public class SkillSelectorHandler : MonoBehaviour {
 
         }
 
+    }
+
+    private static void UnsetAllButtons() {
+        foreach (var t in GameUI.Instance.SkillContainerView.buttons) {
+            t.Disable();
+        }
     }
 
     public void SelectSkill(SkillConfig skillConfig) {
