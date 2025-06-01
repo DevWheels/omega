@@ -12,7 +12,7 @@ public class TeleportZoneOut : MonoBehaviour
     [Header("Teleport Settings")]
     public GameObject targetMarker;
     public bool setGreenZone = false;
-    private const float TELEPORT_DELAY = 30f;
+    private const float TELEPORT_DELAY = 15f;
     
     private GameObject player; 
     private PlayerSkillController playerSkillController;
