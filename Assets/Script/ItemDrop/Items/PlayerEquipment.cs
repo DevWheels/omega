@@ -34,6 +34,7 @@ public class PlayerEquipment : NetworkBehaviour {
     }
 
     public Dictionary<ItemType, ItemConfig> GetAllItems() {
+        Debug.Log(_playerInventoryConfig.Count);
         return _playerInventoryConfig;
     }
 
@@ -67,15 +68,21 @@ public class PlayerEquipment : NetworkBehaviour {
 
     public void Unwear(ItemConfig equipmentItemConfig,ItemData itemData) {
         InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(equipmentItemConfig,itemData);
-
+        
+        _playerInventoryConfig.Remove(equipmentItemConfig.itemType);
+        _playerInventoryData.Remove(equipmentItemConfig.itemType);
+        
         foreach (var skillType in itemData.Skills) {
             InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(ConfigsManager.GetSkillConfig(skillType),InventoryManager.Instance.PlayerSkillController));
         }
         GameUI.Instance.button.Disable();
         UnsetEquipmentImage(equipmentItemConfig);
         
-        _playerInventoryConfig[equipmentItemConfig.itemType] = null;
-        _playerInventoryData[equipmentItemConfig.itemType] = null;
+        InventoryManager.Instance.PlayerSkillController.AddNewSkillFromItem();
+        GameUI.Instance.SkillContainerView.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
+        
+
+
         
     }
 
