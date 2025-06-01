@@ -25,8 +25,6 @@ public class PlayerEquipment : NetworkBehaviour {
     [SerializeField] private Image imageForNecklace;
     [SerializeField] private Image imageForBracelet;
 
-    
-    [SerializeField] private UnwearItemButton UnwearButton;
 
     private void Awake() {
         Instance = this;
@@ -54,13 +52,13 @@ public class PlayerEquipment : NetworkBehaviour {
         var skillController = InventoryManager.Instance.PlayerSkillController;
         skillController.SkillManager.Skills.Clear();
         
-        EquipmentFilter(equipmentItemConfig, itemData);
+        SetEquipment(equipmentItemConfig, itemData);
 
         GameUI.Instance.SkillContainerView.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
         SetEquipmentImage(equipmentItemConfig);
     }
 
-    private void EquipmentFilter(ItemConfig equipmentItemConfig, ItemData itemData) {
+    private void SetEquipment(ItemConfig equipmentItemConfig, ItemData itemData) {
         _playerInventoryConfig[equipmentItemConfig.itemType] = equipmentItemConfig;
         _playerInventoryData[equipmentItemConfig.itemType] = itemData;
     }
@@ -68,9 +66,8 @@ public class PlayerEquipment : NetworkBehaviour {
     public void Unwear(ItemConfig equipmentItemConfig,ItemData itemData) {
         InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(equipmentItemConfig,itemData);
         
-        _playerInventoryConfig.Remove(equipmentItemConfig.itemType);
-        _playerInventoryData.Remove(equipmentItemConfig.itemType);
-        
+        DeleteEquipment(equipmentItemConfig);
+
         foreach (var skillType in itemData.Skills) {
             InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(ConfigsManager.GetSkillConfig(skillType),InventoryManager.Instance.PlayerSkillController));
         }
@@ -80,9 +77,11 @@ public class PlayerEquipment : NetworkBehaviour {
         InventoryManager.Instance.PlayerSkillController.AddNewSkillFromItem();
         GameUI.Instance.SkillContainerView.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
         
+    }
 
-
-        
+    private void DeleteEquipment(ItemConfig equipmentItemConfig) {
+        _playerInventoryConfig.Remove(equipmentItemConfig.itemType);
+        _playerInventoryData.Remove(equipmentItemConfig.itemType);
     }
 
     public void UnsetEquipmentImage(ItemConfig equipmentItemConfig) {
