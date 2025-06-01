@@ -19,7 +19,6 @@ public class UnwearItemButton : MonoBehaviour{
 
     public void Enable() {
         gameObject.SetActive(true);
-        GameUI.Instance.button.transform.SetParent(transform);
         
     }
     public void OnUnwearItem() {
