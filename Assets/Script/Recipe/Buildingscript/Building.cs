@@ -14,18 +14,20 @@ public abstract class Building : NetworkBehaviour
     [SyncVar(hook = nameof(OnBuildingLevelChanged))]
     public int buildingLevel = 1;
     
+    [Header("Basic Settings")]
     [SerializeField] private string buildingName;
     [SerializeField] private Collider interactionCollider;
-    [SerializeField] private GameObject uiPanelPrefab;
+    [SerializeField] private GameObject craftingUIPanel; // Ссылка на UI панель
+    
+    [Header("Upgrade Settings")]
     [SerializeField] private BuildingUpgradeCost[] upgradeCosts;
     
     [Header("Visual Effects")]
     [SerializeField] private VisualEffect upgradeEffect;
     [SerializeField] private VisualEffect craftEffect;
     
-    private GameObject currentUIPanel;
     private bool playerInRange;
-    
+
     public string BuildingName => buildingName;
     
     private void OnTriggerEnter(Collider other)
@@ -36,7 +38,7 @@ public abstract class Building : NetworkBehaviour
         if (player.isLocalPlayer)
         {
             playerInRange = true;
-            PlayerInputHandler.Instance.OnInteractKeyPressed += TryOpenBuildingUI;
+            Debug.Log("Player entered building zone");
         }
     }
     
@@ -48,33 +50,50 @@ public abstract class Building : NetworkBehaviour
         if (player.isLocalPlayer)
         {
             playerInRange = false;
-            PlayerInputHandler.Instance.OnInteractKeyPressed -= TryOpenBuildingUI;
             CloseUI();
+            Debug.Log("Player left building zone");
         }
     }
     
-    private void TryOpenBuildingUI()
+    private void Update()
     {
-        if (!playerInRange) return;
-        
-        if (currentUIPanel == null)
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            currentUIPanel = Instantiate(uiPanelPrefab, UICanvas.Instance.transform);
-            SetupUI(currentUIPanel);
+            ToggleUI();
+        }
+    }
+    
+    private void ToggleUI()
+    {
+        if (craftingUIPanel == null) return;
+        
+        if (craftingUIPanel.activeSelf)
+        {
+            CloseUI();
         }
         else
         {
-            CloseUI();
+            OpenUI();
+        }
+    }
+    
+    private void OpenUI()
+    {
+        craftingUIPanel.SetActive(true);
+        SetupUI(craftingUIPanel);
+        Debug.Log("Opened crafting UI");
+    }
+    
+    public void CloseUI()
+    {
+        if (craftingUIPanel != null)
+        {
+            craftingUIPanel.SetActive(false);
+            Debug.Log("Closed crafting UI");
         }
     }
     
     protected abstract void SetupUI(GameObject uiPanel);
-    
-    public void CloseUI()
-    {
-        if (currentUIPanel != null)
-            Destroy(currentUIPanel);
-    }
     
     [Command(requiresAuthority = false)]
     public void CmdUpgradeBuilding(NetworkConnectionToClient sender = null)
@@ -112,7 +131,7 @@ public abstract class Building : NetworkBehaviour
             upgradeEffect.Play();
         }
         
-        Debug.Log($"{buildingName} улучшено до уровня {newLevel}");
+        Debug.Log($"{buildingName} upgraded to level {newLevel}");
     }
     
     public virtual void PlayCraftEffect()

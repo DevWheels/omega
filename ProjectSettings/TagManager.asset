@@ -11,17 +11,20 @@ TagManager:
   - Ice
   - Slaim
   - Chest
+  - Building
+  - Enemy
+  - SmithyBuilding
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Alhim
   - Water
   - UI
   - Light1
   - Light2
   - Light3
-  - 
+  - Building
   - 
   - 
   - 

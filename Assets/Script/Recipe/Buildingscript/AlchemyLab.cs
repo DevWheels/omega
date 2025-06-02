@@ -5,7 +5,7 @@ public class AlchemyLab : Building
 {
     [Header("Crafting Settings")]
     [SerializeField] private ItemRecipe[] availableRecipes;
-    // [SerializeField] private float craftRadius = 3f;
+    [SerializeField] private float craftRadius = 3f;
     
     protected override void SetupUI(GameObject uiPanel)
     {
@@ -32,11 +32,11 @@ public class AlchemyLab : Building
             return false;
         }
         
-        // if (!IsPlayerInRange())
-        // {
-        //     Debug.Log("Player is too far from the building");
-        //     return false;
-        // }
+        if (!IsPlayerInRange())
+        {
+            Debug.Log("Player is too far from the building");
+            return false;
+        }
         
         foreach (var ingredient in recipe.ingredients)
         {
@@ -90,18 +90,18 @@ public class AlchemyLab : Building
         return ItemRank.C;
     }
 
-    // private bool IsPlayerInRange()
-    // {
-    //     Collider[] hitColliders = Physics.OverlapSphere(transform.position, craftRadius);
-    //     foreach (var hitCollider in hitColliders)
-    //     {
-    //         if (hitCollider != null && 
-    //             hitCollider.CompareTag("Player") && 
-    //             hitCollider.GetComponent<NetworkIdentity>()?.isLocalPlayer == true)
-    //         {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
+    private bool IsPlayerInRange()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, craftRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider != null && 
+                hitCollider.CompareTag("Player") && 
+                hitCollider.GetComponent<NetworkIdentity>()?.isLocalPlayer == true)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
