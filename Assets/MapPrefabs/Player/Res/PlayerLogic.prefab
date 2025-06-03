@@ -795,7 +795,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  greenZone: 1
+  greenZone: 0
 --- !u!114 &-510250030928325903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,121 +987,145 @@ MonoBehaviour:
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
 --- !u!114 &6197982689662656025

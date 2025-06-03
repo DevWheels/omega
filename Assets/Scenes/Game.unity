@@ -2093,6 +2093,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &95793205
@@ -3540,6 +3541,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &160821726
@@ -4464,6 +4466,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &201503568
@@ -5287,6 +5290,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &223534309
@@ -5480,6 +5484,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1001 &237744500
@@ -6175,6 +6180,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &267663987
@@ -7531,6 +7537,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &311083749
@@ -10118,6 +10125,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &400880743
@@ -12607,6 +12615,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &540643603
@@ -13424,6 +13433,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &574275103
@@ -15199,6 +15209,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &660584611
@@ -15511,6 +15522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!114 &674982330
@@ -16405,6 +16417,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &720930613
@@ -18703,6 +18716,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &844324961
@@ -19020,6 +19034,171 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855232565}
   m_CullTransparentMesh: 1
+--- !u!43 &856817132
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 0
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 0
+    localAABB:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 0
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 0
+    _typelessdata: 
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  'm_MeshMetrics[0]': 1
+  'm_MeshMetrics[1]': 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &871395730
 GameObject:
   m_ObjectHideFlags: 0
@@ -19477,6 +19656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!114 &888660432
@@ -20852,6 +21032,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &917067407
@@ -23149,6 +23330,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &984743184
@@ -24372,6 +24554,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6853417651617102070, guid: 833e20343a9263346a8ba4376e1ebfbf, type: 3}
   m_PrefabInstance: {fileID: 1065981330}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1065981334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9080471906376829308, guid: 833e20343a9263346a8ba4376e1ebfbf, type: 3}
+  m_PrefabInstance: {fileID: 1065981330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1075203015
 GameObject:
   m_ObjectHideFlags: 0
@@ -24455,6 +24642,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 542134605271343237, guid: a356e0764f7e2be4e9aeb4fb7df18dca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -106.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 542134605271343237, guid: a356e0764f7e2be4e9aeb4fb7df18dca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.66
+      objectReference: {fileID: 0}
     - target: {fileID: 2020944344875123299, guid: a356e0764f7e2be4e9aeb4fb7df18dca, type: 3}
       propertyPath: panel
       value: 
@@ -24463,6 +24658,10 @@ PrefabInstance:
       propertyPath: panel
       value: 
       objectReference: {fileID: 1065981333}
+    - target: {fileID: 3759664273295821521, guid: a356e0764f7e2be4e9aeb4fb7df18dca, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 1065981334}
     - target: {fileID: 4629259182286048905, guid: a356e0764f7e2be4e9aeb4fb7df18dca, type: 3}
       propertyPath: m_Name
       value: Traning
@@ -26242,6 +26441,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1167215314
@@ -26566,6 +26766,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &1168982202
@@ -26721,6 +26922,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1173185639
@@ -30383,6 +30585,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1312510456
@@ -32174,6 +32377,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &1375328444
@@ -35065,6 +35269,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &1502873811
@@ -35851,6 +36056,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1548685465
@@ -36409,6 +36615,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1569616614
@@ -36631,6 +36838,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1571266017
@@ -37861,6 +38069,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1654129208
@@ -39694,6 +39903,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1750336503
@@ -40314,6 +40524,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!222 &1760721235
@@ -41566,6 +41777,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1808618598
@@ -42391,6 +42603,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1852596299
@@ -43084,6 +43297,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1001 &1916554323
@@ -44155,6 +44369,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &1955354567
@@ -45478,6 +45693,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &2010394747
@@ -45871,6 +46087,7 @@ MonoBehaviour:
   slotItemConfig: {fileID: 0}
   slotItemData:
     Type: 0
+    Skills: 
     configId: 
     rank: 0
 --- !u!1 &2023330852
@@ -47110,15 +47327,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6961648780496721955, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -82.9
+      value: -89.01
       objectReference: {fileID: 0}
     - target: {fileID: 6961648780496721955, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.28
+      value: 11.21
       objectReference: {fileID: 0}
     - target: {fileID: 6961648780496721955, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 75.91
+      value: -8.5
       objectReference: {fileID: 0}
     - target: {fileID: 6961648780496721955, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
       propertyPath: m_LocalRotation.w
