@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillConfig : ScriptableObject {
     public string SkillViewConfigName;
     public string Name;
+    
     [TextArea]
     public string Description;
     

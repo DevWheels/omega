@@ -25,8 +25,7 @@ MonoBehaviour:
   itemType: 5
   Rank: 0
   Prefab: {fileID: 828090784902224273, guid: 2c3c946d97076774b8d8883feecf0625, type: 3}
-  itemSkills:
-  - {fileID: 11400000, guid: 83199a9ca4b38024987216c1b039f37a, type: 2}
+  Skills: 00000000
   dRankStats:
     health: {x: 111, y: 444}
     attack: {x: 111, y: 444}

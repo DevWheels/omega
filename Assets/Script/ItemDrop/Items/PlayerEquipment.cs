@@ -8,10 +8,11 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerEquipment : NetworkBehaviour {
-    private Dictionary<ItemType, ItemConfig> PlayerInventory = new();
+    private Dictionary<ItemType, ItemConfig> _playerInventoryConfig = new();
+    private Dictionary<ItemType, ItemData> _playerInventoryData = new();
+    private Dictionary<ItemType, Image> _itemTypeToImageMap = new();
+
     public static PlayerEquipment Instance;
-    private ItemConfig _itemConfig;
-    private ItemData _itemData;
 
     [SerializeField] private Image imageForArmor;
     [SerializeField] private Image imageForAccessory;
@@ -23,25 +24,28 @@ public class PlayerEquipment : NetworkBehaviour {
     [SerializeField] private Image imageForBracers;
     [SerializeField] private Image imageForNecklace;
     [SerializeField] private Image imageForBracelet;
-    [SerializeField] private PlayerStats playerStats;
-    
-    [SerializeField] private UnwearItemButton UnwearButton;
+
 
     private void Awake() {
         Instance = this;
+        InitializeItemTypeMap();
+        
     }
 
     public Dictionary<ItemType, ItemConfig> GetAllItems() {
-        return PlayerInventory;
+        return _playerInventoryConfig;
     }
 
-    public void WearItem(ItemConfig equipmentItemConfig, ItemData itemData)
-    {
-        _itemData = itemData;
-        ApplyItemStats(equipmentItemConfig);
+    public ItemConfig GetItemConfig(ItemType itemType) {
+        return _playerInventoryConfig[itemType];
+    }
 
-        if (equipmentItemConfig.itemSkills.Count < 0)
-        {
+    public ItemData GetItemData(ItemType itemType) {
+        return _playerInventoryData[itemType];
+    }
+
+    public void WearItem(ItemConfig equipmentItemConfig, ItemData itemData) {
+        if (equipmentItemConfig.Skills.Count < 0) {
             SetEquipmentImage(equipmentItemConfig);
             return;
         }
@@ -49,120 +53,83 @@ public class PlayerEquipment : NetworkBehaviour {
         var skillController = InventoryManager.Instance.PlayerSkillController;
         skillController.SkillManager.Skills.Clear();
 
-        if (PlayerInventory.ContainsKey(equipmentItemConfig.itemType))
-        {
-
-            RemoveItemStats(PlayerInventory[equipmentItemConfig.itemType]);
-            PlayerInventory[equipmentItemConfig.itemType] = equipmentItemConfig;
-        }
-        else
-        {
-            PlayerInventory.Add(equipmentItemConfig.itemType, equipmentItemConfig);
-        }
+        SetEquipment(equipmentItemConfig, itemData);
 
         GameUI.Instance.SkillContainerView.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
         SetEquipmentImage(equipmentItemConfig);
     }
 
-    private void Unwear(ItemConfig equipmentItemConfig, ItemData itemData, List<SkillConfig> skillConfig)
-    {
+    private void SetEquipment(ItemConfig equipmentItemConfig, ItemData itemData) {
+        _playerInventoryConfig[equipmentItemConfig.itemType] = equipmentItemConfig;
+        _playerInventoryData[equipmentItemConfig.itemType] = itemData;
+        Debug.Log(_playerInventoryConfig[equipmentItemConfig.itemType]);
+    }
 
-        RemoveItemStats(equipmentItemConfig);
-    
-        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>().PutInEmptySlot(equipmentItemConfig, itemData);
+    public void Unwear(ItemConfig equipmentItemConfig, ItemData itemData) {
+        InventoryManager.Instance.PlayerSkillController.gameObject.GetComponent<PlayerInventory>()
+            .PutInEmptySlot(equipmentItemConfig, itemData);
 
-        foreach (var skillConf in skillConfig)
-        {
-            InventoryManager.Instance.PlayerSkillController.DeleteSkill(SkillFactory.Create(skillConf, InventoryManager.Instance.PlayerSkillController));
+        DeleteEquipment(equipmentItemConfig);
+
+        foreach (var skillType in itemData.Skills) {
+            InventoryManager.Instance.PlayerSkillController.DeleteSkill(
+                SkillFactory.Create(ConfigsManager.GetSkillConfig(skillType),
+                    InventoryManager.Instance.PlayerSkillController));
+        }
+
+        GameUI.Instance.button.Disable();
+        UnsetEquipmentImage(equipmentItemConfig);
+
+        InventoryManager.Instance.PlayerSkillController.AddNewSkillFromItem();
+        GameUI.Instance.SkillContainerView.gameObject.GetComponent<SkillSelectorHandler>().UpdateSkillSelector();
+    }
+
+    private void DeleteEquipment(ItemConfig equipmentItemConfig) {
+        _playerInventoryConfig.Remove(equipmentItemConfig.itemType);
+        _playerInventoryData.Remove(equipmentItemConfig.itemType);
+    }
+
+    private void UnsetEquipmentImage(ItemConfig equipmentItemConfig) {
+        if (_itemTypeToImageMap.TryGetValue(equipmentItemConfig.itemType, out var image)) {
+            UnSetImage(image, equipmentItemConfig.icon);
         }
     }
-    private void RemoveItemStats(ItemConfig itemConfig)
-    {
-        var playerStats = GetComponent<PlayerStats>();
-        if (playerStats == null) return;
 
-        if (itemConfig is EquipmentItemData equipmentData)
-        {
-            playerStats.MaxHp -= equipmentData.Health;
-            playerStats.Armor -= equipmentData.Armor;
-            
-            for (int i = 0; i < equipmentData.SpecialStats.Length; i++)
-            {
-               
-            }
-        }
-    }
-    private void ApplyItemStats(ItemConfig itemConfig)
-    {
-        var playerStats = GetComponent<PlayerStats>();
-        if (playerStats == null) return;
-        if (itemConfig is EquipmentItemData equipmentData)
-        {
-            playerStats.MaxHp += equipmentData.Health;
-            playerStats.Armor += equipmentData.Armor;
-            for (int i = 0; i < equipmentData.SpecialStats.Length; i++)
-            {
-                // Здесь можно добавить логику для специальных характеристик
-                // Например, увеличение крит. шанса, уклонения и т.д.
-            }
-        }
-    }
-    
     private void SetEquipmentImage(ItemConfig equipmentItemConfig) {
-        switch (equipmentItemConfig.itemType) {
-            case ItemType.Armor:
-
-                imageForArmor.gameObject.SetActive(true);
-                imageForArmor.sprite = equipmentItemConfig.icon;
-                
-                // UnwearButton.SetData(equipmentItemConfig.itemSkills,_itemConfig,_itemData,Unwear);
-                break;
-            case ItemType.Accessory:
-
-                imageForAccessory.gameObject.SetActive(true);
-                imageForAccessory.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.Weapon:
-
-                imageForWeapon.gameObject.SetActive(true);
-                imageForWeapon.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.weapon:
-                imageForWeapon.gameObject.SetActive(true);
-                imageForWeapon.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.boots:
-
-                imageForBoots.gameObject.SetActive(true);
-                imageForBoots.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.bracelet:
-                imageForBracelet.gameObject.SetActive(true);
-                imageForBracelet.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.chestPlate:
-                imageForChestPlate.gameObject.SetActive(true);
-                imageForChestPlate.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.necklace:
-                imageForNecklace.gameObject.SetActive(true);
-                imageForNecklace.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.shoulderPads:
-                imageForShoulderPads.gameObject.SetActive(true);
-                imageForShoulderPads.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.bracers:
-                imageForBracers.gameObject.SetActive(true);
-                imageForBracers.sprite = equipmentItemConfig.icon;
-                break;
-            case ItemType.helmet:
-                imageForHelmet.gameObject.SetActive(true);
-                imageForHelmet.sprite = equipmentItemConfig.icon;
-                break;
-            default:
-                Debug.LogError("not correct item type or no type: " + equipmentItemConfig.itemType);
-                break;
+        if (_itemTypeToImageMap.TryGetValue(equipmentItemConfig.itemType, out var image)) {
+            SetImage(image, equipmentItemConfig.icon);
         }
+        else {
+            Debug.LogError("not correct item type or no type: " + equipmentItemConfig.itemType);
+        }
+
+        GameUI.Instance.button.SetData(_playerInventoryConfig[equipmentItemConfig.itemType],
+            _playerInventoryData[equipmentItemConfig.itemType], Unwear);
+    }
+
+    private void SetImage(Image image, Sprite sprite) {
+        image.gameObject.SetActive(true);
+        image.sprite = sprite;
+    }
+
+    private void UnSetImage(Image image, Sprite sprite) {
+        image.gameObject.SetActive(false);
+        image.sprite = null;
+    }
+
+    private void InitializeItemTypeMap() {
+        _itemTypeToImageMap = new Dictionary<ItemType, Image>() {
+            { ItemType.Armor, imageForArmor },
+            { ItemType.Accessory, imageForAccessory },
+            { ItemType.Weapon, imageForWeapon },
+            { ItemType.weapon, imageForWeapon },
+            { ItemType.boots, imageForBoots },
+            { ItemType.bracelet, imageForBracelet },
+            { ItemType.chestPlate, imageForChestPlate },
+            { ItemType.necklace, imageForNecklace },
+            { ItemType.shoulderPads, imageForShoulderPads },
+            { ItemType.bracers, imageForBracers },
+            { ItemType.helmet, imageForHelmet }
+        };
     }
 }

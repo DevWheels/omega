@@ -109,6 +109,6 @@ public class InventorySlotView : MonoBehaviour {
         slotItemData = null;
         _icon.sprite = null;
         _icon.enabled = false;
-        _slotBackground.color = commonColor;
+        _slotBackground.color = commonColor;    
     }
 }

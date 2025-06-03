@@ -61,8 +61,8 @@ public class PlayerSkillController : NetworkBehaviour {
 
         var newSkills = PlayerEquipment.Instance.GetAllItems();
         foreach (var pair in newSkills) {
-            foreach (var t in pair.Value.itemSkills) {
-                var createdSkill = SkillFactory.Create(t, this);
+            foreach (var t in pair.Value.Skills) {
+                var createdSkill = SkillFactory.Create(ConfigsManager.GetSkillConfig(t), this);
                 _skills.Add(createdSkill);
             }
         }

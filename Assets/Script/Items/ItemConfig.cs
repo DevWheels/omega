@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 
@@ -34,7 +35,7 @@ public class ItemConfig : ScriptableObject
     public GameObject Prefab;
     
     [Header("Skills")]
-    public List<SkillConfig> itemSkills;
+    public List<SkillType> Skills;
     
     [Header("Stat Ranges By Rank")]
     public RankStatRanges dRankStats;
