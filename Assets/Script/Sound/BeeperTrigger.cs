@@ -5,7 +5,7 @@ public class AreaSoundTrigger2D : MonoBehaviour
 {
     [Header("Sound Settings")]
     public AudioClip areaSound;
-    [Range(0, 1)] public float volume = 0.7f;
+    [Range(0, 1)] public float volume = 0.3f;
     public bool loopSound = true;
     
     [Header("Debug")]
