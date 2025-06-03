@@ -734,7 +734,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  GreenZone: 1
+  GreenZone: 0
 --- !u!114 &-6800800320709123403
 MonoBehaviour:
   m_ObjectHideFlags: 0
