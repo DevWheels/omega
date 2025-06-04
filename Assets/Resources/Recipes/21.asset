@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bc31589fdffe14c92605b656502117, type: 3}
+  m_Name: 21
+  m_EditorClassIdentifier: 
+  recipeName: 21
+  recipeIcon: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
+  description: 21
+  ingredients:
+  - itemConfig: {fileID: 11400000, guid: acf25f746d0b0e14ab6ff4314203c476, type: 2}
+    amount: 1
+    minRank: 0
+  requiredBuildingLevel: 1
+  resultItem: {fileID: 11400000, guid: 0084c87e2f68ac04395cb64e968538b6, type: 2}
+  resultAmount: 1
+  craftTime: 3
+  resultRank: 1

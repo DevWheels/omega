@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6668cfaf7a9d546a0a3c1b38a876f6, type: 3}
+  m_Name: "\u042F\u0431\u043B\u043E\u043A\u043E"
+  m_EditorClassIdentifier: 
+  Description: "\u042F\u0431\u043B\u043E\u043A\u043E"
+  icon: {fileID: 21300000, guid: 5d9ba4e7d0964044ea54abe409d81dfd, type: 3}
+  isHealing: 1
+  HealingPower: 15
+  isMana: 0
+  ManaPower: 0
+  time: 0
+  Coins: 0
+  PlayerPrefsName: 
+  itemName: "\u042F\u0431\u043B\u043E\u043A\u043E"
+  itemType: 12
+  Rank: 0
+  Prefab: {fileID: 1570666454112329521, guid: 4ef65705e6e52754fb913658c18a3bbe, type: 3}
+  Skills: 
+  dRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  cRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  bRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  aRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  sRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  rarity: 0

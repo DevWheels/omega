@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6668cfaf7a9d546a0a3c1b38a876f6, type: 3}
+  m_Name: "\u041A\u043D\u0438\u0433\u0430 \u0410\u043B\u044C\u0431\u0443\u0441\u0430
+    \u0414\u0430\u043C\u0431\u043B\u0434\u043E\u0440\u0430"
+  m_EditorClassIdentifier: 
+  Description: "\u041A\u043D\u0438\u0433\u0430 \u0410\u043B\u044C\u0431\u0443\u0441\u0430
+    \u0414\u0430\u043C\u0431\u043B\u0434\u043E\u0440\u0430"
+  icon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
+  isHealing: 0
+  HealingPower: 0
+  isMana: 0
+  ManaPower: 0
+  time: 0
+  Coins: 0
+  PlayerPrefsName: "\u041A\u043D\u0438\u0433\u0430 \u0410\u043B\u044C\u0431\u0443\u0441\u0430
+    \u0414\u0430\u043C\u0431\u043B\u0434\u043E\u0440\u0430"
+  itemName: "\u041A\u043D\u0438\u0433\u0430 \u0410\u043B\u044C\u0431\u0443\u0441\u0430
+    \u0414\u0430\u043C\u0431\u043B\u0434\u043E\u0440\u0430"
+  itemType: 0
+  Rank: 0
+  Prefab: {fileID: 1570666454112329521, guid: 8cc13fb574402b14d937caf620b0aa8d, type: 3}
+  Skills: 
+  dRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  cRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  bRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  aRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  sRankStats:
+    health: {x: 0, y: 0}
+    attack: {x: 0, y: 0}
+    armor: {x: 0, y: 0}
+    perLevelIncrease: 0
+    possibleSpecialStats: 
+    specialStatRanges: []
+  rarity: 0
