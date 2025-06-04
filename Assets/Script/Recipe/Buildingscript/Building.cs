@@ -53,10 +53,8 @@ public abstract class Building : NetworkBehaviour
         }
     }
     
-    private void TryOpenBuildingUI()
+    public void TryOpenBuildingUI()
     {
-        if (!playerInRange) return;
-        
         if (currentUIPanel == null)
         {
             currentUIPanel = Instantiate(uiPanelPrefab, UICanvas.Instance.transform);
@@ -89,19 +87,30 @@ public abstract class Building : NetworkBehaviour
     
     private bool CanUpgrade(PlayerInventory inventory)
     {
+        if (inventory == null) return false;
+    
         foreach (var cost in upgradeCosts)
         {
-            if (!inventory.HasItem(cost.itemConfig, cost.amount))
+            if (cost.itemConfig == null)
+            {
+                Debug.LogWarning("Upgrade cost itemConfig is null!");
+                continue;
+            }
+        
+            if (!inventory.HasItem(cost.itemConfig.name, cost.amount))
+            {
+                Debug.Log($"Missing upgrade item: {cost.itemConfig.name} x{cost.amount}");
                 return false;
+            }
         }
         return true;
     }
-    
+
     private void SpendUpgradeResources(PlayerInventory inventory)
     {
         foreach (var cost in upgradeCosts)
         {
-            inventory.CmdRemoveItem(cost.itemConfig, cost.amount);
+            inventory.CmdRemoveItemSimple(cost.itemConfig.name, cost.amount);
         }
     }
     

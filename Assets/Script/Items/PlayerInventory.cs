@@ -5,25 +5,32 @@ using UnityEngine;
 
 public class PlayerInventory : NetworkBehaviour {
     public List<InventorySlot> Slots = new List<InventorySlot>(24);
+    public event Action OnInventoryChanged;
 
-    public void PutInEmptySlot(ItemConfig itemConfig, ItemData itemData) {
-        for (int i = 0; i < Slots.Count; i++) {
-            if (Slots[i].ItemConfig != null) {
-                continue;
-            }
-
+public bool PutInEmptySlot(ItemConfig itemConfig, ItemData itemData) 
+{
+    for (int i = 0; i < Slots.Count; i++) 
+    {
+        if (Slots[i].ItemConfig == null) 
+        {
             Slots[i] = new InventorySlot {
                 ItemConfig = itemConfig,
                 ItemData = itemData
             };
         
-            if (Slots[i].SlotView != null) {
+            if (Slots[i].SlotView != null) 
+            {
                 Slots[i].SlotView.PutInSlot(itemConfig, itemData);
             }
-            return;
+            
+            OnInventoryChanged?.Invoke();
+            return true;
         }
     }
+    return false;
+}
 
+  
     public void DropOnDie() {
         foreach (InventorySlot t in Slots) {
             if (t.ItemConfig == null) {
@@ -35,73 +42,181 @@ public class PlayerInventory : NetworkBehaviour {
         }
     }
     
-    public bool HasItem(ItemConfig itemConfig, int amount)
-    {
-        if (itemConfig == null)
-        {
-            Debug.LogWarning("HasItem: itemConfig is null");
-            return false;
-        }
-
-        int count = 0;
-        foreach (var slot in Slots)
-        {
-            if (slot.ItemConfig == itemConfig)
-            {
-                count++;
-                if (count >= amount) 
-                    return true;
-            }
-        }
-        return false;
-    }
-    [Command]
+    // public bool HasItem(ItemConfig itemConfig, int amount, ItemRank minRank = ItemRank.C)
+    // {
+    //     if (itemConfig == null)
+    //     {
+    //         Debug.LogWarning("HasItem: itemConfig is null");
+    //         return false;
+    //     }
+    //
+    //     int count = 0;
+    //     foreach (var slot in Slots)
+    //     {
+    //         if (slot.ItemConfig == itemConfig && (slot.ItemData?.rank ?? ItemRank.C) >= minRank)
+    //         {
+    //             count++;
+    //             if (count >= amount) 
+    //                 return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    // [Command]
     public void CmdRemoveSpecificItems(ItemConfig itemConfig, int amount, ItemRank minRank)
     {
         int remaining = amount;
         for (int i = 0; i < Slots.Count; i++)
         {
-            if (Slots[i].ItemConfig == itemConfig && Slots[i].ItemData.rank >= minRank)
+            if (Slots[i].ItemConfig == itemConfig && 
+                Slots[i].ItemData.rank >= minRank)
             {
-                Slots[i] = new InventorySlot(); 
+                if (Slots[i].SlotView != null)
+                {
+                    Slots[i].SlotView.ClearSlot();
+                }
+            
+                Slots[i] = new InventorySlot();
                 remaining--;
+            
                 if (remaining <= 0) break;
             }
         }
         RpcUpdateInventory();
     }
-    
-    [Command]
-    public void CmdCraftItem(ItemRecipe recipe)
+    public void CraftItem(ItemRecipe recipe)
     {
-        if (!CanCraft(recipe)) return;
+        if (!CanCraft(recipe))
+        {
+            Debug.LogWarning("Crafting conditions not met!");
+            return;
+        }
 
         foreach (var ingredient in recipe.ingredients)
         {
-            CmdRemoveSpecificItems(ingredient.itemConfig, ingredient.amount, ingredient.minRank);
+            if (ingredient != null && ingredient.itemConfig != null)
+            {
+                CmdRemoveSpecificItems(ingredient.itemConfig, ingredient.amount, ingredient.minRank);
+            }
         }
 
-        var itemData = new ItemData {
-            configId = recipe.resultItem.name,
-            rank = CalculateResultRank(recipe)
-        };
-        PutInEmptySlot(recipe.resultItem, itemData);
+        if (recipe.resultItem != null)
+        {
+            var itemData = new ItemData {
+                configId = recipe.resultItem.name,
+                rank = CalculateResultRank(recipe)
+            };
+            PutInEmptySlot(recipe.resultItem, itemData);
+            Debug.Log($"Successfully crafted: {recipe.resultItem.itemName}");
+        }
+    }
+    [Command]
+    public void CmdCraftItem(string recipeId)
+    {
+        Debug.Log($"Server received craft request for: {recipeId}");
+    
+        var recipe = RecipeDatabase.GetRecipeById(recipeId);
+        if (recipe == null)
+        {
+            Debug.LogError($"Recipe not found: {recipeId}");
+            return;
+        }
+
+        // Дополнительная проверка на сервере
+        if (!CanCraftLocally(recipe))
+        {
+            Debug.Log("Server validation failed - cannot craft");
+            return;
+        }
+
+        // Удаление ингредиентов
+        foreach (var ingredient in recipe.ingredients)
+        {
+            if (ingredient != null && ingredient.itemConfig != null)
+            {
+                Debug.Log($"Removing ingredient: {ingredient.itemConfig.name} x{ingredient.amount}");
+                CmdRemoveItem(ingredient.itemConfig.name, ingredient.amount, ingredient.minRank);
+            }
+        }
+
+        // Создание результата
+        if (recipe.resultItem != null)
+        {
+            var result = new ItemData {
+                configId = recipe.resultItem.name,
+                rank = CalculateResultRank(recipe)
+            };
+            Debug.Log($"Creating result: {recipe.resultItem.itemName} x{recipe.resultAmount}");
+            TargetAddCraftResult(connectionToClient, result.configId, result.rank);
+        }
+    }
+    
+    [TargetRpc]
+    private void TargetAddCraftResult(NetworkConnection target, string itemId, ItemRank rank)
+    {
+        Debug.Log($"Received craft result: {itemId} (rank {rank})");
+    
+        var itemConfig = ItemDatabase.GetItemById(itemId);
+        if (itemConfig != null)
+        {
+            var itemData = new ItemData {
+                configId = itemId,
+                rank = rank
+            };
         
-        RpcUpdateInventory();
+            if (PutInEmptySlot(itemConfig, itemData))
+            {
+                Debug.Log($"Successfully added to inventory: {itemConfig.itemName}");
+            }
+            else
+            {
+                Debug.LogWarning("No empty slots for crafted item!");
+                // Здесь можно реализовать дроп предмета на землю
+            }
+        }
+        else
+        {
+            Debug.LogError($"Item config not found for: {itemId}");
+        }
+    }
+    private bool CanCraftLocally(ItemRecipe recipe)
+    {
+        foreach (var ingredient in recipe.ingredients)
+        {
+            if (!HasItem(ingredient.itemConfig, ingredient.amount, ingredient.minRank))
+                return false;
+        }
+        return true;
     }
     public bool CanCraft(ItemRecipe recipe)
     {
-        Debug.Log($"Checking recipe: {recipe?.name ?? "NULL"}");
-        foreach (var ing in recipe?.ingredients ?? Array.Empty<Ingredient>())
-        {
-            Debug.Log($"Ingredient: {ing?.amount}x {ing?.itemConfig?.name ?? "NULL"}");
-        }
+        if (recipe == null) return false;
+    
         foreach (var ingredient in recipe.ingredients)
         {
-            
-            if (!HasItem(ingredient.itemConfig, ingredient.amount))
+            if (ingredient == null || ingredient.itemConfig == null) 
                 return false;
+            
+            bool hasEnough = false;
+            int count = 0;
+        
+            foreach (var slot in Slots)
+            {
+                if (slot.ItemConfig == ingredient.itemConfig && 
+                    slot.ItemData.rank >= ingredient.minRank)
+                {
+                    count++;
+                    if (count >= ingredient.amount)
+                    {
+                        hasEnough = true;
+                        break;
+                    }
+                }
+            }
+        
+            if (!hasEnough) return false;
         }
+    
         return true;
     }
     private ItemRank CalculateResultRank(ItemRecipe recipe)
@@ -110,36 +225,137 @@ public class PlayerInventory : NetworkBehaviour {
     }
     
     [Command]
-    public void CmdRemoveItem(ItemConfig itemConfig, int amount)
+    public void CmdRemoveItem(string itemId, int amount, ItemRank minRank)
     {
+        var itemConfig = ItemDatabase.GetItemById(itemId);
         if (itemConfig == null) return;
 
         int remaining = amount;
         for (int i = 0; i < Slots.Count; i++)
         {
-            if (Slots[i].ItemConfig == itemConfig)
+            if (Slots[i].ItemConfig == itemConfig && 
+                (Slots[i].ItemData?.rank ?? ItemRank.C) >= minRank)
             {
-                Slots[i] = new InventorySlot(); 
+                Slots[i] = new InventorySlot();
                 remaining--;
                 if (remaining <= 0) break;
             }
         }
         RpcUpdateInventory();
     }
+    [Command]
+    public void CmdRemoveItemSimple(string itemId, int amount)
+    {
+        CmdRemoveItem(itemId, amount, ItemRank.C);
+    }
+    public bool HasItem(ItemConfig itemConfig, int amount, ItemRank minRank = ItemRank.C)
+    {
+        if (itemConfig == null)
+        {
+            Debug.LogWarning("HasItem: itemConfig is null");
+            return false;
+        }
 
+        Debug.Log($"Checking for item: {itemConfig.itemName}, need {amount} with min rank {minRank}");
+    
+        int count = 0;
+        foreach (var slot in Slots)
+        {
+            if (slot.ItemConfig == itemConfig)
+            {
+                var slotRank = slot.ItemData?.rank ?? ItemRank.C;
+                Debug.Log($"Found item: {itemConfig.itemName}, rank {slotRank} in slot");
+            
+                if (slotRank >= minRank)
+                {
+                    count++;
+                    if (count >= amount) 
+                    {
+                        Debug.Log($"Enough items found: {count} >= {amount}");
+                        return true;
+                    }
+                }
+            }
+        }
+    
+        Debug.Log($"Not enough items: found {count}, need {amount}");
+        return false;
+    }
+    
+    public bool HasItem(string itemId, int amount, ItemRank minRank = ItemRank.C)
+    {
+        var itemConfig = ItemDatabase.GetItemById(itemId);
+        if (itemConfig == null)
+        {
+            Debug.LogWarning($"Item not found: {itemId}");
+            return false;
+        }
+        return HasItem(itemConfig, amount, minRank);
+    }
+    
+    
+    
+    // [Command]
+    // public void CmdRemoveSpecificItems(string itemId, int amount, ItemRank minRank)
+    // {
+    //     var itemConfig = ItemDatabase.GetItemById(itemId);
+    //     if (itemConfig == null) return;
+    //
+    //     int remaining = amount;
+    //     for (int i = 0; i < Slots.Count; i++)
+    //     {
+    //         if (Slots[i].ItemConfig == itemConfig && 
+    //             Slots[i].ItemData.rank >= minRank)
+    //         {
+    //             if (Slots[i].SlotView != null)
+    //             {
+    //                 Slots[i].SlotView.ClearSlot();
+    //             }
+    //         
+    //             Slots[i] = new InventorySlot();
+    //             remaining--;
+    //         
+    //             if (remaining <= 0) break;
+    //         }
+    //     }
+    //     RpcUpdateInventory();
+    // }
+    
     [ClientRpc]
     private void RpcUpdateInventory()
     {
         InventoryManager.Instance.InventoryView.SetData(this);
+        OnInventoryChanged?.Invoke(); 
     }
     
     [Command]
     private void DropItem(ItemData itemData) {
-        Vector3 dropPos = new(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+        if (itemData == null) return;
+
+        Vector3 dropPos = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
         ItemBase item = ItemFactory.Instance.CreateItemByData(itemData);
+    
+        if (item == null) {
+            Debug.LogWarning($"Failed to drop item of type {itemData.Type}");
+            return;
+        }
+
         item.gameObject.SetActive(true);
         item.gameObject.transform.position = dropPos;
         NetworkServer.Spawn(item.gameObject);
+
+        // Очищаем слот
+        for (int i = 0; i < Slots.Count; i++) {
+            if (Slots[i].ItemData == itemData) {
+                if (Slots[i].SlotView != null) {
+                    Slots[i].SlotView.ClearSlot();
+                }
+                Slots[i] = new InventorySlot();
+                break;
+            }
+        }
+
+        RpcUpdateInventory();
     }
     
 }

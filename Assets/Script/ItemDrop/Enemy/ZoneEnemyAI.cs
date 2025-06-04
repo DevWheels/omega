@@ -18,8 +18,8 @@ public class ZoneEnemyAI : NetworkBehaviour
     private TestenemyHealth _enemyHealth;
     private float _lastAttackTime;
     private Transform _currentTarget;
-    private Vector3 _startPosition;
-    private Vector3 _currentPatrolPoint;
+    private Vector2 _startPosition;
+    private Vector2 _currentPatrolPoint;
     private float _idleTimer;
     private float _currentIdleTime;
     private bool _isChasing;
@@ -37,7 +37,7 @@ public class ZoneEnemyAI : NetworkBehaviour
             return;
         }
         
-        if( _enemyHealth.IsDead) {
+        if (_enemyHealth.IsDead) {
             Debug.Log("Im dead");
             return;
         }
@@ -46,15 +46,13 @@ public class ZoneEnemyAI : NetworkBehaviour
 
         if (_currentTarget != null)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, _currentTarget.position);
-            
+            float distanceToPlayer = Vector2.Distance(transform.position, _currentTarget.position);
 
             if (distanceToPlayer <= _attackRange)
             {
                 Attack();
                 return;
             }
-            
 
             if (distanceToPlayer <= _patrolRadius * 1.5f) 
             {
@@ -63,7 +61,6 @@ public class ZoneEnemyAI : NetworkBehaviour
                 return;
             }
         }
-
 
         _isChasing = false;
         Patrol();
@@ -81,7 +78,7 @@ public class ZoneEnemyAI : NetworkBehaviour
             PlayerStats playerStats = player.GetComponent<PlayerStats>();
             if (playerStats != null)
             {
-                float distance = Vector3.Distance(transform.position, player.transform.position);
+                float distance = Vector2.Distance(transform.position, player.transform.position);
                 if (distance < closestDistance && distance <= _patrolRadius * 1.5f)
                 {
                     closestDistance = distance;
@@ -96,7 +93,6 @@ public class ZoneEnemyAI : NetworkBehaviour
     [Server]
     private void Patrol()
     {
-
         if (Vector2.Distance(transform.position, _currentPatrolPoint) < 0.5f)
         {
             _idleTimer += Time.deltaTime;
@@ -110,11 +106,15 @@ public class ZoneEnemyAI : NetworkBehaviour
         }
         else
         {
-
-            Vector3 direction = (_currentPatrolPoint - transform.position).normalized;
-            transform.position += direction * _moveSpeed * Time.deltaTime;
-            transform.up = direction;
-            //transform.LookAt(new Vector3(_currentPatrolPoint.x, transform.position.y, _currentPatrolPoint.z));
+            Vector2 direction = (_currentPatrolPoint - (Vector2)transform.position).normalized;
+            transform.position += (Vector3)(direction * _moveSpeed * Time.deltaTime);
+            
+            // Поворот спрайта в направлении движения (для 2D)
+            if (direction != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
         }
     }
 
@@ -123,8 +123,7 @@ public class ZoneEnemyAI : NetworkBehaviour
     {
         if (_currentTarget == null) return;
 
-
-        Vector2 toPlayer = _currentTarget.position - _startPosition;
+        Vector2 toPlayer = (Vector2)_currentTarget.position - _startPosition;
         if (toPlayer.magnitude > _patrolRadius)
         {
             Debug.Log("Stop chasing player");
@@ -133,10 +132,15 @@ public class ZoneEnemyAI : NetworkBehaviour
             return;
         }
 
-        Vector2 direction = (_currentTarget.position - transform.position).normalized;
+        Vector2 direction = ((Vector2)_currentTarget.position - (Vector2)transform.position).normalized;
         transform.position += (Vector3)(direction * _moveSpeed * Time.deltaTime);
-        transform.up = direction;
-        //transform.LookAt(new Vector2(_currentTarget.position.x, transform.position.y));
+        
+        // Поворот спрайта в направлении игрока (для 2D)
+        if (direction != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 
     [Server]
@@ -144,7 +148,7 @@ public class ZoneEnemyAI : NetworkBehaviour
     {
         Debug.Log("Set new patrol point");
         Vector2 randomPoint = Random.insideUnitCircle * _patrolRadius;
-        _currentPatrolPoint = _startPosition + new Vector3(randomPoint.x, 0, randomPoint.y);
+        _currentPatrolPoint = _startPosition + randomPoint;
     }
 
     [Server]
@@ -161,9 +165,12 @@ public class ZoneEnemyAI : NetworkBehaviour
         if (!CanAttack()) return;
         Debug.Log("Attack");
 
-        Vector2 dir = _currentTarget.position - transform.position;
-        transform.up = dir;
-        //transform.LookAt(new Vector3(_currentTarget.position.x, transform.position.y, _currentTarget.position.z));
+        Vector2 dir = (Vector2)_currentTarget.position - (Vector2)transform.position;
+        if (dir != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
         
         PlayerStats playerStats = _currentTarget.GetComponent<PlayerStats>();
         if (playerStats != null)
@@ -177,16 +184,14 @@ public class ZoneEnemyAI : NetworkBehaviour
     [ClientRpc]
     private void RpcPlayAttackEffects()
     {
-
+        // Здесь можно добавить визуальные/звуковые эффекты атаки
     }
 
     private void OnDrawGizmosSelected()
     {
-
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(_startPosition, _patrolRadius);
+        Gizmos.DrawWireSphere(Application.isPlaying ? (Vector3)_startPosition : transform.position, _patrolRadius);
         
-
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _attackRange);
     }

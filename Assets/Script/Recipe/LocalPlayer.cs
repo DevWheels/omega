@@ -16,4 +16,6 @@ public class LocalPlayer : MonoBehaviour
         Instance = this;
         Inventory = GetComponent<PlayerInventory>();
     }
+    
+    
 }

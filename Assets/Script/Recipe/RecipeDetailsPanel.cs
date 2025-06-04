@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
+using System.Linq;
 
 public class RecipeDetailsPanel : MonoBehaviour
 {
@@ -9,17 +10,38 @@ public class RecipeDetailsPanel : MonoBehaviour
     [SerializeField] private Image recipeIcon;
     [SerializeField] private TMP_Text recipeName;
     [SerializeField] private TMP_Text recipeDescription;
-    [SerializeField] private TMP_Text ingredientsText;
+    [SerializeField] private Transform ingredientsContainer; 
+    [SerializeField] private GameObject ingredientIconPrefab; 
     [SerializeField] private TMP_Text requiredLevelText;
     [SerializeField] private TMP_Text resultItemText;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button createButton;
     [SerializeField] private Slider craftProgress;
-    
+    [SerializeField] private Slider craftProgressSlider;
     private ItemRecipe currentRecipe;
     private Building currentBuilding;
     private bool isCrafting;
+    [SerializeField] private ItemRecipe[] allRecipes;
+
+    void Start()
+    {
+        Debug.Log($"Checking recipes count: {allRecipes.Length}");
     
+
+    
+        if (allRecipes != null && allRecipes.Length > 0)
+        {
+            var testRecipe = RecipeDatabase.GetRecipeById(allRecipes[0].name);
+        }
+    
+        foreach (var recipe in allRecipes)
+        {
+            if (recipe != null && recipe.name == "Книга Альбуса Дамблдора")
+            {
+                Debug.Log($"Found target recipe: {recipe.name}");
+            }
+        }
+    }
     private void Awake()
     {
         if (closeButton != null) 
@@ -42,11 +64,13 @@ public class RecipeDetailsPanel : MonoBehaviour
         if (craftProgress != null) 
             craftProgress.gameObject.SetActive(false);
     }
+
     private void OnCreateButtonClicked()
     {
         Debug.Log("Create button clicked", this);
         StartCrafting();
     }
+
     public void ShowRecipe(ItemRecipe recipe, Building building)
     {
         if (recipe == null || building == null)
@@ -58,34 +82,47 @@ public class RecipeDetailsPanel : MonoBehaviour
         currentRecipe = recipe;
         currentBuilding = building;
 
-            if (recipeIcon != null) recipeIcon.sprite = recipe.recipeIcon;
+        if (recipeIcon != null) recipeIcon.sprite = recipe.recipeIcon;
         if (recipeName != null) recipeName.text = recipe.recipeName ?? "Unknown Recipe";
         if (recipeDescription != null) recipeDescription.text = recipe.description ?? string.Empty;
-        if (ingredientsText != null) ingredientsText.text = GetIngredientsList(recipe);
         if (requiredLevelText != null) requiredLevelText.text = $"Required Level: {recipe.requiredBuildingLevel}";
         if (resultItemText != null) resultItemText.text = GetResultItemText(recipe);
+
+        ClearIngredientIcons();
+
+        if (ingredientsContainer != null && ingredientIconPrefab != null)
+        {
+            foreach (var ingredient in recipe.ingredients.Where(i => i != null && i.itemConfig != null))
+            {
+                var iconGO = Instantiate(ingredientIconPrefab, ingredientsContainer);
+                var iconImage = iconGO.GetComponentInChildren<Image>();
+                var amountText = iconGO.GetComponentInChildren<TMP_Text>();
+
+                if (iconImage != null)
+                {
+                    iconImage.sprite = ingredient.itemConfig.icon;
+                    iconImage.preserveAspect = true;
+                }
+
+                if (amountText != null)
+                {
+                    amountText.text = ingredient.amount.ToString();
+                }
+            }
+        }
 
         UpdateCraftButtonState();
         gameObject.SetActive(true);
     }
 
-    
-    
-    private string GetIngredientsList(ItemRecipe recipe)
+    private void ClearIngredientIcons()
     {
-        if (recipe?.ingredients == null) return "Ingredients: None";
+        if (ingredientsContainer == null) return;
 
-        var sb = new StringBuilder("Ingredients:\n");
-        foreach (var ingredient in recipe.ingredients)
+        foreach (Transform child in ingredientsContainer)
         {
-            if (ingredient?.itemConfig != null)
-            {
-                string rankReq = ingredient.minRank > ItemRank.D ? 
-                    $" (min {ingredient.minRank})" : "";
-                sb.AppendLine($"- {ingredient.amount}x {ingredient.itemConfig.itemName}{rankReq}");
-            }
+            Destroy(child.gameObject);
         }
-        return sb.ToString();
     }
 
     private string GetResultItemText(ItemRecipe recipe)
@@ -99,83 +136,100 @@ public class RecipeDetailsPanel : MonoBehaviour
         if (createButton == null) return;
 
         bool isCraftingInProgress = isCrafting;
-    
         bool hasValidRecipe = currentRecipe != null;
         bool hasValidBuilding = currentBuilding != null;
     
         var inventory = LocalPlayer.Instance?.GetComponent<PlayerInventory>();
         bool hasInventory = inventory != null;
     
-        bool hasIngredients = !isCraftingInProgress && 
-                              currentBuilding?.CanCraft(currentRecipe, inventory) == true;
+        bool hasIngredients = false;
+    
+        if (!isCraftingInProgress && hasValidRecipe && hasValidBuilding && hasInventory)
+        {
+            hasIngredients = currentBuilding.CanCraft(currentRecipe, inventory);
+        
+            // Добавляем подробное логирование
+            if (!hasIngredients)
+            {
+                Debug.Log("Missing ingredients:");
+                foreach (var ingredient in currentRecipe.ingredients)
+                {
+                    if (ingredient != null && ingredient.itemConfig != null)
+                    {
+                        bool has = inventory.HasItem(ingredient.itemConfig, ingredient.amount, ingredient.minRank);
+                        Debug.Log($"- {ingredient.itemConfig.itemName}: {ingredient.amount} (min rank {ingredient.minRank}) - {(has ? "OK" : "MISSING")}");
+                    }
+                }
+            }
+        }
 
         createButton.interactable = hasValidRecipe && 
                                     hasValidBuilding && 
                                     hasInventory && 
                                     !isCraftingInProgress && 
                                     hasIngredients;
-
-        Debug.Log($"Button State Update: " +
-                  $"Recipe={hasValidRecipe}, " +
-                  $"Building={hasValidBuilding}, " +
-                  $"Inventory={hasInventory}, " +
-                  $"Crafting={isCraftingInProgress}, " +
-                  $"Ingredients={hasIngredients}");
     }
 
-    private void HidePanel() => gameObject.SetActive(false);
+    private void HidePanel()
+    {
+        craftProgressSlider.gameObject.SetActive(false);
+        craftProgressSlider.value = 0f;
+        gameObject.SetActive(false);
+    }
 
     private void StartCrafting()
     {
-        Debug.Log($"StartCrafting called. isCrafting: {isCrafting}, recipe: {currentRecipe != null}");
-        
         if (isCrafting || currentRecipe == null) 
         {
-            Debug.LogWarning($"Crafting conditions not met. isCrafting: {isCrafting}, recipe: {currentRecipe != null}");
+            Debug.LogWarning("Crafting already in progress or recipe is null!");
             return;
         }
 
         StartCoroutine(CraftingRoutine());
     }
+
     private System.Collections.IEnumerator CraftingRoutine()
     {
         isCrafting = true;
         UpdateButtonState();
-        
-        Debug.Log($"Starting craft: {currentRecipe.recipeName}");
 
-        float progress = 0;
-        if (craftProgress != null)
-        {
-            craftProgress.gameObject.SetActive(true);
-            craftProgress.value = 0;
-        }
+        float progress = 0f;
+        craftProgressSlider.gameObject.SetActive(true);
+        craftProgressSlider.value = 0f;
 
         while (progress < currentRecipe.craftTime)
         {
             progress += Time.deltaTime;
-            if (craftProgress != null)
-                craftProgress.value = progress / currentRecipe.craftTime;
+            float normalizedProgress = Mathf.Clamp01(progress / currentRecipe.craftTime);
+            craftProgressSlider.value = normalizedProgress;
             yield return null;
         }
 
+
+        craftProgressSlider.value = 1f;
+        yield return new WaitForSeconds(0.1f); 
         FinishCrafting();
     }
+
     private void FinishCrafting()
     {
-        Debug.Log($"Completing craft: {currentRecipe.recipeName}");
-        
-        var inventory = GetPlayerInventory();
-        if (inventory != null && currentBuilding != null)
+        Debug.Log($"Attempting to craft: {currentRecipe?.name}");
+    
+        if (currentRecipe == null)
         {
-            currentBuilding.CraftItem(currentRecipe, inventory);
+            Debug.LogError("Current recipe is null!");
+            return;
         }
 
-        isCrafting = false;
-        if (craftProgress != null)
-            craftProgress.gameObject.SetActive(false);
-        
-        UpdateButtonState();
+        var inventory = LocalPlayer.Instance?.GetComponent<PlayerInventory>();
+        if (inventory == null)
+        {
+            Debug.LogError("Inventory is null!");
+            return;
+        }
+
+        Debug.Log($"Передаваемое имя рецепта: '{currentRecipe.name}'");
+        inventory.CmdCraftItem(currentRecipe.name);
     }
     private PlayerInventory GetPlayerInventory()
     {
@@ -191,6 +245,7 @@ public class RecipeDetailsPanel : MonoBehaviour
 
         return inventory;
     }
+
     private void UpdateButtonState()
     {
         if (createButton == null) return;
@@ -199,6 +254,7 @@ public class RecipeDetailsPanel : MonoBehaviour
         createButton.interactable = canCraft;
         Debug.Log($"UpdateButtonState. CanCraft: {canCraft}");
     }
+
     private bool CanCraftNow()
     {
         if (isCrafting || currentRecipe == null || currentBuilding == null)
@@ -210,29 +266,30 @@ public class RecipeDetailsPanel : MonoBehaviour
 
         return currentBuilding.CanCraft(currentRecipe, inventory);
     }
-    private System.Collections.IEnumerator CraftingProcess()
+    
+    private void OnEnable()
     {
-        isCrafting = true;
-        if (craftProgress != null) craftProgress.gameObject.SetActive(true);
-
-        float timer = 0;
-        while (timer < currentRecipe.craftTime)
+        if (LocalPlayer.Instance != null)
         {
-            timer += Time.deltaTime;
-            if (craftProgress != null) craftProgress.value = timer / currentRecipe.craftTime;
-            yield return null;
+            var inventory = LocalPlayer.Instance.GetComponent<PlayerInventory>();
+            if (inventory != null)
+            {
+                inventory.OnInventoryChanged += UpdateCraftButtonState;
+            }
         }
-
-        CompleteCrafting();
-    }
-
-    private void CompleteCrafting()
-    {
-        var inventory = LocalPlayer.Instance?.GetComponent<PlayerInventory>();
-        currentBuilding?.CraftItem(currentRecipe, inventory);
-        
-        isCrafting = false;
-        if (craftProgress != null) craftProgress.gameObject.SetActive(false);
         UpdateCraftButtonState();
     }
+
+    private void OnDisable()
+    {
+        if (LocalPlayer.Instance != null)
+        {
+            var inventory = LocalPlayer.Instance.GetComponent<PlayerInventory>();
+            if (inventory != null)
+            {
+                inventory.OnInventoryChanged -= UpdateCraftButtonState;
+            }
+        }
+    }
+    
 }

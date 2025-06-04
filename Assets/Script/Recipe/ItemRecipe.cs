@@ -11,6 +11,7 @@ public class ItemRecipe : ScriptableObject
     public ItemConfig resultItem;
     public int resultAmount = 1;
     public float craftTime = 3f;
+    public ItemRank resultRank = ItemRank.C;
 }
 
 [System.Serializable]

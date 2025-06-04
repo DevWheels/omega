@@ -12,5 +12,5 @@ public class ItemData {
 }
 
 public enum PickItemType {
-    Apple,ManaPotion,Boots,Staff, Chestplate
+    Apple,ManaPotion,Boots,Staff, Chestplate,ingredients
 }

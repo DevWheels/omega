@@ -5,8 +5,16 @@ public class AlchemyLab : Building
 {
     [Header("Crafting Settings")]
     [SerializeField] private ItemRecipe[] availableRecipes;
-    // [SerializeField] private float craftRadius = 3f;
+    [SerializeField] private float craftRadius = 3f;
     
+    
+    private void Start()
+    {
+        if (availableRecipes != null && availableRecipes.Length > 0)
+        {
+            var testRecipe = RecipeDatabase.GetRecipeById(availableRecipes[0].name);
+        }
+    }
     protected override void SetupUI(GameObject uiPanel)
     {
         if (uiPanel == null) return;
@@ -22,37 +30,33 @@ public class AlchemyLab : Building
     {
         if (recipe == null || inventory == null)
         {
-            Debug.LogWarning($"CanCraft check failed: {(recipe == null ? "Recipe is null" : "Inventory is null")}");
+            Debug.LogWarning("Recipe or Inventory is null!");
             return false;
         }
 
+        // Проверка уровня здания
         if (recipe.requiredBuildingLevel > buildingLevel)
         {
             Debug.Log($"Building level too low. Required: {recipe.requiredBuildingLevel}, Current: {buildingLevel}");
             return false;
         }
-        
-        // if (!IsPlayerInRange())
-        // {
-        //     Debug.Log("Player is too far from the building");
-        //     return false;
-        // }
-        
+
+        // Подробная проверка ингредиентов
         foreach (var ingredient in recipe.ingredients)
         {
             if (ingredient == null || ingredient.itemConfig == null)
             {
-                Debug.LogWarning("Ingredient or itemConfig is null in recipe");
+                Debug.LogWarning("Ingredient or itemConfig is null!");
                 return false;
             }
 
-            if (!inventory.HasItem(ingredient.itemConfig, ingredient.amount))
+            if (!inventory.HasItem(ingredient.itemConfig, ingredient.amount, ingredient.minRank))
             {
-                Debug.Log($"Missing ingredient: {ingredient.amount}x {ingredient.itemConfig.name}");
+                Debug.Log($"Missing ingredient: {ingredient.amount}x {ingredient.itemConfig.itemName} (min rank: {ingredient.minRank})");
                 return false;
             }
         }
-        
+
         return true;
     }
     
@@ -64,11 +68,21 @@ public class AlchemyLab : Building
             return;
         }
 
+        // Добавьте эту проверку
+        if (recipe.resultItem == null)
+        {
+            Debug.LogError($"Recipe '{recipe.name}' has no result item assigned!");
+            return;
+        }
         foreach (var ingredient in recipe.ingredients)
         {
             if (ingredient != null && ingredient.itemConfig != null)
             {
-                inventory.CmdRemoveItem(ingredient.itemConfig, ingredient.amount);
+                inventory.CmdRemoveItem(
+                    ingredient.itemConfig.name, 
+                    ingredient.amount, 
+                    ingredient.minRank
+                );
             }
         }
 
@@ -79,9 +93,8 @@ public class AlchemyLab : Building
                 rank = CalculateResultRank(recipe)
             };
             inventory.PutInEmptySlot(recipe.resultItem, itemData);
-            Debug.Log($"Successfully crafted: {recipe.resultItem.itemName}");
         }
-        
+    
         PlayCraftEffect();
     }
 

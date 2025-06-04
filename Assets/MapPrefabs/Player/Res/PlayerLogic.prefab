@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: -3095385020681225760}
   - component: {fileID: 6197982689662656025}
   - component: {fileID: 4722248026660128851}
+  - component: {fileID: -1337530180944930152}
   m_Layer: 0
   m_Name: PlayerLogic
   m_TagString: Player
@@ -851,121 +852,145 @@ MonoBehaviour:
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
   - ItemConfig: {fileID: 0}
     ItemData:
       Type: 0
+      Skills: 
       configId: 
       rank: 0
 --- !u!114 &6197982689662656025
@@ -995,6 +1020,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2be3b1dbc0702458f8e51ba0f9c8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1337530180944930152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909981378074328598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c76793e7ac172a43a862111e7372036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PanelSmithy: {fileID: 0}
+  PanelSmithyBuilding: {fileID: 0}
+  interactKey: 101
 --- !u!1 &7563778525642114572
 GameObject:
   m_ObjectHideFlags: 0

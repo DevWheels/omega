@@ -11,6 +11,19 @@ public class RecipeListPopulator : MonoBehaviour
 
     private void Start()
     {
+        if (allRecipes != null && allRecipes.Length > 0)
+        {
+            // Это вызовет автоматическую инициализацию
+            var testRecipe = RecipeDatabase.GetRecipeById(allRecipes[0].name);
+        }
+
+        // Остальной код остается без изменений
+        if (recipetPrefab == null)
+        {
+            Debug.LogError("Recipe prefab is not assigned!", this);
+            return;
+        }
+        
         if (recipetPrefab == null)
         {
             Debug.LogError("Recipe prefab is not assigned!", this);

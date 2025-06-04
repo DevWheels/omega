@@ -6,7 +6,7 @@ public class EnemySpawner : NetworkBehaviour
 {
     [Header("Spawn Settings")]
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private int maxEnemies = 5;
+    [SerializeField] private int maxTotalEnemies = 5; // Максимальное общее количество врагов
     [SerializeField] private float spawnInterval = 5f;
     [SerializeField] private float initialSpawnDelay = 3f;
     [SerializeField] private float spawnPointRadius = 2f;
@@ -17,6 +17,8 @@ public class EnemySpawner : NetworkBehaviour
     [SerializeField] private bool autoCollectSpawnPoints = true;
 
     private List<Transform> spawnPoints = new List<Transform>();
+    private Dictionary<Transform, bool> pointOccupied = new Dictionary<Transform, bool>(); // Отслеживание занятости точек
+    private int currentEnemiesCount = 0;
     private float nextSpawnTime;
 
     public override void OnStartServer()
@@ -35,12 +37,15 @@ public class EnemySpawner : NetworkBehaviour
     private void CollectSpawnPoints()
     {
         spawnPoints.Clear();
+        pointOccupied.Clear();
         
         GameObject[] pointObjects = GameObject.FindGameObjectsWithTag(spawnPointTag);
         
         foreach (GameObject point in pointObjects)
         {
-            spawnPoints.Add(point.transform);
+            var pointTransform = point.transform;
+            spawnPoints.Add(pointTransform);
+            pointOccupied[pointTransform] = false;
             Debug.Log($"Added spawn point: {point.name}");
         }
 
@@ -53,7 +58,7 @@ public class EnemySpawner : NetworkBehaviour
     [ServerCallback]
     private void Update()
     {
-        if (Time.time >= nextSpawnTime && spawnPoints.Count > 0)
+        if (Time.time >= nextSpawnTime && spawnPoints.Count > 0 && currentEnemiesCount < maxTotalEnemies)
         {
             TrySpawnEnemy();
             nextSpawnTime = Time.time + spawnInterval;
@@ -63,24 +68,34 @@ public class EnemySpawner : NetworkBehaviour
     [Server]
     private void TrySpawnEnemy()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length >= maxEnemies)
-            return;
+        // Создаем список доступных точек (не занятых)
+        List<Transform> availablePoints = new List<Transform>();
+        foreach (var point in spawnPoints)
+        {
+            if (!pointOccupied[point])
+            {
+                availablePoints.Add(point);
+            }
+        }
 
-        Vector2 spawnPosition = GetSpawnPosition();
+        if (availablePoints.Count == 0) return;
+
+        // Выбираем случайную доступную точку
+        Transform selectedPoint = availablePoints[Random.Range(0, availablePoints.Count)];
+        Vector2 spawnPosition = GetSpawnPosition(selectedPoint);
+        
         if (spawnPosition != Vector2.zero)
         {
-            SpawnEnemy(spawnPosition);
+            SpawnEnemy(spawnPosition, selectedPoint);
         }
     }
 
     [Server]
-    private Vector2 GetSpawnPosition()
+    private Vector2 GetSpawnPosition(Transform spawnPoint)
     {
-        Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-
         for (int i = 0; i < 5; i++)
         {
-            Vector2 spawnPos = (Vector2)randomSpawnPoint.position + 
+            Vector2 spawnPos = (Vector2)spawnPoint.position + 
                              Random.insideUnitCircle * spawnPointRadius;
             
             if (IsValidSpawnPosition(spawnPos))
@@ -93,7 +108,6 @@ public class EnemySpawner : NetworkBehaviour
     [Server]
     private bool IsValidSpawnPosition(Vector2 position)
     {
-
         var players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in players)
         {
@@ -101,23 +115,36 @@ public class EnemySpawner : NetworkBehaviour
                 return false;
         }
 
-
         Collider2D hit = Physics2D.OverlapCircle(position, 0.5f);
         return hit == null;
     }
 
     [Server]
-    private void SpawnEnemy(Vector2 position)
+    private void SpawnEnemy(Vector2 position, Transform spawnPoint)
     {
         GameObject enemy = Instantiate(enemyPrefab, position, Quaternion.identity);
         NetworkServer.Spawn(enemy);
-        Debug.Log($"Spawned enemy at {position} near {spawnPointTag} point");
+        
+        currentEnemiesCount++;
+        pointOccupied[spawnPoint] = true;
+        
+        enemy.GetComponent<TestenemyHealth>().OnDeath += () => OnEnemyDeath(spawnPoint);
+        
+        Debug.Log($"Spawned enemy at {position}. Total enemies: {currentEnemiesCount}/{maxTotalEnemies}");
+    }
+
+    [Server]
+    private void OnEnemyDeath(Transform spawnPoint)
+    {
+        currentEnemiesCount--;
+        if (currentEnemiesCount < 0) currentEnemiesCount = 0;
+        
+        pointOccupied[spawnPoint] = false;
     }
 
     private void OnDrawGizmos()
     {
         if (!showSpawnGizmos) return;
-
 
         Gizmos.color = Color.magenta;
         foreach (var point in spawnPoints)

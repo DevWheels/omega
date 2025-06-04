@@ -11,6 +11,9 @@ TagManager:
   - Ice
   - Slaim
   - Chest
+  - Enemy
+  - PointEnemy
+  - Building
   layers:
   - Default
   - TransparentFX

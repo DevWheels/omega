@@ -10,9 +10,16 @@ public class ItemFactory : MonoBehaviour {
     }
 
     public ItemBase CreateItemByData(ItemData data) {
-        ItemBase itemPrefab = itemPrefabs.First(i=>i.itemData.Type==data.Type);
+        ItemBase itemPrefab = itemPrefabs.FirstOrDefault(i => i.itemData.Type == data.Type);
+    
+        if (itemPrefab == null) {
+            Debug.LogError($"Prefab for item type {data.Type} not found in ItemFactory!");
+            return null;
+        }
+
         ItemBase item = Instantiate(itemPrefab);
         item.itemData = data;
+        item.itemConfig = Resources.Load<ItemConfig>(data.configId);
         return item;
     }
 }

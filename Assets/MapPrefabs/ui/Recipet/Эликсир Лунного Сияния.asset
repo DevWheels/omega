@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bc31589fdffe14c92605b656502117, type: 3}
+  m_Name: "\u042D\u043B\u0438\u043A\u0441\u0438\u0440 \u041B\u0443\u043D\u043D\u043E\u0433\u043E
+    \u0421\u0438\u044F\u043D\u0438\u044F"
+  m_EditorClassIdentifier: 
+  recipeName: "\u042D\u043B\u0438\u043A\u0441\u0438\u0440 \u041B\u0443\u043D\u043D\u043E\u0433\u043E
+    \u0421\u0438\u044F\u043D\u0438\u044F"
+  recipeIcon: {fileID: 21300000, guid: fb5456ceacbef764e939df24e0faa2b1, type: 3}
+  description: 
+  ingredients:
+  - itemConfig: {fileID: 11400000, guid: 4c457bab18867d34b8e2ef4fc811714f, type: 2}
+    amount: 1
+    minRank: 0
+  - itemConfig: {fileID: 11400000, guid: e0f7f721c05a5974ebfde2e33aa9e395, type: 2}
+    amount: 1
+    minRank: 0
+  requiredBuildingLevel: 1
+  resultItem: {fileID: 11400000, guid: 36bdd57d1122f864bbac58abb4a89e75, type: 2}
+  resultAmount: 1
+  craftTime: 3
+  resultRank: 1
