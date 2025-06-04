@@ -12,6 +12,7 @@ TagManager:
   - Slaim
   - Chest
   - Enemy
+  - Building
   layers:
   - Default
   - TransparentFX
