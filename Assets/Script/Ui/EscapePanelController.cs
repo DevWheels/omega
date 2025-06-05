@@ -4,21 +4,30 @@ using UnityEngine.UI;
 public class EscapePanelController : MonoBehaviour
 {
     public GameObject escapePanel; 
-    public GameObject otherUI; 
+    public GameObject[] otherUI; // Теперь это массив UI-элементов
 
     private void Update()
     {
-  
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (otherUI != null && !otherUI.activeInHierarchy)
+            // Проверяем, что ни один из otherUI не активен
+            bool canOpenEscapePanel = true;
+            foreach (var uiElement in otherUI)
+            {
+                if (uiElement != null && uiElement.activeInHierarchy)
+                {
+                    canOpenEscapePanel = false;
+                    break;
+                }
+            }
+
+            if (canOpenEscapePanel)
             {
                 ToggleEscapePanel();
             }
         }
     }
 
-    // Переключаем видимость панели ESC
     private void ToggleEscapePanel()
     {
         bool newState = !escapePanel.activeSelf;
@@ -27,15 +36,15 @@ public class EscapePanelController : MonoBehaviour
         if (newState)
         {
             Debug.Log("Escape panel opened");
+            // Дополнительные действия при открытии
         }
         else
         {
-    
             Debug.Log("Escape panel closed");
+            // Дополнительные действия при закрытии
         }
     }
 
-  
     public void OnContinueButton()
     {
         escapePanel.SetActive(false);
@@ -45,8 +54,8 @@ public class EscapePanelController : MonoBehaviour
     {
         Application.Quit();
         
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#endif
     }
 }
