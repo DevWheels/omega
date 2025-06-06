@@ -1,61 +1,49 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
 public class NPCInteraction : MonoBehaviour
 {
     [Header("UI Elements")]
-    public GameObject panel; // Основная панель UI
-    public TextMeshProUGUI dialogText; // TMP текст
-    public AudioSource audioSource; // Источник звука для голоса NPC
+    public GameObject panel; // Панель диалога
+    public TextMeshProUGUI dialogText; // Текст диалога (TMP)
+    public AudioSource audioSource; // Аудиоисточник для голоса NPC
 
     [Header("Dialog Settings")]
-    public Dialog[] dialogs; // Список реплик NPC
+    public Dialog[] dialogs; // Массив реплик NPC
     private int currentDialogIndex = 0;
-    private PlayerMovement playerMovement; // Ссылка на скрипт управления игроком
-    private bool isDialogActive = false; // Флаг активности диалога
-    private Collider2D npcCollider; // Коллайдер NPC
+    private bool isDialogActive = false;
+    private Collider2D npcCollider;
 
     private void Start()
     {
         panel.SetActive(false);
         npcCollider = GetComponent<Collider2D>();
-        
-        // Находим скрипт управления игроком по тегу
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            playerMovement = player.GetComponent<PlayerMovement>();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isDialogActive)
+        if (other.CompareTag("Player") && !isDialogActive && IsLocalPlayer(other))
         {
             StartDialog();
         }
     }
 
+    // Проверка, является ли игрок локальным (для Mirror)
+    private bool IsLocalPlayer(Collider2D playerCollider)
+    {
+        NetworkIdentity networkIdentity = playerCollider.GetComponent<NetworkIdentity>();
+        return networkIdentity != null && networkIdentity.isLocalPlayer;
+    }
+
     private void StartDialog()
     {
         isDialogActive = true;
-        
-        // Отключаем управление игроком
-        if (playerMovement != null)
-        {
-            playerMovement.enabled = false;
-        }
-
-        // Отключаем коллайдер, чтобы игрок не мог выйти из триггера
-        if (npcCollider != null)
-        {
-            npcCollider.enabled = false;
-        }
-
+        npcCollider.enabled = false; // Отключаем коллайдер NPC, чтобы диалог не прерывался
         panel.SetActive(true);
         ShowNextDialog();
-        Debug.Log("Диалог начат! Управление отключено.");
+        Debug.Log("Диалог начат (управление не отключено)");
     }
 
     private void Update()
@@ -70,10 +58,8 @@ public class NPCInteraction : MonoBehaviour
     {
         if (currentDialogIndex < dialogs.Length)
         {
-            // Установка текста
             dialogText.text = dialogs[currentDialogIndex].text;
             
-            // Воспроизведение голоса
             if (dialogs[currentDialogIndex].voiceClip != null)
             {
                 audioSource.Stop();
@@ -91,24 +77,12 @@ public class NPCInteraction : MonoBehaviour
 
     private void EndDialog()
     {
-        // Закрываем панель когда диалоги закончились
         panel.SetActive(false);
         currentDialogIndex = 0;
         isDialogActive = false;
+        npcCollider.enabled = true; // Включаем коллайдер обратно
 
-        // Включаем управление игроком
-        if (playerMovement != null)
-        {
-            playerMovement.enabled = true;
-        }
-
-        // Включаем коллайдер обратно
-        if (npcCollider != null)
-        {
-            npcCollider.enabled = true;
-        }
-
-        Debug.Log("Диалог завершен! Управление возвращено.");
+        Debug.Log("Диалог завершен (управление не блокировалось)");
     }
 }
 
@@ -116,5 +90,5 @@ public class NPCInteraction : MonoBehaviour
 public class Dialog
 {
     public string text; // Текст реплики
-    public AudioClip voiceClip; // Звуковой файл с голосом
+    public AudioClip voiceClip; // Озвучка реплики
 }
