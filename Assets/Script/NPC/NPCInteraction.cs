@@ -9,24 +9,60 @@ public class NPCInteraction : MonoBehaviour
     public GameObject panel; // Панель диалога
     public TextMeshProUGUI dialogText; // Текст диалога (TMP)
     public AudioSource audioSource; // Аудиоисточник для голоса NPC
+    public GameObject interactHint; // Подсказка "Нажми E"
 
     [Header("Dialog Settings")]
     public Dialog[] dialogs; // Массив реплик NPC
     private int currentDialogIndex = 0;
     private bool isDialogActive = false;
+    private bool isPlayerInTrigger = false;
     private Collider2D npcCollider;
+    private GameObject currentPlayer; // Текущий игрок в триггере
 
     private void Start()
     {
         panel.SetActive(false);
+        interactHint.SetActive(false);
         npcCollider = GetComponent<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isDialogActive && IsLocalPlayer(other))
+        if (other.CompareTag("Player") && IsLocalPlayer(other))
         {
-            StartDialog();
+            isPlayerInTrigger = true;
+            currentPlayer = other.gameObject;
+            interactHint.SetActive(true); // Показываем подсказку
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && other.gameObject == currentPlayer)
+        {
+            isPlayerInTrigger = false;
+            interactHint.SetActive(false); // Скрываем подсказку
+            
+            if (isDialogActive)
+            {
+                ForceEndDialog(); // Закрываем диалог, если игрок ушёл
+            }
+        }
+    }
+
+    private void Update()
+    {
+        // Если игрок в триггере и нажал E
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.E))
+        {
+            if (!isDialogActive)
+            {
+                StartDialog(); // Начинаем диалог
+            }
+            else
+            {
+                ShowNextDialog(); // Продолжаем диалог
+            }
         }
     }
 
@@ -40,18 +76,10 @@ public class NPCInteraction : MonoBehaviour
     private void StartDialog()
     {
         isDialogActive = true;
-        npcCollider.enabled = false; // Отключаем коллайдер NPC, чтобы диалог не прерывался
         panel.SetActive(true);
+        interactHint.SetActive(false); // Скрываем подсказку
         ShowNextDialog();
-        Debug.Log("Диалог начат (управление не отключено)");
-    }
-
-    private void Update()
-    {
-        if (isDialogActive && Input.GetKeyDown(KeyCode.E))
-        {
-            ShowNextDialog();
-        }
+        Debug.Log("Диалог начат (по нажатию E)");
     }
 
     private void ShowNextDialog()
@@ -80,9 +108,18 @@ public class NPCInteraction : MonoBehaviour
         panel.SetActive(false);
         currentDialogIndex = 0;
         isDialogActive = false;
-        npcCollider.enabled = true; // Включаем коллайдер обратно
+        interactHint.SetActive(true); // Снова показываем подсказку
+        Debug.Log("Диалог завершен (нормально)");
+    }
 
-        Debug.Log("Диалог завершен (управление не блокировалось)");
+    // Принудительное завершение диалога
+    private void ForceEndDialog()
+    {
+        panel.SetActive(false);
+        currentDialogIndex = 0;
+        isDialogActive = false;
+        audioSource.Stop();
+        Debug.Log("Диалог прерван (игрок вышел из зоны)");
     }
 }
 
