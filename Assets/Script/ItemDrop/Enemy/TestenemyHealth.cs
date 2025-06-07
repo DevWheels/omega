@@ -92,19 +92,19 @@ public class TestenemyHealth : NetworkBehaviour
     [Server]
     public void TakeDamage(int damage, PlayerStats attacker)
     {
-        if (_isDead) return;
-        
+        if (_isDead || !isServer) return; // Добавили проверку isServer
+    
         int actualDamage = Mathf.Max(1, damage - _currentArmor);
         _currentHealth -= actualDamage;
         _lastAttacker = attacker;
-        
+    
         OnDamageTaken?.Invoke(actualDamage); 
-        
+    
         if (_currentHealth <= 0)
         {
             Die();
         }
-        
+    
         RpcUpdateHealth(_currentHealth);
     }
     [ClientRpc]
