@@ -23,7 +23,7 @@ public class ItemConfig : ScriptableObject
 
     [Header("�������������� ��� ��������")]
     public int Coins;
-
+    public bool canBeStolen = true;
     public string PlayerPrefsName;
     
 

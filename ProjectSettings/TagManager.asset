@@ -13,19 +13,20 @@ TagManager:
   - Chest
   - Enemy
   - Building
+  - Minion
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemies
   - Water
   - UI
   - Light1
   - Light2
   - Light3
   - SpecialZone
-  - 
-  - 
+  - Minions
+  - Projectiles
   - 
   - 
   - 

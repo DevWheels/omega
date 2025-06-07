@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using System.Collections;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -10,11 +11,85 @@ public class PlayerMovement : NetworkBehaviour
     private Vector2 movementInput;
     private Vector2 lastDirection;
     private Camera mainCamera;
-
+    private float originalMoveSpeed;
+    private Coroutine slowCoroutine;
+    private Coroutine rootCoroutine;
+    private bool isFearEffectActive;
     private void Awake()
     {
         mainCamera = Camera.main;
         lastDirection = Vector2.down; // Начальное направление - вниз
+        originalMoveSpeed = moveSpeed;
+    }
+
+    [Server]
+    public void ApplySlow(float duration, float amount)
+    {
+        if (!isLocalPlayer) return; 
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+        slowCoroutine = StartCoroutine(SlowEffect(duration, amount));
+    }
+
+    [ClientRpc]
+    public void ApplyRoot(float duration)
+    {
+        if (!isLocalPlayer) return;
+    
+        if (rootCoroutine != null)
+        {
+            StopCoroutine(rootCoroutine);
+        }
+        rootCoroutine = StartCoroutine(RootEffect(duration));
+    }
+    [Server]
+    public void ApplyFearEffect(float duration)
+    {
+        TargetApplyFearEffect(duration);
+    }
+    
+    [TargetRpc]
+    private void TargetApplyFearEffect(float duration)
+    {
+        // Запускаем эффект страха (например, инверсия управления)
+        StartCoroutine(FearEffect(duration));
+    }
+    
+    private IEnumerator FearEffect(float duration)
+    {
+        isFearEffectActive = true;
+        float endTime = Time.time + duration;
+        while (Time.time < endTime)
+        {
+            movementInput = Random.insideUnitCircle;
+            yield return null;
+        }
+        isFearEffectActive = false;
+    }
+    
+    private IEnumerator SlowEffect(float duration, float amount)
+    {
+        moveSpeed = originalMoveSpeed * (1f - amount);
+        yield return new WaitForSeconds(duration);
+        moveSpeed = originalMoveSpeed;
+    }
+
+    private IEnumerator RootEffect(float duration)
+    {
+        float originalSpeed = moveSpeed;
+        moveSpeed = 0f; // Полное обездвиживание
+    
+        // Принудительно останавливаем движение
+        if (isLocalPlayer)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+    
+        yield return new WaitForSeconds(duration);
+    
+        moveSpeed = originalSpeed;
     }
 
     void Update()
@@ -28,12 +103,13 @@ public class PlayerMovement : NetworkBehaviour
 
     private void HandleInput()
     {
+        if (isFearEffectActive) return; // Добавьте флаг isFearEffectActive
+
         movementInput = new Vector2(
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         ).normalized;
 
-        // Сохраняем последнее направление при движении
         if (movementInput.magnitude > 0.1f)
         {
             lastDirection = movementInput;
