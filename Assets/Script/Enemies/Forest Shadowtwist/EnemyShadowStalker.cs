@@ -14,6 +14,16 @@ public class EnemyShadowStalker : NetworkBehaviour
     [SerializeField] private float postPounceStunDuration = 1f;
     [SerializeField] private float lightVulnerabilityMultiplier = 2f;
     
+    [Header("Debuff Settings")]
+    [SerializeField] private float debuffInterval = 1f; // Интервал между применениями дебаффа
+    [SerializeField] private float debuffDuration = 3f; // Длительность дебаффа
+    [SerializeField] private int debuffStacksMax = 3; // Максимальное количество стаков дебаффа
+    [SerializeField] private float debuffEffectValue = 0.1f; // Значение эффекта дебаффа (например, снижение скорости)
+    [SerializeField] private float bleedingDamagePerTick = 5f;
+    [SerializeField] private float bleedingTickInterval = 1f;
+    [SerializeField] private float fearDuration = 3f;
+    [SerializeField] private float hunterMarkMultiplier = 1.5f;
+    
     [Header("Patrol Settings")]
     [SerializeField] private float patrolRadius = 10f; // Радиус зоны патрулирования
     [SerializeField] private float patrolPointReachedThreshold = 0.5f; // Дистанция для смены точки патрулирования
@@ -23,6 +33,11 @@ public class EnemyShadowStalker : NetworkBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Color stealthColor = new Color(1, 1, 1, 0.3f);
     [SerializeField] private GameObject pounceEffectPrefab;
+    
+    [Header("Attachment Settings")]
+    [SerializeField] private float attachmentDuration = 5f; // Максимальное время прикрепления
+    [SerializeField] private float attachmentDistance = 1.5f; // Дистанция прикрепления
+    [SerializeField] private float attachmentCheckInterval = 0.2f; // Интервал проверки прикрепления
     
     private TestenemyHealth health;
     private Rigidbody2D rb;
@@ -41,6 +56,13 @@ public class EnemyShadowStalker : NetworkBehaviour
     private Vector2 patrolCenter; // Центральная точка патрулирования
     private Vector2 currentPatrolPoint; // Текущая точка патрулирования
 
+    private Coroutine attachmentCoroutine;
+    private bool isAttachedToPlayer = false;
+    private float attachmentEndTime;
+    
+    private Coroutine debuffCoroutine;
+    private PlayerStats debuffedPlayer;
+    
     private void Awake()
     {
         health = GetComponent<TestenemyHealth>();
@@ -139,38 +161,24 @@ public class EnemyShadowStalker : NetworkBehaviour
             spriteRenderer.color = Color.white;
         }
     }
-
     [Server]
     void Update()
     {
-        if (health.IsDead || isStunned) return;
+        if (health.IsDead || isStunned || isAttachedToPlayer) return;
         
         FindNearestTarget();
         
         if (currentTarget != null)
         {
-            // Проверяем, находится ли игрок в зоне патрулирования
-            if (Vector2.Distance(patrolCenter, currentTarget.position) <= patrolRadius)
-            {
-                HandleMovement();
-                HandlePounce();
-            }
-            else
-            {
-                // Игрок вышел из зоны - возвращаемся к патрулированию
-                currentTarget = null;
-                if (!isPatrolling)
-                {
-                    StartPatrol();
-                }
-            }
+            HandleMovement();
+            HandlePounce();
         }
     }
 
     [Server]
     private void FindNearestTarget()
     {
-        if (currentTarget != null) return;
+        if (currentTarget != null || isAttachedToPlayer) return;
         
         PlayerStats[] players = FindObjectsOfType<PlayerStats>();
         float closestDistance = float.MaxValue;
@@ -181,8 +189,7 @@ public class EnemyShadowStalker : NetworkBehaviour
             if (player.greenZone) continue;
             
             float distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance < closestDistance && 
-                Vector2.Distance(patrolCenter, player.transform.position) <= patrolRadius)
+            if (distance < closestDistance)
             {
                 closestDistance = distance;
                 closestPlayer = player.transform;
@@ -232,13 +239,18 @@ public class EnemyShadowStalker : NetworkBehaviour
         isPouncing = true;
         nextPounceTime = Time.time + pounceCooldown;
         
-        // Store original speed and set pounce speed
         Vector2 originalVelocity = rb.linearVelocity;
         rb.linearVelocity = lastDirection * pounceSpeed;
         
         RpcPlayPounceEffect();
         
         yield return new WaitForSeconds(0.5f); // Pounce duration
+        
+        // Проверяем, попали ли мы в игрока
+        if (currentTarget != null && Vector2.Distance(transform.position, currentTarget.position) < attachmentDistance)
+        {
+            AttachToPlayer(currentTarget);
+        }
         
         // Stun after pounce
         isStunned = true;
@@ -249,7 +261,172 @@ public class EnemyShadowStalker : NetworkBehaviour
         
         isStunned = false;
     }
+    
+    [Server]
+    private void AttachToPlayer(Transform player)
+    {
+        if (isAttachedToPlayer) return;
+        
+        isAttachedToPlayer = true;
+        attachmentEndTime = Time.time + attachmentDuration;
+        
+        // Останавливаем патрулирование и другие корутины
+        if (patrolCoroutine != null)
+            StopCoroutine(patrolCoroutine);
+        isPatrolling = false;
+        
+        if (stealthCoroutine != null)
+            StopCoroutine(stealthCoroutine);
+        isInStealth = false;
+        RpcSetStealthVisuals(false);
+        
+        // Запускаем корутину прикрепления
+        if (attachmentCoroutine != null)
+            StopCoroutine(attachmentCoroutine);
+        attachmentCoroutine = StartCoroutine(AttachmentRoutine(player));
+        
+        // Запускаем дебафф (если нужно)
+        if (debuffCoroutine != null)
+            StopCoroutine(debuffCoroutine);
+        debuffedPlayer = player.GetComponent<PlayerStats>();
+        debuffCoroutine = StartCoroutine(ApplyDebuffRoutine());
+    }
+    
+    [Server]
+    private IEnumerator AttachmentRoutine(Transform player)
+    {
+        while (isAttachedToPlayer && Time.time < attachmentEndTime && player != null)
+        {
+            // Двигаемся к игроку, если он немного отошел
+            if (Vector2.Distance(transform.position, player.position) > attachmentDistance * 0.8f)
+            {
+                Vector2 direction = (player.position - transform.position).normalized;
+                rb.linearVelocity = direction * health.CurrentAttack * 0.7f;
+            }
+            else
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            
+            RpcUpdateAnimator((player.position - transform.position).normalized, rb.linearVelocity.magnitude);
+            yield return new WaitForSeconds(attachmentCheckInterval);
+        }
+        
+        DetachFromPlayer();
+    }
+    
+    [Server]
+    private void DetachFromPlayer()
+    {
+        if (!isAttachedToPlayer) return;
+        
+        isAttachedToPlayer = false;
+        
+        if (attachmentCoroutine != null)
+            StopCoroutine(attachmentCoroutine);
+        attachmentCoroutine = null;
+        
+        // Останавливаем дебафф
+        if (debuffCoroutine != null)
+        {
+            StopCoroutine(debuffCoroutine);
+            RemoveDebuff();
+        }
+        
+        // Возвращаемся к патрулированию
+        currentTarget = null;
+        StartPatrol();
+        StartStealthCycle();
+    }
+    
+    [Server]
+    private IEnumerator ApplyDebuffRoutine()
+    {
+        while (debuffedPlayer != null && Vector2.Distance(transform.position, debuffedPlayer.transform.position) < 2f)
+        {
+            ApplyDebuff();
+            yield return new WaitForSeconds(debuffInterval);
+        }
+        
+        // Когда выходим из цикла, убираем дебафф
+        RemoveDebuff();
+        debuffCoroutine = null;
+    }
 
+    [Server]
+    private void ApplyDebuff()
+    {
+        if (debuffedPlayer == null) return;
+    
+        // Применяем стандартный дебафф скорости
+        ShadowStalkerDebuff debuff = debuffedPlayer.GetComponent<ShadowStalkerDebuff>();
+        if (debuff == null)
+        {
+            debuff = debuffedPlayer.gameObject.AddComponent<ShadowStalkerDebuff>();
+        }
+        debuff.SetDebuffParameters(debuffDuration, debuffEffectValue, debuffStacksMax);
+        debuff.AddStack();
+    
+        // С шансом 30% накладываем кровотечение
+        if (Random.value < 0.3f)
+        {
+            BleedingDebuff bleeding = debuffedPlayer.GetComponent<BleedingDebuff>();
+            if (bleeding == null)
+            {
+                bleeding = debuffedPlayer.gameObject.AddComponent<BleedingDebuff>();
+                bleeding.SetParameters(debuffDuration * 2, bleedingDamagePerTick, bleedingTickInterval);
+                bleeding.ApplyDebuff();
+            }
+        }
+    
+        // С шансом 20% накладываем страх (если игрок не в зеленой зоне)
+        if (Random.value < 0.2f && !debuffedPlayer.greenZone)
+        {
+            FearDebuff fear = debuffedPlayer.GetComponent<FearDebuff>();
+            if (fear == null)
+            {
+                fear = debuffedPlayer.gameObject.AddComponent<FearDebuff>();
+                fear.SetParameters(fearDuration);
+                fear.ApplyDebuff();
+            }
+        }
+    
+        // Всегда накладываем метку охотника
+        HunterMarkBuff mark = debuffedPlayer.GetComponent<HunterMarkBuff>();
+        if (mark == null)
+        {
+            mark = debuffedPlayer.gameObject.AddComponent<HunterMarkBuff>();
+            mark.SetParameters(debuffDuration * 3, hunterMarkMultiplier);
+            mark.ApplyBuff();
+        }
+    
+        RpcShowDebuffEffect(debuffedPlayer.gameObject);
+    }
+    [Server]
+    private void RemoveDebuff()
+    {
+        if (debuffedPlayer == null) return;
+        
+        ShadowStalkerDebuff debuff = debuffedPlayer.GetComponent<ShadowStalkerDebuff>();
+        if (debuff != null)
+        {
+            // Уничтожаем дебафф, если нет стаков
+            if (debuff.CurrentStacks <= 0)
+            {
+                Destroy(debuff);
+            }
+        }
+        
+        debuffedPlayer = null;
+    }
+
+    [ClientRpc]
+    private void RpcShowDebuffEffect(GameObject player)
+    {
+        // Здесь можно добавить визуальные эффекты для дебаффа
+        // Например, частицы или изменение цвета игрока
+    }
+    
     [ClientRpc]
     private void RpcPlayPounceEffect()
     {
@@ -273,13 +450,27 @@ public class EnemyShadowStalker : NetworkBehaviour
     [Server]
     public void TakeDamageWithLightCheck(int damage, PlayerStats attacker, bool isLightDamage = false)
     {
-        int finalDamage = isLightDamage ? 
-            Mathf.FloorToInt(damage * lightVulnerabilityMultiplier) : 
-            damage;
-        
+        float damageMultiplier = 1f;
+        if (attacker != null)
+        {
+            HunterMarkBuff mark = attacker.GetComponent<HunterMarkBuff>();
+            if (mark != null)
+            {
+                damageMultiplier = mark.GetDamageMultiplier();
+            }
+        }
+    
+        int finalDamage = Mathf.FloorToInt(damage * damageMultiplier * (isLightDamage ? lightVulnerabilityMultiplier : 1f));
+    
         health.TakeDamage(finalDamage, attacker);
         
-        // Interrupt stealth when hit
+        // Открепляемся при получении урона
+        if (isAttachedToPlayer)
+        {
+            DetachFromPlayer();
+        }
+        
+        // Прерываем stealth при получении урона
         if (isInStealth)
         {
             if (stealthCoroutine != null)
@@ -306,6 +497,18 @@ public class EnemyShadowStalker : NetworkBehaviour
         
         if (patrolCoroutine != null)
             StopCoroutine(patrolCoroutine);
+            
+        if (debuffCoroutine != null)
+        {
+            StopCoroutine(debuffCoroutine);
+            RemoveDebuff();
+        }
+        
+        if (attachmentCoroutine != null)
+        {
+            StopCoroutine(attachmentCoroutine);
+            isAttachedToPlayer = false;
+        }
     }
 
     [Server]
@@ -324,8 +527,17 @@ public class EnemyShadowStalker : NetworkBehaviour
             {
                 playerMovement.ApplyRoot(0.5f);
             }
+            
+            // Начинаем накладывать дебафф при столкновении
+            debuffedPlayer = player;
+            if (debuffCoroutine != null)
+                StopCoroutine(debuffCoroutine);
+                
+            debuffCoroutine = StartCoroutine(ApplyDebuffRoutine());
         }
     }
+
+
 
     // Визуализация зоны патрулирования в редакторе
     private void OnDrawGizmosSelected()
