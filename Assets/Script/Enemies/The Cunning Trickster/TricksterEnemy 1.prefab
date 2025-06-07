@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 655036041168096066}
   - component: {fileID: 5988739114672121101}
   - component: {fileID: 1017114557682557911}
-  - component: {fileID: 1374370078688513452}
+  - component: {fileID: 2614747956093426742}
   m_Layer: 0
-  m_Name: TricksterEnemy
+  m_Name: TricksterEnemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 171.77, y: -50.9, z: -0.060463827}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5875, y: 0.5465625, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -214,11 +214,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 4163340555
+  _assetId: 4130239065
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &1374370078688513452
+--- !u!114 &2614747956093426742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,22 +227,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4067909426962822870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b1cd98f44dc1d49a502a8b7f0ed129, type: 3}
+  m_Script: {fileID: 11500000, guid: ab4563d1778840f4a88f57964bf41126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  moveSpeed: 3.5
-  detectionRange: 8
-  keepDistance: 4
-  patrolRadius: 10
-  cloneCooldown: 15
-  stealCooldown: 20
-  maxClones: 3
-  clonePrefab: {fileID: 4067909426962822870, guid: 4c89d89867834844bbcb9452f90677a0, type: 3}
-  abilityRange: 5
-  stealDistance: 2
-  stealEffectPrefab: {fileID: 0}
-  vanishEffectPrefab: {fileID: 0}
-  reappearEffectPrefab: {fileID: 0}
+  cloneDamage: 1
+  cloneLifetime: 20
+  moveSpeed: 2.5
+  followDistance: 3
+  scatterSpeedMultiplier: 2
