@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
@@ -121,7 +122,22 @@ public class PlayerSkillController : NetworkBehaviour {
         projectile.Init(gameObject, config.Damage, config.ProjectileSpeed, config.ProjectileLifetime);
         NetworkServer.Spawn(projectile.gameObject);
     }
+    [ClientRpc]
+    public void RpcBlockSkills(float duration)
+    {
+        StartCoroutine(BlockSkillsRoutine(duration));
+    }
 
+    private IEnumerator BlockSkillsRoutine(float duration)
+    {
+        bool canUseSkills = false; // Предполагаем, что у вас есть такое поле
+        float endTime = Time.time + duration;
+        while (Time.time < endTime)
+        {
+            yield return null;
+        }
+        canUseSkills = true;
+    }
     public void TeleportToArena() {
         GreenZone = false;
     }

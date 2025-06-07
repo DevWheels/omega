@@ -33,14 +33,27 @@ public class FireBallProjectile : ProjectileBase {
         transform.position += (Vector3)(TargetDirection * (_projectileSpeed * Time.deltaTime));
     }
 
+    [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision) {
+        if (!isServer) return;
         if (_owner == null || collision.gameObject == _owner) {
             return; 
         }
 
         PlayerStats enemyPlayer = collision.GetComponent<PlayerStats>();
-        if (enemyPlayer != null || !enemyPlayer.isLocalPlayer) {
+        if (enemyPlayer != null) {
             enemyPlayer.TakeHit(_projectileDamage);
+            NetworkServer.Destroy(gameObject);
+            return;
+        }
+        
+        TestenemyHealth enemy = collision.GetComponent<TestenemyHealth>();
+        if (enemy != null) {
+            PlayerStats attacker = _owner.GetComponent<PlayerStats>();
+            if (attacker != null) {
+                enemy.TakeDamage(_projectileDamage, attacker);
+            }
+            NetworkServer.Destroy(gameObject);
         }
     }
 }

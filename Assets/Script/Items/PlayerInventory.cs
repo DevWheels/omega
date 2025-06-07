@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerInventory : NetworkBehaviour {
     public List<InventorySlot> Slots = new List<InventorySlot>(24);
@@ -30,7 +31,81 @@ public bool PutInEmptySlot(ItemConfig itemConfig, ItemData itemData)
     return false;
 }
 
-  
+      
+    [Server]
+    public ItemData StealRandomItem()
+    {
+        if (!isServer) return null;
+
+        // Собираем все непустые слоты с предметами, которые можно украсть
+        List<InventorySlot> stealableSlots = new List<InventorySlot>();
+        foreach (var slot in Slots)
+        {
+            if (slot.ItemConfig != null && slot.ItemConfig.canBeStolen)
+            {
+                stealableSlots.Add(slot);
+            }
+        }
+
+        // Если нет предметов для кражи
+        if (stealableSlots.Count == 0)
+        {
+            Debug.Log("No items to steal in inventory");
+            return null;
+        }
+
+        // Выбираем случайный слот для кражи
+        int randomIndex = Random.Range(0, stealableSlots.Count);
+        InventorySlot stolenSlot = stealableSlots[randomIndex];
+    
+        // Создаем копию данных предмета перед удалением
+        ItemData stolenItemData = new ItemData
+        {
+            configId = stolenSlot.ItemConfig.name,
+            rank = stolenSlot.ItemData?.rank ?? ItemRank.C
+        };
+
+        // Удаляем предмет из инвентаря
+        for (int i = 0; i < Slots.Count; i++)
+        {
+            if (Slots[i] == stolenSlot)
+            {
+                if (Slots[i].SlotView != null)
+                {
+                    Slots[i].SlotView.ClearSlot();
+                }
+                Slots[i] = new InventorySlot();
+                break;
+            }
+        }
+
+        // Вызываем событие обновления инвентаря
+        RpcUpdateInventory();
+    
+        Debug.Log($"Stolen item: {stolenItemData.configId}");
+    
+        return stolenItemData;
+    }
+
+    [Server]
+    public void ReturnStolenItem(ItemData itemData)
+    {
+        if (itemData == null) return;
+
+        var itemConfig = ItemDatabase.GetItemById(itemData.configId);
+        if (itemConfig != null)
+        {
+            PutInEmptySlot(itemConfig, itemData);
+            RpcShowReturnedItemMessage(itemConfig.itemName);
+        }
+    }
+
+    [ClientRpc]
+    private void RpcShowReturnedItemMessage(string itemName)
+    {
+        // Показать сообщение игроку, что предмет возвращен
+        Debug.Log($"Возвращен украденный предмет: {itemName}");
+    }
     public void DropOnDie() {
         foreach (InventorySlot t in Slots) {
             if (t.ItemConfig == null) {

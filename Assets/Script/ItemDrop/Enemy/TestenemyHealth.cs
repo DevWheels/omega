@@ -30,7 +30,7 @@ public class TestenemyHealth : NetworkBehaviour
     
     private PlayerStats _lastAttacker;    
     public System.Action OnDeath;          
-
+    public System.Action<float> OnDamageTaken;
     #region Свойства
     public int MaxHp => _baseHealth + (_healthPerLevel * (_currentLevel - 1));
     public int CurrentHealth => _currentHealth;
@@ -41,6 +41,7 @@ public class TestenemyHealth : NetworkBehaviour
     public float AttackCooldown => _attackCooldown;
     public float LastAttackTime => _lastAttackTime;
     public bool IsDead => _isDead;
+    public float MaxHealth => MaxHp;
     #endregion
 
 
@@ -53,7 +54,14 @@ public class TestenemyHealth : NetworkBehaviour
         _currentHealth = MaxHp;
         enabled = true; 
     }
-
+    [Server]
+    public void ServerHeal(float amount) 
+    {
+        if (_isDead) return;
+        
+        _currentHealth = Mathf.Min(_currentHealth + Mathf.RoundToInt(amount), MaxHp);
+        RpcUpdateHealth(_currentHealth);
+    }
 
     [Server]
     private void CalculateEnemyLevel()
@@ -80,6 +88,7 @@ public class TestenemyHealth : NetworkBehaviour
         _currentArmor = _baseArmor + _armorPerLevel * (_currentLevel - 1);
     }
 
+   
     [Server]
     public void TakeDamage(int damage, PlayerStats attacker)
     {
@@ -89,6 +98,8 @@ public class TestenemyHealth : NetworkBehaviour
         _currentHealth -= actualDamage;
         _lastAttacker = attacker;
         
+        OnDamageTaken?.Invoke(actualDamage); 
+        
         if (_currentHealth <= 0)
         {
             Die();
@@ -96,7 +107,6 @@ public class TestenemyHealth : NetworkBehaviour
         
         RpcUpdateHealth(_currentHealth);
     }
-
     [ClientRpc]
     private void RpcUpdateHealth(int newHealth)
     {

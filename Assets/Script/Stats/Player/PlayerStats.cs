@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -99,7 +100,18 @@ public class PlayerStats : NetworkBehaviour {
         set { speed = value; }
     }
 
-
+    public float MovementSpeed
+    {
+        get { return playerMovement.moveSpeed; }
+        set { playerMovement.moveSpeed = value; }
+    }
+    
+    public bool isPlayer
+    {
+        get { return isLocalPlayer; }
+    }
+    
+    public bool IsPlayer => isLocalPlayer;
     private PlayerMovement playerMovement;
     private PlayerUI playerUI;
 
@@ -135,6 +147,23 @@ public class PlayerStats : NetworkBehaviour {
     //     base.OnStartLocalPlayer();
     //     gameObject.layer = LayerMask.NameToLayer("Player");
     // }
+
+ 
+    [ClientRpc]
+    public void RpcShowPoisonEffect()
+    {
+        // Здесь можно добавить визуальные эффекты (например, изменение цвета игрока)
+        Debug.Log("Poison effect applied (visual)");
+    }
+
+    [ClientRpc]
+    public void RpcHidePoisonEffect()
+    {
+        // Здесь можно убрать визуальные эффекты
+        Debug.Log("Poison effect removed (visual)");
+    }
+
+
     
     public void UseItem(ItemConfig itemConfig)
     {
@@ -204,28 +233,29 @@ public class PlayerStats : NetworkBehaviour {
     [Server]
     public void TakeHit(int damage)
     {
+        if (!isServer || connectionToClient == null) return;
         if (!isServer) 
         {
             Debug.Log("TakeHit called on client, ignoring");
             return;
         }
-    
+
         currently_hp -= damage;
         Debug.Log($"Player took {damage} damage, health now: {currently_hp}");
-    
+
         if (currently_hp <= 0)
         {
             currently_hp = 0;
             Die();
         }
-    
+
         RpcUpdateHealth(currently_hp);
     }
-    
 
     [ClientRpc]
     private void RpcUpdateHealth(int newHealth)
     {
+        if (!isClient) return;
         currently_hp = newHealth;
         if (playerUI != null)
         {
@@ -306,6 +336,15 @@ public class PlayerStats : NetworkBehaviour {
         }
     }
 
+    [ClientRpc]
+    public void RpcApplyTemporarySlow(float slowFactor, float duration)
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.ApplySlow(duration, slowFactor);
+        }
+    }
+    
     [Client]
     private void UpdateEverything() {
         playerUI.UpdateUI();
