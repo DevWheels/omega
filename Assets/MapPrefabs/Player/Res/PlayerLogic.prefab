@@ -623,13 +623,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243756e46a3e9314497ccbd7de2cabae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 40
   attackRange: 1
   attackCooldown: 0.5
   attackOffset: {x: 0.5, y: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 136
   animator: {fileID: 7085261678692851948}
   attackSound: {fileID: 8300000, guid: 91806d6425f834d1897ded278936ac7f, type: 3}
   playerStats: {fileID: 0}
